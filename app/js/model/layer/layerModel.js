@@ -17,17 +17,20 @@ var LayerModel = function(name) {
     };
 
     self.toggleSelection = function() {
-      if(self.selected == LayerSelectionMode.SELECTED || self.selected == LayerSelectionMode.SEMI_SELECTED){
-          self.selected = false;
-      } else if(self.selected == LayerSelectionMode.DESELECTED){
-          self.selected = true;
+      if(self.selected === LayerSelectionMode.SELECTED){
+          self.selected = LayerSelectionMode.DESELECTED;
+      } else if(self.selected === LayerSelectionMode.DESELECTED  || self.selected === LayerSelectionMode.SEMI_SELECTED){
+          self.selected = LayerSelectionMode.SELECTED;
       }
     };
 
     /** GETTER SETTER FUNCTIONS**/
     self.__defineSetter__("selected", function(flag){
         self.sublayers.forEach(function(sublayer){
-            sublayer.selected = flag;
+            if(flag == LayerSelectionMode.SELECTED)
+                sublayer.selected = true;
+            if(flag == LayerSelectionMode.DESELECTED)
+                sublayer.selected = false;
         });
     });
 
