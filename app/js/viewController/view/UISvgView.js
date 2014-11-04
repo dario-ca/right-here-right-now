@@ -2,11 +2,10 @@
  *  Class UISVGView
  */
 var UISvgView = function() {
-    var self = d3.select(document.createElementNS('http://www.w3.org/2000/svg', 'svg'));
-    var uiView = UIView();
-    //Inherit also from uiview
-    for (var attribute in uiView) { self[attribute] = uiView[attribute]; }
-    uiView.self = self;
+
+    var self = UIView();
+    self.__proto__ = d3.select(document.createElementNS('http://www.w3.org/2000/svg', 'svg'));
+
 
     /** PUBLIC FUNCTIONS**/
 
@@ -23,7 +22,6 @@ var UISvgView = function() {
     };
 
     /** PRIVATE FUNCTIONS**/
-
 
 
     var init = function() {

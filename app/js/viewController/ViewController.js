@@ -15,15 +15,21 @@ var ViewController = function() {
     };
 
 
+    /**
+     * Remove the view from the dom
+     * Call dispose on every child
+     */
+    self.dispose = function() {
+        self.children.forEach(function(child) {
+            child.dispose();
+        });
 
-
-
-    /** PRIVATE FUNCTIONS**/
-
-    var privateFunction = function(variable) {
+       self.view.remove();
 
     };
 
+
+    /** PRIVATE FUNCTIONS**/
 
 
     var init = function() {
@@ -32,4 +38,29 @@ var ViewController = function() {
     }();
 
     return self;
+};
+
+
+/**
+ *  Create a view controller with an SVG view
+ */
+var SvgViewController = function() {
+    var viewController = ViewController();
+    viewController.view = UISvgView();
+};
+
+/**
+ *  Create a view controller with an G view
+ */
+var GViewController = function() {
+    var viewController = ViewController();
+    viewController.view = UIGView();
+};
+
+/**
+ *  Create a view controller with an DIV view
+ */
+var DivViewController = function() {
+    var viewController = ViewController();
+    viewController.view = UIDivView();
 };
