@@ -8,7 +8,9 @@
     <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
     <!-- Styles -->
-  
+    <link rel="stylesheet" href="style/theme.css"/>
+    <link rel="stylesheet" href="style/window.css"/>
+    <link rel="stylesheet" href="style/leaflet.css"/>
 
     <!-- External libraries -->
     <script src="js/lib/d3.js"></script>
@@ -22,8 +24,11 @@
     <script src="js/lib/vec2d.js"></script>
 
     <!-- classes -->
+
+
     <script src="js/application.js"></script>
 
+    <!-- MODEL -->
     <script src="js/model/layer/layerModel.js"></script>
     <script src="js/model/layer/sublayerModel.js"></script>
     <script src="js/model/model.js"></script>
@@ -32,18 +37,30 @@
     <script src="js/model/data/dataPotholeModel.js"></script>
     <script src="js/model/data/dataDivvyModel.js"></script>
 
+    <script src="js/model/resource/externalSvgModel.js"></script>
+
+    <script src="js/model/map/mapModel.js"></script>
+
     <script src="js/notification/notificationCenter.js"></script>
     <script src="js/notification/notifications.js"></script>
 
     <script src="js/factory/layerFactory.js"></script>
 
+    <!-- VIEW CONTROLLER -->
+
     <script src="js/viewController/viewController.js"></script>
     <script src="js/viewController/externalSvgViewController.js"></script>
+    <script src="js/viewController/windowController.js"></script>
+    <script src="js/viewController/map/mapViewController.js"></script>
+
     <script src="js/viewController/view/UISvgView.js"></script>
     <script src="js/viewController/view/UIGView.js"></script>
     <script src="js/viewController/view/UIDivView.js"></script>
     <script src="js/viewController/view/UIView.js"></script>
     <script src="js/viewController/view/UIImageView.js"></script>
+
+    <script src="js/viewController/map/layer/mapLayerController.js"></script>
+    <script src="js/viewController/map/layer/dummyLayerController.js"></script>
 
     <!-- Starts application -->
     <script src="js/main.js"></script>

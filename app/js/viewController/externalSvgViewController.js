@@ -9,43 +9,48 @@ var ExternalSvgViewController = function(svgPath) {
     /** PRIVATE FUNCTIONS**/
 
     var loadSvg = function() {
-        d3.xml(_svgPath, 'image/svg+xml', function (error, data) {
+        var data = externalSvgModel.svgsData[svgPath];
 
-            self.view.node().appendChild(data.documentElement);
+        if(!data){
+            console.warn("svg " + svgPath + " is not included in externalSvgModel.js");
+        }
 
-            //Generate all getter
-            self.view.selectAll("*")[0].forEach(function(node){
-                var id = d3.select(node).attr("id");
-                var d3Node = d3.select(node);
-                var uiView = null;
+        self.view.node().appendChild(data.documentElement);
 
-                var tagName = $(node).prop("tagName").toLowerCase();
+        //Generate all getter
+        self.view.selectAll("*")[0].forEach(function(node){
+            var id = d3.select(node).attr("id");
+            var d3Node = d3.select(node);
+            var uiView = null;
 
-                //Wrap the svg element with ours high level class
-                if(tagName == "svg") {
-                    uiView = UISvgView(d3Node);
-                } else if(tagName == "g") {
-                    uiView = UIGView(d3Node);
-                } else if(tagName == "image") {
-                    uiView = UIImageView(d3Node);
-                } else {
-                    uiView = UIView(d3Node);
-                }
+            var tagName = $(node).prop("tagName").toLowerCase();
 
+            //Wrap the svg element with ours high level class
+            if(tagName == "svg") {
+                uiView = UISvgView(d3Node);
+            } else if(tagName == "g") {
+                uiView = UIGView(d3Node);
+            } else if(tagName == "image") {
+                uiView = UIImageView(d3Node);
+            } else {
+                uiView = UIView(d3Node);
+            }
 
-                if(id) {
-                    self.view.__defineGetter__(id, function(){
-                        return uiView;
-                    });
-                }
+            //set parent controller
+            uiView.parentController = self;
 
-            });
-
-            //get the first child and adapt the viewBox
-            var firstChild = UISvgView(self.view.select("*"));
-            self.view.setViewBox(0,0,firstChild.width, firstChild.height);
+            if(id) {
+                self.view.__defineGetter__(id, function(){
+                    return uiView;
+                });
+            }
 
         });
+
+        //get the first child and adapt the viewBox
+        var firstChild = UISvgView(self.view.select("*"));
+        self.view.setViewBox(0,0,firstChild.width, firstChild.height);
+
     };
 
     var init = function() {

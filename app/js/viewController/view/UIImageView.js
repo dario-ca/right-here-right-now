@@ -23,14 +23,45 @@ var UIImageView = function(imageElement) {
         return self.attr("xlink:href");
     });
 
+
+    /**
+     * width height
+     */
+    self.__defineSetter__("width", function(width){
+        self.attr("width", width);
+    });
+
+
+    self.__defineGetter__("width", function(){
+        var width = self.attr("width");
+        width = width != null ? width : 0;
+        return width;
+    });
+
+
+    self.__defineSetter__("height", function(height){
+        self.attr("height", height);
+    });
+
+
+    self.__defineGetter__("height", function(){
+        var height = self.attr("height");
+        height = height != null ? height : 0;
+        return height;
+    });
+
     /** PRIVATE FUNCTIONS**/
 
 
     var init = function() {
 
         self.classed("ui-image-view", true);
-
-
+        if(!self.attr("width")){
+            self.width = "100%";
+        }
+        if(!self.attr("height")){
+            self.height = "100%";
+        }
 
     }();
 

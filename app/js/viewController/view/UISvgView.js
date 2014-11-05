@@ -100,26 +100,6 @@ var UISvgView = function(svg) {
 
 
     /**
-     * Return svg width
-     * @returns {number}
-     */
-    self.__defineGetter__("width", function() {
-        var width = self.attr("width");
-        width = width != null ? width : 0;
-        return width;
-    });
-
-    /**
-     * Return svg height
-     * @returns {number}
-     */
-    self.__defineGetter__("height", function() {
-        var height = self.attr("height");
-        height = height != null ? height : 0;
-        return height;
-    });
-
-    /**
      *
      * @param x
      * @param y

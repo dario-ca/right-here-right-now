@@ -1,0 +1,47 @@
+body {
+    min-height: 100vh;
+    height: 100vh;
+    display: -webkit-flex;
+    display:         flex;
+    -webkit-flex-flow: row;
+    flex-flow: row;
+}
+
+.window-controller {
+    min-height: 100%;
+    background: white;
+    -webkit-flex: 1;
+    flex: 1;
+    -webkit-order: 1;
+    order: 1;
+    position:relative
+}
+
+.map-view-controller.leaflet-container  {
+    min-height: 100vh;
+    height: 100vh;
+    position: absolute;
+    z-index: 2;
+}
+
+
+/*
+.visualization-module-controller {
+    min-height: 100%;
+    background: white;
+    -webkit-flex: 1;
+    flex: 1;
+    -webkit-order: 1;
+    order: 1;
+    position:relative
+}
+
+.overview-map-controller {
+    min-height: 100%;
+    max-width: 18%;
+    color: #eee;
+    -webkit-flex: 1;
+    flex: 1;
+    -webkit-order: 1;
+    order: 1;
+}*/

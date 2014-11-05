@@ -4,6 +4,8 @@
 var UIView = function(domElement) {
     var self = domElement;
 
+    self.parentController = null;
+
     /** PUBLIC FUNCTIONS**/
 
     /**
@@ -16,6 +18,31 @@ var UIView = function(domElement) {
     /*self.add = function(subview) {
         self.node().appendChild(subview.node());
     };*/
+
+    /**
+     * @Override
+     * Add a controller or a view to the hierarchy
+     */
+    self.super_append = self.append;
+    self.append = function(element) {
+        if(element.view) {
+            //appending a controller
+            self.node().appendChild(element.view.node());
+            if(self.parentController) {
+                self.parentController.addChildController(element)
+            } else {
+                console.warn("Trying to add a controller to a view without controller");
+            }
+        } else if(element.node){
+            //appending a normal view
+            self.node().appendChild(element.node());
+            //super_append(element);
+        } else {
+            //it is just a string
+            return self.super_append(element);
+        }
+
+    };
 
     /**
      * Append the current view to the given d3Element (parent view)

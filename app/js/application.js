@@ -5,9 +5,7 @@ var Application = function() {
     var self = {};
 
 
-    var _privateVar = 1;
-
-    self.publicVar = 5;
+    self.mainWindow = null;
 
     /** PUBLIC FUNCTIONS**/
 
@@ -33,12 +31,36 @@ var Application = function() {
 
     };
 
+    /**
+     * Load basic resources before the start of the application
+     */
+    var loadResources = function(callback) {
+        queue()
+            .defer(externalSvgModel.loadResources)
+            .await(callback)
+    };
+
+    /**
+     * Start the application
+     */
+    var setUp = function() {
+        var layerFactory = LayerFactory();
+        layerFactory.populateLayers();
+
+
+        var body = d3.select("body");
+
+        self.mainWindow = WindowController();
+        self.mainWindow.view.appendTo(body);
+        self.mainWindow.updateView();
+    };
 
 
     var init = function() {
 
-        var layerFactory = LayerFactory();
-        layerFactory.populateLayers();
+        loadResources(function(){
+            setUp();
+        });
 
     }();
 

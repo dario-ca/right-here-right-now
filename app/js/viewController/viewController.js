@@ -4,14 +4,13 @@
 var ViewController = function() {
     var self = {};
 
-    self.view = null;
+    var _view = null;
     self.children = [];
 
     /** PUBLIC FUNCTIONS**/
 
-    self.addChild = function(childController) {
-        self.view.append(childController.view);
-        self.children.append(childController);
+    self.addChildController = function(childController) {
+        self.children.push(childController);
     };
 
 
@@ -28,6 +27,25 @@ var ViewController = function() {
 
     };
 
+    /**
+     * Called every time it is necessary to update the view layout
+     */
+    self.updateView = function() {
+        self.children.forEach(function(child) {
+            child.updateView();
+        });
+    };
+
+
+    //#GETTER AND SETTER
+    self.__defineSetter__("view", function(view){
+        _view = view;
+        _view.parentController = self;
+    });
+
+    self.__defineGetter__("view", function(){
+        return _view;
+    });
 
     /** PRIVATE FUNCTIONS**/
 

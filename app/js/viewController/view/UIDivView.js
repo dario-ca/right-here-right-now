@@ -4,8 +4,8 @@
  */
 var UIDivView = function() {
 
-    var self = UIView();
-    self.__proto__ = d3.select(document.createElement('div'));
+    var self = UIView(d3.select(document.createElement('div')));
+
 
 
     /** PUBLIC FUNCTIONS**/
