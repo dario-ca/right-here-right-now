@@ -1,8 +1,8 @@
 /**
  *  Class UIView
  */
-var UIView = function() {
-    var self = {};
+var UIView = function(domElement) {
+    var self = domElement;
 
     /** PUBLIC FUNCTIONS**/
 
