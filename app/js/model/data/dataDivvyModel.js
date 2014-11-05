@@ -24,4 +24,6 @@ var DataDivvyModel = function(name) {
     };
 
     return self;
-}
+};
+
+var dataDivvyModel = DataDivvyModel();

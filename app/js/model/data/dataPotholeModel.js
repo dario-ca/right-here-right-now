@@ -24,4 +24,6 @@ var DataPotholeModel = function(name) {
     };
 
     return self;
-}
+};
+
+var dataPotholeModel = DataPotholeModel();
