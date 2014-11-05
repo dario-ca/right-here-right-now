@@ -47,6 +47,7 @@ var ViewController = function() {
 var SvgViewController = function() {
     var viewController = ViewController();
     viewController.view = UISvgView();
+    return viewController;
 };
 
 /**
@@ -55,6 +56,7 @@ var SvgViewController = function() {
 var GViewController = function() {
     var viewController = ViewController();
     viewController.view = UIGView();
+    return viewController;
 };
 
 /**
@@ -63,4 +65,5 @@ var GViewController = function() {
 var DivViewController = function() {
     var viewController = ViewController();
     viewController.view = UIDivView();
+    return viewController;
 };
