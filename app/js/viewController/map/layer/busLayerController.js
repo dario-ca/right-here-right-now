@@ -3,19 +3,19 @@ function BusLayerController() {
 
     var onBusData = function() {
         // Takes all bus data
-        positions = [[41.866320, -87.64, 157], [41.886320, -87.64, 66], [41.906320, -87.64, 1], [41.926320, -87.64, 6666]];
-        for(var i in positions) {
-            var position = positions[i];
+        vehicles = dataBusModel.data;
+        for(var i in vehicles) {
+            var vehicle = vehicles[i];
             var bus = ExternalSvgViewController("resource/sublayer/icon/bus.svg");
 
             bus.view.width = self.defaultIconSize;
             bus.view.height= self.defaultIconSize;
 
-            var p = self.project(position[0], position[1]);
+            var p = self.project(vehicle.lat, vehicle.lon);
             bus.view.x = p.x;
             bus.view.y = p.y;
 
-            bus.view.busNumber.text(position[2]);
+            bus.view.busNumber.text(vehicle.rt);
 
             self.view.append(bus);
         }
@@ -23,7 +23,7 @@ function BusLayerController() {
 
     var init = function() {
 
-        onBusData();
+        dataBusModel.subscribe(Notifications.data.BUS_CHANGED, onBusData);
 
         /*
         //POPUP

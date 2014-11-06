@@ -33,17 +33,31 @@ var DataModel = function(name) {
         }
 
         // Fetch data and enable timer
-        if(_observers > 0 && _active == false) {
-            _active = true;
-            self.fetchData();
-
-            // start timer
-            if(self.interval > 0) {
-                _timer = setInterval(function () {
-                    self.fetchData();
-                }, self.interval);
-            }
+        if(_observers > 0 &&
+            _active == false &&
+            selectionModel.isEmpty() == false) {
+            self.startFetching();
         }
+    };
+
+    /**
+     * Use this when the selection is activated
+     */
+    self.startFetching = function() {
+        _active = true;
+        self.fetchData();
+
+        // start timer
+        if(self.interval > 0) {
+            _timer = setInterval(function () {
+                self.fetchData();
+            }, self.interval);
+        }
+    };
+
+    self.stopFetching = function() {
+        _active = false;
+        clearInterval(_timer);
     };
 
     var super_unsubscribe = self.subscribe;
@@ -54,8 +68,7 @@ var DataModel = function(name) {
 
         // Disable timer if no observers are present
         if(_observers <= 0 && _active == true && _timer != null) {
-            _active = false;
-            clearInterval(_timer);
+            self.stopFetching();
         }
     };
 
