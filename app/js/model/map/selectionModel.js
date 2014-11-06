@@ -25,7 +25,7 @@ var SelectionModel = function() {
     };
 
     self.removeSelection = function() {
-        var rectangles = [];
+        rectangles = [];
         selectionChanged();
     };
 
