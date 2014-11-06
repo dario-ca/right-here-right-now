@@ -7,19 +7,22 @@ function DivvyLayerController() {
 
     /////////////////////////// PRIVATE METHODS ////////////////////////////
 
+    var createIcon = function(latitude, longitude, path){
+        var icon = ExternalSvgViewController(path);
+        self.view.append(icon);
+        icon.view.width =self.defaultIconSize;
+        icon.view.height=self.defaultIconSize;
+
+        var position = self.project(latitude, longitude);
+        icon.view.x = position.x;
+        icon.view.y = position.y;
+
+        return icon;
+    };
 
     var drawStations = function(){
         divvyData.forEach(function(d){
-
-            var divvyStationIcon = ExternalSvgViewController("resource/sublayer/icon/divvy-station.svg");
-            self.view.append(divvyStationIcon);
-            divvyStationIcon.view.width =self.defaultIconSize;
-            divvyStationIcon.view.height=self.defaultIconSize;
-
-            var position = self.project(d.latitude, d.longitude);
-            divvyStationIcon.view.x = position.x;
-            divvyStationIcon.view.y = position.y;
-
+            var divvyStationIcon = createIcon(d.latitude, d.longitude,"resource/sublayer/icon/divvy-station.svg");
             divvyStationIcon.view.background.style("fill",function(){
                 //station empty: no bikes
                 if(d.availableBikes==0){
@@ -38,27 +41,10 @@ function DivvyLayerController() {
     var onDivvyData = function(){
         divvyData=dataDivvyModel.data;
         drawStations();
-        console.log(divvyData);
     };
 
     var init = function() {
-
         dataDivvyModel.subscribe(Notifications.data.DIVVY_BIKES_CHANGED,onDivvyData);
-
-
-
-
-
-        /*var divvyStationIcon = ExternalSvgViewController("resource/sublayer/icon/divvy-station.svg");
-        self.view.append(divvyStationIcon);
-        divvyStationIcon.view.width =self.defaultIconSize;
-        divvyStationIcon.view.height=self.defaultIconSize;
-        var position = self.project(41.866320,-87.64 );
-        divvyStationIcon.view.x = position.x;
-        divvyStationIcon.view.y = position.y;
-
-        divvyStationIcon.view.background.style("fill","red");*/
-
     }();
 
 

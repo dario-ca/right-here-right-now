@@ -9,7 +9,7 @@ var ExternalSvgModel = function() {
     var externalSvgPaths = ["resource/view/notification-popup.svg",
                             "resource/sublayer/icon/divvy-station.svg",
                             "resource/sublayer/icon/bus.svg",
-                            "resource/sublayer/icon/pothole.svg"];
+                            "resource/sublayer/icon/pothole.svg",
                             "resource/view/button.svg"];
 
 
@@ -39,5 +39,5 @@ var ExternalSvgModel = function() {
     return self;
 };
 
-//Global istance
+//Global instance
 var externalSvgModel = ExternalSvgModel();
