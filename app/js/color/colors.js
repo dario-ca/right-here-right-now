@@ -15,8 +15,15 @@ Colors.station = {
 
 Colors.pothole = {
   POTHOLE_OPEN: "#3F8643",
-  POTHOLE_OPEN_DUP: "yellow",
-  POTHOLE_COMPLETED: "#768A78"
+  POTHOLE_OPEN_DUP: "yellow",//TODO
+  POTHOLE_COMPLETED: "#BABABA"
+};
+
+Colors.vehicle = { //TODO
+    VEHICLE_OPEN: "red",
+    VEHICLE_OPEN_DUP: "red",
+    VEHICLE_COMPLETED: "#BABABA",
+    VEHICLE_COMPLETED_DUP: "red"
 };
 
 Colors.layer = {
