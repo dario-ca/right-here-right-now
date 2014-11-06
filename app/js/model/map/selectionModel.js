@@ -20,15 +20,26 @@ var SelectionModel = function() {
         rectangle.addPoint([point2[0], point2[1]]);
         rectangle.addPoint([point2[0], point1[1]]);
         rectangles.push(rectangle);
-    }
+    };
 
     self.removeSelection = function() {
         var rectangles = [];
-    }
+    };
 
     self.getSelection = function() {
         return rectangles;
-    }
+    };
+
+    /**
+     * point: {array} [lat, lon]
+     * @return: {bool} true if point inside, false otherwise
+     **/
+    self.pointInside = function(point) {
+        var found = false;
+        return _.filter(rectangles, function(rect) {
+           return rect.pointInside(point);
+        }).length > 0;
+    };
 
 
     ////////////////////////////////// PRIVATE METHODS //////////////////////////////////
@@ -76,6 +87,20 @@ var Rectangle = function() {
     self.addPoint = function(point) {
         points.push(point);
     };
+
+    self.pointInside = function(point) {
+        if(points.length != 4)
+            return false;
+        return geolib.isPointInside(
+            {latitude: point[0], longitude: point[1]},
+            [
+                {latitude: points[0][0], longitude: points[0][1]},
+                {latitude: points[1][0], longitude: points[1][1]},
+                {latitude: points[2][0], longitude: points[2][1]},
+                {latitude: points[3][0], longitude: points[3][1]},
+            ]
+        );
+    }
 
     self.__defineGetter__("points", function() {
         return points;
