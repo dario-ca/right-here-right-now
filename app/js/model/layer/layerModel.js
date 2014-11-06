@@ -11,8 +11,8 @@ var LayerModel = function(name) {
 
     /** PUBLIC FUNCTIONS**/
 
-    self.addSublayer = function(name, icon) {
-        var sublayer = SublayerModel(self, name, icon);
+    self.addSublayer = function(name, icon, color) {
+        var sublayer = SublayerModel(self, name, icon, color);
         self.sublayers.push(sublayer);
         return sublayer;
     };

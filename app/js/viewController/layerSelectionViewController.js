@@ -90,19 +90,34 @@ var LayerSelectionViewController = function() {
                 //label sublayer
                 var sublayerLabel = UIView(_layersSvg.view.append("text"));
                 sublayerLabel.classed("sublayer-name-label", true);
+                sublayerLabel.classed("clickable-item", true);
                 sublayerLabel.attr("x", _margin.sublayerLeft + _size.sublayerIcon + 2);
                 sublayerLabel.attr("y", yPos + 10);
                 sublayerLabel.text(sublayer.name);
 
+                sublayerLabel.on("click", function() {
+                   sublayer.toggleSelection();
+                });
+
                 //icon sublayer
-                var sublayerIcon = UIImageView();
-                sublayerIcon.classed("sublayer-icon", true);
-                sublayerIcon.imageSrc = sublayer.icon;
-                sublayerIcon.width = _size.sublayerIcon;
-                sublayerIcon.height = _size.sublayerIcon;
-                sublayerIcon.y = yPos + 4;
-                sublayerIcon.x = _margin.sublayerLeft;
+                var sublayerIcon = ExternalSvgViewController(sublayer.icon);
+                sublayerIcon.view.classed("sublayer-icon", true);
+
+                sublayerIcon.view.width = _size.sublayerIcon;
+                sublayerIcon.view.height = _size.sublayerIcon;
+                sublayerIcon.view.y = yPos + 4;
+                sublayerIcon.view.x = _margin.sublayerLeft;
                 _layersSvg.view.append(sublayerIcon);
+
+                console.log(sublayerIcon);
+                if(sublayer.selected){
+                    sublayerIcon.view.background.style("fill",sublayer.color);
+                    sublayerLabel.style("fill",Colors.components.WHITE_SELECTED);
+
+                } else {
+                    sublayerIcon.view.background.style("fill",Colors.components.GREY_DESELECTED);
+                    sublayerLabel.style("fill",Colors.components.GREY_DESELECTED);
+                }
 
             });
 
