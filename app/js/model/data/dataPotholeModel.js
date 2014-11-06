@@ -7,11 +7,13 @@
 var DataPotholeModel = function(name) {
     var self = DataModel();
 
+    ////////////////////////// PRIVATE ATTRIBUTES ///////////////////////////
+
     self._potholesURL = "http://data.cityofchicago.org/resource/7as2-ds3y.json";
     self._notification = Notification.data.POTHOLE_CHANGED;
     self.interval = 30000;
 
-    /** PUBLIC FUNCTIONS**/
+    ////////////////////////// PUBLIC METHODS //////////////////////////
 
     self.fetchData = function() {
         d3.json(self._proxyURL + self._potholesURL, function(error, json) {

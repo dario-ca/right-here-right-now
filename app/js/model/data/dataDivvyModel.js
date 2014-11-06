@@ -11,7 +11,7 @@ var DataDivvyModel = function(name) {
     self._notification = Notification.data.DIVVY_BIKES_CHANGED;
     self.interval = 30000;
 
-    /** PUBLIC FUNCTIONS**/
+    ////////////////////////// PUBLIC METHODS //////////////////////////
 
     self.fetchData = function() {
         d3.json(self._proxyURL + self._divvyURL, function(error, json) {
@@ -19,7 +19,7 @@ var DataDivvyModel = function(name) {
                 console.log("Error downloading the file "+self._divvyURL);
                 return;
             }
-            self.callback(json);
+            self.callback(json.stationBeanList);
         });
     };
 

@@ -11,15 +11,15 @@ var DataModel = function(name) {
     var _active = false;    // Will not fetch
     var _timer = null;
 
-    /** PUBLIC ATTRIBUTES**/
+    ////////////////////////// PUBLIC ATTRIBUTES ///////////////////////////
 
     self.data = null;   // Contains the data downloaded
 
-    /* Contains the interval (in seconds) of re-fetching (0 if no automatic re-fetch) */
+    /* Contains the interval (in milli-seconds) of re-fetching (0 if no automatic re-fetch) */
     self.interval = 0;
 
 
-    /** PUBLIC FUNCTIONS**/
+    ////////////////////////// PUBLIC METHODS //////////////////////////
 
     var super_subscribe = self.subscribe;
     self.subscribe = function(notification, callback) {
@@ -67,6 +67,14 @@ var DataModel = function(name) {
             self.dispatch(self._notification);
         }
     };
+
+
+    ////////////////////////////////// PRIVATE METHODS //////////////////////////////////
+    var init = function() {
+
+        // Listen for the selection update notification and call fetch when it changes
+
+    }();
 
     return self;
 };
