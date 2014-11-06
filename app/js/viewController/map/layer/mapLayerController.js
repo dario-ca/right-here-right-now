@@ -5,11 +5,15 @@
 var MapLayerController = function() {
     var self = SvgViewController();
 
+    ////////////////////////// PUBLIC ATTRIBUTES //////////////////////////
+
+    self.fixedSizeControllers = [];
+    self.defaultIconSize=1;
+
     ////////////////////////// PRIVATE ATTRIBUTES //////////////////////////
 
     // Contains all the layers of the VC
     var _layerGroup;
-    self.fixedSizeControllers = [];
 
     //////////////////////////// PUBLIC METHODS ////////////////////////////
     /**

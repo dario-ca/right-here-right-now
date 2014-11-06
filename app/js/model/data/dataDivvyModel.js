@@ -8,7 +8,7 @@ var DataDivvyModel = function(name) {
     var self = DataModel();
 
     self._divvyURL = "http://www.divvybikes.com/stations/json/";
-    self._notification = Notification.data.DIVVY_BIKES_CHANGED;
+    self._notification = Notifications.data.DIVVY_BIKES_CHANGED;
     self.interval = 30000;
 
     ////////////////////////// PUBLIC METHODS //////////////////////////

@@ -18,6 +18,9 @@ var WindowController = function() {
         var dummyLayer = DummyLayerController();
         self.mapViewController.addLayer(dummyLayer);
 
+        var divvyLayer = DivvyLayerController();
+        self.mapViewController.addLayer(divvyLayer);
+
 
     }();
 

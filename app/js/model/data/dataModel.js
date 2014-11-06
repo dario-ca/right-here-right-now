@@ -6,7 +6,7 @@ var DataModel = function(name) {
     var self = NotificationCenter();
 
     self._proxyURL = "proxy.php?csurl=";
-    self._notification = Notification.data.GENERIC_DATA_CHANGED;  // Must be reimplemented in all subclasses
+    self._notification = Notifications.data.GENERIC_DATA_CHANGED;  // Must be reimplemented in all subclasses
     var _observers = 0;
     var _active = false;    // Will not fetch
     var _timer = null;
