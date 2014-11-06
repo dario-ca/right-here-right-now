@@ -7,7 +7,7 @@
 var DataPotholeModel = function(name) {
     var self = DataModel();
 
-    ////////////////////////// PRIVATE ATTRIBUTES ///////////////////////////
+    ////////////////////////// PUBLIC ATTRIBUTES ///////////////////////////
 
     self._potholesURL = "http://data.cityofchicago.org/resource/7as2-ds3y.json";
     self._notification = Notifications.data.POTHOLE_CHANGED;
@@ -29,3 +29,9 @@ var DataPotholeModel = function(name) {
 };
 
 var dataPotholeModel = DataPotholeModel();
+
+DataPotholeModel.status = {
+    POTHOLE_OPEN: "Open",
+    POTHOLE_OPEN_DUP: "Open - Dup",
+    POTHOLE_COMPLETED: "Completed"
+}
