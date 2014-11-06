@@ -30,7 +30,8 @@ define( 'CSAJAX_DEBUG', false );
  */
 $valid_requests = array(
 	"www.divvybikes.com",
-	"data.cityofchicago.org"
+	"data.cityofchicago.org",
+	"www.ctabustracker.com"
 );
 
 /* * * STOP EDITING HERE UNLESS YOU KNOW WHAT YOU ARE DOING * * */

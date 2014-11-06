@@ -3,7 +3,7 @@ function BusLayerController() {
 
     var onBusData = function() {
         // Takes all bus data
-        positions = [[41.866320, -87.64, 157], [41.886320, -87.64, 66]]//, [41.906320, -87.64, 1], [41.926320, -87.64, 6666]];
+        positions = [[41.866320, -87.64, 157], [41.886320, -87.64, 66], [41.906320, -87.64, 1], [41.926320, -87.64, 6666]];
         for(var i in positions) {
             var position = positions[i];
             var bus = ExternalSvgViewController("resource/sublayer/icon/bus.svg");
