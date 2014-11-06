@@ -5,7 +5,7 @@ var WindowController = function() {
     var self = DivViewController();
 
     self.mapViewController = null;
-
+    self.mainViewController = null;
 
     var init = function() {
 
@@ -15,11 +15,16 @@ var WindowController = function() {
         self.mapViewController = MapViewController();
         self.view.append(self.mapViewController);
 
+        self.mainViewController = MainViewController();
+        self.view.append(self.mapViewController);
+
         var dummyLayer = DummyLayerController();
         self.mapViewController.addLayer(dummyLayer);
 
         var divvyLayer = DivvyLayerController();
         self.mapViewController.addLayer(divvyLayer);
+
+
 
 
     }();
