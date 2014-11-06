@@ -2,9 +2,20 @@
  * Created by Luca on 06/11/2014.
  */
 
+
+/**
+ * Abstract class for retrive data relative a desired area from the 311 database
+ * @param name: Name of the class
+ * @param mainUrl: main url of the database
+ * @param notification: notification invoked when the data are updated
+ * @param interval: delay between updates
+ * @param nameDateAttribute: name of the date attribute of the json returned
+ * @returns {*} a dataModel
+ * @constructor
+ */
 var Data311Model = function(name,mainUrl,notification,interval,nameDateAttribute) {
     //////////////////////////  DEBUG ///////////////////////////
-    var debug = false;
+    var debug = true;
     //////////////////////////  PRIVATE ATTRIBUTES ///////////////////////////
     var self = DataModel();
     var name = name;
@@ -16,7 +27,7 @@ var Data311Model = function(name,mainUrl,notification,interval,nameDateAttribute
     var incrementalID = 0;
     var numWaitingQueries = 0;
     var prefixQuery = self._proxyURL;
-    var charAfterUrl = "&"
+    var charAfterUrl = "&";
 
     //////////////////////////  PUBLIC ATTRIBUTES ///////////////////////////
 
@@ -26,7 +37,7 @@ var Data311Model = function(name,mainUrl,notification,interval,nameDateAttribute
     ////////////////////////// PRIVATE METHODS //////////////////////////
 
     //Function that perform a single query to the database on a single rectangle,
-    //the query is filtered depending on the state of the object for what concern time
+    //the query is filtered on time and on position
     var singleQuery = function(topLeftCord,botRightCord){
         var queryString = charAfterUrl + "$where=" + nameDateAttribute + ">'"+ fromTime  + "' AND latitude<" +
             topLeftCord[0] + " AND longitude>" + topLeftCord[1] + " AND latitude>" + botRightCord[0] + " AND longitude<" + botRightCord[1];
@@ -56,7 +67,7 @@ var Data311Model = function(name,mainUrl,notification,interval,nameDateAttribute
                 if (numWaitingQueries === 0) {
                     //last query has arrived update state
                     if (debug){
-                        console.log(name + "request ID: " + myId);
+                        console.log(name + " request ID: " + myId);
                         console.log(tmpData);
                     }
                     self.callback(tmpData);
@@ -125,3 +136,11 @@ var dataPotholeModel = Data311Model("Potholes","http://data.cityofchicago.org/re
 var dataVehiclesModel = Data311Model("Abandoned Vehicles","http://data.cityofchicago.org/resource/3c9v-pnva.json",Notifications.data.ABANDONED_VEHICLES_CHANGED,30000,"creation_date");
 var dataLightsAllModel = Data311Model("All lights out","http://data.cityofchicago.org/resource/zuxi-7xem.json",Notifications.data.LIGHT_OUT_ALL_CHANGED,30000,"creation_date");
 var dataLight1Model = Data311Model("One light out","http://data.cityofchicago.org/resource/3aav-uy2v.json",Notifications.data.LIGHT_OUT_SINGLE_CHANGED,30000,"creation_date");
+var dataFoodInspection = Data311Model("Food insoections","http://data.cityofchicago.org/resource/4ijn-s7e5.json",Notifications.data.FOOD_INSPECTION_CHANGED,30000,"inspection_date");
+
+////////////////////////// STATUS //////////////////////////
+DataPotholeModel.status = {
+    POTHOLE_OPEN: "Open",
+    POTHOLE_OPEN_DUP: "Open - Dup",
+    POTHOLE_COMPLETED: "Completed"
+}
