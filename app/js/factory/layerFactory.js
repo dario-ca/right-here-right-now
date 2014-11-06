@@ -26,10 +26,10 @@ var LayerFactory = function() {
         informationLayer.addSublayer("Abandoned Vehicle", "resource/sublayer/icon/abandoned-vehicle.svg");
 
         var securityLayer = self.addLayer("SECURITY");
-        securityLayer.addSublayer("Murder", "resource/sublayer/potholes.png");
-        securityLayer.addSublayer("Kidnapping", "resource/sublayer/lights.png");
-        securityLayer.addSublayer("Mice", "resource/sublayer/abandoned_vehicle.png");
-        securityLayer.addSublayer("Pigeons", "resource/sublayer/abandoned_vehicle.png");
+        securityLayer.addSublayer("Murder", "resource/sublayer/icon/pothole.svg");
+        securityLayer.addSublayer("Kidnapping", "resource/sublayer/icon/pothole.svg");
+        securityLayer.addSublayer("Mice", "resource/sublayer/icon/pothole.svg");
+        securityLayer.addSublayer("Pigeons", "resource/sublayer/icon/pothole.svg");
 
     };
 

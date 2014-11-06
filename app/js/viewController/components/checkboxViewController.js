@@ -29,6 +29,7 @@ var CheckboxViewController = function() {
 
     var init = function () {
         self.view.classed("checkbox-view-controller", true);
+        self.view.classed("clickable-item", true);
 
         self.selected = LayerSelectionMode.SELECTED;
     }();

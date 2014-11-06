@@ -21,6 +21,7 @@ var LayerSelectionViewController = function() {
         _lastMonthButton;
 
 
+    var _layersSvg;
     /**
      * @override
      * Called every time it is necessary to update the view layout
@@ -36,6 +37,11 @@ var LayerSelectionViewController = function() {
         _lastMonthButton.view.width = "50%";
     };
 
+    
+    self.onLayerSelectionChanged = function() {
+        _layersSvg.view.html("");
+        addLayers();
+    };
 
     //#PRIVATE FUNCTIONS
 
@@ -46,20 +52,20 @@ var LayerSelectionViewController = function() {
 
         var viewbox = {width: 100, height: 1};
 
-        var layersSvg = SvgViewController();
-        layersSvg.view.width = "100%";
-        layersSvg.view.height = "80%";
-        layersSvg.view.y = "10%";
-        layersSvg.view.setViewBox(0, 0, viewbox.width, viewbox.height);
+        _layersSvg = SvgViewController();
+        _layersSvg.view.width = "100%";
+        _layersSvg.view.height = "80%";
+        _layersSvg.view.y = "10%";
+        _layersSvg.view.setViewBox(0, 0, viewbox.width, viewbox.height);
 
-        self.view.append(layersSvg);
+        self.view.append(_layersSvg);
 
         var yPos = 0;
 
         model.layers.forEach(function(layer){
 
             //Layer label
-            var layerLabel = UIView(layersSvg.view.append("text"));
+            var layerLabel = UIView(_layersSvg.view.append("text"));
             layerLabel.classed("layer-name-label", true);
             layerLabel.attr("x", _margin.labelLeft);
             layerLabel.attr("y", yPos + 10);
@@ -70,14 +76,19 @@ var LayerSelectionViewController = function() {
             checkbox.view.y = yPos + 3;
             checkbox.view.x = viewbox.width - _size.checkbox - _margin.checkboxRight ;
             checkbox.view.height = _size.checkbox;
-            layersSvg.view.append(checkbox);
+            checkbox.selected = layer.selected;
+            _layersSvg.view.append(checkbox);
+
+            checkbox.onClick(function(){
+               layer.toggleSelection();
+            });
 
             //Layer sublayers
             layer.sublayers.forEach(function(sublayer){
                 yPos += _margin.sublayer;
 
                 //label sublayer
-                var sublayerLabel = UIView(layersSvg.view.append("text"));
+                var sublayerLabel = UIView(_layersSvg.view.append("text"));
                 sublayerLabel.classed("sublayer-name-label", true);
                 sublayerLabel.attr("x", _margin.sublayerLeft + _size.sublayerIcon + 2);
                 sublayerLabel.attr("y", yPos + 10);
@@ -91,7 +102,7 @@ var LayerSelectionViewController = function() {
                 sublayerIcon.height = _size.sublayerIcon;
                 sublayerIcon.y = yPos + 4;
                 sublayerIcon.x = _margin.sublayerLeft;
-                layersSvg.view.append(sublayerIcon);
+                _layersSvg.view.append(sublayerIcon);
 
             });
 
@@ -126,8 +137,6 @@ var LayerSelectionViewController = function() {
 
         self.view.append(translateCoordinateSystemGroup);
 
-
-
         _lastWeekButton = ButtonViewController();
         _lastWeekButton.view.background.hide();
         _lastWeekButton.view.title.text("LAST WEEK");
@@ -149,6 +158,9 @@ var LayerSelectionViewController = function() {
             _lastWeekButton.selected = false;
         });
 
+
+        //REGISTER TO CALLBACKS
+        notificationCenter.subscribe(Notifications.layer.SUBLAYER_SELECTION_CHANGED, self.onLayerSelectionChanged);
 
     }();
 

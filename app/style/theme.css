@@ -43,5 +43,7 @@ body {
 }
 
 .clickable-item {
+    pointer-events: all;
     cursor: pointer;
+
 }
