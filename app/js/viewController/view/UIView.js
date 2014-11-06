@@ -45,6 +45,10 @@ var UIView = function(domElement) {
 
     };
 
+    self.__defineSetter__("clickable", function(v) {
+        self.classed("clickable-item", v);
+    });
+
     /**
      * Append the current view to the given d3Element (parent view)
      * @param d3Element
