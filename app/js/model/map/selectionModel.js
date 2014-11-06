@@ -20,10 +20,13 @@ var SelectionModel = function() {
         rectangle.addPoint([point2[0], point2[1]]);
         rectangle.addPoint([point2[0], point1[1]]);
         rectangles.push(rectangle);
+
+        selectionChanged();
     };
 
     self.removeSelection = function() {
         var rectangles = [];
+        selectionChanged();
     };
 
     self.getSelection = function() {
