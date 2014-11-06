@@ -36,6 +36,7 @@ var UIView = function(domElement) {
         } else if(element.node){
             //appending a normal view
             self.node().appendChild(element.node());
+            element.parentController = self.parentController;
             //super_append(element);
         } else {
             //it is just a string

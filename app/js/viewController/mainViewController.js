@@ -15,7 +15,7 @@ var MainViewController = function() {
      * Called every time it is necessary to update the view layout
      */
     self.super_updateView = self.updateView;
-    self.updateView = function() {
+    self.updateView = function() {''
         self.super_updateView();
     };
 
