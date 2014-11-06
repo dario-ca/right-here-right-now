@@ -3,11 +3,38 @@
     padding: 0;
 }
 
+@font-face {
+    font-family: 'Lato-Thin';
+    src: url('../resource/font/Lato-Thin.ttf');
+}
+
+@font-face {
+    font-family: 'Lato-Regular';
+    src: url('../resource/font/Lato-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Lato-Light';
+    src: url('../resource/font/Lato-Light.ttf');
+}
+
 body {
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
 }
 
+*.unselectable {
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+
+    /*
+      Introduced in IE 10.
+      See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+    */
+    -ms-user-select: none;
+    user-select: none;
+}
 
 .clickable-item {
     cursor: pointer;

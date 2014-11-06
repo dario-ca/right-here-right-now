@@ -27,7 +27,7 @@ var MainViewController = function() {
         self.view.height = "100%";
 
         self.layerSelectionViewController = LayerSelectionViewController();
-        self.layerSelectionViewController.view.width = "30%";
+        self.layerSelectionViewController.view.width = "14%";
         self.layerSelectionViewController.view.height = "100%";
         self.view.append(self.layerSelectionViewController);
 

@@ -10,6 +10,7 @@ var ExternalSvgModel = function() {
                             "resource/sublayer/icon/divvy-station.svg",
                             "resource/sublayer/icon/bus.svg",
                             "resource/sublayer/icon/pothole.svg"];
+                            "resource/view/button.svg"];
 
 
     self.loadResources = function(callback){

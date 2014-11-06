@@ -63,6 +63,19 @@ var UIView = function(domElement) {
         return self.attr("id");
     });
 
+    /**
+     *
+     */
+    self.hide = function() {
+        self.style("opacity", 0);
+    };
+
+    /**
+     *
+     */
+    self.show = function() {
+        self.style("opacity", 1);
+    };
 
 
 
