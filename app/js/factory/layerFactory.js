@@ -17,13 +17,19 @@ var LayerFactory = function() {
     self.populateLayers = function() {
 
         var mobilityLayer = self.addLayer("MOBILITY");
-        mobilityLayer.addSublayer("Divvy", "resources/sublayer/divvy.png");
-        mobilityLayer.addSublayer("Buses", "resources/sublayer/buses.png");
+        mobilityLayer.addSublayer("Divvy", "resource/sublayer/icon/divvy-station.svg");
+        mobilityLayer.addSublayer("Buses", "resource/sublayer/icon/bus.svg");
 
         var informationLayer = self.addLayer("INFORMATION");
-        informationLayer.addSublayer("Potholes", "resources/sublayer/potholes.png");
-        informationLayer.addSublayer("Lights", "resources/sublayer/lights.png");
-        informationLayer.addSublayer("Abandoned Vehicle", "resources/sublayer/abandoned_vehicle.png");
+        informationLayer.addSublayer("Potholes", "resource/sublayer/icon/pothole.svg");
+        informationLayer.addSublayer("Lights", "resource/sublayer/icon/light.svg");
+        informationLayer.addSublayer("Abandoned Vehicle", "resource/sublayer/icon/abandoned-vehicle.svg");
+
+        var securityLayer = self.addLayer("SECURITY");
+        securityLayer.addSublayer("Murder", "resource/sublayer/icon/pothole.svg");
+        securityLayer.addSublayer("Kidnapping", "resource/sublayer/icon/pothole.svg");
+        securityLayer.addSublayer("Mice", "resource/sublayer/icon/pothole.svg");
+        securityLayer.addSublayer("Pigeons", "resource/sublayer/icon/pothole.svg");
 
     };
 

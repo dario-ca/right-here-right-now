@@ -28,6 +28,9 @@ var WindowController = function() {
         var busLayer = BusLayerController();
         self.mapViewController.addLayer(busLayer);
 
+        var potholeLayer = PotholeLayerController();
+        self.mapViewController.addLayer(potholeLayer);
+
 
 
 

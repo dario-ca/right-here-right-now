@@ -50,6 +50,30 @@ var UIImageView = function(imageElement) {
         return height;
     });
 
+    self.__defineSetter__("x", function(x){
+        self.attr("x", x);
+    });
+
+
+    self.__defineGetter__("x", function(){
+        var x = self.attr("x");
+        x = x != null ? x : 0;
+        return x;
+    });
+
+
+    self.__defineSetter__("y", function(y){
+        self.attr("y", y);
+    });
+
+
+    self.__defineGetter__("y", function(){
+        var y = self.attr("y");
+        y = y != null ? y : 0;
+        return y;
+    });
+
+
     /** PRIVATE FUNCTIONS**/
 
 

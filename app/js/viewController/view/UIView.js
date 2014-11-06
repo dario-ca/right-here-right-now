@@ -36,6 +36,7 @@ var UIView = function(domElement) {
         } else if(element.node){
             //appending a normal view
             self.node().appendChild(element.node());
+            element.parentController = self.parentController;
             //super_append(element);
         } else {
             //it is just a string
@@ -63,6 +64,19 @@ var UIView = function(domElement) {
         return self.attr("id");
     });
 
+    /**
+     *
+     */
+    self.hide = function() {
+        self.style("opacity", 0);
+    };
+
+    /**
+     *
+     */
+    self.show = function() {
+        self.style("opacity", 1);
+    };
 
 
 

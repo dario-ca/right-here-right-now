@@ -1,0 +1,5 @@
+.button-view-controller {
+    pointer-events: visiblePainted;
+    cursor: pointer;
+}
+

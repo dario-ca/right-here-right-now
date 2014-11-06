@@ -6,6 +6,7 @@ var LayerModel = function(name) {
     var self = {};
 
     self.sublayers = [];
+    self.name = name;
 
 
     /** PUBLIC FUNCTIONS**/

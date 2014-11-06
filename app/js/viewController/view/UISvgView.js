@@ -64,6 +64,7 @@ var UISvgView = function(svg) {
      */
     self.setViewBox = function(x, y, width, height) {
         self.attr("viewBox", x + " " + y + " " + width + " " + height);
+        return self;
     };
 
 
@@ -82,6 +83,7 @@ var UISvgView = function(svg) {
         self.attr("y", y);
         self.attr("width", width);
         self.attr("height", height);
+        return self;
     };
 
 
@@ -171,19 +173,6 @@ var UISvgView = function(svg) {
         });
     };
 
-    /**
-     *
-     */
-    self.hide = function() {
-        self.style("opacity", 0);
-    };
-
-    /**
-     *
-     */
-    self.show = function() {
-        self.style("opacity", 1);
-    };
 
 
     /**
@@ -192,6 +181,7 @@ var UISvgView = function(svg) {
      */
     self.setAspectRatioOptions = function(options) {
         self.attr("preserveAspectRatio", options);
+        return self;
     };
 
 

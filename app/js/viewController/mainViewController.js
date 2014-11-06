@@ -15,7 +15,7 @@ var MainViewController = function() {
      * Called every time it is necessary to update the view layout
      */
     self.super_updateView = self.updateView;
-    self.updateView = function() {
+    self.updateView = function() {''
         self.super_updateView();
     };
 
@@ -27,7 +27,7 @@ var MainViewController = function() {
         self.view.height = "100%";
 
         self.layerSelectionViewController = LayerSelectionViewController();
-        self.layerSelectionViewController.view.width = "30%";
+        self.layerSelectionViewController.view.width = "14%";
         self.layerSelectionViewController.view.height = "100%";
         self.view.append(self.layerSelectionViewController);
 

@@ -21,9 +21,30 @@ var UIGView = function(g) {
      * @param y
      */
     self.setTranslation = function(x, y) {
-        console.log("NOT REALLY IMPLEMENTED");
-        self.attr("transform", "translate=(" + [x, y] + ")");
+        self.attr("transform", "translate(" + [x, y] + ")");
+        return self;
     };
+
+    self.setScale = function(x, y) {
+        self.attr("transform", "translate(" + [self.x, self.y] + ")scale(" + [x, y] + ")");
+    };
+
+    self.__defineGetter__("x", function(){
+        var x =  d3.transform(self.attr("transform")).translate[0];
+        return x ? x : 0;
+    });
+
+    self.__defineGetter__("y", function(){
+        var y = d3.transform(self.attr("transform")).translate[1];
+        return y ? y : 0;
+    });
+
+
+    self.__defineSetter__("scale", function(scale){
+       self.attr("transform", "translate(" + [self.x, self.y] + ")scale(" + scale + ")");
+    });
+
+
 
     /** PRIVATE FUNCTIONS**/
 
