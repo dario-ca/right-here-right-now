@@ -48,10 +48,5 @@ function DivvyLayerController() {
         dataDivvyModel.subscribe(Notifications.data.DIVVY_BIKES_CHANGED,onDivvyData);
     }();
 
-    self.removeall=function(){
-      self.view.remove();
-    };
-
-
     return self;
 }
