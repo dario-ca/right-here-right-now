@@ -4,6 +4,7 @@ function PotholeLayerController() {
     /////////////////////////// PRIVATE ATTRIBUTES ////////////////////////////
 
     var potholeData=[];
+    var svgPotholes=[];
 
     /////////////////////////// PRIVATE METHODS ////////////////////////////
 
@@ -21,9 +22,11 @@ function PotholeLayerController() {
     };*/
 
     var drawPotholes = function(){
-        //TODO: remove stations before update
+        //TODO: remove stations before update, now it removes every station
+        self.view.html("");
         potholeData.forEach(function(d){
             var potholeIcon = self.createIcon(d.latitude, d.longitude,"resource/sublayer/icon/pothole.svg");
+            svgPotholes.push(potholeIcon);
             potholeIcon.view.background.style("fill",function(){
                 if(d.status==DataPotholeModel.status.POTHOLE_OPEN){
                     return Colors.pothole.POTHOLE_OPEN;
