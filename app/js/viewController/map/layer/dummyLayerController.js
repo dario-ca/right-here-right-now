@@ -27,8 +27,8 @@ function DummyLayerController() {
         var image = UIImageView();
         image.imageSrc = "resource/sublayer/icon/assault.png";
 
-        simpleIcon.view.width = 5;
-        simpleIcon.view.height = 5;
+        simpleIcon.view.width = self.defaultIconSize;
+        simpleIcon.view.height = self.defaultIconSize;
         simpleIcon.view.append(image);
         simpleIcon.view.classed("dummy-icon", true);
         self.view.append(simpleIcon);

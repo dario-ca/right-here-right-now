@@ -1,10 +1,20 @@
 /**
- *  Main window of the application
+ *  main Controller of the application
  */
-var WindowController = function() {
-    var self = DivViewController();
+var MainViewController = function() {
+    var self = SvgViewController();
 
     self.mapViewController = null;
+
+    /**
+     * @override
+     * Called every time it is necessary to update the view layout
+     */
+    self.updateView = function() {
+        self.children.forEach(function(child) {
+            child.updateView();
+        });
+    };
 
 
     var init = function() {
@@ -17,9 +27,6 @@ var WindowController = function() {
 
         var dummyLayer = DummyLayerController();
         self.mapViewController.addLayer(dummyLayer);
-
-        var divvyLayer = DivvyLayerController();
-        self.mapViewController.addLayer(divvyLayer);
 
 
     }();
