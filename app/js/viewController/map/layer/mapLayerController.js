@@ -52,7 +52,6 @@ var MapLayerController = function() {
         self.fixedSizeControllers.push(viewController);
      };
 
-
     /////////////////////////// PRIVATE METHODS ////////////////////////////
     var init = function() {
         _layerGroup = L.layerGroup();
