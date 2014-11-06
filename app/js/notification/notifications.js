@@ -14,6 +14,7 @@ Notifications.data = {
     DIVVY_BIKES_CHANGED: "data.DIVVY_BIKES_CHANGED",
     BUS_CHANGED: "data.BUS_CHANGED",
     WEATHER_CHANGED: "data.WEATHER_CHANGED",
+    CRIME_CHANGED: "data.CRIME_CHANGED",
 
     // For future uses
     YELP_FOOD_CHANGED: "data.YELP_FOOD_CHANGED",
