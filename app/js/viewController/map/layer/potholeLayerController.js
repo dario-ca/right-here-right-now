@@ -7,7 +7,7 @@ function PotholeLayerController() {
 
     /////////////////////////// PRIVATE METHODS ////////////////////////////
 
-    var createIcon = function(latitude, longitude, path){
+   /* var createIcon = function(latitude, longitude, path){
         var icon = ExternalSvgViewController(path);
         self.view.append(icon);
         icon.view.width =self.defaultIconSize;
@@ -18,11 +18,12 @@ function PotholeLayerController() {
         icon.view.y = position.y;
 
         return icon;
-    };
+    };*/
 
     var drawPotholes = function(){
+        //TODO: remove stations before update
         potholeData.forEach(function(d){
-            var potholeIcon = createIcon(d.latitude, d.longitude,"resource/sublayer/icon/pothole.svg");
+            var potholeIcon = self.createIcon(d.latitude, d.longitude,"resource/sublayer/icon/pothole.svg");
             potholeIcon.view.background.style("fill",function(){
                 if(d.status==DataPotholeModel.status.POTHOLE_OPEN){
                     return Colors.pothole.POTHOLE_OPEN;

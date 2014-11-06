@@ -52,6 +52,22 @@ var MapLayerController = function() {
         self.fixedSizeControllers.push(viewController);
      };
 
+    /**
+     * create the icon of the data to visualize
+     */
+    self.createIcon = function(latitude, longitude, path){
+        var icon = ExternalSvgViewController(path);
+        self.view.append(icon);
+        icon.view.width =self.defaultIconSize;
+        icon.view.height=self.defaultIconSize;
+
+        var position = self.project(latitude, longitude);
+        icon.view.x = position.x;
+        icon.view.y = position.y;
+
+        return icon;
+    };
+
     /////////////////////////// PRIVATE METHODS ////////////////////////////
     var init = function() {
         _layerGroup = L.layerGroup();

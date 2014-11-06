@@ -7,7 +7,7 @@ function DivvyLayerController() {
 
     /////////////////////////// PRIVATE METHODS ////////////////////////////
 
-    var createIcon = function(latitude, longitude, path){
+    /*var createIcon = function(latitude, longitude, path){
         var icon = ExternalSvgViewController(path);
         self.view.append(icon);
         icon.view.width =self.defaultIconSize;
@@ -18,11 +18,12 @@ function DivvyLayerController() {
         icon.view.y = position.y;
 
         return icon;
-    };
+    };*/
 
     var drawStations = function(){
+        //TODO: remove stations before update
         divvyData.forEach(function(d){
-            var divvyStationIcon = createIcon(d.latitude, d.longitude,"resource/sublayer/icon/divvy-station.svg");
+            var divvyStationIcon = self.createIcon(d.latitude, d.longitude,"resource/sublayer/icon/divvy-station.svg");
             divvyStationIcon.view.background.style("fill",function(){
                 //station empty: no bikes
                 if(d.availableBikes==0){
@@ -46,6 +47,10 @@ function DivvyLayerController() {
     var init = function() {
         dataDivvyModel.subscribe(Notifications.data.DIVVY_BIKES_CHANGED,onDivvyData);
     }();
+
+    self.removeall=function(){
+      self.view.remove();
+    };
 
 
     return self;
