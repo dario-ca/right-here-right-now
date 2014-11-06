@@ -15,6 +15,8 @@ function BusLayerController() {
             bus.view.x = p.x;
             bus.view.y = p.y;
 
+            bus.view.busNumber.text(position[2]);
+
             self.view.append(bus);
         }
     };
