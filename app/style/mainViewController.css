@@ -1,0 +1,5 @@
+.main-view-controller {
+    position: absolute;
+    pointer-events: none;
+    z-index: 5;
+}

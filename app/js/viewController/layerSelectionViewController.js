@@ -14,9 +14,9 @@ var LayerSelectionViewController = function() {
      * @override
      * Called every time it is necessary to update the view layout
      */
-    self.super_updateView = self.updateView();
+    self.super_updateView = self.updateView;
     self.updateView = function() {
-        self.updateView();
+        self.super_updateView();
 
     };
 
@@ -24,9 +24,8 @@ var LayerSelectionViewController = function() {
     var init = function() {
 
         self.view.classed("layer-selection-view-controller", true);
+        self.view.append(UIBackgroundView());
 
-        self.view.width = "30%";
-        self.view.height = "100%";
 
     }();
 

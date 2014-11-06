@@ -11,12 +11,13 @@ var WindowController = function() {
 
         self.view.classed("window-controller", true);
 
+        self.mainViewController = MainViewController();
+        self.view.append(self.mainViewController);
 
         self.mapViewController = MapViewController();
         self.view.append(self.mapViewController);
 
-        self.mainViewController = MainViewController();
-        self.view.append(self.mapViewController);
+
 
         var dummyLayer = DummyLayerController();
         self.mapViewController.addLayer(dummyLayer);

@@ -16,7 +16,7 @@
    width="10245"
    height="2735"
    xml:space="preserve"
-   sodipodi:docname="controllers hierarchi.svg"><metadata
+   sodipodi:docname="controllers hierarchy.svg"><metadata
      id="metadata3029"><rdf:RDF><cc:Work
          rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></metadata><defs
@@ -150,7 +150,7 @@
      id="namedview3025"
      showgrid="false"
      inkscape:zoom="0.1125427"
-     inkscape:cx="3049.3532"
+     inkscape:cx="3618.0262"
      inkscape:cy="766.02427"
      inkscape:window-x="0"
      inkscape:window-y="24"
@@ -1015,5 +1015,24 @@
          id="tspan4545-5-8-1"
          x="1317.4144"
          y="-2229.5759"
-         style="font-weight:bold;fill:#d45500;-inkscape-font-specification:Helvetica Neue LT Pro Bold">lnotificationsViewController</tspan></text>
+         style="font-weight:bold;fill:#d45500;-inkscape-font-specification:Helvetica Neue LT Pro Bold">notificationsViewController</tspan></text>
+<rect
+       style="fill:none;stroke:#0c33ac;stroke-width:48;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:0.86301368;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect3754-4-9-7-0"
+       width="1634.3148"
+       height="164.43309"
+       x="2609.0977"
+       y="-0.46980119" /><text
+       xml:space="preserve"
+       style="font-size:114.86708832px;font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000080;fill-opacity:1;stroke:none;font-family:Helvetica Neue LT Pro;-inkscape-font-specification:Helvetica Neue LT Pro Light"
+       x="2915.2864"
+       y="-222.00363"
+       id="text4543-2-4-0-6"
+       sodipodi:linespacing="125%"
+       transform="scale(1,-1)"><tspan
+         sodipodi:role="line"
+         id="tspan4545-5-8-1-2"
+         x="2915.2864"
+         y="-222.00363"
+         style="font-weight:bold;fill:#000080;-inkscape-font-specification:Helvetica Neue LT Pro Bold">mapToolsViewController</tspan></text>
 </g></svg>
