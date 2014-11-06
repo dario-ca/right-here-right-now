@@ -33,6 +33,10 @@ var SelectionModel = function() {
         return rectangles;
     };
 
+    self.isEmpty = function() {
+        return rectangles == 0;
+    }
+
     /**
      * point: {array} [lat, lon]
      * @return: {bool} true if point inside, false otherwise

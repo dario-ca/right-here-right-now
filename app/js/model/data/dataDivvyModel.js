@@ -23,6 +23,14 @@ var DataDivvyModel = function(name) {
         });
     };
 
+    ////////////////////////////////// PRIVATE METHODS //////////////////////////////////
+    var init = function() {
+
+        // Listen for the selection update notification and call fetch when it changes
+        notificationCenter.subscribe(Notifications.selection.SELECTION_CHANGED, self.startFetching);
+
+    }();
+
     return self;
 };
 
