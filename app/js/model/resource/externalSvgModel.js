@@ -7,7 +7,8 @@ var ExternalSvgModel = function() {
     self.svgsData = {};
 
     var externalSvgPaths = ["resource/view/notification-popup.svg",
-                                "resource/sublayer/icon/divvy-station.svg"];
+                            "resource/sublayer/icon/divvy-station.svg",
+                            "resource/sublayer/icon/bus.svg"];
 
 
     self.loadResources = function(callback){

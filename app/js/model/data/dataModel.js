@@ -27,6 +27,11 @@ var DataModel = function(name) {
 
         _observers++;
 
+        if(_active == true) {
+            // Data is already present, call callback
+            callback();
+        }
+
         // Fetch data and enable timer
         if(_observers > 0 && _active == false) {
             _active = true;

@@ -21,6 +21,9 @@ var WindowController = function() {
         var divvyLayer = DivvyLayerController();
         self.mapViewController.addLayer(divvyLayer);
 
+        var busLayer = BusLayerController();
+        self.mapViewController.addLayer(busLayer);
+
 
     }();
 

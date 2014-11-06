@@ -9,13 +9,16 @@ var ExternalSvgViewController = function(svgPath) {
     /** PRIVATE FUNCTIONS**/
 
     var loadSvg = function() {
-        var data = externalSvgModel.svgsData[svgPath];
+        var data = {};
+        jQuery.extend(data, externalSvgModel.svgsData[svgPath]);
+        //var data = clone(externalSvgModel.svgsData[svgPath]);
+            //JSON.parse(JSON.stringify(externalSvgModel.svgsData[svgPath]));
 
         if(!data){
             console.warn("svg " + svgPath + " is not included in externalSvgModel.js");
         }
 
-        self.view.node().appendChild(data.documentElement);
+        self.view.node().appendChild(data.rootElement);
 
         //Generate all getter
         self.view.selectAll("*")[0].forEach(function(node){
