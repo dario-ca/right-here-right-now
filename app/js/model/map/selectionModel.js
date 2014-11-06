@@ -43,6 +43,11 @@ var SelectionModel = function() {
 
 
     ////////////////////////////////// PRIVATE METHODS //////////////////////////////////
+
+    var selectionChanged = function() {
+        notificationCenter.dispatch(Notifications.selection.SELECTION_CHANGED);
+    };
+
     var init = function() {
     } ();
 
