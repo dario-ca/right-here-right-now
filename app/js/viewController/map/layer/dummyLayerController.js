@@ -6,7 +6,7 @@ function DummyLayerController() {
 
         //POPUP
 
-        var popup = ExternalSvgViewController("resource/view/notification-popup.svg")
+        var popup = ExternalSvgViewController("resource/view/notification-popup.svg");
         self.view.append(popup);
         popup.view.width = 20;
         popup.view.height= 10;
@@ -17,6 +17,23 @@ function DummyLayerController() {
         var position = self.project(41.866320,-87.64 );
         popup.view.x = position.x;
         popup.view.y = position.y;
+
+
+        var popup2 = ExternalSvgViewController("resource/view/notification-popup.svg");
+        self.view.append(popup2);
+        popup2.view.width = 20;
+        popup2.view.height= 10;
+        popup2.view.title.text("prova");
+        popup2.view.subtitle.text("provaprova");
+        popup2.view.icon.imageSrc = "resource/sublayer/icon/assault.png";
+
+        var position = self.project(41.866320,-87.64 );
+        popup2.view.x = position.x;
+        popup2.view.y = position.y;
+
+
+
+
 
         self.fixControllerSize(popup);
 

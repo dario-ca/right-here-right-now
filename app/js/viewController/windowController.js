@@ -5,7 +5,7 @@ var WindowController = function() {
     var self = DivViewController();
 
     self.mapViewController = null;
-
+    self.mainViewController = null;
 
     var init = function() {
 
@@ -13,6 +13,9 @@ var WindowController = function() {
 
 
         self.mapViewController = MapViewController();
+        self.view.append(self.mapViewController);
+
+        self.mainViewController = MainViewController();
         self.view.append(self.mapViewController);
 
         var dummyLayer = DummyLayerController();
@@ -23,6 +26,8 @@ var WindowController = function() {
 
         var busLayer = BusLayerController();
         self.mapViewController.addLayer(busLayer);
+
+
 
 
     }();

@@ -1,7 +1,7 @@
 /**
- *  main Controller of the application
+ *  controller for the selection on the left of the application
  */
-var MainViewController = function() {
+var LayerSelectionViewController = function() {
     var self = SvgViewController();
 
     self.layerSelectionViewController = null;
@@ -23,9 +23,9 @@ var MainViewController = function() {
 
     var init = function() {
 
-        self.view.classed("main-view-controller", true);
+        self.view.classed("layer-selection-view-controller", true);
 
-        self.view.width = "100%";
+        self.view.width = "30%";
         self.view.height = "100%";
 
     }();

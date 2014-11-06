@@ -9,10 +9,7 @@ var ExternalSvgViewController = function(svgPath) {
     /** PRIVATE FUNCTIONS**/
 
     var loadSvg = function() {
-        var data = {};
-        jQuery.extend(data, externalSvgModel.svgsData[svgPath]);
-        //var data = clone(externalSvgModel.svgsData[svgPath]);
-            //JSON.parse(JSON.stringify(externalSvgModel.svgsData[svgPath]));
+        var data = externalSvgModel.svgsData[svgPath].cloneNode(true);
 
         if(!data){
             console.warn("svg " + svgPath + " is not included in externalSvgModel.js");
