@@ -12,7 +12,6 @@ function VehicleLayerController() {
         //TODO: remove vehicles before update, now it removes every vehicle
         self.view.html("");
         vehicleData.forEach(function(d){
-            //TODO:fix path icon
             var vehicleIcon = self.createIcon(d.latitude, d.longitude,"resource/sublayer/icon/abandoned-vehicle.svg");
             svgVehicles.push(vehicleIcon);
             vehicleIcon.view.background.style("fill",function(){

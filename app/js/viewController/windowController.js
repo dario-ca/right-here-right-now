@@ -30,6 +30,9 @@ var WindowController = function() {
         var vehicleLayer = VehicleLayerController();
         self.mapViewController.addLayer(vehicleLayer);
 
+        var lightOneLayer = LightOneLayerController();
+        self.mapViewController.addLayer(lightOneLayer);
+
 
 
 
