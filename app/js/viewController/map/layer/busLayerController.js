@@ -1,7 +1,92 @@
 function BusLayerController() {
     var self = MapLayerController();
 
+    var busRouteLayers = [];
+    var busControllers = [];
+
+    /**
+     * Display the bus route
+     * @param rt: bus line number
+     */
+    /*
+    self.displayBusRoute = function(rt, dir) {
+
+        var stops = dataBusModel.getLineStops(rt, dir);
+        var latLon = [];
+        stops.forEach(function(stop) {
+            latLon.push(L.latLng(stop.lat, stop.lon));
+        });
+
+        var routeLayer = L.Routing.control({
+            plan: L.Routing.plan(latLon,
+                { waypointIcon: L.icon({
+                    iconUrl: "resource/sublayer/icon/bus_stop.png",
+                    iconAnchor: L.point(12, 41)
+                })
+            }),
+            fitSelectedRoutes: false,
+            lineOptions: {
+                styles: [
+                    {color: 'black', opacity: 0, weight: 0},
+                    {color: 'blue', opacity: 0, weight: 0},
+                    {color: 'red', opacity: 0, weight: 2}
+                ]
+            }
+        });
+        var map = mapModel.getLeafletMap();
+        map.addLayer(routeLayer);
+    };
+    */
+
+    /**
+     * Display the bus stops
+     * @param stops
+     */
+    self.displayBusRoute = function(stops) {
+
+        // Extract latitude and longitude
+        var latLon = [];
+        stops.forEach(function(stop) {
+            latLon.push(L.latLng(stop.lat, stop.lon));
+        });
+
+        var routeLayer = L.Routing.control({
+            plan: L.Routing.plan(latLon,
+                { waypointIcon: L.icon({
+                    iconUrl: "resource/sublayer/icon/bus_stop.png",
+                    iconAnchor: L.point(12, 41)
+                })
+                }),
+            fitSelectedRoutes: false,
+            lineOptions: {
+                styles: [
+                    {color: 'black', opacity: 0, weight: 0},
+                    {color: 'blue', opacity: 0, weight: 0},
+                    {color: 'red', opacity: 1, weight: 2}
+                ]
+            }
+        });
+        var map = mapModel.getLeafletMap();
+        map.addLayer(routeLayer);
+        busRouteLayers.push(routeLayer);
+    };
+
+    self.hideBusRoutes = function() {
+        var map = mapModel.getLeafletMap();
+        busRouteLayers.forEach(function(routeLayer){
+            map.removeLayer(routeLayer);
+        });
+        busRouteLayers = [];
+    };
+
     var onBusData = function() {
+        // Remove all busses
+        busControllers.forEach( function(bus) {
+           bus.dispose();
+        });
+        busControllers = [];
+
+
         // Takes all bus data
         vehicles = dataBusModel.data;
         for(var i in vehicles) {
@@ -10,6 +95,7 @@ function BusLayerController() {
 
             bus.view.width = self.defaultIconSize;
             bus.view.height= self.defaultIconSize;
+            bus.vehicle = vehicle;
 
             var p = self.project(vehicle.lat, vehicle.lon);
             bus.view.x = p.x;
@@ -18,12 +104,30 @@ function BusLayerController() {
             bus.view.busNumber.text(vehicle.rt);
 
             self.view.append(bus);
+
+            // Add the interaction on click
+            bus.view.on("click", function() {
+               dataBusModel.busClicked(vehicle);
+            });
+
+            // Add the bus controller
+            busControllers.push(bus);
         }
+    };
+
+    var onBusSelected = function() {
+        if(dataBusModel.busSelected != null) {
+            self.displayBusRoute(dataBusModel.busSelected.stops);
+            console.log(dataBusModel.busSelected);
+        }
+        else
+            self.hideBusRoutes();
     };
 
     var init = function() {
 
         dataBusModel.subscribe(Notifications.data.BUS_CHANGED, onBusData);
+        dataBusModel.subscribe(Notifications.data.BUS_SELECTION_CHANGED, onBusSelected);
 
         /*
         //POPUP
