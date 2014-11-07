@@ -1,4 +1,6 @@
 /**
+ *  OBSOLETE DO NOT USE THIS CLASS
+ *
  *  Class DataPotholeModel
  *
  *  This class fetch the data of the potholes of Chicago city
@@ -115,9 +117,3 @@ var DataPotholeModel = function(name) {
 };
 
 //var dataPotholeModel = DataPotholeModel();
-
-DataPotholeModel.status = {
-    POTHOLE_OPEN: "Open",
-    POTHOLE_OPEN_DUP: "Open - Dup",
-    POTHOLE_COMPLETED: "Completed"
-}

@@ -2,22 +2,34 @@
  * Created by Luca on 06/11/2014.
  */
 
-var Data311Model = function(name,mainUrl,notification,interval,nameDateAttribute) {
+
+/**
+ * Class for access data relative a desired area from the 311 database
+ * @param modelName  Name of the class
+ * @param databaseMainUrl  main url of the database
+ * @param notification : notification invoked when the data are updated
+ * @param interval delay between updates
+ * @param jsonNameDateAttribute name of the date attribute of the json returned
+ * @param numWeekFilter default 1, set to 2 only for crimes
+ * @returns {*} a dataModel
+ * @constructor
+ */
+var Data311Model = function(modelName,databaseMainUrl,notification,interval,jsonNameDateAttribute,numWeekFilter) {
     //////////////////////////  DEBUG ///////////////////////////
-    var debug = false;
+    var debug = true;
     //////////////////////////  PRIVATE ATTRIBUTES ///////////////////////////
     var self = DataModel();
-    var name = name;
+    var name = modelName;
     var fromTime = moment().subtract(1, 'months').format('YYYY-MM-DD'); //TODO remove hardcode
     var rectangles = [];
-    var mainUrl = mainUrl;
+    var mainUrl = databaseMainUrl;
     var tmpData = [];
-    var nameDateAttribute = nameDateAttribute;
+    var nameDateAttribute = jsonNameDateAttribute;
     var incrementalID = 0;
     var numWaitingQueries = 0;
     var prefixQuery = self._proxyURL;
-    var charAfterUrl = "&"
-
+    var charAfterUrl = "&";
+    var weeksNum = numWeekFilter || 1;
     //////////////////////////  PUBLIC ATTRIBUTES ///////////////////////////
 
     self._notification = notification;
@@ -26,12 +38,12 @@ var Data311Model = function(name,mainUrl,notification,interval,nameDateAttribute
     ////////////////////////// PRIVATE METHODS //////////////////////////
 
     //Function that perform a single query to the database on a single rectangle,
-    //the query is filtered depending on the state of the object for what concern time
+    //the query is filtered on time and on position
     var singleQuery = function(topLeftCord,botRightCord){
         var queryString = charAfterUrl + "$where=" + nameDateAttribute + ">'"+ fromTime  + "' AND latitude<" +
-            topLeftCord[0] + " AND longitude>" + topLeftCord[1] + " AND latitude>" + botRightCord[0] + " AND longitude<" + botRightCord[1];
+            topLeftCord[0] + " AND longitude>" + topLeftCord[1] + " AND latitude>" + botRightCord[0] + " AND longitude<" + botRightCord[1]+"&$limit=10000";
         d3.json(prefixQuery + mainUrl + queryString, createCallBackData(incrementalID));
-    }
+    };
 
     //Create a Callback function invoked when the data are returned from SODA
     //@param id : identifier used for diversify different sets of queries.
@@ -56,7 +68,7 @@ var Data311Model = function(name,mainUrl,notification,interval,nameDateAttribute
                 if (numWaitingQueries === 0) {
                     //last query has arrived update state
                     if (debug){
-                        console.log(name + "request ID: " + myId);
+                        console.log(name + " request ID: " + myId);
                         console.log(tmpData);
                     }
                     self.callback(tmpData);
@@ -64,7 +76,7 @@ var Data311Model = function(name,mainUrl,notification,interval,nameDateAttribute
             }
         }
 
-    }
+    };
 
     //Callback invoked when the selections areas are changed
     var callBackChangeAreas = function() {
@@ -72,7 +84,7 @@ var Data311Model = function(name,mainUrl,notification,interval,nameDateAttribute
         rectangles = selectionModel.getSelection();
         self.fetchData();
         //TODO reset timer
-    }
+    };
 
     //Callback function invoked when the time filter is changed
     var callBackChangeTimeFilter = function() {
@@ -80,11 +92,11 @@ var Data311Model = function(name,mainUrl,notification,interval,nameDateAttribute
         if (/*timeFilterModel.mode == "month"*/true) {
             fromTime = moment().subtract(1, 'months').format('YYYY-MM-DD');
         } else {
-            fromTime = moment().subtract(1, 'weeks').format('YYYY-MM-DD');
+            fromTime = moment().subtract(weeksNum, 'weeks').format('YYYY-MM-DD');
         }
         self.fetchData();
         //TODO reset timer
-    }
+    };
 
 
     ////////////////////////// PUBLIC METHODS //////////////////////////
@@ -103,7 +115,8 @@ var Data311Model = function(name,mainUrl,notification,interval,nameDateAttribute
         }
     };
 
-    self.phpServerEnabled = function (val) {
+    //Change the the query depending if the php proxy is active or not
+    self.proxyPhpQueries = function (val) {
         if (val){
             prefixQuery = self._proxyURL;
             charAfterUrl = "&";
@@ -111,7 +124,7 @@ var Data311Model = function(name,mainUrl,notification,interval,nameDateAttribute
             prefixQuery = "";
             charAfterUrl = "?";
         }
-    }
+    };
 
     ////////////////////////// SUBSCRIBES //////////////////////////
 
@@ -125,3 +138,19 @@ var dataPotholeModel = Data311Model("Potholes","http://data.cityofchicago.org/re
 var dataVehiclesModel = Data311Model("Abandoned Vehicles","http://data.cityofchicago.org/resource/3c9v-pnva.json",Notifications.data.ABANDONED_VEHICLES_CHANGED,30000,"creation_date");
 var dataLightsAllModel = Data311Model("All lights out","http://data.cityofchicago.org/resource/zuxi-7xem.json",Notifications.data.LIGHT_OUT_ALL_CHANGED,30000,"creation_date");
 var dataLight1Model = Data311Model("One light out","http://data.cityofchicago.org/resource/3aav-uy2v.json",Notifications.data.LIGHT_OUT_SINGLE_CHANGED,30000,"creation_date");
+var dataFoodInspection = Data311Model("Food insoections","http://data.cityofchicago.org/resource/4ijn-s7e5.json",Notifications.data.FOOD_INSPECTION_CHANGED,30000,"inspection_date");
+var dataCrimeModel = Data311Model("Crimes","http://data.cityofchicago.org/resource/ijzp-q8t2.json",Notifications.data.CRIME_CHANGED,30000,"date",2);
+
+////////////////////////// STATUS //////////////////////////
+dataPotholeModel.status = {
+    POTHOLE_OPEN: "Open",
+    POTHOLE_OPEN_DUP: "Open - Dup",
+    POTHOLE_COMPLETED: "Completed"
+};
+
+dataVehiclesModel.status = {
+    VEHICLE_OPEN: "Open",
+    VEHICLE_OPEN_DUP: "Open - Dup",
+    VEHICLE_COMPLETED: "Completed",
+    VEHICLE_COMPLETED_DUP: "Completed - Dup"
+};

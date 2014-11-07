@@ -90,14 +90,10 @@ var LayerSelectionViewController = function() {
                 //label sublayer
                 var sublayerLabel = UIView(_layersSvg.view.append("text"));
                 sublayerLabel.classed("sublayer-name-label", true);
-                sublayerLabel.classed("clickable-item", true);
+                sublayerLabel.clickable = true;
                 sublayerLabel.attr("x", _margin.sublayerLeft + _size.sublayerIcon + 2);
                 sublayerLabel.attr("y", yPos + 10);
                 sublayerLabel.text(sublayer.name);
-
-                sublayerLabel.on("click", function() {
-                   sublayer.toggleSelection();
-                });
 
                 //icon sublayer
                 var sublayerIcon = ExternalSvgViewController(sublayer.icon);
@@ -107,9 +103,19 @@ var LayerSelectionViewController = function() {
                 sublayerIcon.view.height = _size.sublayerIcon;
                 sublayerIcon.view.y = yPos + 4;
                 sublayerIcon.view.x = _margin.sublayerLeft;
+                sublayerIcon.view.clickable = true;
                 _layersSvg.view.append(sublayerIcon);
 
-                console.log(sublayerIcon);
+                //click
+                sublayerLabel.on("click", function() {
+                    sublayer.toggleSelection();
+                });
+
+                sublayerIcon.view.on("click", function() {
+                    sublayer.toggleSelection();
+                });
+
+                //Color
                 if(sublayer.selected){
                     sublayerIcon.view.background.style("fill",sublayer.color);
                     sublayerLabel.style("fill",Colors.components.WHITE_SELECTED);

@@ -27,6 +27,9 @@ var WindowController = function() {
         var potholeLayer = PotholeLayerController();
         self.mapViewController.addLayer(potholeLayer);
 
+        var vehicleLayer = VehicleLayerController();
+        self.mapViewController.addLayer(vehicleLayer);
+
 
 
 

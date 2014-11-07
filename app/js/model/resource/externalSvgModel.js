@@ -13,8 +13,8 @@ var ExternalSvgModel = function() {
                             "resource/view/checkbox.svg",
                             "resource/view/layer-title.svg",
                             "resource/sublayer/icon/pothole.svg",
-                            "resource/sublayer/icon/light.svg",
-                            "resource/sublayer/icon/abandoned-vehicle.svg"
+                            "resource/sublayer/icon/abandoned-vehicle.svg",
+                            "resource/sublayer/icon/light.svg"
                             ];
 
 
