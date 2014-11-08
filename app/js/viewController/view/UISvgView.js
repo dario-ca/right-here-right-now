@@ -191,6 +191,7 @@ var UISvgView = function(svg) {
      * @param callBack
      */
     self.onClick = function(callBack) {
+        self.classed("ui-view-pointer", true);   // Add the class pointer if it is clickable
         self.on("click", callBack);
     };
 
