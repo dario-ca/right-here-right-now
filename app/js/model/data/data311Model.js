@@ -154,3 +154,10 @@ dataVehiclesModel.status = {
     VEHICLE_COMPLETED: "Completed",
     VEHICLE_COMPLETED_DUP: "Completed - Dup"
 };
+
+dataLight1Model.status = {
+    LIGHT_ONE_OPEN: "Open",
+    LIGHT_ONE_OPEN_DUP: "Open - Dup",
+    LIGHT_ONE_COMPLETED: "Completed",
+    LIGHT_ONE_COMPLETED_DUP: "Completed - Dup"
+};
