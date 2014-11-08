@@ -2,7 +2,6 @@ function BusLayerController() {
     var self = MapLayerController();
 
     var busRouteLayers = [];
-    var busControllers = [];
 
     /**
      * Display the bus route
@@ -44,6 +43,21 @@ function BusLayerController() {
      */
     self.displayBusRoute = function(stops) {
 
+        stops.forEach(function(stop) {
+            // TODO: add the bus stop icon
+            var busStop = ExternalSvgViewController("resource/sublayer/icon/bus.svg");
+            busStop.view.width = self.defaultIconSize;
+            busStop.view.height= self.defaultIconSize;
+
+            var p = self.project(stop.lat, stop.lon);
+            busStop.view.x = p.x;
+            busStop.view.y = p.y;
+
+            self.view.append(busStop);
+            busRouteLayers.push(busStop);
+        });
+
+        /*
         // Extract latitude and longitude
         var latLon = [];
         stops.forEach(function(stop) {
@@ -55,42 +69,49 @@ function BusLayerController() {
                 { waypointIcon: L.icon({
                     iconUrl: "resource/sublayer/icon/bus_stop.png",
                     iconAnchor: L.point(12, 41)
-                })
-                }),
+                    }),
+                draggableWaypoints: false,
+                addWaypoints: false
+            }),
             fitSelectedRoutes: false,
             lineOptions: {
                 styles: [
                     {color: 'black', opacity: 0, weight: 0},
                     {color: 'blue', opacity: 0, weight: 0},
-                    {color: 'red', opacity: 1, weight: 2}
+                    {color: 'red', opacity: 0, weight: 0}
                 ]
             }
         });
         var map = mapModel.getLeafletMap();
         map.addLayer(routeLayer);
         busRouteLayers.push(routeLayer);
+        */
     };
 
     self.hideBusRoutes = function() {
+        /*
         var map = mapModel.getLeafletMap();
         busRouteLayers.forEach(function(routeLayer){
             map.removeLayer(routeLayer);
+        });
+        */
+        busRouteLayers.forEach(function(busStop) {
+            busStop.dispose();
         });
         busRouteLayers = [];
     };
 
     var onBusData = function() {
         // Remove all busses
-        busControllers.forEach( function(bus) {
-           bus.dispose();
+        self.children.forEach( function(child) {
+            if(child.vehicle != undefined)
+                child.dispose();    // It is a bus
         });
-        busControllers = [];
-
+        self.children = [];
 
         // Takes all bus data
         vehicles = dataBusModel.data;
-        for(var i in vehicles) {
-            var vehicle = vehicles[i];
+        vehicles.forEach(function(vehicle) {
             var bus = ExternalSvgViewController("resource/sublayer/icon/bus.svg");
 
             bus.view.width = self.defaultIconSize;
@@ -105,14 +126,11 @@ function BusLayerController() {
 
             self.view.append(bus);
 
-            // Add the interaction on click
-            bus.view.on("click", function() {
-               dataBusModel.busClicked(vehicle);
+            // Add the interaction on
+            bus.view.onClick(function() {
+                dataBusModel.busClicked(bus.vehicle);
             });
-
-            // Add the bus controller
-            busControllers.push(bus);
-        }
+        });
     };
 
     var onBusSelected = function() {

@@ -31,7 +31,8 @@ define( 'CSAJAX_DEBUG', false );
 $valid_requests = array(
 	"www.divvybikes.com",
 	"data.cityofchicago.org",
-	"www.ctabustracker.com"
+	"www.ctabustracker.com",
+	"api.yelp.com"
 );
 
 /* * * STOP EDITING HERE UNLESS YOU KNOW WHAT YOU ARE DOING * * */
