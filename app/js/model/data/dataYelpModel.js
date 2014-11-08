@@ -19,6 +19,8 @@ var DataYelpModel = function(name) {
     var token_public = '5N-egiQwfvcKydR-pYrYzyA4wn_QqZu_';
     var token_secret = 'Fe7g29LlohGjz_ASGFqQX0dboMM';
 
+    var maxBusiness = 100;
+
 
     ////////////////////////// PUBLIC METHODS //////////////////////////
 
@@ -34,7 +36,7 @@ var DataYelpModel = function(name) {
 
             var bounds = rectangle.circumscribed();
 
-            q.defer(function(callback){ self.fetchSingleData(tempData, bounds, callback); });
+            q.defer(function(callback){ self.fetchSingleData(tempData, bounds, 0, callback); });
         });
 
         // When all data arrived call that callback
@@ -44,12 +46,15 @@ var DataYelpModel = function(name) {
     };
 
     ////////////////////////////////// PRIVATE METHODS //////////////////////////////////
-    self.fetchSingleData = function(tempData, bounds, callback) {
+    self.fetchSingleData = function(tempData, bounds, offsetNumber, callback) {
 
         // Calculate the search terms
         var sw = bounds.points[0];
         var ne = bounds.points[2];
         var searchTerms = "term=food&bounds="+sw[0]+","+sw[1]+"|"+ne[0]+","+ne[1];
+        var limit  = "limit=20";        // Yelp API limits the result to 20
+        var sort = "sort=0";            // Sort businesses for highest rated
+        var offset = "offset=" + offsetNumber; // Add an offset, used in multiple queries
 
         var oauth = OAuth({
             consumer: {
@@ -65,7 +70,7 @@ var DataYelpModel = function(name) {
         };
 
         var request_data = {
-            url: _yelpURL+"?"+searchTerms,
+            url: _yelpURL+"?"+searchTerms+"&"+limit+"&"+sort+"&"+offset,
             method: 'GET',
             data: {
                 status: ''
@@ -79,7 +84,6 @@ var DataYelpModel = function(name) {
             data: oauth.authorize(request_data, token),
             headers: oauth.toHeader(oauth.authorize(request_data, token))
         }).done(function(data) {
-            console.log(data);
 
             // Filters data for location
             var filteredData = data.businesses.filter(function(b) {
@@ -87,9 +91,13 @@ var DataYelpModel = function(name) {
                 return selectionModel.pointInside([c.latitude, c.longitude]);
             });
 
-            console.log(filteredData);
-            tempData.push(filteredData);
-            callback();
+            tempData = tempData.concat(filteredData);
+
+            if(offsetNumber+20 >= maxBusiness ||
+               data.total < offsetNumber+20)
+                callback();
+            else
+                self.fetchSingleData(tempData, bounds, offsetNumber+20, callback)
         }).fail(function() {
             callback();
         })

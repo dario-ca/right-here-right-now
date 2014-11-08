@@ -136,7 +136,6 @@ function BusLayerController() {
     var onBusSelected = function() {
         if(dataBusModel.busSelected != null) {
             self.displayBusRoute(dataBusModel.busSelected.stops);
-            console.log(dataBusModel.busSelected);
         }
         else
             self.hideBusRoutes();
