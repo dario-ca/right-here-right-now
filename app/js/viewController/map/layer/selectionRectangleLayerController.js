@@ -41,7 +41,6 @@ function SelectionRectangleViewController() {
             .attr("width","100%");
 
         self.view.onDrag(function() {
-                console.log("Drag start");
                 d3.event.sourceEvent.stopPropagation(); // Block the propagation of the drag signal
                 startCoordinates = d3.mouse(self.view.node());
                 selectionRectangle = mask
@@ -54,7 +53,6 @@ function SelectionRectangleViewController() {
                 selectionModel.removeSelection();
             },
             function() {
-                console.log("Drag");
                 d3.event.sourceEvent.stopPropagation(); // Block the propagation of the drag signal
                 var relCoords = d3.mouse(self.view.node());
                 if(selectionRectangle != undefined &&
@@ -81,7 +79,6 @@ function SelectionRectangleViewController() {
                 stopCoordinates = relCoords;
             },
             function() {
-                console.log("Drag end");
                 d3.event.sourceEvent.stopPropagation(); // Block the propagation of the drag signal
                 selectionRectangle.remove();
 
