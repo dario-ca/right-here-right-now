@@ -33,6 +33,9 @@ var WindowController = function() {
         var lightOneLayer = LightOneLayerController();
         self.mapViewController.addLayer(lightOneLayer);
 
+        var crimeNarcoticsLayer = CrimeNarcoticsLayerController();
+        self.mapViewController.addLayer(crimeNarcoticsLayer);
+
 
 
 
