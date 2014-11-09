@@ -1,14 +1,16 @@
 /**
  *  Class SublayerModel
  *  Base Sublayer
+ *  @mapLayers = array of Map Layer Class to be visualized for that sublayer
  */
-var SublayerModel = function(layer, name, icon, color) {
+var SublayerModel = function(layer, name, icon, color, mapLayers) {
     var self = {};
 
     self.icon = icon;
     self.name = name;
     self.layer = layer;
     self.color = color;
+    self.mapLayers = mapLayers;
 
     var _selected = false;
     /** PUBLIC FUNCTIONS**/
