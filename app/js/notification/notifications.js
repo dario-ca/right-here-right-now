@@ -31,4 +31,8 @@ Notifications.selection = {
     SELECTION_CHANGED: "selection.SELECTION_CHANGED"
 };
 
+Notifications.timeInterval = {
+    TIME_INTERVAL_CHANGED: "timeInterval.TIME_INTERVAL_CHANGED"
+}
+
 
