@@ -195,6 +195,18 @@ var UISvgView = function(svg) {
         self.on("click", callBack);
     };
 
+    /**
+     * Shorthand to set a call back function to the view click event
+     * @param callBack
+     */
+    self.onDrag =function(callbackDragStart, callbackDrag, callbackDragEnd) {
+        dragListener = d3.behavior.drag()
+            .on("dragstart", callbackDragStart)
+            .on("drag", callbackDrag)
+            .on("dragend", callbackDragEnd);
+        self.call(dragListener);
+    };
+
     /** PRIVATE FUNCTIONS**/
 
 

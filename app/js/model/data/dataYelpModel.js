@@ -7,7 +7,6 @@
 var DataYelpModel = function(name) {
     var self = DataModel();
 
-    self._yelpURL = "http://www.divvybikes.com/stations/json/";
     self._notification = Notifications.data.YELP_FOOD_CHANGED;
     self.interval = 120000;
 
@@ -107,7 +106,7 @@ var DataYelpModel = function(name) {
     var init = function() {
 
         // Listen for the selection update notification and call fetch when it changes
-        notificationCenter.subscribe(Notifications.selection.SELECTION_CHANGED, self.startFetching);
+        notificationCenter.subscribe(Notifications.selection.SELECTION_CHANGED, self.dataRequested);
 
     }();
 

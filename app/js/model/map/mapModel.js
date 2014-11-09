@@ -49,6 +49,10 @@ var MapModel = function() {
         return _map.project(new L.LatLng(lat,long), _defaultZoomForProjecting);
     };
 
+    self.unprojectAtDefaultZoom = function(x,y) {
+        return _map.unproject(new L.Point(x,y), _defaultZoomForProjecting);
+    };
+
 
     /**
      *
@@ -85,7 +89,7 @@ var MapModel = function() {
 
     self.getLeafletMap = function() {
         return _map;
-    }
+    };
 
 
     /**

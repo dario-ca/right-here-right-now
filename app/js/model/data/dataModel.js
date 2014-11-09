@@ -32,12 +32,7 @@ var DataModel = function(name) {
             callback();
         }
 
-        // Fetch data and enable timer
-        if(_observers > 0 &&
-            _active == false &&
-            selectionModel.isEmpty() == false) {
-            self.startFetching();
-        }
+        self.dataRequested();
     };
 
     /**
@@ -58,6 +53,19 @@ var DataModel = function(name) {
     self.stopFetching = function() {
         _active = false;
         clearInterval(_timer);
+    };
+
+    /**
+     * This function evaluate if the new data must be fetched
+     */
+    self.dataRequested = function() {
+
+        // Fetch data and enable timer
+        if(_observers > 0 &&
+            _active == false &&
+            selectionModel.isEmpty() == false) {
+            self.startFetching();
+        }
     };
 
     var super_unsubscribe = self.subscribe;

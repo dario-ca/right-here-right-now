@@ -36,6 +36,10 @@ var MapLayerController = function() {
         return mapModel.projectAtDefaultZoom(lat,lng);
     };
 
+    self.unproject = function(x, y) {
+        return mapModel.unprojectAtDefaultZoom(x,y);
+    };
+
     /**
      * Wrapper for the standard d3 projection
      */

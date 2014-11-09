@@ -59,7 +59,6 @@ var LayerFactory = function() {
                                     "resource/sublayer/icon/pothole.svg",
                                     Colors.layer.SECURITY,
                                     []);
-
     };
 
 
