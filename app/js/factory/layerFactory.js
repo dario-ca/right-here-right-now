@@ -49,7 +49,7 @@ var LayerFactory = function() {
         securityLayer.addSublayer("Kidnapping",
                                     "resource/sublayer/icon/pothole.svg",
                                     Colors.layer.SECURITY,
-                                    [CrimeNarcoticsLayerController]
+                                    [CrimeLayerController]
                                 );
         securityLayer.addSublayer("Mice",
                                     "resource/sublayer/icon/pothole.svg",

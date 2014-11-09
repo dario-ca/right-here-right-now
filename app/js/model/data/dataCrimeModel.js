@@ -136,3 +136,6 @@ var DataCrimeModel = function(modelName,databaseMainUrl,notification,interval,js
 
 var dataCrimeNarcoticsModel = DataCrimeModel("Crimes","http://data.cityofchicago.org/resource/ijzp-q8t2.json",Notifications.data.crime.CRIME_NARCOTICS_CHANGED,30000,"date",2);
 dataCrimeNarcoticsModel.addSqlWhere("primary_type='NARCOTICS'");
+
+var dataCrimeRobberyModel = DataCrimeModel("Crimes","http://data.cityofchicago.org/resource/ijzp-q8t2.json",Notifications.data.crime.CRIME_ROBBERY_CHANGED,30000,"date",2);
+dataCrimeRobberyModel.addSqlWhere("primary_type='ROBBERY'");

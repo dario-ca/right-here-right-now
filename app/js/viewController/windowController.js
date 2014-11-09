@@ -33,10 +33,11 @@ var WindowController = function() {
         var lightOneLayer = LightOneLayerController();
         self.mapViewController.addLayer(lightOneLayer);
 
-        var crimeNarcoticsLayer = CrimeNarcoticsLayerController();
+        var crimeNarcoticsLayer = CrimeLayerController("narcotics",Notifications.data.crime.CRIME_NARCOTICS_CHANGED,"resource/sublayer/icon/pothole.svg");
         self.mapViewController.addLayer(crimeNarcoticsLayer);
 
-
+        var crimeRobberyLayer = CrimeLayerController("robbery",Notifications.data.crime.CRIME_ROBBERY_CHANGED,"resource/sublayer/icon/light.svg");
+        self.mapViewController.addLayer(crimeRobberyLayer);
 
 
     }();
