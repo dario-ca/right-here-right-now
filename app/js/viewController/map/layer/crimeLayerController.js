@@ -7,6 +7,8 @@ function CrimeLayerController(name,notification,icon) {
     var svgCrimes=[];
     var _notification=notification;
     var _iconPath=icon;
+
+    //name of the controller, needed in the switches
     var _name=name;
 
     /////////////////////////// PRIVATE METHODS ////////////////////////////
@@ -17,35 +19,25 @@ function CrimeLayerController(name,notification,icon) {
         crimeData.forEach(function(d){
             var crimeIcon = self.createIcon(d.latitude, d.longitude,_iconPath);
             svgCrimes.push(crimeIcon);
+            //TODO:check icon
             crimeIcon.view.background.style("fill","red");
-           /* crimeIcon.view.background.style("fill",function(){
-                if(d.status==dataVehiclesModel.status.VEHICLE_COMPLETED){
-                    return Colors.vehicle.VEHICLE_COMPLETED;
-                }else if(d.status==dataVehiclesModel.status.VEHICLE_COMPLETED_DUP){
-                    return Colors.vehicle.VEHICLE_COMPLETED_DUP;
-                }else if(d.status==dataVehiclesModel.status.VEHICLE_OPEN) {
-                    return Colors.vehicle.VEHICLE_OPEN;
-                }else if(d.status==dataVehiclesModel.status.VEHICLE_OPEN_DUP) {
-                    return Colors.vehicle.VEHICLE_OPEN_DUP;
-                }
-            });*/
         })
     };
 
     var onCrimeData = function(){
         switch(_name){
-            case "narcotics":   crimeData=dataCrimeNarcoticsModel.data;
+            case "category1":       crimeData=dataCrimeCategory1Model.data;
                 break;
-            case "robbery":     crimeData=dataCrimeRobberyModel.data;
+            case "category2":       crimeData=dataCrimeCategory2Model.data;
         }
         drawCrimes();
     };
 
     var init = function() {
         switch(_name){
-            case "narcotics":   dataCrimeNarcoticsModel.subscribe(_notification,onCrimeData);
+            case "category1":       dataCrimeCategory1Model.subscribe(_notification,onCrimeData);
                 break;
-            case "robbery":     dataCrimeRobberyModel.subscribe(_notification,onCrimeData);
+            case "category2":       dataCrimeCategory2Model.subscribe(_notification,onCrimeData);
         }
     }();
 

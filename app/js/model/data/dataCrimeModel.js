@@ -134,8 +134,9 @@ var DataCrimeModel = function(modelName,databaseMainUrl,notification,interval,js
     return self;
 };
 
-var dataCrimeNarcoticsModel = DataCrimeModel("Crimes","http://data.cityofchicago.org/resource/ijzp-q8t2.json",Notifications.data.crime.CRIME_NARCOTICS_CHANGED,30000,"date",2);
-dataCrimeNarcoticsModel.addSqlWhere("primary_type='NARCOTICS'");
+var dataCrimeCategory1Model = DataCrimeModel("Crimes","http://data.cityofchicago.org/resource/ijzp-q8t2.json",Notifications.data.crime.CRIME_CATEGORY1_CHANGED,30000,"date",2);
+dataCrimeCategory1Model.addSqlWhere("(primary_type='NARCOTICS' OR primary_type='ROBBERY')");
 
-var dataCrimeRobberyModel = DataCrimeModel("Crimes","http://data.cityofchicago.org/resource/ijzp-q8t2.json",Notifications.data.crime.CRIME_ROBBERY_CHANGED,30000,"date",2);
-dataCrimeRobberyModel.addSqlWhere("primary_type='ROBBERY'");
+var dataCrimeCategory2Model = DataCrimeModel("Crimes","http://data.cityofchicago.org/resource/ijzp-q8t2.json",Notifications.data.crime.CRIME_CATEGORY2_CHANGED,30000,"date",2);
+dataCrimeCategory2Model.addSqlWhere("primary_type=''");
+

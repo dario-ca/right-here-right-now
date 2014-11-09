@@ -33,11 +33,12 @@ var WindowController = function() {
         var lightOneLayer = LightOneLayerController();
         self.mapViewController.addLayer(lightOneLayer);
 
-        var crimeNarcoticsLayer = CrimeLayerController("narcotics",Notifications.data.crime.CRIME_NARCOTICS_CHANGED,"resource/sublayer/icon/pothole.svg");
-        self.mapViewController.addLayer(crimeNarcoticsLayer);
+        //TODO: fix names and icons
+        var crimeCategory1Layer = CrimeLayerController("category1",Notifications.data.crime.CRIME_CATEGORY1_CHANGED,"resource/sublayer/icon/pothole.svg");
+        self.mapViewController.addLayer(crimeCategory1Layer);
 
-        var crimeRobberyLayer = CrimeLayerController("robbery",Notifications.data.crime.CRIME_ROBBERY_CHANGED,"resource/sublayer/icon/light.svg");
-        self.mapViewController.addLayer(crimeRobberyLayer);
+        var crimeCategory2Layer = CrimeLayerController("category2",Notifications.data.crime.CRIME_CATEGORY2_CHANGED,"resource/sublayer/icon/light.svg");
+        self.mapViewController.addLayer(crimeCategory2Layer);
 
 
     }();
