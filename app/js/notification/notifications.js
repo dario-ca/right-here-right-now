@@ -13,6 +13,7 @@ Notifications.data = {
     LIGHT_OUT_ALL_CHANGED: "data.LIGHT_OUT_SINGLE_CHANGED",
     DIVVY_BIKES_CHANGED: "data.DIVVY_BIKES_CHANGED",
     BUS_CHANGED: "data.BUS_CHANGED",
+    BUS_SELECTION_CHANGED: "data.BUS_SELECTION_CHANGED",
     WEATHER_CHANGED: "data.WEATHER_CHANGED",
     /// CRIME notification
     CRIME_CHANGED: "data.CRIME_CHANGED", //Crime relative current selection updated
@@ -29,5 +30,9 @@ Notifications.data = {
 Notifications.selection = {
     SELECTION_CHANGED: "selection.SELECTION_CHANGED"
 };
+
+Notifications.timeInterval = {
+    TIME_INTERVAL_CHANGED: "timeInterval.TIME_INTERVAL_CHANGED"
+}
 
 

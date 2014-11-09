@@ -73,9 +73,9 @@ var Rectangle = function() {
      */
     self.circumscribed = function() {
         var minLat = Number.MAX_VALUE;
-        var maxLat = Number.MIN_VALUE;
+        var maxLat = -Number.MAX_VALUE;
         var minLon = Number.MAX_VALUE;
-        var maxLon = Number.MIN_VALUE;
+        var maxLon = -Number.MAX_VALUE;
         for(var i in points) {
             var point = points[i];
             if(point[0] < minLat)
@@ -84,7 +84,7 @@ var Rectangle = function() {
                 maxLat = point[0];
             if(point[1] < minLon)
                 minLon = point[1];
-            if(point[0] > maxLon)
+            if(point[1] > maxLon)
                 maxLon = point[1];
         }
         var rectangle = Rectangle();

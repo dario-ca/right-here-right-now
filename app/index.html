@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="style/leaflet.css"/>
     <link rel="stylesheet" href="style/mainViewController.css"/>
     <link rel="stylesheet" href="style/UIBackgroundView.css"/>
+    <link rel="stylesheet" href="style/UIView.css"/>
     <link rel="stylesheet" href="style/buttonViewController.css"/>
     <link rel="stylesheet" href="style/layerSelectionViewController.css"/>
 
@@ -24,11 +25,16 @@
     <script src="js/lib/queue.js"></script>
     <script src="js/lib/leaflet.js"></script>
     <script src="js/lib/leaflet-src.js"></script>
+    <script src="js/lib/leaflet-routing-machine.js"></script>
     <script src="js/lib/suncalc.js"></script>
     <script src="js/lib/vec2d.js"></script>
     <script src="js/lib/moment.js"></script>
     <script src="js/lib/geolib.js"></script>
     <script src="js/lib/xml2json.js"></script>
+    <script src="js/lib/oauth-1.0a.js"></script>
+
+    <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/hmac-sha1.js"></script>
+    <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/components/enc-base64-min.js"></script>
 
     <!-- classes -->
 
@@ -46,6 +52,7 @@
 
     <script src="js/model/map/mapModel.js"></script>
     <script src="js/model/map/selectionModel.js"></script>
+    <script src="js/model/map/timeIntervalModel.js"></script>
 
     <script src="js/model/data/dataModel.js"></script>
     <script src="js/model/data/dataPotholeModel.js"></script>
@@ -53,6 +60,7 @@
     <script src="js/model/data/dataBusModel.js"></script>
     <script src="js/model/data/data311Model.js"></script>
     <script src="js/model/data/dataCrimeTrendModel.js"></script>
+    <script src="js/model/data/dataYelpModel.js"></script>
 
     <script src="js/model/resource/externalSvgModel.js"></script>
 
@@ -83,8 +91,7 @@
     <script src="js/viewController/map/layer/divvyLayerController.js"></script>
     <script src="js/viewController/map/layer/potholeLayerController.js"></script>
     <script src="js/viewController/map/layer/vehicleLayerController.js"></script>
-
-
+    <script src="js/viewController/map/layer/lightOneLayerController.js"></script>
 
 
     <!-- Starts application -->

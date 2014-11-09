@@ -15,15 +15,22 @@ Colors.station = {
 
 Colors.pothole = {
   POTHOLE_OPEN: "#3F8643",
-  POTHOLE_OPEN_DUP: "yellow",//TODO
+  POTHOLE_OPEN_DUP: "red",//TODO: handle DUPs
   POTHOLE_COMPLETED: "#BABABA"
 };
 
-Colors.vehicle = { //TODO
-    VEHICLE_OPEN: "red",
+Colors.vehicle = { //TODO: handle DUPs
+    VEHICLE_OPEN: "#3F8643",
     VEHICLE_OPEN_DUP: "red",
     VEHICLE_COMPLETED: "#BABABA",
     VEHICLE_COMPLETED_DUP: "red"
+};
+
+Colors.lightOne = { //TODO: handle DUPs
+    LIGHT_ONE_OPEN: "#3F8643",
+    LIGHT_ONE_OPEN_DUP: "red",
+    LIGHT_ONE_COMPLETED: "#BABABA",
+    LIGHT_ONE_COMPLETED_DUP: "red"
 };
 
 Colors.layer = {

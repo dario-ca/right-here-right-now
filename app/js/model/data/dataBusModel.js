@@ -17,9 +17,11 @@ var DataBusModel = function(name) {
     self._directionURL = "http://www.ctabustracker.com/bustime/api/v1/getdirections";
     self._stopURL = "http://www.ctabustracker.com/bustime/api/v1/getstops";
     self._vehicleURL = "http://www.ctabustracker.com/bustime/api/v1/getvehicles";
-    self._CTAKey = "kv6yHNkUrkZJkjA8u7V5sxNTq"; //"fnWCmHX2a2c6XNm84WFmheDVf";// "zWKWa9p6ACYe4uQxTP8Qtjxcv";
+    self._CTAKey = "zWKWa9p6ACYe4uQxTP8Qtjxcv"; // "kv6yHNkUrkZJkjA8u7V5sxNTq"; //"fnWCmHX2a2c6XNm84WFmheDVf";// "zWKWa9p6ACYe4uQxTP8Qtjxcv";
     self._notification = Notifications.data.BUS_CHANGED;
     self.interval = 30000;
+
+    self.busSelected = null;
 
     ////////////////////////// PUBLIC METHODS //////////////////////////
 
@@ -70,9 +72,35 @@ var DataBusModel = function(name) {
             }
 
             if (Object.prototype.toString.call(vehicles.vehicle) === '[object Array]') {
+                vehicles.vehicle.forEach(function(v) {
+                    var dir;
+
+                    // Calculate the direction using the angle
+                    if(v.hdg > 315 || v.hdg < 135) {
+                        dir = 0;
+                    }
+                    else {
+                        dir = 1;
+                    }
+                    if(line.directions.length == 1) // Only one direction
+                        dir = 0;
+                    v.stops = line.directions[dir].stops;
+                });
                 tempData = $.merge(tempData, vehicles.vehicle);
             }
             else {
+                var dir;
+
+                // Calculate the direction using the angle
+                if(vehicles.vehicle.hdg > 315 || vehicles.vehicle.hdg < 135) {
+                    dir = 0;
+                }
+                else {
+                    dir = 1;
+                }
+                if(line.directions.length == 1) // Only one direction
+                    dir = 0;
+                vehicles.vehicle.stops = line.directions[dir].stops;
                 tempData.push(vehicles.vehicle);
             }
 
@@ -84,6 +112,24 @@ var DataBusModel = function(name) {
 
     self.fetchStaticData = function() {
         fetchRoutes();
+    };
+
+    self.getLineStops = function(rt, dir) {
+        var stops = [];
+        stops.push.apply(stops,
+            self._lines.filter(function(line) {
+                return line.rt == rt;
+            })[0].directions[dir].stops
+            );
+        return stops;
+    };
+
+    self.busClicked = function(bus) {
+        if(self.busSelected == null)
+            self.busSelected = bus;
+        else
+            self.busSelected = null;
+        self.dispatch(Notifications.data.BUS_SELECTION_CHANGED);
     };
 
     ////////////////////////// PRIVATE METHODS //////////////////////////
@@ -149,8 +195,76 @@ var DataBusModel = function(name) {
             else {
                 json.route.direction.stops = [stops];
             }
+
+            // Use an heuristic for ordering the stations
+            json.route.direction.stops = heuristicStopOrdering(json.route.direction.stops);
+
             addStop(json);
         });
+    };
+
+    /**
+     * This function try to order the stops with an heuristic algorithm
+     * similar to density based clustering
+     * @stops {Array} stop
+     */
+    var heuristicStopOrdering = function(stops) {
+        var maxDistance = 0;
+        var maxIndexes = [];
+
+        // Find the two more distant stations
+        for(var i in stops) {
+            for(var j in stops) {
+                if(i == j)
+                    continue;
+
+                var stop0 = stops[i];
+                var stop1 = stops[j];
+                var distance = Math.sqrt(Math.pow(stop0.lat-stop1.lat, 2) +
+                                         Math.pow(stop0.lon-stop1.lon, 2));
+                if(distance > maxDistance) {
+                    maxIndexes = [i, j];
+                    maxDistance = distance;
+                }
+            }
+        }
+
+        // If distance == 0 between stops they are already ordered
+        if(maxIndexes.length == 0)
+            return stops;
+
+        var s = stops.slice();
+        var index = maxIndexes[0];
+        var orderedStops = [];
+        while(s.length > 0) {
+            var stop = s.splice(index, 1)[0];
+            var minDistance = Number.MAX_VALUE;
+            var minIndex = -1;
+
+            // Find the closest stop to the current one
+            for(var j in s) {
+
+                var stop1 = s[j];
+
+                if(stop1 == stop)
+                    continue;
+
+                var distance = Math.sqrt(Math.pow(stop.lat-stop1.lat, 2) +
+                Math.pow(stop.lon-stop1.lon, 2));
+                if(distance < minDistance) {
+                    minIndex = j;
+                    minDistance = distance;
+                }
+            }
+
+            if(minIndex != -1) {
+                orderedStops.push(stop);
+                index = minIndex;
+            }
+
+        }
+        return orderedStops;
+
     };
 
     var addStop = function(direction) {
@@ -170,7 +284,6 @@ var DataBusModel = function(name) {
         }
     };
 
-    ////////////////////////////////// PRIVATE METHODS //////////////////////////////////
     var init = function() {
         self.fetchStaticData();
 

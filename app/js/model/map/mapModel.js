@@ -83,6 +83,10 @@ var MapModel = function() {
         });
     };
 
+    self.getLeafletMap = function() {
+        return _map;
+    }
+
 
     /**
      *
