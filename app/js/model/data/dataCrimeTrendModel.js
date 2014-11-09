@@ -4,7 +4,7 @@
 
 var crimeTrendModel = function(modelName,notification,interval) {
     //////////////////////////  DEBUG ///////////////////////////
-    var debug = true;
+    var debug = false;
     //////////////////////////  PRIVATE ATTRIBUTES ///////////////////////////
     var self = DataModel();
     var name = modelName;

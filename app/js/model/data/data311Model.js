@@ -1,8 +1,6 @@
 /**
  * Created by Luca on 06/11/2014.
  */
-
-
 /**
  * Class for access data relative a desired area from the 311 database
  * @param modelName  Name of the class
@@ -30,6 +28,7 @@ var Data311Model = function(modelName,databaseMainUrl,notification,interval,json
     var prefixQuery = self._proxyURL;
     var charAfterUrl = "&";
     var weeksNum = numWeekFilter || 1;
+    var sqlWhere = [];
     //////////////////////////  PUBLIC ATTRIBUTES ///////////////////////////
 
     self._notification = notification;
@@ -41,7 +40,17 @@ var Data311Model = function(modelName,databaseMainUrl,notification,interval,json
     //the query is filtered on time and on position
     var singleQuery = function(topLeftCord,botRightCord){
         var queryString = charAfterUrl + "$where=" + nameDateAttribute + ">'"+ fromTime  + "' AND latitude<" +
-            topLeftCord[0] + " AND longitude>" + topLeftCord[1] + " AND latitude>" + botRightCord[0] + " AND longitude<" + botRightCord[1]+"&$limit=10000";
+            topLeftCord[0] + " AND longitude>" + topLeftCord[1] + " AND latitude>" + botRightCord[0] + " AND longitude<" + botRightCord[1];
+        for (var i = 0; i < sqlWhere.length; i++){
+            if (i === 0){
+                queryString += " AND ";
+            }
+            queryString += sqlWhere[i];
+            if (i !== sqlWhere.length - 1) {
+                queryString += " AND ";
+            }
+        }
+        queryString += "&$limit=10000";
         d3.json(prefixQuery + mainUrl + queryString, createCallBackData(incrementalID));
     };
 
@@ -98,7 +107,6 @@ var Data311Model = function(modelName,databaseMainUrl,notification,interval,json
         //TODO reset timer
     };
 
-
     ////////////////////////// PUBLIC METHODS //////////////////////////
 
     self.fetchData = function() {
@@ -126,6 +134,11 @@ var Data311Model = function(modelName,databaseMainUrl,notification,interval,json
         }
     };
 
+    self.addSqlWhere = function (str){
+        sqlWhere.push(str);
+        return self;
+    }
+
     ////////////////////////// SUBSCRIBES //////////////////////////
 
     //TODO subscribe change time filter
@@ -135,6 +148,7 @@ var Data311Model = function(modelName,databaseMainUrl,notification,interval,json
 };
 
 var dataPotholeModel = Data311Model("Potholes","http://data.cityofchicago.org/resource/7as2-ds3y.json",Notifications.data.POTHOLE_CHANGED,30000,"creation_date");
+dataPotholeModel.addSqlWhere("status!='Completed - Dup'");
 var dataVehiclesModel = Data311Model("Abandoned Vehicles","http://data.cityofchicago.org/resource/3c9v-pnva.json",Notifications.data.ABANDONED_VEHICLES_CHANGED,30000,"creation_date");
 var dataLightsAllModel = Data311Model("All lights out","http://data.cityofchicago.org/resource/zuxi-7xem.json",Notifications.data.LIGHT_OUT_ALL_CHANGED,30000,"creation_date");
 var dataLight1Model = Data311Model("One light out","http://data.cityofchicago.org/resource/3aav-uy2v.json",Notifications.data.LIGHT_OUT_SINGLE_CHANGED,30000,"creation_date");
