@@ -53,7 +53,10 @@ var MapLayerController = function() {
      * add the view controller to the list of object to be resizes
      */
      self.fixControllerSize = function(viewController) {
-        self.fixedSizeControllers.push(viewController);
+         self.fixedSizeControllers.push(viewController);
+         viewController.fixWidth = viewController.view.width;
+         viewController.fixHeight = viewController.view.height;
+
      };
 
     /**

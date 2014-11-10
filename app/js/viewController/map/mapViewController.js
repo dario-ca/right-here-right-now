@@ -1,3 +1,4 @@
+var popupLayerController = null;
 /**
  * @class: MapViewController
  */
@@ -84,8 +85,8 @@ function MapViewController() {
                    zoomFactor = 1 / ((_mapContainer.getZoom()-13)*2);
                }
 
-              controller.view.width = 80 * zoomFactor;
-              controller.view.height = 80 * zoomFactor;
+              controller.view.width = controller.fixWidth * zoomFactor;
+              controller.view.height = controller.fixHeight * zoomFactor;
            });
         });
 
@@ -195,6 +196,10 @@ function MapViewController() {
         //layers
         notificationCenter.subscribe(Notifications.layer.SUBLAYER_SELECTION_CHANGED, self.onSublayerSelectionChanged);
 
+        popupLayerController = PopupLayerController();
+        self.addLayer(popupLayerController);
+
+
         // call first map reset
         self.onMapReset();
 
@@ -204,3 +209,4 @@ function MapViewController() {
 
     return self;
 }
+

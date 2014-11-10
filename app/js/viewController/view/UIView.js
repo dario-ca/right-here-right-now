@@ -82,6 +82,14 @@ var UIView = function(domElement) {
         self.style("opacity", 1);
     };
 
+    /**
+     * Shorthand to set a call back function to the view click event
+     * @param callBack
+     */
+    self.onClick = function(callBack) {
+        self.classed("ui-view-pointer", true);   // Add the class pointer if it is clickable
+        self.on("click", callBack);
+    };
 
 
     /** PRIVATE FUNCTIONS**/
