@@ -7,6 +7,7 @@ function BusLayerController() {
      * Display the bus route
      * @param rt: bus line number
      */
+    // TODO: delete commented code
     /*
     self.displayBusRoute = function(rt, dir) {
 
@@ -57,6 +58,7 @@ function BusLayerController() {
             busRouteLayers.push(busStop);
         });
 
+        // TODO: delete commented code
         /*
         // Extract latitude and longitude
         var latLon = [];

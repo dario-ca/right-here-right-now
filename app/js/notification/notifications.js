@@ -15,16 +15,22 @@ Notifications.data = {
     BUS_CHANGED: "data.BUS_CHANGED",
     BUS_SELECTION_CHANGED: "data.BUS_SELECTION_CHANGED",
     WEATHER_CHANGED: "data.WEATHER_CHANGED",
-    /// CRIME notification
-    CRIME_CHANGED: "data.CRIME_CHANGED", //Crime relative current selection updated
-    CRIME_MONTH_TOTAL_CHANGED: "data.CRIME_MONTH_TOTAL_CHANGED", //Trend total Crime last 5 years relative current Selection with granularity month
-    CRIME_MONTH_TYPE_CHANGED: "data.CRIME_MONTH_TOTAL_CHANGED", //Trend Crime last 5 years grouped by type relative current Selection with granularity month
 
     // For future uses
     YELP_FOOD_CHANGED: "data.YELP_FOOD_CHANGED",
     TWITTER_CHANGED: "data.TWITTER_CHANGED",
     FOOD_INSPECTION_CHANGED: "data.FOOD_INSPECTION_CHANGED",
     TRAFFIC_CONGESTION_CHANGED: "data.TRAFFIC_CONGESTION_CHANGED"
+};
+
+Notifications.data.crime = {
+    /// CRIME notification
+    CRIME_CHANGED: "data.CRIME_CHANGED", //Crime relative current selection updated
+    CRIME_CATEGORY1_CHANGED: "data.crime.CRIME_CATEGORY1_CHANGED",
+    CRIME_CATEGORY2_CHANGED: "data.crime.CRIME_CATEGORY2_CHANGED",
+    CRIME_MONTH_TOTAL_CHANGED: "data.CRIME_MONTH_TOTAL_CHANGED", //Trend total Crime last 5 years relative current Selection with granularity month
+    CRIME_MONTH_TYPE_CHANGED: "data.CRIME_MONTH_TOTAL_CHANGED" //Trend Crime last 5 years grouped by type relative current Selection with granularity month
+
 };
 
 Notifications.selection = {

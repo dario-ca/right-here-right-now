@@ -150,15 +150,20 @@ var Data311Model = function(modelName,databaseMainUrl,notification,interval,json
 var dataPotholeModel = Data311Model("Potholes","http://data.cityofchicago.org/resource/7as2-ds3y.json",Notifications.data.POTHOLE_CHANGED,30000,"creation_date");
 dataPotholeModel.addSqlWhere("status!='Completed - Dup'");
 dataPotholeModel.addSqlWhere("status!='Open - Dup'");
+
 var dataVehiclesModel = Data311Model("Abandoned Vehicles","http://data.cityofchicago.org/resource/3c9v-pnva.json",Notifications.data.ABANDONED_VEHICLES_CHANGED,30000,"creation_date");
 dataVehiclesModel.addSqlWhere("status!='Completed - Dup'");
 dataVehiclesModel.addSqlWhere("status!='Open - Dup'");
+
 var dataLightsAllModel = Data311Model("All lights out","http://data.cityofchicago.org/resource/zuxi-7xem.json",Notifications.data.LIGHT_OUT_ALL_CHANGED,30000,"creation_date");
+
 var dataLight1Model = Data311Model("One light out","http://data.cityofchicago.org/resource/3aav-uy2v.json",Notifications.data.LIGHT_OUT_SINGLE_CHANGED,30000,"creation_date");
 dataLight1Model.addSqlWhere("status!='Completed - Dup'");
 dataLight1Model.addSqlWhere("status!='Open - Dup'");
+
 var dataFoodInspection = Data311Model("Food inspections","http://data.cityofchicago.org/resource/4ijn-s7e5.json",Notifications.data.FOOD_INSPECTION_CHANGED,30000,"inspection_date");
-var dataCrimeModel = Data311Model("Crimes","http://data.cityofchicago.org/resource/ijzp-q8t2.json",Notifications.data.CRIME_CHANGED,30000,"date",2);
+
+//var dataCrimeModel = Data311Model("Crimes","http://data.cityofchicago.org/resource/ijzp-q8t2.json",Notifications.data.crime.CRIME_CHANGED,30000,"date",2);
 
 ////////////////////////// STATUS //////////////////////////
 dataPotholeModel.status = {

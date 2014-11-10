@@ -19,15 +19,29 @@ var DataDivvyModel = function(name) {
                 console.log("Error downloading the file "+self._divvyURL);
                 return;
             }
-            self.callback(json.stationBeanList);
+            self.callback(geoFilter(json.stationBeanList));
         });
     };
 
     ////////////////////////////////// PRIVATE METHODS //////////////////////////////////
+    /**
+     * This function is automatically called for filtering data.
+     * @param data to be filtered
+     */
+    var geoFilter = function(data) {
+        var newData = data.filter(function(d) {
+            //console.log([d.latitude, d.longitude]);
+            //console.log(selectionModel.pointInside([d.latitude, d.longitude]));
+            return selectionModel.pointInside([d.latitude, d.longitude]);
+        });
+
+        return newData;
+    }
+
     var init = function() {
 
         // Listen for the selection update notification and call fetch when it changes
-        notificationCenter.subscribe(Notifications.selection.SELECTION_CHANGED, self.startFetching);
+        notificationCenter.subscribe(Notifications.selection.SELECTION_CHANGED, self.dataChanged);
 
     }();
 

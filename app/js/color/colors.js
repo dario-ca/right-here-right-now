@@ -38,3 +38,7 @@ Colors.layer = {
     INFORMATION: "#3f8643",
     SECURITY: "#b93721"
 };
+
+Colors.selection = {
+    RECTANGLE: "#293d9b"
+};

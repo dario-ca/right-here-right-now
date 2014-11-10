@@ -18,7 +18,6 @@ var DataModel = function(name) {
     /* Contains the interval (in milli-seconds) of re-fetching (0 if no automatic re-fetch) */
     self.interval = 0;
 
-
     ////////////////////////// PUBLIC METHODS //////////////////////////
 
     var super_subscribe = self.subscribe;
@@ -32,12 +31,7 @@ var DataModel = function(name) {
             callback();
         }
 
-        // Fetch data and enable timer
-        if(_observers > 0 &&
-            _active == false &&
-            selectionModel.isEmpty() == false) {
-            self.startFetching();
-        }
+        self.dataRequested();
     };
 
     /**
@@ -58,6 +52,28 @@ var DataModel = function(name) {
     self.stopFetching = function() {
         _active = false;
         clearInterval(_timer);
+    };
+
+    /**
+     * This function evaluate if the new data must be fetched
+     */
+    self.dataRequested = function() {
+
+        // Fetch data and enable timer
+        if(_observers > 0 &&
+            _active == false &&
+            selectionModel.isEmpty() == false) {
+            self.startFetching();
+        }
+    };
+
+
+    /**
+     * Call this function when data change
+     */
+    self.dataChanged = function() {
+        self.stopFetching();
+        self.dataRequested();
     };
 
     var super_unsubscribe = self.subscribe;
@@ -88,6 +104,7 @@ var DataModel = function(name) {
 
 
     ////////////////////////////////// PRIVATE METHODS //////////////////////////////////
+
     var init = function() {
 
         // Listen for the selection update notification and call fetch when it changes
