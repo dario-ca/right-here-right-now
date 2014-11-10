@@ -10,6 +10,7 @@ function SelectionRectangleViewController() {
     var selectionRectangle = null;
     var startCoordinates = null;
     var stopCoordinates = null;
+    var backGroundView = null;
 
     var mask;
 
@@ -48,27 +49,7 @@ function SelectionRectangleViewController() {
         drawSelections();
     };
 
-    var init = function() {
-
-        self.view.classed("selection-rectangle-view", true);
-
-        // calculate coordinates for the svg
-        self.view.append(UIBackgroundView());
-        self.view.select("rect")
-            .attr("mask","url(#mask)")
-            .style("fill", "rgba(0,0,0,0.35)"); // Transparent background
-
-        // Create mask
-        mask = self.view.append("defs")
-            .append("mask")
-            .attr("id","mask");
-
-        mask.append("rect")
-            .attr("fill","#FFFFFF")
-            .attr("x","0")
-            .attr("y","0")
-            .attr("height","100%")
-            .attr("width","100%");
+    var areaSelectionMode = function() {
 
         self.view.onDrag(function() {
                 d3.event.sourceEvent.stopPropagation(); // Block the propagation of the drag signal
@@ -109,29 +90,82 @@ function SelectionRectangleViewController() {
                         .attr("y", coordinates[1])
                         .attr("width", width)
                         .attr("height", height);
-                    }
+                }
                 stopCoordinates = relCoords;
             },
             function() {
                 d3.event.sourceEvent.stopPropagation(); // Block the propagation of the drag signal
                 selectionRectangle.remove();
 
-                if(startCoordinates == null &&
+                if(startCoordinates == null ||
                     stopCoordinates == null)
                     return;
 
 
                 // Add the selection to the model
                 var start = self.unproject(startCoordinates[0],
-                                           startCoordinates[1]);
+                    startCoordinates[1]);
                 var stop = self.unproject(stopCoordinates[0],
-                                          stopCoordinates[1]);
+                    stopCoordinates[1]);
                 selectionModel.addRectangleSelection([start.lat, start.lng], [stop.lat, stop.lng]);
                 startCoordinates = null;
                 stopCoordinates = null;
+
+                deselectAreaMode();
             });
 
-            notificationCenter.subscribe(Notifications.selection.SELECTION_CHANGED, updateSelection);
+    };
+
+    var pathSelectionMode = function() {
+
+    };
+
+    var movingMode = function() {
+        self.view.onDrag(function(){},
+                         function(){},
+                         function(){}); // No actions on drag and drop, propagate the signal
+    };
+
+    var deselectAreaMode = function() {
+        selectionModel.selectionMode = SelectionMode.SELECTION_NONE;
+    };
+
+    var updateSelectionMode = function() {
+        switch(selectionModel.selectionMode) {
+            case SelectionMode.SELECTION_AREA:
+                areaSelectionMode();
+                break;
+            default:
+                movingMode();
+                break;
+
+        }
+    };
+
+    var init = function() {
+
+        self.view.classed("selection-rectangle-view", true);
+
+        // calculate coordinates for the svg
+        self.view.append(UIBackgroundView());
+        backGroundView = self.view.select("rect")
+            .attr("mask","url(#mask)")
+            .style("fill", "rgba(0,0,0,0.35)"); // Transparent background
+
+        // Create mask
+        mask = self.view.append("defs")
+            .append("mask")
+            .attr("id","mask");
+
+        mask.append("rect")
+            .attr("fill","#FFFFFF")
+            .attr("x","0")
+            .attr("y","0")
+            .attr("height","100%")
+            .attr("width","100%");
+
+        notificationCenter.subscribe(Notifications.selection.SELECTION_CHANGED, updateSelection);
+        notificationCenter.subscribe(Notifications.selection.SELECTION_MODE_CHANGED, updateSelectionMode);
 
     }();
 

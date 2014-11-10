@@ -36,7 +36,7 @@ var DataDivvyModel = function(name) {
         });
 
         return newData;
-    }
+    };
 
     var init = function() {
 

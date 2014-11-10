@@ -91,8 +91,7 @@ var Data311Model = function(modelName,databaseMainUrl,notification,interval,json
     var callBackChangeAreas = function() {
         //TODO check this implementation
         rectangles = selectionModel.getSelection();
-        self.fetchData();
-        //TODO reset timer
+        self.dataChanged();
     };
 
     //Callback function invoked when the time filter is changed
@@ -103,8 +102,7 @@ var Data311Model = function(modelName,databaseMainUrl,notification,interval,json
         } else {
             fromTime = moment().subtract(weeksNum, 'weeks').format('YYYY-MM-DD');
         }
-        self.fetchData();
-        //TODO reset timer
+        self.dataChanged();
     };
 
     ////////////////////////// PUBLIC METHODS //////////////////////////

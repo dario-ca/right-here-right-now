@@ -52,7 +52,7 @@ var DataBusModel = function(name) {
 
         // When all data arrived call that callback
         q.await(function() {
-            self.callback(tempData);
+            self.callback(geoFilter(tempData));
         });
     };
 
@@ -197,7 +197,7 @@ var DataBusModel = function(name) {
             }
 
             // Use an heuristic for ordering the stations
-            json.route.direction.stops = heuristicStopOrdering(json.route.direction.stops);
+            //json.route.direction.stops = heuristicStopOrdering(json.route.direction.stops);
 
             addStop(json);
         });
@@ -282,6 +282,18 @@ var DataBusModel = function(name) {
             route.directions.push(direction.route.direction);
             self._lines.push(route);
         }
+    };
+
+    /**
+     * This function is automatically called for filtering data.
+     * @param data to be filtered
+     */
+    var geoFilter = function(data) {
+        var newData = data.filter(function(d) {
+            return selectionModel.pointInside([d.lat, d.lon]);
+        });
+
+        return newData;
     };
 
     var init = function() {
