@@ -13,11 +13,42 @@ function SelectionRectangleViewController() {
 
     var mask;
 
+    var polygons = [];   // Used in order to produce mask not rectangular
+
     //////////////////////////// PUBLIC METHODS //////////////////////////////
 
 
 
     ////////////////////////////////// PRIVATE METHODS //////////////////////////////////
+    var drawSelections = function() {
+        var selections = selectionModel.getSelection();
+
+        selections.forEach(function(selection) {
+            var polygon = mask.append("polygon")
+                            .attr("fill", "#000000")
+                            .attr("points",function(d) {
+                                return selection.points.map(function(p) {
+                                    var point = self.project(p[0], p[1]);
+                                    console.log(point);
+                                    return [point.x, point.y].join(",");
+                                }).join(" ");
+                            });
+            polygons.push(polygon);
+        });
+    };
+
+    var removeSelection = function() {
+        polygons.forEach(function(polygon) {
+           polygon.remove();
+        });
+        polygon = [];
+    };
+
+    var updateSelection = function() {
+        removeSelection();
+        drawSelections();
+    };
+
     var init = function() {
 
         self.view.classed("selection-rectangle-view", true);
@@ -26,7 +57,7 @@ function SelectionRectangleViewController() {
         self.view.append(UIBackgroundView());
         self.view.select("rect")
             .attr("mask","url(#mask)")
-            .style("fill", "rgba(0,0,0,0.5)"); // Transparent background
+            .style("fill", "rgba(0,0,0,0.35)"); // Transparent background
 
         // Create mask
         mask = self.view.append("defs")
@@ -43,6 +74,10 @@ function SelectionRectangleViewController() {
         self.view.onDrag(function() {
                 d3.event.sourceEvent.stopPropagation(); // Block the propagation of the drag signal
                 startCoordinates = d3.mouse(self.view.node());
+
+                if(selectionRectangle != null)
+                    selectionRectangle.remove();
+
                 selectionRectangle = mask
                     .append("rect")
                     .attr("x", startCoordinates[0])
@@ -82,15 +117,22 @@ function SelectionRectangleViewController() {
                 d3.event.sourceEvent.stopPropagation(); // Block the propagation of the drag signal
                 selectionRectangle.remove();
 
+                if(startCoordinates == null &&
+                    stopCoordinates == null)
+                    return;
+
+
                 // Add the selection to the model
                 var start = self.unproject(startCoordinates[0],
                                            startCoordinates[1]);
                 var stop = self.unproject(stopCoordinates[0],
                                           stopCoordinates[1]);
-                selectionModel.addRectangleSelection(start, stop);
+                selectionModel.addRectangleSelection([start.lat, start.lng], [stop.lat, stop.lng]);
                 startCoordinates = null;
                 stopCoordinates = null;
             });
+
+            notificationCenter.subscribe(Notifications.selection.SELECTION_CHANGED, updateSelection);
 
     }();
 
