@@ -112,6 +112,20 @@
         <h3>Luca Buratti</h3>
         <ul>
             <h4>First week</h4>
+            <li>User interface and iteraction study on a sketch</li>
+            <li>Study of the datasets needed for the application, study of SODA api used in 311 databases</li>
+            <li>Initial data Analysys for the data relatives to the crimes in the city of chicago</li>
+            <li>Implementation of:
+                <ul>
+                    <li><strong>data311Model</strong>: class that allow to query a generic soda server for retriving data
+                        for a specific area in the city of chicago in the last week or month, used for acces data for Potholes, Abandoned vehicles,
+                        Food Inspection, lights out and crimes.
+                    </li>
+                    <li><strong>dataCrimeTrendModel</strong>: class that allow to retrive data relatives to the trend of the crimes in the city of 
+                    chicago in the last 5 years (granularity 1 month), at the moment used only for the trend of all the crimes and the trend for
+                        the crimes divided by type.
+                    </li>
+            </li>
             <!--<h4>Second week</h4>
             <h4>Third week</h4>
             <h4>Fourth week</h4>-->
