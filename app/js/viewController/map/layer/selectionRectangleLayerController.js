@@ -29,7 +29,6 @@ function SelectionRectangleViewController() {
                             .attr("points",function(d) {
                                 return selection.points.map(function(p) {
                                     var point = self.project(p[0], p[1]);
-                                    console.log(point);
                                     return [point.x, point.y].join(",");
                                 }).join(" ");
                             });
