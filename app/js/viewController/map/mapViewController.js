@@ -27,7 +27,10 @@ function MapViewController() {
     var _svgLayer;
     var _svgLayerGroup;
 
-    var layerViewControllers = [];
+    var layerViewControllers = [],
+        //list of already visible sublayers
+        visibleSublayers = [];//{sublayerName : [layerViewControllers]}
+
     
     /////////////////////////// PUBLIC METHODS ///////////////////////////
 
@@ -36,6 +39,12 @@ function MapViewController() {
         layerViewControllers.push(layerController);
         layerController.view.appendTo(_svgLayerGroup);
 
+    };
+
+
+    self.removeLayer = function(layerController) {
+        self.removeChildController(layerController);
+        layerViewControllers = _.without(layerController);
     };
 
 
@@ -92,6 +101,31 @@ function MapViewController() {
     };
 
 
+    self.onSublayerSelectionChanged = function() {
+        model.layers.forEach(function(layer) {
+            layer.sublayers.forEach(function(sublayer){
+                //add the missing
+                if(sublayer.selected && !visibleSublayers[sublayer.name]) {
+                    visibleSublayers[sublayer.name] = [];
+                    sublayer.mapLayers.forEach(function(layerViewControllerClass) {
+                        var layerViewController = layerViewControllerClass();
+                        visibleSublayers[sublayer.name].push(layerViewController);
+                        self.addLayer(layerViewController);
+                    });
+                }
+                //remove
+                if(!sublayer.selected && visibleSublayers[sublayer.name]) {
+                    visibleSublayers[sublayer.name].forEach(function(layerViewController){
+                        self.removeLayer(layerViewController);
+                    });
+                    visibleSublayers[sublayer.name] = null;
+                }
+            });
+        });
+    };
+
+
+
     /**
      * @override
      */
@@ -102,6 +136,8 @@ function MapViewController() {
     };
 
     /////////////////////////// PRIVATE METHODS ///////////////////////////
+
+
     var cleanMap = function() {
 
     };
@@ -151,8 +187,13 @@ function MapViewController() {
         });
 
         // Subscribe to notifications
+
+        //map
         _mapContainer.on("viewreset", self.onMapReset);
         _mapContainer.on("zoomstart", self.onZoomStart);
+
+        //layers
+        notificationCenter.subscribe(Notifications.layer.SUBLAYER_SELECTION_CHANGED, self.onSublayerSelectionChanged);
 
         // call first map reset
         self.onMapReset();

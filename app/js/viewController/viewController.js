@@ -13,6 +13,11 @@ var ViewController = function() {
         self.children.push(childController);
     };
 
+    self.removeChildController = function(childController) {
+        self.children = _.without(self.children, childController);
+        childController.dispose();
+    };
+
 
     /**
      * Remove the view from the dom

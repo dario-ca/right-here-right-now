@@ -18,24 +18,6 @@ var WindowController = function() {
         self.view.append(self.mapViewController);
 
 
-        var divvyLayer = DivvyLayerController();
-        self.mapViewController.addLayer(divvyLayer);
-
-        var busLayer = BusLayerController();
-        self.mapViewController.addLayer(busLayer);
-
-        var potholeLayer = PotholeLayerController();
-        self.mapViewController.addLayer(potholeLayer);
-
-        var vehicleLayer = VehicleLayerController();
-        self.mapViewController.addLayer(vehicleLayer);
-
-        var lightOneLayer = LightOneLayerController();
-        self.mapViewController.addLayer(lightOneLayer);
-
-
-
-
     }();
 
     return self;

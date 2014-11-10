@@ -1,5 +1,13 @@
-var ButtonViewController = function() {
-    var self = ExternalSvgViewController("resource/view/button.svg");
+var ButtonViewController = function(title, icon, deselectedIcon) {
+    var self;
+    if(!icon) {
+        self = ExternalSvgViewController("resource/view/button.svg");
+    } else {
+        self = ExternalSvgViewController("resource/view/button-with-icon.svg");
+    }
+
+
+
 
     var _selected;
 
@@ -12,9 +20,15 @@ var ButtonViewController = function() {
         if(selected){
             self.view.classed("selected", true);
             self.view.highlightLine.show();
+            self.view.title.style("fill", Colors.components.WHITE_SELECTED);
+            if(icon)
+                self.view.icon.imageSrc = icon;
         } else {
             self.view.classed("selected", false);
             self.view.highlightLine.hide();
+            self.view.title.style("fill", Colors.components.GREY_DESELECTED);
+            if(deselectedIcon)
+                self.view.icon.imageSrc = deselectedIcon;
         }
     });
 
@@ -28,6 +42,15 @@ var ButtonViewController = function() {
         self.view.classed("button-view-controller", true);
         self.view.title.classed("unselectable", true);
         self.selected = true;
+
+        if(title){
+            self.view.title.text(title);
+        }
+
+        if(icon){
+            self.view.icon.imageSrc = icon;
+        }
+
     }();
 
     return self;

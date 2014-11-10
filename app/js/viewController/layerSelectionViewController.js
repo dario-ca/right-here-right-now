@@ -43,6 +43,12 @@ var LayerSelectionViewController = function() {
         addLayers();
     };
 
+
+    self.onTimeIntervalChanged = function() {
+        _lastMonthButton.selected = timeIntervalModel.timeInterval == TimeInterval.LAST_MONTH;
+        _lastWeekButton.selected = timeIntervalModel.timeInterval == TimeInterval.LAST_WEEK;
+    };
+
     //#PRIVATE FUNCTIONS
 
     /**
@@ -161,27 +167,27 @@ var LayerSelectionViewController = function() {
         _lastWeekButton = ButtonViewController();
         _lastWeekButton.view.background.hide();
         _lastWeekButton.view.title.text("LAST WEEK");
+        _lastWeekButton.selected = timeIntervalModel.timeInterval == TimeInterval.LAST_WEEK;
         translateCoordinateSystemGroup.append(_lastWeekButton);
 
         _lastMonthButton = ButtonViewController();
         _lastMonthButton.view.background.hide();
         _lastMonthButton.view.title.text("LAST MONTH");
-        _lastMonthButton.selected = false; //TODO CHECK THE MODEL
+        _lastMonthButton.selected = timeIntervalModel.timeInterval == TimeInterval.LAST_MONTH;
         translateCoordinateSystemGroup.append(_lastMonthButton);
 
         _lastWeekButton.onClick(function(){
-            _lastWeekButton.selected = true;
-            _lastMonthButton.selected = false;
+            timeIntervalModel.timeInterval = TimeInterval.LAST_WEEK;
         });
 
         _lastMonthButton.onClick(function(){
-            _lastMonthButton.selected = true;
-            _lastWeekButton.selected = false;
+            timeIntervalModel.timeInterval = TimeInterval.LAST_MONTH;
         });
 
 
         //REGISTER TO CALLBACKS
         notificationCenter.subscribe(Notifications.layer.SUBLAYER_SELECTION_CHANGED, self.onLayerSelectionChanged);
+        notificationCenter.subscribe(Notifications.timeInterval.TIME_INTERVAL_CHANGED, self.onTimeIntervalChanged);
 
     }();
 

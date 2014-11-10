@@ -4,7 +4,7 @@ Colors.components = {
   //Used for white text
   WHITE_SELECTED: "#FFFFFF",
   //Used when a text is not selected
-  GREY_DESELECTED: "#777777"
+  GREY_DESELECTED: "#666666"
 };
 
 Colors.station = {

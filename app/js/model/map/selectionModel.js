@@ -2,12 +2,20 @@
  *
  * @constructor
  */
+var SelectionMode = {
+    SELECTION_NEARBY : "SELECTION_NEARBY",
+    SELECTION_AREA: "SELECTION_AREA",
+    SELECTION_PATH: "SELECTION_PATH",
+    SELECTION_NONE: "SELECTION_NONE"
+};
+
+
 var SelectionModel = function() {
     ////////////////////////// PRIVATE ATTRIBUTES //////////////////////////
     var self = {};
     var rectangles = [];
 
-
+    var _selectionMode = SelectionMode.SELECTION_NONE;
     ////////////////////////// PUBLIC METHODS //////////////////////////
     /*
      * point1 [lat, lon]
@@ -35,7 +43,7 @@ var SelectionModel = function() {
 
     self.isEmpty = function() {
         return rectangles == 0;
-    }
+    };
 
     /**
      * point: {array} [lat, lon]
@@ -48,6 +56,16 @@ var SelectionModel = function() {
         }).length > 0;
     };
 
+
+    self.__defineSetter__("selectionMode", function(mode){
+       _selectionMode = mode;
+        notificationCenter.dispatch(Notifications.selection.SELECTION_MODE_CHANGED);
+    });
+
+
+    self.__defineGetter__("selectionMode", function(){
+        return _selectionMode;
+    });
 
     ////////////////////////////////// PRIVATE METHODS //////////////////////////////////
 
@@ -112,7 +130,7 @@ var Rectangle = function() {
                 {latitude: points[3][0], longitude: points[3][1]},
             ]
         );
-    }
+    };
 
     self.__defineGetter__("points", function() {
         return points;
@@ -122,3 +140,4 @@ var Rectangle = function() {
 };
 
 var selectionModel = SelectionModel();
+

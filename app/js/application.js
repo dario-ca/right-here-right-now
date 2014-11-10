@@ -60,6 +60,9 @@ var Application = function() {
 
         loadResources(function(){
             setUp();
+
+            //TODO REMOVE ONLY FOR DEBUG
+            selectionModel.addRectangleSelection([-100,-100],[100,100]);
         });
 
     }();

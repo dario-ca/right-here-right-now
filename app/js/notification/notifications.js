@@ -28,11 +28,12 @@ Notifications.data = {
 };
 
 Notifications.selection = {
-    SELECTION_CHANGED: "selection.SELECTION_CHANGED"
+    SELECTION_CHANGED: "selection.SELECTION_CHANGED",
+    SELECTION_MODE_CHANGED: "selection.SELECTION_MODE_CHANGED"
 };
 
 Notifications.timeInterval = {
     TIME_INTERVAL_CHANGED: "timeInterval.TIME_INTERVAL_CHANGED"
-}
+};
 
 

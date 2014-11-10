@@ -45,6 +45,7 @@ function PotholeLayerController() {
     };
 
     var init = function() {
+        self.view.classed("pothole-layer-controller", true);
         dataPotholeModel.subscribe(Notifications.data.POTHOLE_CHANGED,onPotholeData);
     }();
 

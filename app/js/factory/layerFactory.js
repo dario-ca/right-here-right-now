@@ -19,11 +19,11 @@ var LayerFactory = function() {
         var mobilityLayer = self.addLayer("MOBILITY");
         mobilityLayer.addSublayer("Divvy",
                                   "resource/sublayer/icon/divvy-station.svg",
-                                  Colors.layer.MOBILITY
+                                  Colors.layer.MOBILITY,
                                   [DivvyLayerController]);
         mobilityLayer.addSublayer("Buses",
-                                  "resource/sublayer/icon/bus.svg",
-                                  Colors.layer.MOBILITY
+                                  "resource/sublayer/icon/bus-no-number.svg",
+                                  Colors.layer.MOBILITY,
                                   [BusLayerController]);
 
 
@@ -35,7 +35,7 @@ var LayerFactory = function() {
         informationLayer.addSublayer("Lights",
                                      "resource/sublayer/icon/light.svg",
                                      Colors.layer.INFORMATION,
-                                     []);
+                                     [LightOneLayerController]);
         informationLayer.addSublayer("Abandoned Vehicle",
                                      "resource/sublayer/icon/abandoned-vehicle.svg",
                                      Colors.layer.INFORMATION,

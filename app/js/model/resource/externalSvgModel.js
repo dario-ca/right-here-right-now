@@ -9,12 +9,16 @@ var ExternalSvgModel = function() {
     var externalSvgPaths = ["resource/view/notification-popup.svg",
                             "resource/sublayer/icon/divvy-station.svg",
                             "resource/sublayer/icon/bus.svg",
+                            "resource/sublayer/icon/bus-no-number.svg",
                             "resource/view/button.svg",
+                            "resource/view/button-with-icon.svg",
                             "resource/view/checkbox.svg",
                             "resource/view/layer-title.svg",
                             "resource/sublayer/icon/pothole.svg",
                             "resource/sublayer/icon/abandoned-vehicle.svg",
-                            "resource/sublayer/icon/light.svg"
+                            "resource/sublayer/icon/light.svg",
+                            "resource/mapTools/icon/area.svg",
+                            "resource/mapTools/icon/nearby.svg"
                             ];
 
 
