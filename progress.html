@@ -67,16 +67,41 @@
 
         <h3>Francesco Paduano</h3>
         <ul>
-            <h4>First week</h4>
-            <!--<h4>Second week</h4>
-            <h4>Third week</h4>
-            <h4>Fourth week</h4>-->
+            <ul>
+                <h4>First week</h4>
+                <li>User interface study</li>
+                <li>Mockup on Illustrator</li>
+                <li>Software architecture and design</li>
+                <li>Implementation of:
+                    <ul>
+                        <li><strong>Application skeleton</strong>: classes structure of the main components </li>
+                        <li><strong>SvgImporter</strong>: importer that lets the programmer to handle svg files and edit them</li>
+                        <li><strong>ViewControllerFramework</strong>: abstraction of the ViewController paradigm</li>
+                        <li><strong>MapViewController</strong>: structure that embeds a leaflet map in our application</li>
+                        <li><strong>LayerSelectionController</strong>: component for selecting/deselecting the layers on the map</li>
+                    </ul>
+                <li><strong>PopupController</strong>: component which handles our custom popup on the map</li>
+                </li>
+                <!--<h4>Second week</h4>
+                <h4>Third week</h4>
+                <h4>Fourth week</h4>-->
+            </ul>
         </ul>
 
         <hr>
         <h3>Dario Casula</h3>
         <ul>
             <h4>First week</h4>
+            <li>User interface and iteraction study on a sketch</li>
+            <li>Crime Data analisys</li>
+            <li>Implementation of:
+                <ul>
+                    <li><strong>crimeLayerController</strong>: class that shows different types of crimes on the map</li>
+                    <li><strong>divvyLayerController</strong>: visualizes the divvy stations on the map with information about available bikes or docks</li>
+                    <li><strong>lightOneLayerController</strong>: visualizes 311 requests for broken lights</li>
+                    <li><strong>potholeLayerController</strong>: visualizes all the pothole on the maps</li>
+                    <li><strong>vehicleLayerController</strong>: visualizes abandoned vehicles on the map</li>
+            </li>
             <!--<h4>Second week</h4>
             <h4>Third week</h4>
             <h4>Fourth week</h4>-->
@@ -87,6 +112,20 @@
         <h3>Luca Buratti</h3>
         <ul>
             <h4>First week</h4>
+            <li>User interface and iteraction study on a sketch</li>
+            <li>Study of the datasets needed for the application, study of SODA api used in 311 databases</li>
+            <li>Initial data Analysys for the data relatives to the crimes in the city of chicago</li>
+            <li>Implementation of:
+                <ul>
+                    <li><strong>data311Model</strong>: class that allow to query a generic soda server for retriving data
+                        for a specific area in the city of chicago in the last week or month, used for acces data for Potholes, Abandoned vehicles,
+                        Food Inspection, lights out and crimes.
+                    </li>
+                    <li><strong>dataCrimeTrendModel</strong>: class that allow to retrive data relatives to the trend of the crimes in the city of 
+                    chicago in the last 5 years (granularity 1 month), at the moment used only for the trend of all the crimes and the trend for
+                        the crimes divided by type.
+                    </li>
+            </li>
             <!--<h4>Second week</h4>
             <h4>Third week</h4>
             <h4>Fourth week</h4>-->
