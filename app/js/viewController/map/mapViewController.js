@@ -40,6 +40,8 @@ function MapViewController() {
         layerViewControllers.push(layerController);
         layerController.view.appendTo(_svgLayerGroup);
 
+        //bring the popups to front again
+        popupLayerController.view.bringToFront();
     };
 
 
@@ -198,6 +200,7 @@ function MapViewController() {
 
         popupLayerController = PopupLayerController();
         self.addLayer(popupLayerController);
+
 
 
         // call first map reset
