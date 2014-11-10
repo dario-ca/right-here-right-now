@@ -4,7 +4,7 @@
 
 var crimeTrendModel = function(modelName,notification,interval) {
     //////////////////////////  DEBUG ///////////////////////////
-    var debug = true;
+    var debug = false;
     //////////////////////////  PRIVATE ATTRIBUTES ///////////////////////////
     var self = DataModel();
     var name = modelName;
@@ -178,13 +178,13 @@ var crimeTrendModel = function(modelName,notification,interval) {
     return self;
 };
 
-var dataCrimeTrendMonthModel = crimeTrendModel("Trend total Crime (granularity month)",Notifications.data.CRIME_MONTH_TOTAL_CHANGED,300000);
+var dataCrimeTrendMonthModel = crimeTrendModel("Trend total Crime (granularity month)",Notifications.data.crime.CRIME_MONTH_TOTAL_CHANGED,300000);
 dataCrimeTrendMonthModel.addSqlSelect("date_trunc_ym(date) AS month")
     .addSqlSelect("count(*) AS total")
     .addSqlGroup("month")
     .addSqlOrder("month");
 
-var dataCrimeTrendTypeMonthModel = crimeTrendModel("Trend Crime for type (granularity month)",Notifications.data.CRIME_MONTH_TYPE_CHANGED,300000);
+var dataCrimeTrendTypeMonthModel = crimeTrendModel("Trend Crime for type (granularity month)",Notifications.data.crime.CRIME_MONTH_TYPE_CHANGED,300000);
 dataCrimeTrendTypeMonthModel.addSqlSelect("date_trunc_ym(date) AS month")
     .addSqlSelect("count(*) AS total")
     .addSqlSelect("primary_type")

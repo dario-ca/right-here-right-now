@@ -36,6 +36,9 @@ var WindowController = function() {
         var selectionRectangleLayer = SelectionRectangleViewController();
         self.mapViewController.addLayer(selectionRectangleLayer);
 
+        var crimeNarcoticsLayer = CrimeNarcoticsLayerController();
+        self.mapViewController.addLayer(crimeNarcoticsLayer);
+
 
 
 
