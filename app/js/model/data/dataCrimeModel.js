@@ -81,22 +81,18 @@ var DataCrimeModel = function(modelName,colorCode,databaseMainUrl,notification,i
 
     //Callback invoked when the selections areas are changed
     var callBackChangeAreas = function() {
-        //TODO check this implementation
         rectangles = selectionModel.getSelection();
-        self.fetchData();
-        //TODO reset timer
+        self.dataChanged();
     };
 
     //Callback function invoked when the time filter is changed
     var callBackChangeTimeFilter = function() {
-        //TODO finish implementation, dependency on notification
         if (/*timeFilterModel.mode == "month"*/true) {
             fromTime = moment().subtract(1, 'months').format('YYYY-MM-DD');
         } else {
             fromTime = moment().subtract(weeksNum, 'weeks').format('YYYY-MM-DD');
         }
-        self.fetchData();
-        //TODO reset timer
+        self.dataChanged();
     };
 
     ////////////////////////// PUBLIC METHODS //////////////////////////
