@@ -42,22 +42,22 @@ var LayerFactory = function() {
                                      [VehicleLayerController]);
 
         var securityLayer = self.addLayer("SECURITY");
-        securityLayer.addSublayer("Murder",
-                                  "resource/sublayer/icon/pothole.svg",
-                                  Colors.layer.SECURITY,
+        securityLayer.addSublayer("Personal Assault",
+                                  "resource/sublayer/icon/assault.svg",
+                                  Colors.layer.SECURITY_1,
                                   []);
-        securityLayer.addSublayer("Kidnapping",
-                                    "resource/sublayer/icon/pothole.svg",
-                                    Colors.layer.SECURITY,
+        securityLayer.addSublayer("Property Crime",
+                                    "resource/sublayer/icon/property.svg",
+                                    Colors.layer.SECURITY_2,
                                     [CrimeLayerController]
                                 );
         securityLayer.addSublayer("Mice",
                                     "resource/sublayer/icon/pothole.svg",
-                                    Colors.layer.SECURITY,
+                                    Colors.layer.SECURITY_3,
                                     []);
         securityLayer.addSublayer("Pigeons",
                                     "resource/sublayer/icon/pothole.svg",
-                                    Colors.layer.SECURITY,
+                                    Colors.layer.SECURITY_4,
                                     []);
     };
 

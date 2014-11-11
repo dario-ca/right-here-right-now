@@ -120,7 +120,7 @@ var UISvgView = function(svg) {
     self.__defineGetter__("x", function(){
         var x = self.attr("x");
         x = x != null ? x : 0;
-        return x;
+        return parseFloat(x);
     });
 
 
@@ -132,7 +132,7 @@ var UISvgView = function(svg) {
     self.__defineGetter__("y", function(){
         var y = self.attr("y");
         y = y != null ? y : 0;
-        return y;
+        return parseFloat(y);
     });
 
     /**

@@ -19,7 +19,9 @@ var ExternalSvgModel = function() {
                             "resource/sublayer/icon/abandoned-vehicle.svg",
                             "resource/sublayer/icon/light.svg",
                             "resource/mapTools/icon/area.svg",
-                            "resource/mapTools/icon/nearby.svg"
+                            "resource/mapTools/icon/nearby.svg",
+                            "resource/sublayer/icon/assault.svg",
+                            "resource/sublayer/icon/property.svg"
                             ];
 
 
