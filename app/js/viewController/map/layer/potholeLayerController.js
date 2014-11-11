@@ -44,6 +44,13 @@ function PotholeLayerController() {
         drawPotholes();
     };
 
+    //TODO:check implementation of unsubscribe
+    self.super_dispose = self.dispose;
+    self.dispose = function() {
+        self.super_dispose();
+        dataPotholeModel.unsubscribe(Notifications.data.POTHOLE_CHANGED);
+    };
+
     var init = function() {
         self.view.classed("pothole-layer-controller", true);
         dataPotholeModel.subscribe(Notifications.data.POTHOLE_CHANGED,onPotholeData);

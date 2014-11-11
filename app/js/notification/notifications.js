@@ -28,6 +28,8 @@ Notifications.data.crime = {
     CRIME_CHANGED: "data.CRIME_CHANGED", //Crime relative current selection updated
     CRIME_CATEGORY1_CHANGED: "data.crime.CRIME_CATEGORY1_CHANGED",
     CRIME_CATEGORY2_CHANGED: "data.crime.CRIME_CATEGORY2_CHANGED",
+    CRIME_CATEGORY3_CHANGED: "data.crime.CRIME_CATEGORY3_CHANGED",
+    CRIME_CATEGORY4_CHANGED: "data.crime.CRIME_CATEGORY4_CHANGED",
     CRIME_MONTH_TOTAL_CHANGED: "data.CRIME_MONTH_TOTAL_CHANGED", //Trend total Crime last 5 years relative current Selection with granularity month
     CRIME_MONTH_TYPE_CHANGED: "data.CRIME_MONTH_TOTAL_CHANGED" //Trend Crime last 5 years grouped by type relative current Selection with granularity month
 

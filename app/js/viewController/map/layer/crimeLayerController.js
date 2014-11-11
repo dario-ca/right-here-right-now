@@ -19,8 +19,7 @@ function CrimeLayerController(name,notification,icon) {
         crimeData.forEach(function(d){
             var crimeIcon = self.createIcon(d.latitude, d.longitude,_iconPath);
             svgCrimes.push(crimeIcon);
-            //TODO:check icon
-            crimeIcon.view.background.style("fill","red");
+            crimeIcon.view.background.style("fill", d.color);
         })
     };
 
@@ -29,6 +28,11 @@ function CrimeLayerController(name,notification,icon) {
             case "category1":       crimeData=dataCrimeCategory1Model.data;
                 break;
             case "category2":       crimeData=dataCrimeCategory2Model.data;
+                break;
+            case "category3":       crimeData=dataCrimeCategory3Model.data;
+                break;
+            case "category4":       crimeData=dataCrimeCategory4Model.data;
+                break;
         }
         drawCrimes();
     };
@@ -38,6 +42,11 @@ function CrimeLayerController(name,notification,icon) {
             case "category1":       dataCrimeCategory1Model.subscribe(_notification,onCrimeData);
                 break;
             case "category2":       dataCrimeCategory2Model.subscribe(_notification,onCrimeData);
+                break;
+            case "category3":       dataCrimeCategory3Model.subscribe(_notification,onCrimeData);
+                break;
+            case "category4":       dataCrimeCategory4Model.subscribe(_notification,onCrimeData);
+                break;
         }
     }();
 
