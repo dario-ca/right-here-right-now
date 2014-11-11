@@ -52,11 +52,11 @@ var LayerFactory = function() {
                                     [CrimeLayerController]
                                 );
         securityLayer.addSublayer("Mice",
-                                    "resource/sublayer/icon/pothole.svg",
+                                    "resource/sublayer/icon/unsafe.svg",
                                     Colors.layer.SECURITY_3,
                                     []);
         securityLayer.addSublayer("Pigeons",
-                                    "resource/sublayer/icon/pothole.svg",
+                                    "resource/sublayer/icon/other.svg",
                                     Colors.layer.SECURITY_4,
                                     []);
     };
