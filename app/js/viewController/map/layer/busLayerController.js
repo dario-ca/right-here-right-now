@@ -91,12 +91,6 @@ function BusLayerController() {
     };
 
     self.hideBusRoutes = function() {
-        /*
-        var map = mapModel.getLeafletMap();
-        busRouteLayers.forEach(function(routeLayer){
-            map.removeLayer(routeLayer);
-        });
-        */
         busRouteLayers.forEach(function(busStop) {
             busStop.dispose();
         });
@@ -106,23 +100,45 @@ function BusLayerController() {
     var onBusData = function() {
         // Remove all busses
         self.children.forEach( function(child) {
-            if(child.vehicle != undefined)
-                child.dispose();    // It is a bus
+            if(child.vehicle != undefined) {  // It is a bus
+                //child.dispose();
+                child.displayed = false;
+            }
         });
-        self.children = [];
+        //self.children = [];
 
         // Takes all bus data
         vehicles = dataBusModel.data;
         vehicles.forEach(function(vehicle) {
-            var bus = ExternalSvgViewController("resource/sublayer/icon/bus.svg");
+            var bus = null;// ExternalSvgViewController("resource/sublayer/icon/bus.svg");
+
+            // Retrieve the bus contoller that have vehicle.vid
+            var busses = self.children.filter(function(b) {
+               return b.vehicle.vid == vehicle.vid;
+            });
+
+            if(busses.length > 0) {
+                bus = busses[0];
+                bus.displayed = true;
+
+                var p = self.project(vehicle.lat, vehicle.lon);
+                bus.view
+                    .transition()
+                    .attr("x", p.x)
+                    .attr("y", p.y)
+                    .duration(1000);
+            }
+            else {
+                bus = ExternalSvgViewController("resource/sublayer/icon/bus.svg");
+
+                var p = self.project(vehicle.lat, vehicle.lon);
+                bus.view.x = p.x;
+                bus.view.y = p.y;
+            }
 
             bus.view.width = self.defaultIconSize;
             bus.view.height= self.defaultIconSize;
             bus.vehicle = vehicle;
-
-            var p = self.project(vehicle.lat, vehicle.lon);
-            bus.view.x = p.x;
-            bus.view.y = p.y;
 
             bus.view.busNumber.text(vehicle.rt);
 
@@ -133,6 +149,18 @@ function BusLayerController() {
                 dataBusModel.busClicked(bus.vehicle);
             });
         });
+
+        var newChildren = [];
+        self.children.forEach( function(child) {
+            if(child.vehicle != undefined &&
+                child.displayed == false) {  // It is a bus
+                child.dispose();
+            }
+            else {
+                newChildren.push(child);
+            }
+        });
+        self.children = newChildren;
     };
 
     var onBusSelected = function() {
@@ -148,41 +176,6 @@ function BusLayerController() {
 
         dataBusModel.subscribe(Notifications.data.BUS_CHANGED, onBusData);
         dataBusModel.subscribe(Notifications.data.BUS_SELECTION_CHANGED, onBusSelected);
-
-        /*
-        //POPUP
-
-        var popup = ExternalSvgViewController("resource/view/notification-popup.svg")
-        self.view.append(popup);
-        popup.view.width = 20;
-        popup.view.height= 10;
-        popup.view.title.text("prova");
-        popup.view.subtitle.text("provaprova");
-        popup.view.icon.imageSrc = "resource/sublayer/icon/assault.png";
-
-        var position = self.project(41.866320,-87.64 );
-        popup.view.x = position.x;
-        popup.view.y = position.y;
-
-        self.fixControllerSize(popup);
-
-
-        //ICON
-
-        var simpleIcon = SvgViewController();
-        var image = UIImageView();
-        image.imageSrc = "resource/sublayer/icon/assault.png";
-
-        simpleIcon.view.width = 5;
-        simpleIcon.view.height = 5;
-        simpleIcon.view.append(image);
-        simpleIcon.view.classed("dummy-icon", true);
-        self.view.append(simpleIcon);
-
-        var position2 = self.project(41.876320,-87.64 );
-        simpleIcon.view.x = position2.x;
-        simpleIcon.view.y = position2.y;
-        */
 
     }();
 
