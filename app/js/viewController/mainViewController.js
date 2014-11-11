@@ -7,6 +7,7 @@ var MainViewController = function() {
     self.layerSelectionViewController = null;
     self.notificationsViewController = null;
     self.mapToolsViewController = null;
+    self.notificationsPopupViewController = null;
 
 
 
@@ -22,6 +23,8 @@ var MainViewController = function() {
 
     var init = function() {
 
+        //LAYER SELECTION
+
         self.view.classed("main-view-controller", true);
         self.view.width = "100%";
         self.view.height = "100%";
@@ -30,6 +33,8 @@ var MainViewController = function() {
         self.layerSelectionViewController.view.width = "14%";
         self.layerSelectionViewController.view.height = "100%";
         self.view.append(self.layerSelectionViewController);
+
+        //MAP TOOLS
 
         //translate to the bottom
         var mapToolsTranslateCoordinateSystemGroup = UISvgView()
@@ -45,6 +50,13 @@ var MainViewController = function() {
         self.mapToolsViewController.view.x = "40%";
         mapToolsTranslateCoordinateSystemGroup.append(self.mapToolsViewController);
 
+        //NOTIFICATIONS POPUPS
+        self.notificationsPopupViewController = NotificationPopupsViewController();
+        self.notificationsPopupViewController.view.width = "16%";
+        self.notificationsPopupViewController.view.height = "100%";
+        self.notificationsPopupViewController.view.x = "15%";
+        self.notificationsPopupViewController.view.y = "0.2%";
+        self.view.append(self.notificationsPopupViewController);
 
 
     }();

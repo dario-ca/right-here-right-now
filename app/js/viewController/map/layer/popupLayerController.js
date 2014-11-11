@@ -33,7 +33,6 @@ function PopupLayerController() {
     var init = function() {
 
 
-
     }();
 
     return self;
