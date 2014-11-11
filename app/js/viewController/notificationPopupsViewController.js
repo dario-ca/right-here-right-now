@@ -93,6 +93,12 @@ var NotificationPopupsViewController = function() {
                 "resource/sublayer/icon/light.svg");
         },6000);
 
+        window.setInterval(function(){
+            i++;
+            self.addNotificationPopup("OH MY GOD THEY KILLED KENNY!", "",
+                "resource/sublayer/icon/assault.svg");
+        },15000);
+
     }();
 
     return self;

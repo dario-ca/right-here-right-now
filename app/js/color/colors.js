@@ -36,7 +36,10 @@ Colors.lightOne = { //TODO: handle DUPs
 Colors.layer = {
     MOBILITY: "#293d9b",
     INFORMATION: "#3f8643",
-    SECURITY: "#b93721"
+    SECURITY_1: "#b93721",
+    SECURITY_2: "#F19261",
+    SECURITY_3: "#F8CB90",
+    SECURITY_4: "#FCEFDB"
 };
 
 Colors.selection = {
