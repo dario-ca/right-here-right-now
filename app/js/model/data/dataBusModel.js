@@ -13,6 +13,8 @@ var DataBusModel = function(name) {
 
     ////////////////////////// PUBLIC ATTRIBUTES //////////////////////////
 
+    self._ctaCachedData = "data/cta.json";
+
     self._routesURL = "http://www.ctabustracker.com/bustime/api/v1/getroutes";
     self._directionURL = "http://www.ctabustracker.com/bustime/api/v1/getdirections";
     self._stopURL = "http://www.ctabustracker.com/bustime/api/v1/getstops";
@@ -108,6 +110,15 @@ var DataBusModel = function(name) {
         });
         setTimeout(function(){callback(null, null);}, 5000);    // After five seconds call callback
 
+    };
+
+    self.fetchStaticCachedData = function() {
+        d3.json(self._ctaCachedData, function(error, data) {
+            if(error)
+                console.log("Can't download "+self._ctaCachedData);
+
+            self._lines = data;
+        });
     };
 
     self.fetchStaticData = function() {
@@ -299,7 +310,8 @@ var DataBusModel = function(name) {
     var init = function() {
         //TODO BUS DISABLED
         //console.warn("bus disabled");
-        self.fetchStaticData();
+        //self.fetchStaticData();
+        self.fetchStaticCachedData();
 
         // Listen for the selection update notification and call fetch when it changes
         notificationCenter.subscribe(Notifications.selection.SELECTION_CHANGED, self.dataRequested);

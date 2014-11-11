@@ -138,6 +138,7 @@ function BusLayerController() {
     var onBusSelected = function() {
         if(dataBusModel.busSelected != null) {
             self.displayBusRoute(dataBusModel.busSelected.stops);
+            popupLayerController.openPopup(dataBusModel.busSelected.lat, dataBusModel.busSelected.lon, MapPopupType.POPUP_SIMPLE);
         }
         else
             self.hideBusRoutes();
