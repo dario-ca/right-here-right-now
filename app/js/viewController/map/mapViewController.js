@@ -47,7 +47,7 @@ function MapViewController() {
 
     self.removeLayer = function(layerController) {
         self.removeChildController(layerController);
-        layerViewControllers = _.without(layerController);
+        layerViewControllers = _.without(layerViewControllers, layerController);
     };
 
 
@@ -81,15 +81,21 @@ function MapViewController() {
 
         //Scale object that must be scaled
         layerViewControllers.forEach(function(layer){
-           layer.fixedSizeControllers.forEach(function(controller){
-              var zoomFactor = 1;
-               if(_mapContainer.getZoom() > 13) {
-                   zoomFactor = 1 / ((_mapContainer.getZoom()-13)*2);
-               }
+            //TODO Why fixedSizeControllers is sometime undefined?
+            if(layer.fixedSizeControllers){
+                layer.fixedSizeControllers.forEach(function(controller){
+                    var zoomFactor = 1;
+                    if(_mapContainer.getZoom() > 13) {
+                        zoomFactor = 1 / ((_mapContainer.getZoom()-13)*2);
+                    }
 
-              controller.view.width = controller.fixWidth * zoomFactor;
-              controller.view.height = controller.fixHeight * zoomFactor;
-           });
+                    controller.view.width = controller.fixWidth * zoomFactor;
+                    controller.view.height = controller.fixHeight * zoomFactor;
+                });
+            } else {
+                console.warn("fixedSizeControllers is undefined");
+            }
+
         });
 
 

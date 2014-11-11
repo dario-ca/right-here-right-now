@@ -38,6 +38,8 @@ function CrimeLayerController(name,notification,icon) {
     };
 
     var init = function() {
+        self.view.classed("crime-layer-controller", true);
+
         switch(_name){
             case "category1":       dataCrimeCategory1Model.subscribe(_notification,onCrimeData);
                 break;
@@ -52,3 +54,23 @@ function CrimeLayerController(name,notification,icon) {
 
     return self;
 }
+
+
+/**
+ *  Helper functions for the different map layers
+ */
+var Category1CrimeLayerController = function() {
+    return CrimeLayerController("category1",Notifications.data.crime.CRIME_CATEGORY1_CHANGED,"resource/sublayer/icon/assault.svg");
+};
+
+var Category2CrimeLayerController = function() {
+    return CrimeLayerController("category2", Notifications.data.crime.CRIME_CATEGORY2_CHANGED, "resource/sublayer/icon/property.svg");
+};
+
+var Category3CrimeLayerController = function() {
+    return CrimeLayerController("category3", Notifications.data.crime.CRIME_CATEGORY3_CHANGED, "resource/sublayer/icon/unsafe.svg");
+};
+
+var Category4CrimeLayerController = function() {
+    return CrimeLayerController("category4", Notifications.data.crime.CRIME_CATEGORY4_CHANGED, "resource/sublayer/icon/other.svg");
+};

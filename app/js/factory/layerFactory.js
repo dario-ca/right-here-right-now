@@ -45,20 +45,20 @@ var LayerFactory = function() {
         securityLayer.addSublayer("Personal Assault",
                                   "resource/sublayer/icon/assault.svg",
                                   Colors.layer.SECURITY_1,
-                                  [CrimeLayerController]);
+                                  [Category1CrimeLayerController]);
         securityLayer.addSublayer("Property Crime",
                                     "resource/sublayer/icon/property.svg",
                                     Colors.layer.SECURITY_2,
-                                    [CrimeLayerController]
+                                    [Category2CrimeLayerController]
                                 );
         securityLayer.addSublayer("Mice",
                                     "resource/sublayer/icon/unsafe.svg",
                                     Colors.layer.SECURITY_3,
-                                    [CrimeLayerController]);
+                                    [Category3CrimeLayerController]);
         securityLayer.addSublayer("Pigeons",
                                     "resource/sublayer/icon/other.svg",
                                     Colors.layer.SECURITY_4,
-                                    [CrimeLayerController]);
+                                    [Category4CrimeLayerController]);
     };
 
 
