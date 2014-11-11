@@ -6,7 +6,7 @@ var DataCrimeModel = function(modelName,colorCode,databaseMainUrl,notification,i
     var self = DataModel();
     var name = modelName;
     var color = colorCode;
-    var fromTime = moment().subtract(1, 'months').format('YYYY-MM-DD'); //TODO remove hardcode
+    var fromTime;
     var rectangles = [];
     var mainUrl = databaseMainUrl;
     var tmpData = [];
@@ -87,14 +87,17 @@ var DataCrimeModel = function(modelName,colorCode,databaseMainUrl,notification,i
 
     //Callback function invoked when the time filter is changed
     var callBackChangeTimeFilter = function() {
-        if (/*timeFilterModel.mode == "month"*/true) {
+        if (timeIntervalModel.timeInterval === TimeInterval.LAST_MONTH) {
             fromTime = moment().subtract(1, 'months').format('YYYY-MM-DD');
-        } else {
+        } else if (timeIntervalModel.timeInterval === TimeInterval.LAST_WEEK){
             fromTime = moment().subtract(weeksNum, 'weeks').format('YYYY-MM-DD');
+        } else {
+            console.log("Illegal state time interval");
         }
         self.dataChanged();
     };
 
+    callBackChangeTimeFilter();
     ////////////////////////// PUBLIC METHODS //////////////////////////
 
     self.fetchData = function() {
@@ -138,7 +141,7 @@ var DataCrimeModel = function(modelName,colorCode,databaseMainUrl,notification,i
 
     ////////////////////////// SUBSCRIBES //////////////////////////
 
-    //TODO subscribe change time filter
+    notificationCenter.subscribe(Notifications.timeInterval.TIME_INTERVAL_CHANGED,callBackChangeTimeFilter);
     notificationCenter.subscribe(Notifications.selection.SELECTION_CHANGED,callBackChangeAreas);
 
     return self;

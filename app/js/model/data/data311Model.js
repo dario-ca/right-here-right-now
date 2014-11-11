@@ -14,11 +14,12 @@
  */
 var Data311Model = function(modelName,databaseMainUrl,notification,interval,jsonNameDateAttribute,numWeekFilter) {
     //////////////////////////  DEBUG ///////////////////////////
-    var debug = false;
+    var debug = true;
     //////////////////////////  PRIVATE ATTRIBUTES ///////////////////////////
     var self = DataModel();
     var name = modelName;
-    var fromTime = moment().subtract(1, 'months').format('YYYY-MM-DD'); //TODO remove hardcode
+    //var fromTime = moment().subtract(1, 'months').format('YYYY-MM-DD'); //TODO remove hardcode
+    var fromTime;
     var rectangles = [];
     var mainUrl = databaseMainUrl;
     var tmpData = [];
@@ -96,14 +97,17 @@ var Data311Model = function(modelName,databaseMainUrl,notification,interval,json
 
     //Callback function invoked when the time filter is changed
     var callBackChangeTimeFilter = function() {
-        //TODO finish implementation, dependency on notification
-        if (/*timeFilterModel.mode == "month"*/true) {
+        if (timeIntervalModel.timeInterval === TimeInterval.LAST_MONTH) {
             fromTime = moment().subtract(1, 'months').format('YYYY-MM-DD');
-        } else {
+        } else if (timeIntervalModel.timeInterval === TimeInterval.LAST_WEEK){
             fromTime = moment().subtract(weeksNum, 'weeks').format('YYYY-MM-DD');
+        } else {
+            console.log("Illegal state time interval");
         }
         self.dataChanged();
     };
+
+    callBackChangeTimeFilter();
 
     ////////////////////////// PUBLIC METHODS //////////////////////////
 
@@ -139,7 +143,7 @@ var Data311Model = function(modelName,databaseMainUrl,notification,interval,json
 
     ////////////////////////// SUBSCRIBES //////////////////////////
 
-    //TODO subscribe change time filter
+    notificationCenter.subscribe(Notifications.timeInterval.TIME_INTERVAL_CHANGED,callBackChangeTimeFilter);
     notificationCenter.subscribe(Notifications.selection.SELECTION_CHANGED,callBackChangeAreas);
 
     return self;
@@ -160,7 +164,7 @@ dataLight1Model.addSqlWhere("status!='Completed - Dup'");
 dataLight1Model.addSqlWhere("status!='Open - Dup'");
 
 var dataFoodInspection = Data311Model("Food inspections","http://data.cityofchicago.org/resource/4ijn-s7e5.json",Notifications.data.FOOD_INSPECTION_CHANGED,30000,"inspection_date");
-
+var dataRodentBites = Data311Model("Rodent Bites","http://data.cityofchicago.org/resource/97t6-zrhs.json",Notifications.data.RAT_BITES_CHANGED,30000,"creation_date");
 //var dataCrimeModel = Data311Model("Crimes","http://data.cityofchicago.org/resource/ijzp-q8t2.json",Notifications.data.crime.CRIME_CHANGED,30000,"date",2);
 
 ////////////////////////// STATUS //////////////////////////
