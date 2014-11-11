@@ -26,7 +26,7 @@ var DataModel = function(name) {
 
         _observers++;
 
-        if(_active == true) {
+        if(_active == true && self.data != null) {
             // Data is already present, call callback
             callback();
         }
