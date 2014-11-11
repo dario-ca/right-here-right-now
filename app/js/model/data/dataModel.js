@@ -76,9 +76,9 @@ var DataModel = function(name) {
         self.dataRequested();
     };
 
-    var super_unsubscribe = self.subscribe;
-    self.unsubscribe = function(notification, callback) {
-        super_unsubscribe(notification, callback);
+    var super_unsubscribe = self.unsubscribe;
+    self.unsubscribe = function(notification) {
+        super_unsubscribe(notification);
 
         _observers--;
 
