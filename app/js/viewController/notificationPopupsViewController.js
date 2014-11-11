@@ -79,13 +79,13 @@ var NotificationPopupsViewController = function() {
             i++;
             self.addNotificationPopup("Abandoned Vehicle ", "somewhere",
                 "resource/sublayer/icon/abandoned-vehicle.svg");
-        },11000);
+        },25000);
 
         window.setInterval(function(){
             i++;
             self.addNotificationPopup("Divvy Station Empty", "The bikes station ... has no more bikes",
                 "resource/sublayer/icon/divvy-station.svg");
-        },7000);
+        },11000);
 
         window.setInterval(function(){
             i++;
@@ -98,6 +98,12 @@ var NotificationPopupsViewController = function() {
             self.addNotificationPopup("OH MY GOD THEY KILLED KENNY!", "",
                 "resource/sublayer/icon/assault.svg");
         },15000);
+
+        window.setInterval(function(){
+            i++;
+            self.addNotificationPopup("Mouse", "Mouse spotted close to UIC",
+                "resource/sublayer/icon/unsafe.svg");
+        },19000);
 
     }();
 

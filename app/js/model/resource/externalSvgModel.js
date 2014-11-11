@@ -21,7 +21,9 @@ var ExternalSvgModel = function() {
                             "resource/mapTools/icon/area.svg",
                             "resource/mapTools/icon/nearby.svg",
                             "resource/sublayer/icon/assault.svg",
-                            "resource/sublayer/icon/property.svg"
+                            "resource/sublayer/icon/unsafe.svg",
+                            "resource/sublayer/icon/property.svg",
+                            "resource/sublayer/icon/other.svg"
                             ];
 
 

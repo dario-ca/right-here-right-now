@@ -8,13 +8,14 @@ var LayerSelectionViewController = function() {
     self.notificationsViewController = null;
     self.mapToolsViewController = null;
 
-    var _margin = {layer:20,
-                   sublayer: 12,
+    var _margin = {layer:13,
+                   sublayer: 10,
                    labelLeft: 10,
                    checkboxRight : 10,
+                    checkboxTop : 4,
                    sublayerLeft: 15};
     var _size = {checkbox: 8,
-                 sublayerIcon: 9};
+                 sublayerIcon: 8};
 
     var _layerTitle,
         _lastWeekButton,
@@ -79,7 +80,7 @@ var LayerSelectionViewController = function() {
 
             //Checkbox
             var checkbox = CheckboxViewController();
-            checkbox.view.y = yPos + 3;
+            checkbox.view.y = yPos + _margin.checkboxTop;
             checkbox.view.x = viewbox.width - _size.checkbox - _margin.checkboxRight ;
             checkbox.view.height = _size.checkbox;
             checkbox.selected = layer.selected;
