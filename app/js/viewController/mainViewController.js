@@ -8,7 +8,7 @@ var MainViewController = function() {
     self.notificationsViewController = null;
     self.mapToolsViewController = null;
     self.notificationsPopupViewController = null;
-
+    self.weatherViewController = null;
 
 
     /**
@@ -57,6 +57,9 @@ var MainViewController = function() {
         self.notificationsPopupViewController.view.x = "15%";
         self.notificationsPopupViewController.view.y = "0.2%";
         self.view.append(self.notificationsPopupViewController);
+
+        // WEATHER
+        self.weatherViewController = WeatherViewController();
 
 
     }();
