@@ -91,6 +91,11 @@ var UIView = function(domElement) {
         self.on("click", callBack);
     };
 
+    self.onClickRemove = function() {
+        self.classed("ui-view-pointer", false);   // Add the class pointer if it is clickable
+        self.on("click", function() {});
+    };
+
 
     /** PRIVATE FUNCTIONS**/
 

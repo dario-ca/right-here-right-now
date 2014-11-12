@@ -65,7 +65,10 @@ var MapToolsViewController = function() {
         });
 
         _pathButton.onClick(function(){
-            selectionModel.selectionMode = SelectionMode.SELECTION_PATH;
+            if(selectionModel.selectionMode == SelectionMode.SELECTION_PATH)
+                selectionModel.selectionMode = SelectionMode.SELECTION_NONE;
+            else
+                selectionModel.selectionMode = SelectionMode.SELECTION_PATH;
         });
     };
 

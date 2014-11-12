@@ -16,6 +16,17 @@ var SelectionModel = function() {
     var rectangles = [];
 
     var _selectionMode = SelectionMode.SELECTION_NONE;
+
+    var Dx = 0.0005;       // Width of the automatic selection around path
+    var Dy = 0.0005;
+
+    self.points = [];   // Contains the selected points
+    self.lines = [];    // Contains the lines that connects selected points
+
+    ////////////////////////// PUBLIC ATTRIBUTES //////////////////////////
+
+    self.selectedPoints = [];
+
     ////////////////////////// PUBLIC METHODS //////////////////////////
     /*
      * point1 [lat, lon]
@@ -32,10 +43,24 @@ var SelectionModel = function() {
         selectionChanged();
     };
 
+    self.addPoint = function(point) {
+        self.selectedPoints.push(point);
+        notificationCenter.dispatch(Notifications.selection.SELECTION_POINTS_CHANGED);
+    }
+
     self.removeSelection = function() {
+        // Represent the actual selection
         rectangles = [];
+        self.points = [];
+        self.lines = [];
+
         selectionChanged();
     };
+
+    self.removePath = function() {
+        self.selectedPoints = [];
+        self.removeSelection();
+    }
 
     self.getSelection = function() {
         return rectangles;
@@ -50,7 +75,6 @@ var SelectionModel = function() {
      * @return: {bool} true if point inside, false otherwise
      **/
     self.pointInside = function(point) {
-        var found = false;
         return _.filter(rectangles, function(rect) {
            return rect.pointInside(point);
         }).length > 0;
@@ -67,13 +91,156 @@ var SelectionModel = function() {
         return _selectionMode;
     });
 
+    /**
+     * Bad hack created in order to break the circular dependence between
+     * DataModel -> SelectionModel -> DataGoogeDirectionModel -> DataModel -> ...
+     */
+    self.subscribeToGoogleDirections = function() {
+        dataGoogleDirectionModel.subscribe(Notifications.data.DIRECTION_CHANGED, onDirectionChanged);
+    };
+
     ////////////////////////////////// PRIVATE METHODS //////////////////////////////////
 
     var selectionChanged = function() {
         notificationCenter.dispatch(Notifications.selection.SELECTION_CHANGED);
     };
 
+    var onDirectionChanged = function() {
+        var routes = dataGoogleDirectionModel.data;
+
+        self.removeSelection();  // remove old selection
+
+        self.points = [];
+        self.lines = [];
+
+        var route = routes[0]; // Take only the first route
+
+        // Insert all the points
+        route.legs.forEach(function(leg) {
+            self.points.push([leg.start_location.lat, leg.start_location.lng]);
+            self.points.push([leg.end_location.lat  , leg.end_location.lng  ]);
+        });
+
+        // Create lines and rectangles
+        route.legs.forEach(function(leg) {
+            leg.steps.forEach(function(step) {
+                var start = step.start_location;
+                var end  = step.end_location;
+
+                // Create line
+                self.lines.push([[start.lat, start.lng], [end.lat, end.lng]]);
+
+                // Calculate the rectangles
+                var a = [];
+                var b = [];
+                var c = [];
+                var d = [];
+                var e = [];
+                var f = [];
+                var g = [];
+                var h = [];
+
+                a[0] = start.lat - Dx;
+                a[1] = start.lng + Dy;
+
+                b[0] = start.lat + Dx;
+                b[1] = start.lng + Dy;
+
+                c[0] = start.lat + Dx;
+                c[1] = start.lng - Dy;
+
+                d[0] = start.lat - Dx;
+                d[1] = start.lng - Dy;
+
+                e[0] = end.lat - Dx;
+                e[1] = end.lng + Dy;
+
+                f[0] = end.lat + Dx;
+                f[1] = end.lng + Dy;
+
+                g[0] = end.lat + Dx;
+                g[1] = end.lng - Dy;
+
+                h[0] = end.lat - Dx;
+                h[1] = end.lng - Dy;
+
+                // Rectangle around start point
+                var rectangle = Rectangle();
+                rectangle.addPoint(a);
+                rectangle.addPoint(b);
+                rectangle.addPoint(c);
+                rectangle.addPoint(d);
+                rectangles.push(rectangle);
+
+                // Rectangle between start point and end point
+                rectangle = Rectangle();
+                if(Math.abs(start.lng - end.lng) > Math.abs(start.lat - end.lat)) { // Semi-vertical rectangle
+                    if(start.lng > end.lng) {
+                        rectangle.addPoint(d);
+                        rectangle.addPoint(c);
+                        rectangle.addPoint(f);
+                        rectangle.addPoint(e);
+
+                    }
+                    else {
+                        rectangle.addPoint(h);
+                        rectangle.addPoint(g);
+                        rectangle.addPoint(b);
+                        rectangle.addPoint(a);
+                    }
+                } else {
+                    if(start.lat > end.lat) {
+                        rectangle.addPoint(f);
+                        rectangle.addPoint(a);
+                        rectangle.addPoint(d);
+                        rectangle.addPoint(g);
+
+                    }
+                    else {
+                        rectangle.addPoint(b);
+                        rectangle.addPoint(e);
+                        rectangle.addPoint(h);
+                        rectangle.addPoint(c);
+                    }
+                }
+                rectangles.push(rectangle);
+            });
+        });
+
+        var leg = route.legs[route.legs.length - 1];
+        var step = leg.steps[leg.steps.length - 1];
+        var end  = step.end_location;
+
+        var e = [];
+        var f = [];
+        var g = [];
+        var h = [];
+
+        e[0] = end.lat - Dx;
+        e[1] = end.lng + Dy;
+
+        f[0] = end.lat + Dx;
+        f[1] = end.lng + Dy;
+
+        g[0] = end.lat + Dx;
+        g[1] = end.lng - Dy;
+
+        h[0] = end.lat - Dx;
+        h[1] = end.lng - Dy;
+
+        // Rectangle around final end point
+        var rectangle = Rectangle();
+        rectangle.addPoint(e);
+        rectangle.addPoint(f);
+        rectangle.addPoint(g);
+        rectangle.addPoint(h);
+        rectangles.push(rectangle);
+
+        selectionChanged();
+    };
+
     var init = function() {
+
     } ();
 
     return self;

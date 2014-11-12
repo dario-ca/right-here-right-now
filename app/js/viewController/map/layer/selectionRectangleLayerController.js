@@ -15,6 +15,8 @@ function SelectionRectangleViewController() {
     var mask;
 
     var polygons = [];   // Used in order to produce mask not rectangular
+    self.lines = [];      // Contains the lines that connect the selected points
+    self.points = [];     // Contains the selected point controllers
 
     //////////////////////////// PUBLIC METHODS //////////////////////////////
 
@@ -23,6 +25,20 @@ function SelectionRectangleViewController() {
     ////////////////////////////////// PRIVATE METHODS //////////////////////////////////
     var drawSelections = function() {
         var selections = selectionModel.getSelection();
+        var points = selectionModel.points;
+        var lines = selectionModel.lines;
+
+        // Remove lines
+        self.lines.forEach(function(line) {
+           line.remove();
+        });
+        self.lines = [];
+
+        // Remove points
+        self.points.forEach(function(point) {
+           point.dispose();
+        });
+        self.points = [];
 
         selections.forEach(function(selection) {
             var polygon = mask.append("polygon")
@@ -34,6 +50,38 @@ function SelectionRectangleViewController() {
                                 }).join(" ");
                             });
             polygons.push(polygon);
+        });
+
+        // Draw the lines that connects the selected points
+        lines.forEach(function(line) {
+
+            var p0 = self.project(line[0][0], line[0][1]);
+            var p1 = self.project(line[1][0], line[1][1]);
+
+            var l = self.view.append("line")
+                .attr("x1", p0.x)
+                .attr("y1", p0.y)
+                .attr("x2", p1.x)
+                .attr("y2", p1.y)
+                .attr("stroke-width", 0.1)
+                .attr("stroke", "black");
+
+            self.lines.push(l);
+        });
+
+        // Draw the selected points
+        points.forEach(function(point){
+            var pointController = ExternalSvgViewController("resource/sublayer/icon/bus.svg");
+            pointController.view.width = self.defaultIconSize;
+            pointController.view.height= self.defaultIconSize;
+
+            var p = self.project(point[0], point[1]);
+            pointController.view.x = p.x;
+            pointController.view.y = p.y;
+
+            self.view.append(pointController);
+
+            self.points.push(pointController);
         });
     };
 
@@ -50,6 +98,8 @@ function SelectionRectangleViewController() {
     };
 
     var areaSelectionMode = function() {
+
+        selectionModel.removePath();
 
         self.view.onDrag(function() {
                 d3.event.sourceEvent.stopPropagation(); // Block the propagation of the drag signal
@@ -118,9 +168,20 @@ function SelectionRectangleViewController() {
 
     var pathSelectionMode = function() {
 
+        selectionModel.removePath();
+
+        self.view.onClick(function() {
+            var mouseCoordinates = d3.mouse(self.view.node());
+            var coordinate = self.unproject(mouseCoordinates[0],
+                                             mouseCoordinates[1]);
+            selectionModel.addPoint([coordinate.lat, coordinate.lng]);
+        });
     };
 
     var movingMode = function() {
+
+        self.view.onClickRemove(); // No actions on click, propagate the signal
+
         self.view.onDrag(function(){},
                          function(){},
                          function(){}); // No actions on drag and drop, propagate the signal
@@ -134,6 +195,9 @@ function SelectionRectangleViewController() {
         switch(selectionModel.selectionMode) {
             case SelectionMode.SELECTION_AREA:
                 areaSelectionMode();
+                break;
+            case SelectionMode.SELECTION_PATH:
+                pathSelectionMode();
                 break;
             default:
                 movingMode();

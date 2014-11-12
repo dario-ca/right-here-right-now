@@ -16,6 +16,7 @@ Notifications.data = {
     BUS_CHANGED: "data.BUS_CHANGED",
     BUS_SELECTION_CHANGED: "data.BUS_SELECTION_CHANGED",
     WEATHER_CHANGED: "data.WEATHER_CHANGED",
+    DIRECTION_CHANGED: "data.DIRECTION_CHANGED",
 
     // For future uses
     YELP_FOOD_CHANGED: "data.YELP_FOOD_CHANGED",
@@ -38,6 +39,7 @@ Notifications.data.crime = {
 
 Notifications.selection = {
     SELECTION_CHANGED: "selection.SELECTION_CHANGED",
+    SELECTION_POINTS_CHANGED: "selection.SELECTION_POINTS_CHANGED",
     SELECTION_MODE_CHANGED: "selection.SELECTION_MODE_CHANGED"
 };
 

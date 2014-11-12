@@ -13,7 +13,8 @@ var DataModel = function(name) {
 
     ////////////////////////// PUBLIC ATTRIBUTES ///////////////////////////
 
-    self.data = null;   // Contains the data downloaded
+    self.data = null;               // Contains the data downloaded
+    self.duplicateCheck = true;     // If true check for duplicates and doesn't send notification if found
 
     /* Contains the interval (in milli-seconds) of re-fetching (0 if no automatic re-fetch) */
     self.interval = 0;
@@ -96,7 +97,13 @@ var DataModel = function(name) {
      * Called by the subclass when data is ready
      */
     self.callback = function(data) {
-        if(compare(data, self.data) === false) {
+        if(self.duplicateCheck) {
+            if (compare(data, self.data) === false) {
+                self.data = data;
+                self.dispatch(self._notification);
+            }
+        }
+        else {
             self.data = data;
             self.dispatch(self._notification);
         }

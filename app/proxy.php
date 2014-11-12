@@ -33,7 +33,8 @@ $valid_requests = array(
 	"data.cityofchicago.org",
 	"www.ctabustracker.com",
 	"api.yelp.com",
-	"api.wunderground.com"
+	"api.wunderground.com",
+	"maps.googleapis.com"
 );
 
 /* * * STOP EDITING HERE UNLESS YOU KNOW WHAT YOU ARE DOING * * */
