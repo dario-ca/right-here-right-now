@@ -34,6 +34,7 @@ var Data311Model = function(modelName,databaseMainUrl,notification,interval,json
 
     self._notification = notification;
     self.interval = interval;
+    self.potholeSelected=null;
 
     ////////////////////////// PRIVATE METHODS //////////////////////////
 
@@ -140,6 +141,14 @@ var Data311Model = function(modelName,databaseMainUrl,notification,interval,json
         sqlWhere.push(str);
         return self;
     }
+
+    self.potholeClicked = function(pothole) {
+        if(self.potholeSelected!==null && self.potholeSelected.service_request_number === pothole.service_request_number){
+            self.potholeSelected=null;
+        }else
+            self.potholeSelected = pothole;
+        self.dispatch(Notifications.data.POTHOLE_SELECTION_CHANGED);
+    };
 
     ////////////////////////// SUBSCRIBES //////////////////////////
 

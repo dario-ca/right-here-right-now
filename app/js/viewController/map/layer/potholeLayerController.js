@@ -3,8 +3,9 @@ function PotholeLayerController() {
 
     /////////////////////////// PRIVATE ATTRIBUTES ////////////////////////////
 
-    var potholeData=[];
-    var svgPotholes=[];
+    var _potholeData=[];
+    var _svgPotholes=[];
+    var _popup=null;
 
     /////////////////////////// PRIVATE METHODS ////////////////////////////
 
@@ -24,9 +25,9 @@ function PotholeLayerController() {
     var drawPotholes = function(){
         //TODO: remove potholes before update, now it removes every pothole
         self.view.html("");
-        potholeData.forEach(function(d){
+        _potholeData.forEach(function(d){
             var potholeIcon = self.createIcon(d.latitude, d.longitude,"resource/sublayer/icon/pothole.svg");
-            svgPotholes.push(potholeIcon);
+            _svgPotholes.push(potholeIcon);
             potholeIcon.view.background.style("fill",function(){
                 if(d.status==dataPotholeModel.status.POTHOLE_OPEN){
                     return Colors.pothole.POTHOLE_OPEN;
@@ -36,11 +37,25 @@ function PotholeLayerController() {
                     return Colors.pothole.POTHOLE_COMPLETED;
                 }
             });
+            potholeIcon.view.onClick(function(){
+                if(dataPotholeModel.potholeSelected!==null)
+                    _popup.dispose();
+                dataPotholeModel.potholeClicked(d);
+            });
         })
     };
 
+    var onPotholeSelected = function() {
+        if(_popup!==null)
+            _popup.dispose();
+        if(dataPotholeModel.potholeSelected!==null) {
+            _popup = popupLayerController.openPopup(dataPotholeModel.potholeSelected.latitude, dataPotholeModel.potholeSelected.longitude, MapPopupType.POPUP_SIMPLE);
+            //TODO:add title and text
+        }
+    };
+
     var onPotholeData = function(){
-        potholeData=dataPotholeModel.data;
+        _potholeData=dataPotholeModel.data;
         drawPotholes();
     };
 
@@ -54,6 +69,7 @@ function PotholeLayerController() {
     var init = function() {
         self.view.classed("pothole-layer-controller", true);
         dataPotholeModel.subscribe(Notifications.data.POTHOLE_CHANGED,onPotholeData);
+        dataPotholeModel.subscribe(Notifications.data.POTHOLE_SELECTION_CHANGED, onPotholeSelected);
     }();
 
 
