@@ -20,7 +20,23 @@ var NotificationCenter = function() {
     };
 
     self.unsubscribe = function(notification, callback) {
-        //not implemented yet
+        var index = -1;
+        for(var i=0; i<_callbacks.length; i++) {
+            var c = _callbacks[i];
+            if(c.notification == notification &&
+                c.callback == callback) {
+                index = i;
+                break;
+            }
+        }
+        if(index >= 0) {
+            _callbacks.remove(index);
+            return true;
+        }
+        else {
+            return false;
+        }
+
 
     };
 

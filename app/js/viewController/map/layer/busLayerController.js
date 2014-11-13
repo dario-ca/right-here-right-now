@@ -114,7 +114,9 @@ function BusLayerController() {
 
             // Retrieve the bus contoller that have vehicle.vid
             var busses = self.children.filter(function(b) {
-               return b.vehicle.vid == vehicle.vid;
+                if(b.vehicle == undefined)
+                    return false;
+                return b.vehicle.vid == vehicle.vid;
             });
 
             if(busses.length > 0) {

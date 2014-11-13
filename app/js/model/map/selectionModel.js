@@ -17,8 +17,8 @@ var SelectionModel = function() {
 
     var _selectionMode = SelectionMode.SELECTION_NONE;
 
-    var Dx = 0.0005;       // Width of the automatic selection around path
-    var Dy = 0.0005;
+    var Dx = 0.003;       // Width of the automatic selection around path
+    var Dy = 0.003;
 
     self.points = [];   // Contains the selected points
     self.lines = [];    // Contains the lines that connects selected points
@@ -46,7 +46,7 @@ var SelectionModel = function() {
     self.addPoint = function(point) {
         self.selectedPoints.push(point);
         notificationCenter.dispatch(Notifications.selection.SELECTION_POINTS_CHANGED);
-    }
+    };
 
     self.removeSelection = function() {
         // Represent the actual selection
@@ -60,10 +60,48 @@ var SelectionModel = function() {
     self.removePath = function() {
         self.selectedPoints = [];
         self.removeSelection();
-    }
+    };
 
     self.getSelection = function() {
         return rectangles;
+    };
+
+    /**
+     * Get only one rectangle that circunscribe the selection
+     * @returns {Array} [Rectangle]
+     */
+    self.getCircumscribedSelection = function() {
+        var minLat = Number.MAX_VALUE;
+        var maxLat = -Number.MAX_VALUE;
+        var minLon = Number.MAX_VALUE;
+        var maxLon = -Number.MAX_VALUE;
+
+        if(rectangles.length <= 0)
+            return [];
+
+        rectangles.forEach(function(rectangle) {
+            var points = rectangle.points;
+            for(var i in points) {
+                var point = points[i];
+                if(point[0] < minLat)
+                    minLat = point[0];
+                if(point[0] > maxLat)
+                    maxLat = point[0];
+                if(point[1] < minLon)
+                    minLon = point[1];
+                if(point[1] > maxLon)
+                    maxLon = point[1];
+            }
+        });
+
+        var rectangle = Rectangle();
+        rectangle.addPoint([minLat, minLon]);
+        rectangle.addPoint([minLat, maxLon]);
+        rectangle.addPoint([maxLat, maxLon]);
+        rectangle.addPoint([maxLat, minLon]);
+
+        return [rectangle];
+
     };
 
     self.isEmpty = function() {
@@ -75,9 +113,17 @@ var SelectionModel = function() {
      * @return: {bool} true if point inside, false otherwise
      **/
     self.pointInside = function(point) {
+        /*
         return _.filter(rectangles, function(rect) {
            return rect.pointInside(point);
         }).length > 0;
+        */
+        // Optimized version
+        for(var i = 0; i < rectangles.length; i++) {
+            if(rectangles[i].pointInside(point) == true)
+                return true;
+        }
+        return false;
     };
 
 
@@ -286,8 +332,10 @@ var Rectangle = function() {
     };
 
     self.pointInside = function(point) {
+
         if(points.length != 4)
             return false;
+        /*
         return geolib.isPointInside(
             {latitude: point[0], longitude: point[1]},
             [
@@ -297,6 +345,24 @@ var Rectangle = function() {
                 {latitude: points[3][0], longitude: points[3][1]},
             ]
         );
+        */
+
+        // Superfast algorithm: all points same sign.
+        //       (x        - xi          ) * (yi+1         - yi          ) - (xi+1         - xi          ) * (y        - yi          )
+        var s0 = (point[0] - points[0][0]) * (points[1][1] - points[0][1]) - (points[1][0] - points[0][0]) * (point[1] - points[0][1]);
+        var s1 = (point[0] - points[1][0]) * (points[2][1] - points[1][1]) - (points[2][0] - points[1][0]) * (point[1] - points[1][1]);
+        var s2 = (point[0] - points[2][0]) * (points[3][1] - points[2][1]) - (points[3][0] - points[2][0]) * (point[1] - points[2][1]);
+        var s3 = (point[0] - points[3][0]) * (points[0][1] - points[3][1]) - (points[0][0] - points[3][0]) * (point[1] - points[3][1]);
+
+        if(Math.abs(
+            (s0 > 0 ? 1 : -1) +
+            (s1 > 0 ? 1 : -1) +
+            (s2 > 0 ? 1 : -1) +
+            (s3 > 0 ? 1 : -1)
+            ) == 4)
+            return true;
+        else
+            return false;
     };
 
     self.__defineGetter__("points", function() {

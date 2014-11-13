@@ -12,6 +12,9 @@ function SelectionRectangleViewController() {
     var stopCoordinates = null;
     var backGroundView = null;
 
+    var Dx = 0.01; // Increment in the x coordinates for nearby rectangle
+    var Dy = 0.01; // Increment in the y coordinates for nearby rectangle
+
     var mask;
 
     var polygons = [];   // Used in order to produce mask not rectangular
@@ -187,6 +190,25 @@ function SelectionRectangleViewController() {
                          function(){}); // No actions on drag and drop, propagate the signal
     };
 
+    var nearbyMode = function() {
+        console.log("nearbyMode on");
+
+    };
+
+    self.userPositionChange = function() {
+
+        if(selectionModel.selectionMode != SelectionMode.SELECTION_NEARBY)
+            return; // Not in nearby mode
+
+        var position = dataPositionModel.data;
+
+        var p1 = [position[0]+Dx, position[1]-Dy];
+        var p2 = [position[0]-Dx, position[1]+Dy];
+
+        selectionModel.removeSelection();
+        selectionModel.addRectangleSelection(p1, p2);
+    };
+
     var deselectAreaMode = function() {
         selectionModel.selectionMode = SelectionMode.SELECTION_NONE;
     };
@@ -198,6 +220,9 @@ function SelectionRectangleViewController() {
                 break;
             case SelectionMode.SELECTION_PATH:
                 pathSelectionMode();
+                break;
+            case SelectionMode.SELECTION_NEARBY:
+                nearbyMode();
                 break;
             default:
                 movingMode();
@@ -230,6 +255,7 @@ function SelectionRectangleViewController() {
 
         notificationCenter.subscribe(Notifications.selection.SELECTION_CHANGED, updateSelection);
         notificationCenter.subscribe(Notifications.selection.SELECTION_MODE_CHANGED, updateSelectionMode);
+        dataPositionModel.subscribe(Notifications.position.POSITION_CHANGED, self.userPositionChange);
 
     }();
 

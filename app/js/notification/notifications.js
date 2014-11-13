@@ -48,4 +48,6 @@ Notifications.timeInterval = {
     TIME_INTERVAL_CHANGED: "timeInterval.TIME_INTERVAL_CHANGED"
 };
 
-
+Notifications.position = {
+    POSITION_CHANGED: "position.POSITION_CHANGED"
+};

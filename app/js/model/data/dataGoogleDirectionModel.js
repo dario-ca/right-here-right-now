@@ -4,6 +4,13 @@
  *  This class fetch the data of the directions provided by Google
  */
 
+DataGoogleDirectionMode = {
+    DRIVING: "driving",
+    WALKING: "walking",
+    BICYCLING: "bicycling",
+    TRANSIT: "transit"
+};
+
 var DataGoogleDirectionModel = function(name) {
     var self = DataModel();
 
@@ -14,6 +21,8 @@ var DataGoogleDirectionModel = function(name) {
     self.duplicateCheck = false;    // Send notification every time new data arrive
 
     ////////////////////////// PUBLIC METHODS //////////////////////////
+
+    self.mode = DataGoogleDirectionMode.DRIVING;
 
     self.fetchData = function() {
         // Discover the new coordinates
@@ -41,9 +50,9 @@ var DataGoogleDirectionModel = function(name) {
 
         var query;
         if(waypoints == "")
-            query = "&origin=" + origin + "&destination=" + destination + "&key=" + self._key;
+            query = "&origin=" + origin + "&mode=" + self.mode + "&destination=" + destination + "&key=" + self._key;
         else
-            query = "&origin=" + origin + "&destination=" + destination + "&waypoints=" + waypoints + "&key=" + self._key;
+            query = "&origin=" + origin + "&mode=" + self.mode + "&destination=" + destination + "&waypoints=" + waypoints + "&key=" + self._key;
 
         d3.json(self._proxyURL + self._googleDirectionURL + query, function(error, json) {
             if(error) {

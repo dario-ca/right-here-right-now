@@ -27,6 +27,8 @@ var DataModel = function(name) {
 
         _observers++;
 
+        console.log("Subscribed");
+
         if(_active == true && self.data != null) {
             // Data is already present, call callback
             callback();
@@ -79,9 +81,10 @@ var DataModel = function(name) {
 
     var super_unsubscribe = self.unsubscribe;
     self.unsubscribe = function(notification) {
-        super_unsubscribe(notification);
+        var unsubscribed = super_unsubscribe(notification);
 
-        _observers--;
+        if(unsubscribed)
+            _observers--;
 
         // Disable timer if no observers are present
         if(_observers <= 0 && _active == true && _timer != null) {

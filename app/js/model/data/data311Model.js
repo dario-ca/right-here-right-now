@@ -92,7 +92,8 @@ var Data311Model = function(modelName,databaseMainUrl,notification,interval,json
     //Callback invoked when the selections areas are changed
     var callBackChangeAreas = function() {
         //TODO check this implementation
-        rectangles = selectionModel.getSelection();
+        //rectangles = selectionModel.getSelection();
+        rectangles = selectionModel.getCircumscribedSelection();
         self.dataChanged();
     };
 
