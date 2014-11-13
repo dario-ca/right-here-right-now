@@ -161,6 +161,9 @@ var SelectionModel = function() {
 
         var route = routes[0]; // Take only the first route
 
+        if(route == undefined || route.legs == undefined)
+            return;
+
         // Insert all the points
         route.legs.forEach(function(leg) {
             self.points.push([leg.start_location.lat, leg.start_location.lng]);

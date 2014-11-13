@@ -68,6 +68,11 @@ var DataModel = function(name) {
             selectionModel.isEmpty() == false) {
             self.startFetching();
         }
+        else if(selectionModel.isEmpty() == true &&
+                _observers > 0) {
+            self.data = [];
+            self.dispatch(self._notification);
+        }
     };
 
 

@@ -9,10 +9,15 @@ var WeatherViewController = function() {
 
     self.onWeatherChanged = function() {
 
+        var weather =  dataWeatherModel.data;
+
+        if(weather == null || weather == undefined || weather.current_observation == undefined)
+            return;
+
         // Manage the weather that change
-        console.log("New weather: ",dataWeatherModel.data.current_observation.weather,
-                                    dataWeatherModel.data.current_observation.temp_f,
-                                    dataWeatherModel.data.current_observation.temp_c);
+        console.log("New weather: ",weather.current_observation.weather,
+                                    weather.current_observation.temp_f,
+                                    weather.current_observation.temp_c);
     };
     
     //#PRIVATE FUNCTIONS
