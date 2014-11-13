@@ -1,10 +1,14 @@
-var ButtonViewController = function(title, icon, deselectedIcon) {
+var ButtonViewController = function(title, icon, deselectedIcon, double) {
     var self;
-    if(!icon) {
-        self = ExternalSvgViewController("resource/view/button.svg");
-    } else {
+    if (icon) {
         self = ExternalSvgViewController("resource/view/button-with-icon.svg");
+    } else if (double) {
+        self = ExternalSvgViewController("resource/view/button-double.svg");
+    } else {
+        self = ExternalSvgViewController("resource/view/button.svg");
     }
+
+
 
 
 

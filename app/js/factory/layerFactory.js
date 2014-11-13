@@ -28,11 +28,11 @@ var LayerFactory = function() {
 
 
         var informationLayer = self.addLayer("INFORMATION");
-        informationLayer.addSublayer("Potholes",
+        informationLayer.addSublayer("Pothole",
                                      "resource/sublayer/icon/pothole.svg",
                                      Colors.layer.INFORMATION,
                                      [PotholeLayerController]);
-        informationLayer.addSublayer("Lights",
+        informationLayer.addSublayer("Light",
                                      "resource/sublayer/icon/light.svg",
                                      Colors.layer.INFORMATION,
                                      [LightOneLayerController]);
@@ -59,6 +59,30 @@ var LayerFactory = function() {
                                     "resource/sublayer/icon/other.svg",
                                     Colors.layer.SECURITY_4,
                                     [Category4CrimeLayerController]);
+
+
+        var pointOfInterestLayer = self.addLayer("POINT OF INTEREST");
+        pointOfInterestLayer.addSublayer("Restaurant",
+            "resource/sublayer/icon/restaurant.svg",
+            Colors.layer.POINT_OF_INTEREST,
+            []);
+        pointOfInterestLayer.addSublayer("Bar",
+            "resource/sublayer/icon/bar.svg",
+            Colors.layer.POINT_OF_INTEREST,
+            []);
+        pointOfInterestLayer.addSublayer("Important Place",
+            "resource/sublayer/icon/important-place.svg",
+            Colors.layer.POINT_OF_INTEREST,
+            []);
+
+
+        var socialLayer = self.addLayer("SOCIAL");
+        socialLayer.addSublayer("twitter",
+            "resource/sublayer/icon/twitter.svg",
+            Colors.layer.SOCIAL,
+            []);
+
+
     };
 
 

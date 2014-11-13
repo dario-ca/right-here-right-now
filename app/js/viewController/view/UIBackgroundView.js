@@ -5,11 +5,13 @@
 var UIBackgroundView = function() {
 
     var self = UIGView();
-
+    var _rect;
 
 
     /** PUBLIC FUNCTIONS**/
-
+    self.changeColor = function(color) {
+        _rect.style("fill", color);
+    };
 
 
     /** PRIVATE FUNCTIONS**/
@@ -20,7 +22,7 @@ var UIBackgroundView = function() {
 
         self.classed("ui-background-view", true);
 
-        self.append("rect")
+        _rect = self.append("rect")
             .attr("width","100%")
             .attr("height","100%");
 

@@ -30,7 +30,7 @@ var MainViewController = function() {
         self.view.height = "100%";
 
         self.layerSelectionViewController = LayerSelectionViewController();
-        self.layerSelectionViewController.view.width = "14%";
+        self.layerSelectionViewController.view.width = "28%";
         self.layerSelectionViewController.view.height = "100%";
         self.view.append(self.layerSelectionViewController);
 
@@ -54,7 +54,7 @@ var MainViewController = function() {
         self.notificationsPopupViewController = NotificationPopupsViewController();
         self.notificationsPopupViewController.view.width = "16%";
         self.notificationsPopupViewController.view.height = "100%";
-        self.notificationsPopupViewController.view.x = "15%";
+        self.notificationsPopupViewController.view.x = "29%";
         self.notificationsPopupViewController.view.y = "0.2%";
         self.view.append(self.notificationsPopupViewController);
 
