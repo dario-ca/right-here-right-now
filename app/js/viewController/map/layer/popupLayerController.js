@@ -9,6 +9,11 @@ function PopupLayerController() {
                 popup.view.width = 16;
                 popup.view.height = 4;
                 break;
+            /*case MapPopupType.POPUP_VEHICLE:
+                popup = ExternalSvgViewController("resource/view/map-popup-simple.svg");
+                popup.view.width = 20;
+                popup.view.height = 5;
+                break;*/
             default :
 
         }
@@ -41,4 +46,5 @@ function PopupLayerController() {
 
 var MapPopupType = {
     POPUP_SIMPLE: "POPUP_SIMPLE"
+    //POPUP_VEHICLE: "POPUP_VEHICLE"
 };
