@@ -50,7 +50,8 @@ function PotholeLayerController() {
             _popup.dispose();
         if(dataPotholeModel.potholeSelected!==null) {
             _popup = popupLayerController.openPopup(dataPotholeModel.potholeSelected.latitude, dataPotholeModel.potholeSelected.longitude, MapPopupType.POPUP_SIMPLE);
-            //TODO:add title and text
+            _popup.view.title.text(dataPotholeModel.potholeSelected.type_of_service_request+": "+dataPotholeModel.potholeSelected.status);
+            _popup.view.subtitle.text(dataPotholeModel.potholeSelected.street_address);
         }
     };
 

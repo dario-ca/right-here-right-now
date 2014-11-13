@@ -35,6 +35,7 @@ var Data311Model = function(modelName,databaseMainUrl,notification,interval,json
     self._notification = notification;
     self.interval = interval;
     self.potholeSelected=null;
+    self.vehicleSelected=null;
 
     ////////////////////////// PRIVATE METHODS //////////////////////////
 
@@ -149,6 +150,14 @@ var Data311Model = function(modelName,databaseMainUrl,notification,interval,json
         }else
             self.potholeSelected = pothole;
         self.dispatch(Notifications.data.POTHOLE_SELECTION_CHANGED);
+    };
+
+    self.vehicleClicked = function(vehicle) {
+        if(self.vehicleSelected!==null && self.vehicleSelected.service_request_number === vehicle.service_request_number){
+            self.vehicleSelected=null;
+        }else
+            self.vehicleSelected = vehicle;
+        self.dispatch(Notifications.data.ABANDONED_VEHICLES_SELECTION_CHANGED);
     };
 
     ////////////////////////// SUBSCRIBES //////////////////////////
