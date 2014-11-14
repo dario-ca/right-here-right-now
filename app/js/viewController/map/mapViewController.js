@@ -222,9 +222,9 @@ function MapViewController() {
         popup.view.subtitle.text("popup subtitle");
 
 
-        var c = enhanceLayerController.addWarning(41.876320, -87.672841, 10);
+        //TODO REMOVE
+        enhanceLayerController.addWarning(41.876320, -87.672841, 10);
         enhanceLayerController.addDanger(41.874320, -87.682841, 5);
-        c.remove();
 
     } ();
 
