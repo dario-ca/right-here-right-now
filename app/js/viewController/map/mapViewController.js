@@ -1,4 +1,5 @@
 var popupLayerController = null;
+var enhanceLayerController = null;
 /**
  * @class: MapViewController
  */
@@ -204,8 +205,12 @@ function MapViewController() {
         //layers
         notificationCenter.subscribe(Notifications.layer.SUBLAYER_SELECTION_CHANGED, self.onSublayerSelectionChanged);
 
+
         popupLayerController = PopupLayerController();
         self.addLayer(popupLayerController);
+
+        enhanceLayerController = EnhanceIconLayerController();
+        self.addLayer(enhanceLayerController);
 
 
 
@@ -215,6 +220,11 @@ function MapViewController() {
         var popup = popupLayerController.openPopup(41.876320, -87.672841, MapPopupType.POPUP_SIMPLE);
         popup.view.title.text("POPUP TITLE");
         popup.view.subtitle.text("popup subtitle");
+
+
+        var c = enhanceLayerController.addWarning(41.876320, -87.672841, 10);
+        enhanceLayerController.addDanger(41.874320, -87.682841, 5);
+        c.remove();
 
     } ();
 

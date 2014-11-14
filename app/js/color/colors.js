@@ -44,6 +44,11 @@ Colors.layer = {
     POINT_OF_INTEREST: "#000"
 };
 
+Colors.enhanceIcon = {
+    DANGER: "#BA4426",
+    WARNING: "#FEC20F"
+};
+
 Colors.selection = {
     RECTANGLE: "#293d9b"
 };
