@@ -60,7 +60,7 @@ var LayerSelectionViewController = function() {
      */
     var addLayers = function() {
 
-        var viewbox = {width: 200, height: 1};
+        var viewbox = {width: 170, height: 1};
 
         _layersSvg = SvgViewController();
         _layersSvg.view.width = "100%";

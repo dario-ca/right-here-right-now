@@ -7,7 +7,9 @@ var MapToolsViewController = function() {
 
     var _nearbyButton,
         _areaButton,
-        _pathButton;
+        _pathButton,
+        _dangerButton,
+        _warningButton;
 
     //#PUBLIC FUNCTIONS
 
@@ -36,19 +38,35 @@ var MapToolsViewController = function() {
         }
     };
 
+
+    self.onEnhanceIconChanged = function() {
+        _dangerButton.selected = enhanceIconModel.danger;
+        _warningButton.selected = enhanceIconModel.warning;
+
+    };
+
+
     self.super_updateView = self.updateView;
     self.updateView = function() {
         self.super_updateView();
 
+        var buttonWidth = 19.6;
+        var margin = 2;
 
-        _nearbyButton.view.width = "33.3%";
+        _nearbyButton.view.width = buttonWidth + "%";
         _nearbyButton.view.x = "0%";
 
-        _areaButton.view.width = "33.3%";
-        _areaButton.view.x = "33.3%";
+        _areaButton.view.width = buttonWidth + "%";
+        _areaButton.view.x = buttonWidth + "%";
 
-        _pathButton.view.width = "33.3%";
-        _pathButton.view.x = "66.6%";
+        _pathButton.view.width = buttonWidth + "%";
+        _pathButton.view.x = buttonWidth * 2 +  "%";
+
+        _dangerButton.view.width = buttonWidth + "%";
+        _dangerButton.view.x = buttonWidth * 3 + margin +  "%";
+
+        _warningButton.view.width = buttonWidth + "%";
+        _warningButton.view.x =  buttonWidth * 4 + margin + "%";
 
     };
     
@@ -70,6 +88,14 @@ var MapToolsViewController = function() {
             else
                 selectionModel.selectionMode = SelectionMode.SELECTION_PATH;
         });
+
+        _warningButton.onClick(function(){
+            enhanceIconModel.warning = !enhanceIconModel.warning;
+        });
+
+        _dangerButton.onClick(function(){
+            enhanceIconModel.danger = !enhanceIconModel.danger;
+        });
     };
 
 
@@ -86,14 +112,28 @@ var MapToolsViewController = function() {
                                             "resource/mapTools/icon/path.svg",
                                             "resource/mapTools/icon/path-deselected.svg");
 
+        _dangerButton = ButtonViewController("DANGER",
+            "resource/mapTools/icon/danger.svg",
+            "resource/mapTools/icon/warning-danger-deselected.svg");
+        _dangerButton.selected = enhanceIconModel.danger;
+
+        _warningButton = ButtonViewController("WARNING",
+            "resource/mapTools/icon/warning.svg",
+            "resource/mapTools/icon/warning-danger-deselected.svg");
+        _warningButton.selected = enhanceIconModel.warning;
+
         self.view.append(_nearbyButton);
         self.view.append(_areaButton);
         self.view.append(_pathButton);
+
+        self.view.append(_dangerButton);
+        self.view.append(_warningButton);
 
         addBehaviour();
         self.onSelectionModeChanged();
 
         notificationCenter.subscribe(Notifications.selection.SELECTION_MODE_CHANGED, self.onSelectionModeChanged);
+        notificationCenter.subscribe(Notifications.enhanceIcon.SELECTION_CHANGED, self.onEnhanceIconChanged);
     }();
 
     return self;

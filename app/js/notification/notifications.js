@@ -45,6 +45,10 @@ Notifications.selection = {
     SELECTION_MODE_CHANGED: "selection.SELECTION_MODE_CHANGED"
 };
 
+Notifications.enhanceIcon = {
+    SELECTION_CHANGED: "enhanceIcon.SELECTION_CHANGED"
+};
+
 Notifications.timeInterval = {
     TIME_INTERVAL_CHANGED: "timeInterval.TIME_INTERVAL_CHANGED"
 };

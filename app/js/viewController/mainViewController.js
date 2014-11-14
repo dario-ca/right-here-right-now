@@ -30,7 +30,7 @@ var MainViewController = function() {
         self.view.height = "100%";
 
         self.layerSelectionViewController = LayerSelectionViewController();
-        self.layerSelectionViewController.view.width = "28%";
+        self.layerSelectionViewController.view.width = "22%";
         self.layerSelectionViewController.view.height = "100%";
         self.view.append(self.layerSelectionViewController);
 
@@ -38,23 +38,23 @@ var MainViewController = function() {
 
         //translate to the bottom
         var mapToolsTranslateCoordinateSystemGroup = UISvgView()
-                                                    .setViewBox(0,0,500,10.3)
+                                                    .setViewBox(0,0,500,10.80)
                                                     .setFrame(0,0,"100%","100%")
                                                     .setAspectRatioOptions("xMinYMax meet");
 
         self.view.append(mapToolsTranslateCoordinateSystemGroup);
 
         self.mapToolsViewController = MapToolsViewController();
-        self.mapToolsViewController.view.width = "20%";
+        self.mapToolsViewController.view.width = "36%";
         self.mapToolsViewController.view.height = "100%";
-        self.mapToolsViewController.view.x = "40%";
+        self.mapToolsViewController.view.x = "38%";
         mapToolsTranslateCoordinateSystemGroup.append(self.mapToolsViewController);
 
         //NOTIFICATIONS POPUPS
         self.notificationsPopupViewController = NotificationPopupsViewController();
         self.notificationsPopupViewController.view.width = "16%";
         self.notificationsPopupViewController.view.height = "100%";
-        self.notificationsPopupViewController.view.x = "29%";
+        self.notificationsPopupViewController.view.x = "22.2%";
         self.notificationsPopupViewController.view.y = "0.2%";
         self.view.append(self.notificationsPopupViewController);
 
