@@ -191,7 +191,6 @@ function SelectionRectangleViewController() {
     };
 
     var nearbyMode = function() {
-        console.log("nearbyMode on");
         dataPositionModel.unsubscribe(Notifications.position.POSITION_CHANGED);
         dataPositionModel.subscribe(Notifications.position.POSITION_CHANGED, self.userPositionChange);
 

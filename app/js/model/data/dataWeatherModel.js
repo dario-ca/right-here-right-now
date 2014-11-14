@@ -10,7 +10,7 @@ var DataWeatherModel = function(name) {
     self._key = "6bf3d5f7145551ec";
     self._weather = "http://api.wunderground.com/api/"+self._key+"/conditions/q/CA/Chicago.json";
     self._notification = Notifications.data.WEATHER_CHANGED;
-    self.interval = 600000;
+    self.interval = 1200000;    // Every 20 minutes
 
     ////////////////////////// PUBLIC METHODS //////////////////////////
 
