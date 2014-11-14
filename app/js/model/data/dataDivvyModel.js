@@ -11,6 +11,9 @@ var DataDivvyModel = function(name) {
     self._notification = Notifications.data.DIVVY_BIKES_CHANGED;
     self.interval = 30000;
 
+    self.stationSelected=null;
+
+
     ////////////////////////// PUBLIC METHODS //////////////////////////
 
     self.fetchData = function() {
@@ -36,6 +39,14 @@ var DataDivvyModel = function(name) {
         });
 
         return newData;
+    };
+
+    self.stationClicked = function(divvyStation) {
+        if(self.stationSelected!==null && self.stationSelected.id === divvyStation.id){
+            self.stationSelected=null;
+        }else
+            self.stationSelected = divvyStation;
+        self.dispatch(Notifications.data.DIVVY_BIKES_SELECTION_CHANGED);
     };
 
     var init = function() {

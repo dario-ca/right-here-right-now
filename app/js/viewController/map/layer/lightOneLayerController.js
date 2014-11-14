@@ -3,17 +3,16 @@ function LightOneLayerController() {
 
     /////////////////////////// PRIVATE ATTRIBUTES ////////////////////////////
 
-    var lightOneData=[];
-    var svgLightsOne=[];
+    var _lightOneData=[];
+    var _svgLightsOne=[];
 
     /////////////////////////// PRIVATE METHODS ////////////////////////////
 
     var drawLightsOne = function(){
-        //TODO: remove lights before update, now it removes every light
-        self.view.html("");
-        lightOneData.forEach(function(d){
+        self.hideLights();
+        _lightOneData.forEach(function(d){
             var lightIcon = self.createIcon(d.latitude, d.longitude,"resource/sublayer/icon/light.svg");
-            svgLightsOne.push(lightIcon);
+            _svgLightsOne.push(lightIcon);
             lightIcon.view.background.style("fill",function(){
                 if(d.status==dataLight1Model.status.LIGHT_ONE_COMPLETED){
                     return Colors.lightOne.LIGHT_ONE_COMPLETED;
@@ -29,8 +28,24 @@ function LightOneLayerController() {
     };
 
     var onLightOneData = function(){
-        lightOneData=dataLight1Model.data;
+        _lightOneData=dataLight1Model.data;
         drawLightsOne();
+    };
+
+    self.hideLights = function(){
+        _svgLightsOne.forEach(function(d){
+            d.dispose();
+        });
+        _svgLightsOne=[];
+    };
+
+    //TODO:check implementation of unsubscribe
+    self.super_dispose = self.dispose;
+    self.dispose = function() {
+        self.hideLights();
+        self.super_dispose();
+        dataLight1Model.unsubscribe(Notifications.data.LIGHT_OUT_SINGLE_CHANGED);
+        //dataLight1Model.unsubscribe(Notifications.data.LIGHT_OUT_SINGLE_SELECTION_CHANGED);
     };
 
     var init = function() {
