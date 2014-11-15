@@ -20,9 +20,10 @@ var MapLayerController = function() {
 
     //////////////////////////// PUBLIC METHODS ////////////////////////////
 
-    self.super_dispose = self.dispose;
+    var super_dispose = self.dispose;
     self.dispose = function() {
-        self.super_dispose();
+        console.log("dispose1");
+        super_dispose();
         self.clear();
 
     };
