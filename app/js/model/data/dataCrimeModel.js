@@ -137,7 +137,7 @@ var DataCrimeModel = function(modelName,colorCode,databaseMainUrl,notification,i
         for(var i=1;i<category.length;i++){
             string = string + " OR primary_type='"+category[i]+"'";
         }
-        string=string+")"
+        string=string+")";
         return string;
     }
 
@@ -151,7 +151,7 @@ var DataCrimeModel = function(modelName,colorCode,databaseMainUrl,notification,i
             self.crimeSelected = crime;
             DataCrimeModel.popupCategory=category;
         }*/
-        self.dispatch(Notifications.data.CRIME_SELECTION_CHANGED);
+        self.dispatch(Notifications.data.crime.CRIME_SELECTION_CHANGED);
     };
 
     ////////////////////////// SUBSCRIBES //////////////////////////
