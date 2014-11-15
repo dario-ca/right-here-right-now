@@ -40,10 +40,15 @@ function CrimeLayerController(name,notification,icon) {
             var crimeIcon = self.createIcon(d.latitude, d.longitude,_iconPath);
             _svgCrimes.push(crimeIcon);
             crimeIcon.view.background.style("fill", d.color);
-            crimeIcon.view.onClick(function(){
-                if(currentCrimeCategoryModel.crimeSelected!==null)
+            crimeIcon.view.onClick(function() {
+                //if I am clicking on the same popup, remove it
+                if (currentCrimeCategoryModel.crimeSelected !== null && currentCrimeCategoryModel.crimeSelected.id === d.id && _popup !== null){
                     _popup.dispose();
-                currentCrimeCategoryModel.crimeClicked(d);
+                    _popup=null;
+                    currentCrimeCategoryModel.crimeClicked(null,null);
+                }else{
+                    currentCrimeCategoryModel.crimeClicked(d,_name);
+                }
             });
         })
     };
@@ -64,15 +69,37 @@ function CrimeLayerController(name,notification,icon) {
         drawCrimes();
     };
 
-    //TODO:big problem
+    //TODO:big problem, never entered first condition, problem with notifications I think
     var onCrimeSelected = function() {
-        if(_popup!==null)
+        //if they are not clicking on me, I remove my popup if any
+        if (DataCrimeModel.popupCategory !== _name && _popup !== null) {
+            console.log("Iam IN");
             _popup.dispose();
-        if(currentCrimeCategoryModel.crimeSelected!==null) {
+            currentCrimeCategoryModel.crimeSelected=null;
+            _popup=null;
+        //if they are clicking on me, I create the popup removing the old one if any
+        }else if(DataCrimeModel.popupCategory===_name){
+            if(_popup!==null){
+                _popup.dispose();
+            }
             _popup = popupLayerController.openPopup(currentCrimeCategoryModel.crimeSelected.latitude, currentCrimeCategoryModel.crimeSelected.longitude, MapPopupType.POPUP_SIMPLE);
             _popup.view.title.text(_name);
             _popup.view.subtitle.text(currentCrimeCategoryModel.crimeSelected.id);
         }
+
+
+
+
+        /*if(_popup!==null){
+            console.log(_popup);
+            _popup.dispose();
+        }
+        if(currentCrimeCategoryModel.crimeSelected!==null && DataCrimeModel.popupCategory===_name) {
+            console.log(DataCrimeModel.popupCategory);
+            _popup = popupLayerController.openPopup(currentCrimeCategoryModel.crimeSelected.latitude, currentCrimeCategoryModel.crimeSelected.longitude, MapPopupType.POPUP_SIMPLE);
+            _popup.view.title.text(_name);
+            _popup.view.subtitle.text(currentCrimeCategoryModel.crimeSelected.id);
+        }*/
     };
 
     self.hideCrimes = function(){
