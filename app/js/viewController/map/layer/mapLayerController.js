@@ -10,12 +10,35 @@ var MapLayerController = function() {
     self.fixedSizeControllers = [];
     self.defaultIconSize=1;
 
+    self.warningViews = [];
+    self.dangerViews = [];
+
     ////////////////////////// PRIVATE ATTRIBUTES //////////////////////////
 
     // Contains all the layers of the VC
     var _layerGroup;
 
     //////////////////////////// PUBLIC METHODS ////////////////////////////
+
+    self.super_dispose = self.dispose;
+    self.dispose = function() {
+        self.super_dispose();
+        self.clear();
+
+    };
+
+
+    self.clear = function() {
+        self.warningViews.forEach(function(v) {
+            v.remove();
+        });
+
+        self.dangerViews.forEach(function(v) {
+            v.remove();
+        });
+    };
+
+
     /**
      * Getter for the layer group attribute
      *
@@ -58,6 +81,20 @@ var MapLayerController = function() {
          viewController.fixHeight = viewController.view.height;
 
      };
+
+    self.addWarning = function(lat, long, radius) {
+        var circle = enhanceLayerController.addWarning(lat, long, radius);
+        self.warningViews.push(circle);
+        return circle;
+    };
+
+    self.addDanger = function(lat, long, radius) {
+        var circle = enhanceLayerController.addDanger(lat, long, radius);
+        self.dangerViews.push(circle);
+        return circle;
+    };
+
+
 
     /**
      * create the icon of the data to visualize

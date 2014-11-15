@@ -49,6 +49,7 @@ function DivvyLayerController() {
 
     var init = function() {
         dataDivvyModel.subscribe(Notifications.data.DIVVY_BIKES_CHANGED,onDivvyData);
+
     }();
 
     return self;

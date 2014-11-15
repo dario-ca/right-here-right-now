@@ -223,8 +223,7 @@ function MapViewController() {
 
 
         //TODO REMOVE
-        enhanceLayerController.addWarning(41.876320, -87.672841, 10);
-        enhanceLayerController.addDanger(41.874320, -87.682841, 5);
+
 
     } ();
 
