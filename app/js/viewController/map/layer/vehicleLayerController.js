@@ -10,8 +10,7 @@ function VehicleLayerController() {
     /////////////////////////// PRIVATE METHODS ////////////////////////////
 
     var drawVehicles = function(){
-        //TODO: remove vehicles before update, now it removes every vehicle
-        self.view.html("");
+        self.hideVehicles();
         _vehicleData.forEach(function(d){
             var vehicleIcon = self.createIcon(d.latitude, d.longitude,"resource/sublayer/icon/abandoned-vehicle.svg");
             _svgVehicles.push(vehicleIcon);
@@ -27,8 +26,6 @@ function VehicleLayerController() {
                 }
             });
             vehicleIcon.view.onClick(function(){
-                console.log("DARIO");
-                console.log(dataVehiclesModel.vehicleSelected);
                 if(dataVehiclesModel.vehicleSelected!==null)
                     _popup.dispose();
                 dataVehiclesModel.vehicleClicked(d);
@@ -49,6 +46,22 @@ function VehicleLayerController() {
     var onVehicleData = function(){
         _vehicleData=dataVehiclesModel.data;
         drawVehicles();
+    };
+
+    self.hideVehicles = function(){
+        _svgVehicles.forEach(function(d){
+            d.dispose();
+        });
+        _svgVehicles=[];
+    };
+
+    //TODO:check implementation of unsubscribe
+    self.super_dispose = self.dispose;
+    self.dispose = function() {
+        self.hideVehicles();
+        self.super_dispose();
+        dataVehiclesModel.unsubscribe(Notifications.data.ABANDONED_VEHICLES_CHANGED);
+        dataVehiclesModel.unsubscribe(Notifications.data.ABANDONED_VEHICLES_SELECTION_CHANGED);
     };
 
     var init = function() {

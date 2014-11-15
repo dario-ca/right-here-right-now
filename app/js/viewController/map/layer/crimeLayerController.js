@@ -3,51 +3,131 @@ function CrimeLayerController(name,notification,icon) {
 
     /////////////////////////// PRIVATE ATTRIBUTES ////////////////////////////
 
-    var crimeData=[];
-    var svgCrimes=[];
+    var _crimeData=[];
+    var _svgCrimes=[];
     var _notification=notification;
     var _iconPath=icon;
 
     //name of the controller, needed in the switches
     var _name=name;
 
+    var currentCrimeCategoryModel=null;
+    var _popup=null;
+
+
     /////////////////////////// PRIVATE METHODS ////////////////////////////
 
+    var giveCurrentCrimeCategoryModel = function(){
+        switch(_name) {
+            case "category1":
+                currentCrimeCategoryModel = dataCrimeCategory1Model;
+                break;
+            case "category2":
+                currentCrimeCategoryModel = dataCrimeCategory2Model;
+                break;
+            case "category3":
+                currentCrimeCategoryModel = dataCrimeCategory3Model;
+                break;
+            case "category4":
+                currentCrimeCategoryModel = dataCrimeCategory4Model;
+                break;
+        }
+    };
+
     var drawCrimes = function(){
-        //TODO: remove crimes before update, now it removes every crime
-        self.view.html("");
-        crimeData.forEach(function(d){
+        self.hideCrimes();
+        _crimeData.forEach(function(d){
             var crimeIcon = self.createIcon(d.latitude, d.longitude,_iconPath);
-            svgCrimes.push(crimeIcon);
+            _svgCrimes.push(crimeIcon);
             crimeIcon.view.background.style("fill", d.color);
+            crimeIcon.view.onClick(function(){
+                if(currentCrimeCategoryModel.crimeSelected!==null)
+                    _popup.dispose();
+                currentCrimeCategoryModel.crimeClicked(d);
+            });
         })
     };
 
+
     var onCrimeData = function(){
+        _crimeData=currentCrimeCategoryModel.data;
+        /*switch(_name){
+            case "category1":       _crimeData=dataCrimeCategory1Model.data;
+                break;
+            case "category2":       _crimeData=dataCrimeCategory2Model.data;
+                break;
+            case "category3":       _crimeData=dataCrimeCategory3Model.data;
+                break;
+            case "category4":       _crimeData=dataCrimeCategory4Model.data;
+                break;
+        }*/
+        drawCrimes();
+    };
+
+    //TODO:big problem
+    var onCrimeSelected = function() {
+        if(_popup!==null)
+            _popup.dispose();
+        if(currentCrimeCategoryModel.crimeSelected!==null) {
+            _popup = popupLayerController.openPopup(currentCrimeCategoryModel.crimeSelected.latitude, currentCrimeCategoryModel.crimeSelected.longitude, MapPopupType.POPUP_SIMPLE);
+            _popup.view.title.text(_name);
+            _popup.view.subtitle.text(currentCrimeCategoryModel.crimeSelected.id);
+        }
+    };
+
+    self.hideCrimes = function(){
+        _svgCrimes.forEach(function(d){
+            d.dispose();
+        });
+        _svgCrimes=[];
+    };
+
+    //TODO:check implementation of unsubscribe
+    self.super_dispose = self.dispose;
+    self.dispose = function() {
+        self.hideCrimes();
+        self.super_dispose();
         switch(_name){
-            case "category1":       crimeData=dataCrimeCategory1Model.data;
+            case "category1":
+                        dataCrimeCategory1Model.unsubscribe(Notifications.data.CATEGORY_1);
+                        dataCrimeCategory1Model.unsubscribe(Notifications.data.CRIME_SELECTION_CHANGED);
                 break;
-            case "category2":       crimeData=dataCrimeCategory2Model.data;
+            case "category2":
+                        dataCrimeCategory2Model.unsubscribe(Notifications.data.CATEGORY_2);
+                        dataCrimeCategory2Model.unsubscribe(Notifications.data.CRIME_SELECTION_CHANGED);
                 break;
-            case "category3":       crimeData=dataCrimeCategory3Model.data;
+            case "category3":
+                        dataCrimeCategory3Model.unsubscribe(Notifications.data.CATEGORY_3);
+                        dataCrimeCategory3Model.unsubscribe(Notifications.data.CRIME_SELECTION_CHANGED);
                 break;
-            case "category4":       crimeData=dataCrimeCategory4Model.data;
+            case "category4":
+                        dataCrimeCategory4Model.unsubscribe(Notifications.data.CATEGORY_4);
+                        dataCrimeCategory4Model.unsubscribe(Notifications.data.CRIME_SELECTION_CHANGED);
                 break;
         }
-        drawCrimes();
     };
 
     var init = function() {
         self.view.classed("crime-layer-controller", true);
 
+        giveCurrentCrimeCategoryModel();
+
         switch(_name){
-            case "category1":       dataCrimeCategory1Model.subscribe(_notification,onCrimeData);
+            case "category1":
+                        dataCrimeCategory1Model.subscribe(_notification,onCrimeData);
+                        dataCrimeCategory1Model.subscribe(Notifications.data.CRIME_SELECTION_CHANGED,onCrimeSelected);
                 break;
-            case "category2":       dataCrimeCategory2Model.subscribe(_notification,onCrimeData);
+            case "category2":
+                        dataCrimeCategory2Model.subscribe(_notification,onCrimeData);
+                        dataCrimeCategory2Model.subscribe(Notifications.data.CRIME_SELECTION_CHANGED,onCrimeSelected);
                 break;
-            case "category3":       dataCrimeCategory3Model.subscribe(_notification,onCrimeData);
+            case "category3":
+                        dataCrimeCategory3Model.subscribe(_notification,onCrimeData);
+                        dataCrimeCategory3Model.subscribe(Notifications.data.CRIME_SELECTION_CHANGED,onCrimeSelected);
                 break;
-            case "category4":       dataCrimeCategory4Model.subscribe(_notification,onCrimeData);
+            case "category4":
+                        dataCrimeCategory4Model.subscribe(_notification,onCrimeData);
+                        dataCrimeCategory4Model.subscribe(Notifications.data.CRIME_SELECTION_CHANGED,onCrimeSelected);
                 break;
         }
     }();
