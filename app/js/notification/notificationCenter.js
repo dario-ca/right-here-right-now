@@ -30,7 +30,7 @@ var NotificationCenter = function() {
             }
         }
         if(index >= 0) {
-            _callbacks.remove(index);
+            _callbacks.splice(index,1);
             return true;
         }
         else {

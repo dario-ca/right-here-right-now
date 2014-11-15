@@ -30,12 +30,12 @@ var DataModel = function(name) {
 
         _observers++;
 
+        self.dataRequested();
+
         if(_active == true && self.data != null) {
             // Data is already present, call callback
             callback();
         }
-
-        self.dataRequested();
     };
 
     /**
@@ -86,8 +86,8 @@ var DataModel = function(name) {
     };
 
     var super_unsubscribe = self.unsubscribe;
-    self.unsubscribe = function(notification) {
-        var unsubscribed = super_unsubscribe(notification);
+    self.unsubscribe = function(notification, callback) {
+        var unsubscribed = super_unsubscribe(notification, callback);
 
         if(unsubscribed)
             _observers--;

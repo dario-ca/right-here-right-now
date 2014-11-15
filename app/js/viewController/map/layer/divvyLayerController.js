@@ -78,12 +78,12 @@ function DivvyLayerController() {
     self.dispose = function() {
         self.hideStations();
         self.super_dispose();
-        dataDivvyModel.unsubscribe(Notifications.data.DIVVY_BIKES_CHANGED);
-        dataDivvyModel.unsubscribe(Notifications.data.DIVVY_BIKES_SELECTION_CHANGED);
+        dataDivvyModel.unsubscribe(Notifications.data.DIVVY_BIKES_CHANGED, onDivvyData);
+        dataDivvyModel.unsubscribe(Notifications.data.DIVVY_BIKES_SELECTION_CHANGED, onStationSelected);
     };
 
     var init = function() {
-        dataDivvyModel.subscribe(Notifications.data.DIVVY_BIKES_CHANGED,onDivvyData);
+        dataDivvyModel.subscribe(Notifications.data.DIVVY_BIKES_CHANGED, onDivvyData);
         dataDivvyModel.subscribe(Notifications.data.DIVVY_BIKES_SELECTION_CHANGED, onStationSelected);
     }();
 

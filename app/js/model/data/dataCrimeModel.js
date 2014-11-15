@@ -151,7 +151,7 @@ var DataCrimeModel = function(modelName,colorCode,databaseMainUrl,notification,i
             self.crimeSelected = crime;
             DataCrimeModel.popupCategory=category;
         }*/
-        self.dispatch(Notifications.data.crime.CRIME_SELECTION_CHANGED);
+        notificationCenter.dispatch(Notifications.data.crime.CRIME_SELECTION_CHANGED);
     };
 
     ////////////////////////// SUBSCRIBES //////////////////////////

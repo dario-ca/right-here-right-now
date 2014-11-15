@@ -20,12 +20,14 @@ var MapLayerController = function() {
 
     //////////////////////////// PUBLIC METHODS ////////////////////////////
 
+    /*
     self.super_dispose = self.dispose;
     self.dispose = function() {
         self.super_dispose();
         self.clear();
 
     };
+    */
 
 
     self.clear = function() {

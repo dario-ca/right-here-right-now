@@ -71,13 +71,13 @@ function PotholeLayerController() {
     self.dispose = function() {
         self.hidePotholes();
         self.super_dispose();
-        dataPotholeModel.unsubscribe(Notifications.data.POTHOLE_CHANGED);
-        dataPotholeModel.unsubscribe(Notifications.data.POTHOLE_SELECTION_CHANGED);
+        dataPotholeModel.unsubscribe(Notifications.data.POTHOLE_CHANGED, onPotholeData);
+        dataPotholeModel.unsubscribe(Notifications.data.POTHOLE_SELECTION_CHANGED, onPotholeSelected);
     };
 
     var init = function() {
         self.view.classed("pothole-layer-controller", true);
-        dataPotholeModel.subscribe(Notifications.data.POTHOLE_CHANGED,onPotholeData);
+        dataPotholeModel.subscribe(Notifications.data.POTHOLE_CHANGED, onPotholeData);
         dataPotholeModel.subscribe(Notifications.data.POTHOLE_SELECTION_CHANGED, onPotholeSelected);
     }();
 
