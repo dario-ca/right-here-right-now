@@ -27,12 +27,15 @@ Notifications.data = {
     YELP_FOOD_CHANGED: "data.YELP_FOOD_CHANGED",
     TWITTER_CHANGED: "data.TWITTER_CHANGED",
     FOOD_INSPECTION_CHANGED: "data.FOOD_INSPECTION_CHANGED",
-    TRAFFIC_CONGESTION_CHANGED: "data.TRAFFIC_CONGESTION_CHANGED"
+    TRAFFIC_CONGESTION_CHANGED: "data.TRAFFIC_CONGESTION_CHANGED",
+
+    // Notification when some data change
+    NOTIFICATION_AVAILABLE: "data.NOTIFICATION_AVAILABLE"
 };
 
 Notifications.data.crime = {
     /// CRIME notification
-    CRIME_CHANGED: "data.crime.CRIME_CHANGED", //Crime relative current selection updated
+    //CRIME_CHANGED: "data.crime.CRIME_CHANGED", //Crime relative current selection updated
     CRIME_SELECTION_CHANGED: "data.crime.CRIME_SELECTION_CHANGED",
     CRIME_CATEGORY1_CHANGED: "data.crime.CRIME_CATEGORY1_CHANGED",
     //CRIME_CATEGORY1_SELECTION_CHANGED: "data.crime.CRIME_CATEGORY1_SELECTION_CHANGED",

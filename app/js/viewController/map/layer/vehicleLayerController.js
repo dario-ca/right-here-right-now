@@ -60,12 +60,12 @@ function VehicleLayerController() {
     self.dispose = function() {
         self.hideVehicles();
         self.super_dispose();
-        dataVehiclesModel.unsubscribe(Notifications.data.ABANDONED_VEHICLES_CHANGED);
-        dataVehiclesModel.unsubscribe(Notifications.data.ABANDONED_VEHICLES_SELECTION_CHANGED);
+        dataVehiclesModel.unsubscribe(Notifications.data.ABANDONED_VEHICLES_CHANGED, onVehicleData);
+        dataVehiclesModel.unsubscribe(Notifications.data.ABANDONED_VEHICLES_SELECTION_CHANGED, onVehicleSelected);
     };
 
     var init = function() {
-        dataVehiclesModel.subscribe(Notifications.data.ABANDONED_VEHICLES_CHANGED,onVehicleData);
+        dataVehiclesModel.subscribe(Notifications.data.ABANDONED_VEHICLES_CHANGED, onVehicleData);
         dataVehiclesModel.subscribe(Notifications.data.ABANDONED_VEHICLES_SELECTION_CHANGED, onVehicleSelected);
     }();
 

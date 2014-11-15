@@ -13,9 +13,7 @@ var DataPositionModel = function() {
     ////////////////////////////////// PRIVATE METHODS //////////////////////////////////
 
     self.fetchData = function() {
-        console.log("Try to get geolocation");
         navigator.geolocation.getCurrentPosition(function(position) {
-            console.log("Got geolocation");
             var position = [position.coords.latitude, position.coords.longitude];
             self.callback(position);
         });

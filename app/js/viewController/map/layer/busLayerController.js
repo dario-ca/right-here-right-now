@@ -174,6 +174,14 @@ function BusLayerController() {
             self.hideBusRoutes();
     };
 
+    self.super_dispose = self.dispose;
+    self.dispose = function() {
+        self.hideBusRoutes();
+        self.super_dispose();
+        dataBusModel.unsubscribe(Notifications.data.BUS_CHANGED, onBusData);
+        dataBusModel.unsubscribe(Notifications.data.BUS_SELECTION_CHANGED, onBusSelected);
+    };
+
     var init = function() {
 
         dataBusModel.subscribe(Notifications.data.BUS_CHANGED, onBusData);

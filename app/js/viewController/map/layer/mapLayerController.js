@@ -22,7 +22,6 @@ var MapLayerController = function() {
 
     var super_dispose = self.dispose;
     self.dispose = function() {
-        console.log("dispose1");
         super_dispose();
         self.clear();
 

@@ -44,12 +44,12 @@ function LightOneLayerController() {
     self.dispose = function() {
         self.hideLights();
         self.super_dispose();
-        dataLight1Model.unsubscribe(Notifications.data.LIGHT_OUT_SINGLE_CHANGED);
+        dataLight1Model.unsubscribe(Notifications.data.LIGHT_OUT_SINGLE_CHANGED, onLightOneData);
         //dataLight1Model.unsubscribe(Notifications.data.LIGHT_OUT_SINGLE_SELECTION_CHANGED);
     };
 
     var init = function() {
-        dataLight1Model.subscribe(Notifications.data.LIGHT_OUT_SINGLE_CHANGED,onLightOneData);
+        dataLight1Model.subscribe(Notifications.data.LIGHT_OUT_SINGLE_CHANGED, onLightOneData);
     }();
 
     return self;
