@@ -13,6 +13,7 @@ var ExternalSvgModel = function() {
                             "resource/sublayer/icon/bus-no-number.svg",
                             "resource/view/button.svg",
                             "resource/view/button-with-icon.svg",
+                            "resource/view/button-double.svg",
                             "resource/view/checkbox.svg",
                             "resource/view/layer-title.svg",
                             "resource/sublayer/icon/pothole.svg",
@@ -23,7 +24,11 @@ var ExternalSvgModel = function() {
                             "resource/sublayer/icon/assault.svg",
                             "resource/sublayer/icon/unsafe.svg",
                             "resource/sublayer/icon/property.svg",
-                            "resource/sublayer/icon/other.svg"
+                            "resource/sublayer/icon/other.svg",
+                            "resource/sublayer/icon/bar.svg",
+                            "resource/sublayer/icon/restaurant.svg",
+                            "resource/sublayer/icon/twitter.svg",
+                            "resource/sublayer/icon/important-place.svg"
                             ];
 
 

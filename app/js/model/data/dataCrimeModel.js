@@ -1,7 +1,9 @@
 
 var DataCrimeModel = function(modelName,colorCode,databaseMainUrl,notification,interval,jsonNameDateAttribute,numWeekFilter) {
+
     //////////////////////////  DEBUG ///////////////////////////
     var debug = false;
+
     //////////////////////////  PRIVATE ATTRIBUTES ///////////////////////////
     var self = DataModel();
     var name = modelName;
@@ -21,7 +23,7 @@ var DataCrimeModel = function(modelName,colorCode,databaseMainUrl,notification,i
 
     self._notification = notification;
     self.interval = interval;
-
+    self.crimeSelected=null;
 
     ////////////////////////// PRIVATE METHODS //////////////////////////
 
@@ -139,6 +141,19 @@ var DataCrimeModel = function(modelName,colorCode,databaseMainUrl,notification,i
         return string;
     }
 
+    self.crimeClicked = function(crime,category) {
+        self.crimeSelected = crime;
+        DataCrimeModel.popupCategory=category;
+
+        /*if(self.crimeSelected!==null  && (self.crimeSelected.id === crime.id || DataCrimeModel.popupCategory!==category)){
+            self.crimeSelected=null;
+        }else {
+            self.crimeSelected = crime;
+            DataCrimeModel.popupCategory=category;
+        }*/
+        self.dispatch(Notifications.data.CRIME_SELECTION_CHANGED);
+    };
+
     ////////////////////////// SUBSCRIBES //////////////////////////
 
     notificationCenter.subscribe(Notifications.timeInterval.TIME_INTERVAL_CHANGED,callBackChangeTimeFilter);
@@ -147,16 +162,21 @@ var DataCrimeModel = function(modelName,colorCode,databaseMainUrl,notification,i
     return self;
 };
 
+DataCrimeModel.popupCategory=null;
+
 DataCrimeModel.categories = {
+
     CATEGORY_1 : ["BATTERY",
                     "ASSAULT",
                     "SEX OFFENSE",
                     "CRIM SEXUAL ASSAULT",
                     "ROBBERY",
                     "INTIMIDATION"],
+
     CATEGORY_2 : ["THEFT",
                     "BURGLARY",
                     "MOTOR VEHICLE THEFT"],
+
     CATEGORY_3 : ["PROSTITUTION",
                     "NARCOTICS",
                     "OBSCENITY",
@@ -167,6 +187,7 @@ DataCrimeModel.categories = {
                     "ARSON",
                     "HOMICIDE"
                     ,"KIDNAPPING"],
+
     CATEGORY_4 : ["DOMESTIC VIOLENCE",
                     "GAMBLING",
                     "STALKING",
@@ -180,15 +201,14 @@ DataCrimeModel.categories = {
                     "OFFENSES INVOLVING CHILDREN"]
 };
 
-var dataCrimeCategory1Model = DataCrimeModel("Category1",Colors.layer.SECURITY_1,"http://data.cityofchicago.org/resource/ijzp-q8t2.json",Notifications.data.crime.CRIME_CATEGORY1_CHANGED,30000,"date",2);
+var dataCrimeCategory1Model = DataCrimeModel("category1",Colors.layer.SECURITY_1,"http://data.cityofchicago.org/resource/ijzp-q8t2.json",Notifications.data.crime.CRIME_CATEGORY1_CHANGED,30000,"date",2);
 dataCrimeCategory1Model.addSqlWhere(dataCrimeCategory1Model.giveWhereString(DataCrimeModel.categories.CATEGORY_1));
 
-var dataCrimeCategory2Model = DataCrimeModel("Category2",Colors.layer.SECURITY_2,"http://data.cityofchicago.org/resource/ijzp-q8t2.json",Notifications.data.crime.CRIME_CATEGORY2_CHANGED,30000,"date",2);
+var dataCrimeCategory2Model = DataCrimeModel("category2",Colors.layer.SECURITY_2,"http://data.cityofchicago.org/resource/ijzp-q8t2.json",Notifications.data.crime.CRIME_CATEGORY2_CHANGED,30000,"date",2);
 dataCrimeCategory2Model.addSqlWhere(dataCrimeCategory2Model.giveWhereString(DataCrimeModel.categories.CATEGORY_2));
 
-var dataCrimeCategory3Model = DataCrimeModel("Category3",Colors.layer.SECURITY_3,"http://data.cityofchicago.org/resource/ijzp-q8t2.json",Notifications.data.crime.CRIME_CATEGORY3_CHANGED,30000,"date",2);
+var dataCrimeCategory3Model = DataCrimeModel("category3",Colors.layer.SECURITY_3,"http://data.cityofchicago.org/resource/ijzp-q8t2.json",Notifications.data.crime.CRIME_CATEGORY3_CHANGED,30000,"date",2);
 dataCrimeCategory3Model.addSqlWhere(dataCrimeCategory3Model.giveWhereString(DataCrimeModel.categories.CATEGORY_3));
 
-var dataCrimeCategory4Model = DataCrimeModel("Category4",Colors.layer.SECURITY_4,"http://data.cityofchicago.org/resource/ijzp-q8t2.json",Notifications.data.crime.CRIME_CATEGORY4_CHANGED,30000,"date",2);
+var dataCrimeCategory4Model = DataCrimeModel("category4",Colors.layer.SECURITY_4,"http://data.cityofchicago.org/resource/ijzp-q8t2.json",Notifications.data.crime.CRIME_CATEGORY4_CHANGED,30000,"date",2);
 dataCrimeCategory4Model.addSqlWhere(dataCrimeCategory4Model.giveWhereString(DataCrimeModel.categories.CATEGORY_4));
-

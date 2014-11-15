@@ -3,8 +3,10 @@ function DivvyLayerController() {
 
     /////////////////////////// PRIVATE ATTRIBUTES ////////////////////////////
 
-    var divvyData=[];
-    var svgStations=[];
+    var _divvyData=[];
+    var _svgStations=[];
+    var _popup=null;
+
 
     /////////////////////////// PRIVATE METHODS ////////////////////////////
 
@@ -22,11 +24,10 @@ function DivvyLayerController() {
     };*/
 
     var drawStations = function(){
-        //TODO: remove stations before update, now it removes every station
-        self.view.html("");
-        divvyData.forEach(function(d){
+        self.hideStations();
+        _divvyData.forEach(function(d){
             var divvyStationIcon = self.createIcon(d.latitude, d.longitude,"resource/sublayer/icon/divvy-station.svg");
-            svgStations.push(divvyStationIcon);
+            _svgStations.push(divvyStationIcon);
             divvyStationIcon.view.background.style("fill",function(){
                 //station empty: no bikes
                 if(d.availableBikes==0){
@@ -39,16 +40,51 @@ function DivvyLayerController() {
                     return Colors.station.DIVVY_STATION_REGULAR;
                 }
             });
+            divvyStationIcon.view.onClick(function(){
+                if(dataDivvyModel.stationSelected!==null)
+                    _popup.dispose();
+                console.log(d);
+                dataDivvyModel.stationClicked(d);
+            });
         })
     };
 
     var onDivvyData = function(){
-        divvyData=dataDivvyModel.data;
+        _divvyData=dataDivvyModel.data;
         drawStations();
+    };
+
+    self.hideStations = function(){
+        _svgStations.forEach(function(d){
+            d.dispose();
+        });
+        _svgStations=[];
+    };
+
+    var onStationSelected = function() {
+        if(_popup!==null)
+            _popup.dispose();
+        if(dataDivvyModel.stationSelected!==null) {
+            _popup = popupLayerController.openPopup(dataDivvyModel.stationSelected.latitude, dataDivvyModel.stationSelected.longitude, MapPopupType.POPUP_SIMPLE);
+            _popup.view.title.text(dataDivvyModel.stationSelected.stationName);
+            _popup.view.subtitle.text(
+                "Bikes: "+dataDivvyModel.stationSelected.availableBikes+
+                " - Docks: "+dataDivvyModel.stationSelected.availableDocks);
+        }
+    };
+
+    //TODO:check implementation of unsubscribe
+    self.super_dispose = self.dispose;
+    self.dispose = function() {
+        self.hideStations();
+        self.super_dispose();
+        dataDivvyModel.unsubscribe(Notifications.data.DIVVY_BIKES_CHANGED);
+        dataDivvyModel.unsubscribe(Notifications.data.DIVVY_BIKES_SELECTION_CHANGED);
     };
 
     var init = function() {
         dataDivvyModel.subscribe(Notifications.data.DIVVY_BIKES_CHANGED,onDivvyData);
+        dataDivvyModel.subscribe(Notifications.data.DIVVY_BIKES_SELECTION_CHANGED, onStationSelected);
     }();
 
     return self;

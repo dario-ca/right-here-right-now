@@ -23,8 +23,7 @@ function PotholeLayerController() {
     };*/
 
     var drawPotholes = function(){
-        //TODO: remove potholes before update, now it removes every pothole
-        self.view.html("");
+        self.hidePotholes();
         _potholeData.forEach(function(d){
             var potholeIcon = self.createIcon(d.latitude, d.longitude,"resource/sublayer/icon/pothole.svg");
             _svgPotholes.push(potholeIcon);
@@ -60,11 +59,20 @@ function PotholeLayerController() {
         drawPotholes();
     };
 
+    self.hidePotholes = function(){
+        _svgPotholes.forEach(function(d){
+            d.dispose();
+        });
+        _svgPotholes=[];
+    };
+
     //TODO:check implementation of unsubscribe
     self.super_dispose = self.dispose;
     self.dispose = function() {
+        self.hidePotholes();
         self.super_dispose();
         dataPotholeModel.unsubscribe(Notifications.data.POTHOLE_CHANGED);
+        dataPotholeModel.unsubscribe(Notifications.data.POTHOLE_SELECTION_CHANGED);
     };
 
     var init = function() {
