@@ -141,11 +141,16 @@ var DataCrimeModel = function(modelName,colorCode,databaseMainUrl,notification,i
         return string;
     }
 
-    self.crimeClicked = function(crime) {
-        if(self.crimeSelected!==null  && self.crimeSelected.id === crime.id){
+    self.crimeClicked = function(crime,category) {
+        self.crimeSelected = crime;
+        DataCrimeModel.popupCategory=category;
+
+        /*if(self.crimeSelected!==null  && (self.crimeSelected.id === crime.id || DataCrimeModel.popupCategory!==category)){
             self.crimeSelected=null;
-        }else
+        }else {
             self.crimeSelected = crime;
+            DataCrimeModel.popupCategory=category;
+        }*/
         self.dispatch(Notifications.data.CRIME_SELECTION_CHANGED);
     };
 
@@ -157,6 +162,7 @@ var DataCrimeModel = function(modelName,colorCode,databaseMainUrl,notification,i
     return self;
 };
 
+DataCrimeModel.popupCategory=null;
 
 DataCrimeModel.categories = {
 
