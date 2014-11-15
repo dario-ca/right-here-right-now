@@ -113,20 +113,20 @@ function CrimeLayerController(name,notification,icon) {
         self.super_dispose();
         switch(_name){
             case "category1":
-                        dataCrimeCategory1Model.unsubscribe(Notifications.data.CATEGORY_1);
-                        dataCrimeCategory1Model.unsubscribe(Notifications.data.CRIME_SELECTION_CHANGED);
+                        dataCrimeCategory1Model.unsubscribe(Notifications.data.crime.CRIME_CATEGORY1_CHANGED);
+                        dataCrimeCategory1Model.unsubscribe(Notifications.data.crime.CRIME_SELECTION_CHANGED);
                 break;
             case "category2":
-                        dataCrimeCategory2Model.unsubscribe(Notifications.data.CATEGORY_2);
-                        dataCrimeCategory2Model.unsubscribe(Notifications.data.CRIME_SELECTION_CHANGED);
+                        dataCrimeCategory2Model.unsubscribe(Notifications.data.crime.CRIME_CATEGORY2_CHANGED);
+                        dataCrimeCategory2Model.unsubscribe(Notifications.data.crime.CRIME_SELECTION_CHANGED);
                 break;
             case "category3":
-                        dataCrimeCategory3Model.unsubscribe(Notifications.data.CATEGORY_3);
-                        dataCrimeCategory3Model.unsubscribe(Notifications.data.CRIME_SELECTION_CHANGED);
+                        dataCrimeCategory3Model.unsubscribe(Notifications.data.crime.CRIME_CATEGORY3_CHANGED);
+                        dataCrimeCategory3Model.unsubscribe(Notifications.data.crime.CRIME_SELECTION_CHANGED);
                 break;
             case "category4":
-                        dataCrimeCategory4Model.unsubscribe(Notifications.data.CATEGORY_4);
-                        dataCrimeCategory4Model.unsubscribe(Notifications.data.CRIME_SELECTION_CHANGED);
+                        dataCrimeCategory4Model.unsubscribe(Notifications.data.crime.CRIME_CATEGORY4_CHANGED);
+                        dataCrimeCategory4Model.unsubscribe(Notifications.data.crime.CRIME_SELECTION_CHANGED);
                 break;
         }
     };
@@ -142,22 +142,22 @@ function CrimeLayerController(name,notification,icon) {
             case "category1":
                 {
                     dataCrimeCategory1Model.subscribe(_notification, onCrimeData);
-                    dataCrimeCategory1Model.subscribe(Notifications.data.CRIME_SELECTION_CHANGED, onCrimeSelected);
+                    dataCrimeCategory1Model.subscribe(Notifications.data.crime.CRIME_SELECTION_CHANGED, onCrimeSelected);
                 }break;
             case "category2":
                 {
                     dataCrimeCategory2Model.subscribe(_notification, onCrimeData);
-                    dataCrimeCategory2Model.subscribe(Notifications.data.CRIME_SELECTION_CHANGED, onCrimeSelected);
+                    dataCrimeCategory2Model.subscribe(Notifications.data.crime.CRIME_SELECTION_CHANGED, onCrimeSelected);
                 }break;
             case "category3":
                 {
                     dataCrimeCategory3Model.subscribe(_notification, onCrimeData);
-                    dataCrimeCategory3Model.subscribe(Notifications.data.CRIME_SELECTION_CHANGED, onCrimeSelected);
+                    dataCrimeCategory3Model.subscribe(Notifications.data.crime.CRIME_SELECTION_CHANGED, onCrimeSelected);
                 }break;
             case "category4":
                 {
                     dataCrimeCategory4Model.subscribe(_notification, onCrimeData);
-                    dataCrimeCategory4Model.subscribe(Notifications.data.CRIME_SELECTION_CHANGED, onCrimeSelected);
+                    dataCrimeCategory4Model.subscribe(Notifications.data.crime.CRIME_SELECTION_CHANGED, onCrimeSelected);
                 }break;
         }
     }();

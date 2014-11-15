@@ -35,7 +35,7 @@ Notifications.data = {
 
 Notifications.data.crime = {
     /// CRIME notification
-    CRIME_CHANGED: "data.crime.CRIME_CHANGED", //Crime relative current selection updated
+    //CRIME_CHANGED: "data.crime.CRIME_CHANGED", //Crime relative current selection updated
     CRIME_SELECTION_CHANGED: "data.crime.CRIME_SELECTION_CHANGED",
     CRIME_CATEGORY1_CHANGED: "data.crime.CRIME_CATEGORY1_CHANGED",
     //CRIME_CATEGORY1_SELECTION_CHANGED: "data.crime.CRIME_CATEGORY1_SELECTION_CHANGED",
