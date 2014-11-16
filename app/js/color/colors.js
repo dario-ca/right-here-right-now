@@ -15,18 +15,18 @@ Colors.station = {
 
 Colors.pothole = {
   POTHOLE_OPEN: "#3F8643",
-  POTHOLE_OPEN_DUP: "red",//TODO: handle DUPs
+  POTHOLE_OPEN_DUP: "red",
   POTHOLE_COMPLETED: "#BABABA"
 };
 
-Colors.vehicle = { //TODO: handle DUPs
+Colors.vehicle = {
     VEHICLE_OPEN: "#3F8643",
     VEHICLE_OPEN_DUP: "red",
     VEHICLE_COMPLETED: "#BABABA",
     VEHICLE_COMPLETED_DUP: "red"
 };
 
-Colors.lightOne = { //TODO: handle DUPs
+Colors.lightOne = {
     LIGHT_ONE_OPEN: "#3F8643",
     LIGHT_ONE_OPEN_DUP: "red",
     LIGHT_ONE_COMPLETED: "#BABABA",
@@ -38,8 +38,8 @@ Colors.layer = {
     INFORMATION: "#3f8643",
     SECURITY_1: "#b93721",
     SECURITY_2: "#F19261",
-    SECURITY_3: "#F8CB90",
-    SECURITY_4: "#FCEFDB",
+    SECURITY_3: "#FACC00",
+    SECURITY_4: "#FFF194",
     SOCIAL: "#3CC3E2",
     POINT_OF_INTEREST: "#000"
 };

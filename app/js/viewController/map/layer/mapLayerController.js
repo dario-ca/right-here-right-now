@@ -9,6 +9,7 @@ var MapLayerController = function() {
 
     self.fixedSizeControllers = [];
     self.defaultIconSize=2;
+    self.defaultCircleRatio=0.9;
 
     self.warningViews = [];
     self.dangerViews = [];
