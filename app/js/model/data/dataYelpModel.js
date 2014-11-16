@@ -94,6 +94,9 @@ var DataYelpModel = function(notification) {
 
             tempData = tempData.concat(filteredData);
 
+            // TODO: check if the graphic layer is overloaded
+            self.callback(tempData);
+
             if(offsetNumber+20 >= maxBusiness ||
                data.total < offsetNumber+20)
                 callback();
