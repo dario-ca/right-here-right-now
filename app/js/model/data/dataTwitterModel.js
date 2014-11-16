@@ -18,10 +18,13 @@ var DataTwitterModel = function() {
     self.fetchData = function() {
 
         var selection = selectionModel.getCircumscribedSelection();
-        var radius = getRadius(selection[0]);
+        var radius    = getRadius(selection[0]);
+        var center    = getCenter(selection[0]);
+        var latitude  = center[0];
+        var longitude = center[1];
 
         d3.json(self._twitterProxyURL +
-                "&latitude=" + latitude +
+                "?latitude=" + latitude +
                 "&longitude=" + longitude +
                 "&radius=" + radius +
                 "&count=" + count, function(error, json) {
@@ -40,7 +43,8 @@ var DataTwitterModel = function() {
      */
     var geoFilter = function(data) {
         var newData = data.filter(function(d) {
-            if(d.coordinates != undefined)
+            if(d.coordinates == undefined ||
+                d.coordinates == null)
                 return false;
 
             return selectionModel.pointInside([d.coordinates[0], d.coordinates[1]]);
@@ -50,13 +54,7 @@ var DataTwitterModel = function() {
     };
 
     var getRadius = function(rectangle) {
-        var p0 = rectangle.points[0];
-        var p1 = rectangle.points[1];
-        var p2 = rectangle.points[2];
-        var p3 = rectangle.points[3];
-
-        var center = [p0[0]+p1[0]+p2[0]+p3[0],
-                      p0[1]+p1[1]+p2[1]+p3[1]];
+        var center = getCenter(rectangle);
 
         var maxDistance = 0;
 
@@ -70,6 +68,18 @@ var DataTwitterModel = function() {
         });
 
         return maxDistance;
+    };
+
+    var getCenter = function(rectangle) {
+        var p0 = rectangle.points[0];
+        var p1 = rectangle.points[1];
+        var p2 = rectangle.points[2];
+        var p3 = rectangle.points[3];
+
+        var center = [(p0[0]+p1[0]+p2[0]+p3[0])/4,
+                      (p0[1]+p1[1]+p2[1]+p3[1])/4];
+
+        return center;
     };
 
     var init = function() {
