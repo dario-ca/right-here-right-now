@@ -49,7 +49,6 @@ function CrimeLayerController(name,notification,icon) {
                 }else{
                     currentCrimeCategoryModel.crimeClicked(d,_name);
                 }
-                console.log(d);
             });
         })
     };
