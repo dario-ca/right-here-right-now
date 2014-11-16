@@ -58,6 +58,7 @@ var GraphsViewController = function() {
                 icon.view.append(button);
                 if(sublayer.name == graphsModel.sublayerSelected){
                     icon.view.selectAll("path").style("fill", Colors.components.WHITE_SELECTED);
+                    _graphsTitle.view.title.text(sublayer.name);
                 } else {
                     icon.view.selectAll("path").style("fill", Colors.components.GREY_DESELECTED);
                 }
@@ -90,7 +91,11 @@ var GraphsViewController = function() {
 
         //TITLE
         _graphsTitle = ExternalSvgViewController("resource/view/graphs-title.svg");
-        _graphsTitle.
+        _graphsTitle.view.title = "prova";
+        _graphsTitle.view.x = "3.5%";
+        _graphsTitle.view.y = "2.2%";
+        _graphsTitle.view.width = "40%";
+        self.view.append(_graphsTitle);
         //BUTTON
 
         var buttonCount = 0;
