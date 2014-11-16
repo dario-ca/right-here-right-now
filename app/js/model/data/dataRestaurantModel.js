@@ -9,6 +9,9 @@ var DataRestaurantModel = function() {
 
     self._notification = Notifications.data.FOOD_CHANGED;
 
+    self.restaurantSelected=null;
+
+
     ////////////////////////// PRIVATE ATTRIBUTES //////////////////////////
 
 
@@ -25,28 +28,43 @@ var DataRestaurantModel = function() {
     var onDataChanged = function() {
         var restaurants    = dataYelpRestaurantModel.data;
         var foodInspection = dataFoodInspection.data;
-        console.log(restaurants, foodInspection);
 
-        restaurants.forEach(function(restaurant) {
-            var f = foodInspection.filter(function(fi) {
-                return dinstance([restaurant.location.latitude, restaurant.location.longitude],
-                                 [fi.latitude, fi.longitude]) > 0;
+        if(restaurants == null)
+            return;
+
+        if(foodInspection != null)  // Are present the food inspections
+            restaurants.forEach(function(restaurant) {
+                var f = foodInspection.filter(function(fi) {
+                    return distance([restaurant.location.coordinate.latitude, restaurant.location.coordinate.longitude],
+                                     [fi.latitude, fi.longitude]) < 0.001 &&
+                           1 == 1;  // TODO: insert some other condition
+                });
+                if(f.length > 0) {
+                    restaurant["food_inspection"] = f[0];
+                    console.log("Food inspection non passata", restaurant);
+                }
             });
-            if(f.length > 0)
-                restaurant["food_inspection"] = f[0];
-        });
 
         self.callback(restaurants);
     };
 
-    var dinstance = function(p0, p1) {
+    var distance = function(p0, p1) {
         return Math.sqrt((p0[0]-p1[0])*(p0[0]-p1[0]) +
                          (p0[1]-p1[1])*(p0[1]-p1[1]));
-    }
+    };
+
+    self.restaurantClicked = function(restaurant) {
+        if(self.restaurantSelected!==null && self.restaurantSelected.id === restaurant.id){
+            self.restaurantSelected=null;
+        }else
+            self.restaurantSelected = restaurant;
+        self.dispatch(Notifications.data.FOOD_SELECTION_CHANGED);
+    };
 
 
     var init = function() {
         // Initialization functions
+        notificationCenter.subscribe(Notifications.selection.SELECTION_CHANGED, self.dataChanged);
     }();
 
     return self;

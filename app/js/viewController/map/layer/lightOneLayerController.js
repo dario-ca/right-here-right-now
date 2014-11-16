@@ -43,7 +43,7 @@ function LightOneLayerController() {
             _popup.dispose();
         if(dataLight1Model.light1selected!==null) {
             _popup = popupLayerController.openPopup(dataLight1Model.light1selected.latitude, dataLight1Model.light1selected.longitude, MapPopupType.POPUP_SIMPLE);
-            _popup.view.title.text("Light Broken: "+dataLight1Model.light1selected.status);
+            _popup.view.title.text("Single light Broken: "+dataLight1Model.light1selected.status);
             _popup.view.subtitle.text(dataLight1Model.light1selected.street_address);
         }
     };

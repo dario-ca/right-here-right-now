@@ -70,7 +70,7 @@ var LayerFactory = function() {
         pointOfInterestLayer.addSublayer("Restaurant",
             "resource/sublayer/icon/restaurant.svg",
             Colors.layer.POINT_OF_INTEREST,
-            []);
+            [RestaurantLayerController]);
         pointOfInterestLayer.addSublayer("Bar",
             "resource/sublayer/icon/bar.svg",
             Colors.layer.POINT_OF_INTEREST,

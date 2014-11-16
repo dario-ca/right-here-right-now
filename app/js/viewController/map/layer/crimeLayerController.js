@@ -40,6 +40,15 @@ function CrimeLayerController(name,notification,icon) {
             var crimeIcon = self.createIcon(d.latitude, d.longitude,_iconPath);
             _svgCrimes.push(crimeIcon);
             crimeIcon.view.background.style("fill", d.color);
+
+            if(_.indexOf(DataCrimeModel.typesWarningCircle, d.primary_type) !== -1){
+                self.addWarning(d.latitude, d.longitude,self.defaultIconSize*self.defaultCircleRatio);
+            }
+
+            if(_.indexOf(DataCrimeModel.typesDangerCircle, d.primary_type) !== -1){
+                self.addDanger(d.latitude, d.longitude,self.defaultIconSize*self.defaultCircleRatio);
+            }
+
             crimeIcon.view.onClick(function() {
                 //if I am clicking on the same popup, remove it
                 if (currentCrimeCategoryModel.crimeSelected !== null && currentCrimeCategoryModel.crimeSelected.id === d.id && _popup !== null){

@@ -178,8 +178,8 @@ DataCrimeModel.categories = {
                     "WEAPONS VIOLATION",
                     "CRIMINAL DAMAGE",
                     "ARSON",
-                    "HOMICIDE"
-                    ,"KIDNAPPING"],
+                    "HOMICIDE",
+                    "KIDNAPPING"],
 
     CATEGORY_4 : ["DOMESTIC VIOLENCE",
                     "GAMBLING",
@@ -193,6 +193,11 @@ DataCrimeModel.categories = {
                     "CONCEALED CARRY LICENSE VIOLATION",
                     "OFFENSES INVOLVING CHILDREN"]
 };
+
+DataCrimeModel.typesDangerCircle = ["BATTERY"];
+
+DataCrimeModel.typesWarningCircle = [""];
+
 
 var dataCrimeCategory1Model = DataCrimeModel("category1",Colors.layer.SECURITY_1,"http://data.cityofchicago.org/resource/ijzp-q8t2.json",Notifications.data.crime.CRIME_CATEGORY1_CHANGED,30000,"date",2);
 dataCrimeCategory1Model.addSqlWhere(dataCrimeCategory1Model.giveWhereString(DataCrimeModel.categories.CATEGORY_1));
