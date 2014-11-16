@@ -28,7 +28,15 @@ function DivvyLayerController() {
         _divvyData.forEach(function(d){
             var divvyStationIcon = self.createIcon(d.latitude, d.longitude,"resource/sublayer/icon/divvy-station.svg");
             _svgStations.push(divvyStationIcon);
-            divvyStationIcon.view.background.style("fill",function(){
+
+            divvyStationIcon.view.background.style("fill",Colors.station.DIVVY_STATION_REGULAR);
+            if(d.availableBikes==0 || d.availableDocks==0) {
+                self.addWarning(d.latitude, d.longitude,self.defaultIconSize*self.defaultCircleRatio);
+            }
+
+             //code before circles
+
+            /*divvyStationIcon.view.background.style("fill",function(){
                 //station empty: no bikes
                 if(d.availableBikes==0){
                     return Colors.station.DIVVY_STATION_EMPTY;
@@ -39,7 +47,7 @@ function DivvyLayerController() {
                 }else{
                     return Colors.station.DIVVY_STATION_REGULAR;
                 }
-            });
+            });*/
             divvyStationIcon.view.onClick(function(){
                 if(dataDivvyModel.stationSelected!==null)
                     _popup.dispose();

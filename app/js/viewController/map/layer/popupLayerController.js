@@ -53,6 +53,5 @@ function PopupLayerController() {
 var MapPopupType = {
     POPUP_SIMPLE: "POPUP_SIMPLE",
     POPUP_BUS: "POPUP_BUS",
-    POPUP_BUS: "POPUP_BUS",
     POPUP_CRIME: "POPUP_CRIME"
 };
