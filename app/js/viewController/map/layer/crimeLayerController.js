@@ -8,7 +8,7 @@ function CrimeLayerController(name,notification,icon) {
     var _notification=notification;
     var _iconPath=icon;
 
-    //name of the controller, needed in the switches
+    //name of the controller
     var _name=name;
 
     var currentCrimeCategoryModel=null;
@@ -49,6 +49,7 @@ function CrimeLayerController(name,notification,icon) {
                 }else{
                     currentCrimeCategoryModel.crimeClicked(d,_name);
                 }
+                console.log(d);
             });
         })
     };
@@ -56,22 +57,11 @@ function CrimeLayerController(name,notification,icon) {
 
     var onCrimeData = function(){
         _crimeData=currentCrimeCategoryModel.data;
-        /*switch(_name){
-            case "category1":       _crimeData=dataCrimeCategory1Model.data;
-                break;
-            case "category2":       _crimeData=dataCrimeCategory2Model.data;
-                break;
-            case "category3":       _crimeData=dataCrimeCategory3Model.data;
-                break;
-            case "category4":       _crimeData=dataCrimeCategory4Model.data;
-                break;
-        }*/
         drawCrimes();
     };
 
     //TODO:big problem, never entered first condition, problem with notifications I think
     var onCrimeSelected = function() {
-        //console.log("I am controller of: "+_name+", and categoryOfPopup is: "+DataCrimeModel.popupCategory);
         //if they are not clicking on me, I remove my popup if any
         if (DataCrimeModel.popupCategory !== _name && _popup !== null) {
             _popup.dispose();
@@ -82,21 +72,12 @@ function CrimeLayerController(name,notification,icon) {
             if(_popup!==null){
                 _popup.dispose();
             }
-            _popup = popupLayerController.openPopup(currentCrimeCategoryModel.crimeSelected.latitude, currentCrimeCategoryModel.crimeSelected.longitude, MapPopupType.POPUP_SIMPLE);
-            _popup.view.title.text(_name);
-            _popup.view.subtitle.text(currentCrimeCategoryModel.crimeSelected.id);
+            _popup = popupLayerController.openPopup(currentCrimeCategoryModel.crimeSelected.latitude, currentCrimeCategoryModel.crimeSelected.longitude, MapPopupType.POPUP_CRIME);
+            _popup.view.title.text(currentCrimeCategoryModel.crimeSelected.primary_type);
+            _popup.view.description.text(currentCrimeCategoryModel.crimeSelected.description);
+            _popup.view.subtitle.text(currentCrimeCategoryModel.crimeSelected.block);
         }
 
-        /*if(_popup!==null){
-            console.log(_popup);
-            _popup.dispose();
-        }
-        if(currentCrimeCategoryModel.crimeSelected!==null && DataCrimeModel.popupCategory===_name) {
-            console.log(DataCrimeModel.popupCategory);
-            _popup = popupLayerController.openPopup(currentCrimeCategoryModel.crimeSelected.latitude, currentCrimeCategoryModel.crimeSelected.longitude, MapPopupType.POPUP_SIMPLE);
-            _popup.view.title.text(_name);
-            _popup.view.subtitle.text(currentCrimeCategoryModel.crimeSelected.id);
-        }*/
     };
 
     self.hideCrimes = function(){
@@ -111,55 +92,19 @@ function CrimeLayerController(name,notification,icon) {
     self.dispose = function() {
         self.hideCrimes();
         self.super_dispose();
-        switch(_name){
-            case "category1":
-                        dataCrimeCategory1Model.unsubscribe(Notifications.data.crime.CRIME_CATEGORY1_CHANGED, onCrimeData);
-                        notificationCenter.unsubscribe(Notifications.data.crime.CRIME_SELECTION_CHANGED, onCrimeSelected);
-                break;
-            case "category2":
-                        dataCrimeCategory2Model.unsubscribe(Notifications.data.crime.CRIME_CATEGORY2_CHANGED, onCrimeData);
-                        notificationCenter.unsubscribe(Notifications.data.crime.CRIME_SELECTION_CHANGED, onCrimeSelected);
-                break;
-            case "category3":
-                        dataCrimeCategory3Model.unsubscribe(Notifications.data.crime.CRIME_CATEGORY3_CHANGED, onCrimeData);
-                        notificationCenter.unsubscribe(Notifications.data.crime.CRIME_SELECTION_CHANGED, onCrimeSelected);
-                break;
-            case "category4":
-                        dataCrimeCategory4Model.unsubscribe(Notifications.data.crime.CRIME_CATEGORY4_CHANGED, onCrimeData);
-                        notificationCenter.unsubscribe(Notifications.data.crime.CRIME_SELECTION_CHANGED, onCrimeSelected);
-                break;
-        }
+
+        currentCrimeCategoryModel.unsubscribe(_notification, onCrimeData);
+        notificationCenter.unsubscribe(Notifications.data.crime.CRIME_SELECTION_CHANGED, onCrimeSelected);
+
     };
 
     var init = function() {
         self.view.classed("crime-layer-controller", true);
 
         giveCurrentCrimeCategoryModel();
-        //console.log(currentCrimeCategoryModel);
-        //console.log("I am controller of: "+_name+", I am alive!");
+        currentCrimeCategoryModel.subscribe(_notification, onCrimeData);
+        notificationCenter.subscribe(Notifications.data.crime.CRIME_SELECTION_CHANGED, onCrimeSelected);
 
-        switch(_name){
-            case "category1":
-                {
-                    dataCrimeCategory1Model.subscribe(_notification, onCrimeData);
-                    notificationCenter.subscribe(Notifications.data.crime.CRIME_SELECTION_CHANGED, onCrimeSelected);
-                }break;
-            case "category2":
-                {
-                    dataCrimeCategory2Model.subscribe(_notification, onCrimeData);
-                    notificationCenter.subscribe(Notifications.data.crime.CRIME_SELECTION_CHANGED, onCrimeSelected);
-                }break;
-            case "category3":
-                {
-                    dataCrimeCategory3Model.subscribe(_notification, onCrimeData);
-                    notificationCenter.subscribe(Notifications.data.crime.CRIME_SELECTION_CHANGED, onCrimeSelected);
-                }break;
-            case "category4":
-                {
-                    dataCrimeCategory4Model.subscribe(_notification, onCrimeData);
-                    notificationCenter.subscribe(Notifications.data.crime.CRIME_SELECTION_CHANGED, onCrimeSelected);
-                }break;
-        }
     }();
 
     return self;
