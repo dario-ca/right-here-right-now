@@ -11,13 +11,7 @@ function BusLayerController() {
 
         stops.forEach(function(stop) {
             // TODO: add the bus stop icon
-            var busStop = ExternalSvgViewController("resource/sublayer/icon/bus-stop.svg");
-            busStop.view.width = self.defaultIconSize;
-            busStop.view.height= self.defaultIconSize;
-
-            var p = self.project(stop.lat, stop.lon);
-            busStop.view.x = p.x;
-            busStop.view.y = p.y;
+            var busStop = self.createIcon(stop.lat, stop.lon, "resource/sublayer/icon/bus.svg");
 
             self.view.append(busStop);
             busRouteLayers.push(busStop);
@@ -67,15 +61,12 @@ function BusLayerController() {
                     .duration(1000);
             }
             else {
-                bus = ExternalSvgViewController("resource/sublayer/icon/bus.svg");
+                bus = self.createIcon(vehicle.lat, vehicle.lon, "resource/sublayer/icon/bus.svg");
 
-                var p = self.project(vehicle.lat, vehicle.lon);
-                bus.view.x = p.x;
-                bus.view.y = p.y;
             }
 
-            bus.view.width = self.defaultIconSize;
-            bus.view.height= self.defaultIconSize;
+
+
             bus.vehicle = vehicle;
 
             bus.view.busNumber.text(vehicle.rt);

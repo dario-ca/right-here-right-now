@@ -36,6 +36,7 @@ var Data311Model = function(modelName,databaseMainUrl,notification,interval,json
     self.interval = interval;
     self.potholeSelected=null;
     self.vehicleSelected=null;
+    self.light1selected=null;
 
     ////////////////////////// PRIVATE METHODS //////////////////////////
 
@@ -160,6 +161,14 @@ var Data311Model = function(modelName,databaseMainUrl,notification,interval,json
         self.dispatch(Notifications.data.ABANDONED_VEHICLES_SELECTION_CHANGED);
     };
 
+    self.light1Clicked = function(light1) {
+        if(self.light1selected!==null && self.light1selected.service_request_number === light1.service_request_number){
+            self.light1selected=null;
+        }else
+            self.light1selected = light1;
+        self.dispatch(Notifications.data.LIGHT_OUT_SINGLE_SELECTION_CHANGED);
+    };
+
     ////////////////////////// SUBSCRIBES //////////////////////////
 
     notificationCenter.subscribe(Notifications.timeInterval.TIME_INTERVAL_CHANGED,callBackChangeTimeFilter);
@@ -177,6 +186,8 @@ dataVehiclesModel.addSqlWhere("status!='Completed - Dup'");
 dataVehiclesModel.addSqlWhere("status!='Open - Dup'");
 
 var dataLightsAllModel = Data311Model("All lights out","http://data.cityofchicago.org/resource/zuxi-7xem.json",Notifications.data.LIGHT_OUT_ALL_CHANGED,30000,"creation_date");
+dataLightsAllModel.addSqlWhere("status!='Completed - Dup'");
+dataLightsAllModel.addSqlWhere("status!='Open - Dup'");
 
 var dataLight1Model = Data311Model("One light out","http://data.cityofchicago.org/resource/3aav-uy2v.json",Notifications.data.LIGHT_OUT_SINGLE_CHANGED,30000,"creation_date");
 dataLight1Model.addSqlWhere("status!='Completed - Dup'");

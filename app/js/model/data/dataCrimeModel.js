@@ -144,13 +144,6 @@ var DataCrimeModel = function(modelName,colorCode,databaseMainUrl,notification,i
     self.crimeClicked = function(crime,category) {
         self.crimeSelected = crime;
         DataCrimeModel.popupCategory=category;
-
-        /*if(self.crimeSelected!==null  && (self.crimeSelected.id === crime.id || DataCrimeModel.popupCategory!==category)){
-            self.crimeSelected=null;
-        }else {
-            self.crimeSelected = crime;
-            DataCrimeModel.popupCategory=category;
-        }*/
         notificationCenter.dispatch(Notifications.data.crime.CRIME_SELECTION_CHANGED);
     };
 

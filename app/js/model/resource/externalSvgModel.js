@@ -30,7 +30,8 @@ var ExternalSvgModel = function() {
                             "resource/sublayer/icon/bar.svg",
                             "resource/sublayer/icon/restaurant.svg",
                             "resource/sublayer/icon/twitter.svg",
-                            "resource/sublayer/icon/important-place.svg"
+                            "resource/sublayer/icon/important-place.svg",
+                            "resource/view/map-popup-crime.svg"
                             ];
 
 

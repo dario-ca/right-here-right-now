@@ -5,6 +5,7 @@ function LightOneLayerController() {
 
     var _lightOneData=[];
     var _svgLightsOne=[];
+    var _popup=null;
 
     /////////////////////////// PRIVATE METHODS ////////////////////////////
 
@@ -24,6 +25,11 @@ function LightOneLayerController() {
                     return Colors.lightOne.LIGHT_ONE_OPEN_DUP;
                 }
             });
+            lightIcon.view.onClick(function(){
+                if(dataLight1Model.light1selected!==null)
+                    _popup.dispose();
+                dataLight1Model.light1Clicked(d);
+            });
         })
     };
 
@@ -31,6 +37,19 @@ function LightOneLayerController() {
         _lightOneData=dataLight1Model.data;
         drawLightsOne();
     };
+
+    var onLight1Selected = function() {
+        if(_popup!==null)
+            _popup.dispose();
+        if(dataLight1Model.light1selected!==null) {
+            _popup = popupLayerController.openPopup(dataLight1Model.light1selected.latitude, dataLight1Model.light1selected.longitude, MapPopupType.POPUP_SIMPLE);
+            _popup.view.title.text("Light Broken: "+dataLight1Model.light1selected.status);
+            _popup.view.subtitle.text(dataLight1Model.light1selected.street_address);
+        }
+    };
+
+    /////////////////////////// PUBLIC METHODS ////////////////////////////
+
 
     self.hideLights = function(){
         _svgLightsOne.forEach(function(d){
@@ -45,11 +64,12 @@ function LightOneLayerController() {
         self.hideLights();
         self.super_dispose();
         dataLight1Model.unsubscribe(Notifications.data.LIGHT_OUT_SINGLE_CHANGED, onLightOneData);
-        //dataLight1Model.unsubscribe(Notifications.data.LIGHT_OUT_SINGLE_SELECTION_CHANGED);
+        dataLight1Model.unsubscribe(Notifications.data.LIGHT_OUT_SINGLE_SELECTION_CHANGED,onLight1Selected);
     };
 
     var init = function() {
         dataLight1Model.subscribe(Notifications.data.LIGHT_OUT_SINGLE_CHANGED, onLightOneData);
+        dataLight1Model.subscribe(Notifications.data.LIGHT_OUT_SINGLE_SELECTION_CHANGED, onLight1Selected);
     }();
 
     return self;

@@ -8,7 +8,7 @@ var MapLayerController = function() {
     ////////////////////////// PUBLIC ATTRIBUTES //////////////////////////
 
     self.fixedSizeControllers = [];
-    self.defaultIconSize=1;
+    self.defaultIconSize=2;
 
     self.warningViews = [];
     self.dangerViews = [];
@@ -73,12 +73,15 @@ var MapLayerController = function() {
 
 
     /**
-     * add the view controller to the list of object to be resizes
+     * add the view controller to the list of object to be resized
      */
-     self.fixControllerSize = function(viewController) {
+     self.fixControllerSize = function(viewController, centered) {
          self.fixedSizeControllers.push(viewController);
          viewController.fixWidth = viewController.view.width;
          viewController.fixHeight = viewController.view.height;
+         viewController.fixAnchorCentered = centered;
+
+         MapViewController.scaleController(viewController, mapModel.getZoom());
 
      };
 
@@ -105,9 +108,11 @@ var MapLayerController = function() {
         icon.view.width =self.defaultIconSize;
         icon.view.height=self.defaultIconSize;
 
+
         var position = self.project(latitude, longitude);
-        icon.view.x = position.x;
-        icon.view.y = position.y;
+        icon.view.x = position.x - self.defaultIconSize/2;
+        icon.view.y = position.y - self.defaultIconSize/2;
+        self.fixControllerSize(icon, true);
 
         return icon;
     };
