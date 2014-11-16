@@ -18,6 +18,14 @@ var ViewController = function() {
         childController.dispose();
     };
 
+    self.removeAllChildren = function() {
+        self.children.forEach(function(child) {
+            child.dispose();
+        });
+        self.children = [];
+    };
+
+
 
     /**
      * Remove the view from the dom

@@ -12,6 +12,9 @@ var SublayerModel = function(layer, name, icon, color, mapLayers) {
     self.color = color;
     self.mapLayers = mapLayers;
 
+    //whether has a related graph on the right
+    self.hasRelatedGraph = false;
+
     var _selected = false;
     /** PUBLIC FUNCTIONS**/
 

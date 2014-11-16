@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 16.0.4, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="200" height="84.333" viewBox="0 0 200 84.333" enable-background="new 0 0 200 84.333" xml:space="preserve">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0"
+	 width="171.333" height="69.333" viewBox="0 0 171.333 69.333" enable-background="new 0 0 171.333 69.333"
+	 xml:space="preserve">
 <g>
 	<g>
 		<g id="time_popup_11_" opacity="0.9">
-			<rect width="200" height="84.247"/>
+			<rect width="171.333" height="69.581"/>
 		</g>
 	</g>
-	
-		<text id="celsius" transform="matrix(1 0 0 1 121.1689 33.1362)" fill="#FFFFFF" font-family="'HelveticaNeue-Thin'" font-size="14.2564">17</text>
 </g>
-<text id="fahrenheit" transform="matrix(1 0 0 1 120.502 59.8037)" fill="#FFFFFF" font-family="'HelveticaNeue-Thin'" font-size="14.2564">47</text>
-<text transform="matrix(1 0 0 1 146.0225 35.1357)" fill="#FFFFFF" font-family="'HelveticaNeue-Thin'" font-size="14.2564">°C</text>
-<text transform="matrix(1 0 0 1 144.3555 60.4697)" fill="#FFFFFF" font-family="'HelveticaNeue-Thin'" font-size="10.2779">F</text>
-<line fill="none" stroke="#FFFFFF" stroke-width="0.0989" stroke-miterlimit="10" x1="103.667" y1="40.667" x2="194.333" y2="40.667"/>
-<image overflow="visible" width="25" height="41" id="icon" xlink:href="../sublayer/icon/bus_stop.png"  transform="matrix(2.2075 0 0 1.3008 21.9995 15.0005)">
+<text id="fahrenheit" transform="matrix(1 0 0 1 95.1694 57.1377)" fill="#FFFFFF" font-family="'HelveticaNeue-Thin'" font-size="14.2564">47</text>
+<text transform="matrix(1 0 0 1 124.022 26.6147)" fill="#FFFFFF" font-family="'HelveticaNeue-Thin'" font-size="10.6332">°C</text>
+<text transform="matrix(1 0 0 1 131.021 56.9834)" fill="#FFFFFF" font-family="'HelveticaNeue-Thin'" font-size="9.7092">F</text>
+<line fill="none" stroke="#FFFFFF" stroke-width="0.4" stroke-miterlimit="10" x1="75" y1="37.667" x2="165.667" y2="37.667"/>
+<image overflow="visible" width="25" height="41" id="icon" xlink:href="../sublayer/icon/bus_stop.png"  transform="matrix(2.5669 0 0 2.5935 6.999 -16.3335)">
 </image>
+<text id="celsius" transform="matrix(1 0 0 1 94.8354 25.4697)" fill="#FFFFFF" font-family="'HelveticaNeue-Thin'" font-size="14.2564">17</text>
 </svg>

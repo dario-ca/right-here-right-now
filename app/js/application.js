@@ -53,6 +53,8 @@ var Application = function() {
         self.mainWindow = WindowController();
         self.mainWindow.view.appendTo(body);
         self.mainWindow.updateView();
+
+        graphsModel.layerSelected = "SECURITY";
     };
 
 

@@ -56,8 +56,8 @@ function BusLayerController() {
                 var p = self.project(vehicle.lat, vehicle.lon);
                 bus.view
                     .transition()
-                    .attr("x", p.x)
-                    .attr("y", p.y)
+                    .attr("x", p.x - bus.view.width/2)
+                    .attr("y", p.y - bus.view.width/2)
                     .duration(1000);
             }
             else {
@@ -75,7 +75,7 @@ function BusLayerController() {
 
             // Eventually add a warning if the vehicle is delayed
             if(vehicle.dly != undefined || 1==1) {
-                self.addWarning(vehicle.lat, vehicle.lon, 0.8);
+                self.addWarning(vehicle.lat, vehicle.lon, 2.8);
             }
 
             // Add the interaction on

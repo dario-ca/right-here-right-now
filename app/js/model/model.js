@@ -10,7 +10,17 @@ var Model = function(name) {
 
     
     /** PUBLIC FUNCTIONS**/
+    self.getLayerWithName = function(name) {
+        var selectedLayer = null;
+        if(name){
+            self.layers.forEach(function(layer){
+                if(layer.name.toUpperCase() === name.toUpperCase())
+                    selectedLayer = layer;
+            });
+        }
 
+        return selectedLayer;
+    };
 
 
     /** PRIVATE FUNCTIONS**/

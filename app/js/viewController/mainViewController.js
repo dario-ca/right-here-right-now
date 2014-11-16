@@ -9,6 +9,7 @@ var MainViewController = function() {
     self.mapToolsViewController = null;
     self.notificationsPopupViewController = null;
     self.weatherViewController = null;
+    self.graphsViewController = null;
 
 
     /**
@@ -47,7 +48,7 @@ var MainViewController = function() {
         self.mapToolsViewController = MapToolsViewController();
         self.mapToolsViewController.view.width = "36%";
         self.mapToolsViewController.view.height = "100%";
-        self.mapToolsViewController.view.x = "38%";
+        self.mapToolsViewController.view.x = "34%";
         mapToolsTranslateCoordinateSystemGroup.append(self.mapToolsViewController);
 
         //NOTIFICATIONS POPUPS
@@ -60,11 +61,19 @@ var MainViewController = function() {
 
         // WEATHER
         self.weatherViewController = WeatherViewController();
-        self.weatherViewController.view.width = "16%";
+        self.weatherViewController.view.width = "8%";
         self.weatherViewController.view.height = "100%";
-        self.weatherViewController.view.x = "66%";
+        self.weatherViewController.view.x = "62%";
         self.weatherViewController.view.y = "0.2%";
         self.view.append(self.weatherViewController);
+
+        //GRAPHS
+        self.graphsViewController = GraphsViewController();
+        self.graphsViewController.view.width = "29.8%";
+        self.graphsViewController.view.height = "100%";
+        self.graphsViewController.view.x = "70.2%";
+        self.graphsViewController.view.y = "0%";
+        self.view.append(self.graphsViewController);
 
     }();
 
