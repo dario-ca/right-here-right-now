@@ -7,6 +7,7 @@ var ExternalSvgModel = function() {
     self.svgsData = {};
 
     var externalSvgPaths = ["resource/view/notification-popup.svg",
+                            "resource/view/notification-popup2.svg",
                             "resource/view/map-popup-simple.svg",
                             "resource/view/map-popup-bus.svg",
                             "resource/sublayer/icon/divvy-station.svg",
@@ -31,7 +32,8 @@ var ExternalSvgModel = function() {
                             "resource/sublayer/icon/restaurant.svg",
                             "resource/sublayer/icon/twitter.svg",
                             "resource/sublayer/icon/important-place.svg",
-                            "resource/view/map-popup-crime.svg"
+                            "resource/view/map-popup-crime.svg",
+                            "resource/view/weather-widget.svg"
                             ];
 
 

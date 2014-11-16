@@ -30,11 +30,11 @@ var MapLayerController = function() {
 
     self.clear = function() {
         self.warningViews.forEach(function(v) {
-            v.remove();
+            v.dispose();
         });
 
         self.dangerViews.forEach(function(v) {
-            v.remove();
+            v.dispose();
         });
     };
 
