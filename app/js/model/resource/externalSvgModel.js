@@ -8,6 +8,7 @@ var ExternalSvgModel = function() {
 
     var externalSvgPaths = ["resource/view/notification-popup.svg",
                             "resource/view/map-popup-simple.svg",
+                            "resource/view/map-popup-bus.svg",
                             "resource/sublayer/icon/divvy-station.svg",
                             "resource/sublayer/icon/bus.svg",
                             "resource/sublayer/icon/bus-no-number.svg",

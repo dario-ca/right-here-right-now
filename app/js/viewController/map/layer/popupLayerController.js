@@ -9,6 +9,11 @@ function PopupLayerController() {
                 popup.view.width = 16;
                 popup.view.height = 4;
                 break;
+            case MapPopupType.POPUP_BUS:
+                popup = ExternalSvgViewController("resource/view/map-popup-bus.svg");
+                popup.view.width = 16;
+                popup.view.height = 8;
+                break;
             /*case MapPopupType.POPUP_VEHICLE:
                 popup = ExternalSvgViewController("resource/view/map-popup-simple.svg");
                 popup.view.width = 20;
@@ -45,6 +50,7 @@ function PopupLayerController() {
 
 
 var MapPopupType = {
-    POPUP_SIMPLE: "POPUP_SIMPLE"
+    POPUP_SIMPLE: "POPUP_SIMPLE",
+    POPUP_BUS: "POPUP_BUS"
     //POPUP_VEHICLE: "POPUP_VEHICLE"
 };

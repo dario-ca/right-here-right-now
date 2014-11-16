@@ -176,8 +176,16 @@ var SelectionModel = function() {
                 var start = step.start_location;
                 var end  = step.end_location;
 
-                // Create line
-                self.lines.push([[start.lat, start.lng], [end.lat, end.lng]]);
+                // Create lines
+                //self.lines.push([[start.lat, start.lng], [end.lat, end.lng]]);
+                var decodedPath = google.maps.geometry.encoding.decodePath(step.polyline.points);
+                var lastLatLng = null;
+                decodedPath.forEach(function(latLng) {
+                    if(lastLatLng != null)
+                        self.lines.push([[lastLatLng.lat(), lastLatLng.lng()],[latLng.lat(), latLng.lng()]]);
+
+                    lastLatLng = latLng;
+                });
 
                 // Calculate the rectangles
                 var a = [];

@@ -98,6 +98,8 @@ function BusLayerController() {
     };
 
     var onBusData = function() {
+        self.clear();  // Remove warnings and dangers
+
         // Remove all busses
         self.children.forEach( function(child) {
             if(child.vehicle != undefined) {  // It is a bus
@@ -146,6 +148,11 @@ function BusLayerController() {
 
             self.view.append(bus);
 
+            // Eventually add a warning if the vehicle is delayed
+            if(vehicle.dly != undefined || 1==1) {
+                self.addWarning(vehicle.lat, vehicle.lon, 0.8);
+            }
+
             // Add the interaction on
             bus.view.onClick(function() {
                 dataBusModel.busClicked(bus.vehicle);
@@ -168,7 +175,16 @@ function BusLayerController() {
     var onBusSelected = function() {
         if(dataBusModel.busSelected != null) {
             self.displayBusRoute(dataBusModel.busSelected.stops);
-            popupLayerController.openPopup(dataBusModel.busSelected.lat, dataBusModel.busSelected.lon, MapPopupType.POPUP_SIMPLE);
+            var popup = popupLayerController.openPopup(dataBusModel.busSelected.lat, dataBusModel.busSelected.lon, MapPopupType.POPUP_BUS);
+            popup.view.title.text("Bus "+dataBusModel.busSelected.rt);
+            popup.view.destination.text(dataBusModel.busSelected.des);
+
+            if(dataBusModel.busSelected.dly != undefined) {
+                popup.view.delay.text("No delay");
+            }
+            else {
+                popup.view.delay.text("Delay");
+            }
         }
         else
             self.hideBusRoutes();
@@ -177,6 +193,7 @@ function BusLayerController() {
     self.super_dispose = self.dispose;
     self.dispose = function() {
         self.hideBusRoutes();
+        self.clear();
         self.super_dispose();
         dataBusModel.unsubscribe(Notifications.data.BUS_CHANGED, onBusData);
         dataBusModel.unsubscribe(Notifications.data.BUS_SELECTION_CHANGED, onBusSelected);
