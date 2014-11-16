@@ -60,7 +60,11 @@ var MainViewController = function() {
 
         // WEATHER
         self.weatherViewController = WeatherViewController();
-
+        self.weatherViewController.view.width = "16%";
+        self.weatherViewController.view.height = "100%";
+        self.weatherViewController.view.x = "66%";
+        self.weatherViewController.view.y = "0.2%";
+        self.view.append(self.weatherViewController);
 
     }();
 
