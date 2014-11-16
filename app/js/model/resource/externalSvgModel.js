@@ -34,7 +34,8 @@ var ExternalSvgModel = function() {
                             "resource/sublayer/icon/important-place.svg",
                             "resource/view/map-popup-crime.svg",
                             "resource/view/weather-widget.svg",
-                            "resource/view/graphs-title.svg"
+                            "resource/view/graphs-title.svg",
+                            "resource/view/map-popup-warning.svg"
                             ];
 
 
