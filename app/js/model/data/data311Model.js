@@ -186,6 +186,8 @@ dataVehiclesModel.addSqlWhere("status!='Completed - Dup'");
 dataVehiclesModel.addSqlWhere("status!='Open - Dup'");
 
 var dataLightsAllModel = Data311Model("All lights out","http://data.cityofchicago.org/resource/zuxi-7xem.json",Notifications.data.LIGHT_OUT_ALL_CHANGED,30000,"creation_date");
+dataLightsAllModel.addSqlWhere("status!='Completed - Dup'");
+dataLightsAllModel.addSqlWhere("status!='Open - Dup'");
 
 var dataLight1Model = Data311Model("One light out","http://data.cityofchicago.org/resource/3aav-uy2v.json",Notifications.data.LIGHT_OUT_SINGLE_CHANGED,30000,"creation_date");
 dataLight1Model.addSqlWhere("status!='Completed - Dup'");

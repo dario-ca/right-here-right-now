@@ -12,6 +12,7 @@ var ExternalSvgModel = function() {
                             "resource/view/map-popup-bus.svg",
                             "resource/sublayer/icon/divvy-station.svg",
                             "resource/sublayer/icon/bus.svg",
+                            "resource/sublayer/icon/bus-stop.svg",
                             "resource/sublayer/icon/bus-no-number.svg",
                             "resource/view/button.svg",
                             "resource/view/button-with-icon.svg",

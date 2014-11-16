@@ -24,7 +24,19 @@ var DataWeatherModel = function(name) {
         });
     };
 
+    self.subscribe = function(notification, callback) {
+        self.super_subscribe(notification, callback);
+
+        self._observers++;
+
+        if(self._active == true && self.data != null) {
+            // Data is already present, call callback
+            callback();
+        }
+    };
+
     ////////////////////////////////// PRIVATE METHODS //////////////////////////////////
+
     var init = function() {
         self.startFetching();
     }();
