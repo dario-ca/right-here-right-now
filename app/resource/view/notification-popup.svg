@@ -47,7 +47,7 @@
      id="NOTIFICATION2"
      transform="translate(-164.6778,150)"><polygon
        id="notifica1"
-       points="-372.519,-71.546 872.092,-71.546 872.092,93.32 767.754,170.625 -372.519,170.625 "
+       points="-372.519,-71.546 872.092,-71.546 872.092,170.625 -372.519,170.625 "
        style="fill:#f1f2f2"
        transform="translate(539.7066,-75.284373)" /><text
        font-size="65.0952"

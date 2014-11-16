@@ -88,6 +88,7 @@ var UIView = function(domElement) {
      */
     self.onClick = function(callBack) {
         self.classed("ui-view-pointer", true);   // Add the class pointer if it is clickable
+        self.classed("clickable-item", true);
         self.on("click", callBack);
     };
 

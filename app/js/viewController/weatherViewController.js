@@ -22,7 +22,7 @@ var WeatherViewController = function() {
                                     weather.current_observation.temp_c);
 
         //var currentDate = self.getModel().getTimeModel().getDate();
-        var conditions = weather.current_observation;
+        var conditions = weather.current_observation.weather;
         var imgPath = "resource/weather-icons/";
         //if(self.getModel().getTimeModel().isDay()) {
             imgPath += weatherIconMapping[conditions].day;

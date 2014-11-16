@@ -7,7 +7,8 @@ var LayerModel = function(name) {
 
     self.sublayers = [];
     self.name = name;
-
+    //whether or not the graph is linked to some graphs on the right
+    self.hasRelatedGraphs = false;
 
     /** PUBLIC FUNCTIONS**/
 

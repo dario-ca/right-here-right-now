@@ -63,3 +63,9 @@ Notifications.timeInterval = {
 Notifications.position = {
     POSITION_CHANGED: "position.POSITION_CHANGED"
 };
+
+
+Notifications.graphs = {
+    GRAPH_LAYER_SELECTED_CHANGED: "graphs.GRAPH_LAYER_SELECTED_CHANGED",
+    GRAPH_SUBLAYER_SELECTED_CHANGED: "graphs.GRAPH_SUBLAYER_SELECTED_CHANGED"
+};

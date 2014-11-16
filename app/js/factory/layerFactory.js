@@ -17,17 +17,21 @@ var LayerFactory = function() {
     self.populateLayers = function() {
 
         var mobilityLayer = self.addLayer("MOBILITY");
+        mobilityLayer.hasRelatedGraphs= true;
         mobilityLayer.addSublayer("Divvy",
                                   "resource/sublayer/icon/divvy-station.svg",
                                   Colors.layer.MOBILITY,
-                                  [RestaurantLayerController]);
+                                  [DivvyLayerController])
+                                  .hasRelatedGraph = true;
         mobilityLayer.addSublayer("Buses",
                                   "resource/sublayer/icon/bus-no-number.svg",
                                   Colors.layer.MOBILITY,
-                                  [BusLayerController]);
+                                  [BusLayerController])
+                                  .hasRelatedGraph = true;
 
 
         var informationLayer = self.addLayer("INFORMATION");
+        informationLayer.hasRelatedGraphs= true;
         informationLayer.addSublayer("Pothole",
                                      "resource/sublayer/icon/pothole.svg",
                                      Colors.layer.INFORMATION,
@@ -42,6 +46,7 @@ var LayerFactory = function() {
                                      [VehicleLayerController]);
 
         var securityLayer = self.addLayer("SECURITY");
+        securityLayer.hasRelatedGraphs= true;
         securityLayer.addSublayer("Personal Assault",
                                   "resource/sublayer/icon/assault.svg",
                                   Colors.layer.SECURITY_1,
@@ -74,8 +79,7 @@ var LayerFactory = function() {
             "resource/sublayer/icon/important-place.svg",
             Colors.layer.POINT_OF_INTEREST,
             []);
-
-
+        
         var socialLayer = self.addLayer("SOCIAL");
         socialLayer.addSublayer("twitter",
             "resource/sublayer/icon/twitter.svg",
