@@ -7,8 +7,8 @@ var DataModel = function(name) {
 
     self._proxyURL = "proxy.php?csurl=";
     self._notification = Notifications.data.GENERIC_DATA_CHANGED;  // Must be reimplemented in all subclasses
-    var _observers = 0;
-    var _active = false;    // Will not fetch
+    self._observers = 0;
+    self._active = false;    // Will not fetch
     var _timer = null;
 
     ////////////////////////// PUBLIC ATTRIBUTES ///////////////////////////
@@ -24,15 +24,15 @@ var DataModel = function(name) {
 
     ////////////////////////// PUBLIC METHODS //////////////////////////
 
-    var super_subscribe = self.subscribe;
+    self.super_subscribe = self.subscribe;
     self.subscribe = function(notification, callback) {
-        super_subscribe(notification, callback);
+        self.super_subscribe(notification, callback);
 
-        _observers++;
+        self._observers++;
 
         self.dataRequested();
 
-        if(_active == true && self.data != null) {
+        if(self._active == true && self.data != null) {
             // Data is already present, call callback
             callback();
         }
@@ -42,7 +42,7 @@ var DataModel = function(name) {
      * Use this when the selection is activated
      */
     self.startFetching = function() {
-        _active = true;
+        self._active = true;
         self.fetchData();
 
         // start timer
@@ -54,7 +54,7 @@ var DataModel = function(name) {
     };
 
     self.stopFetching = function() {
-        _active = false;
+        self._active = false;
         clearInterval(_timer);
     };
 
@@ -64,13 +64,13 @@ var DataModel = function(name) {
     self.dataRequested = function() {
 
         // Fetch data and enable timer
-        if(_observers > 0 &&
-            _active == false &&
+        if(self._observers > 0 &&
+            self._active == false &&
             selectionModel.isEmpty() == false) {
             self.startFetching();
         }
         else if(selectionModel.isEmpty() == true &&
-                _observers > 0) {
+                self._observers > 0) {
             self.data = [];
             self.dispatch(self._notification);
         }
@@ -90,10 +90,10 @@ var DataModel = function(name) {
         var unsubscribed = super_unsubscribe(notification, callback);
 
         if(unsubscribed)
-            _observers--;
+            self._observers--;
 
         // Disable timer if no observers are present
-        if(_observers <= 0 && _active == true && _timer != null) {
+        if(self._observers <= 0 && self._active == true && _timer != null) {
             self.stopFetching();
         }
     };
