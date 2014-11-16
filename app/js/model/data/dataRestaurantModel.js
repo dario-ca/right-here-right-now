@@ -9,6 +9,9 @@ var DataRestaurantModel = function() {
 
     self._notification = Notifications.data.FOOD_CHANGED;
 
+    self.restaurantSelected=null;
+
+
     ////////////////////////// PRIVATE ATTRIBUTES //////////////////////////
 
 
@@ -32,7 +35,7 @@ var DataRestaurantModel = function() {
         if(foodInspection != null)  // Are present the food inspections
             restaurants.forEach(function(restaurant) {
                 var f = foodInspection.filter(function(fi) {
-                    return dinstance([restaurant.location.coordinate.latitude, restaurant.location.coordinate.longitude],
+                    return distance([restaurant.location.coordinate.latitude, restaurant.location.coordinate.longitude],
                                      [fi.latitude, fi.longitude]) < 0.001 &&
                            1 == 1;  // TODO: insert some other condition
                 });
@@ -45,14 +48,23 @@ var DataRestaurantModel = function() {
         self.callback(restaurants);
     };
 
-    var dinstance = function(p0, p1) {
+    var distance = function(p0, p1) {
         return Math.sqrt((p0[0]-p1[0])*(p0[0]-p1[0]) +
                          (p0[1]-p1[1])*(p0[1]-p1[1]));
+    };
+
+    self.restaurantClicked = function(restaurant) {
+        if(self.restaurantSelected!==null && self.restaurantSelected.id === restaurant.id){
+            self.restaurantSelected=null;
+        }else
+            self.restaurantSelected = restaurant;
+        self.dispatch(Notifications.data.FOOD_SELECTION_CHANGED);
     };
 
 
     var init = function() {
         // Initialization functions
+        notificationCenter.subscribe(Notifications.selection.SELECTION_CHANGED, self.dataChanged);
     }();
 
     return self;
