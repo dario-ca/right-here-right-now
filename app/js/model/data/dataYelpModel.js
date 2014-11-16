@@ -4,10 +4,10 @@
  *  This class fetch the data of the potholes of Chicago city
  */
 
-var DataYelpModel = function(name) {
+var DataYelpModel = function(notification) {
     var self = DataModel();
 
-    self._notification = Notifications.data.YELP_FOOD_CHANGED;
+    self._notification = notification;
     self.interval = 120000;
 
     ////////////////////////// PRIVATE ATTRIBUTES //////////////////////////
@@ -20,6 +20,8 @@ var DataYelpModel = function(name) {
 
     var maxBusiness = 100;
 
+    var tempData;   // Contains the partial data
+
 
     ////////////////////////// PUBLIC METHODS //////////////////////////
 
@@ -28,14 +30,14 @@ var DataYelpModel = function(name) {
         var selection = selectionModel.getSelection();
 
         var q = queue(15);
-        var tempData = [];  // Contains the partial data
+        tempData = [];  // Contains the partial data
 
         // For all rectangle in the selection
         selection.forEach(function(rectangle) {
 
             var bounds = rectangle.circumscribed();
 
-            q.defer(function(callback){ self.fetchSingleData(tempData, bounds, 0, callback); });
+            q.defer(function(callback){ self.fetchSingleData(bounds, 0, callback); });
         });
 
         // When all data arrived call that callback
@@ -45,7 +47,7 @@ var DataYelpModel = function(name) {
     };
 
     ////////////////////////////////// PRIVATE METHODS //////////////////////////////////
-    self.fetchSingleData = function(tempData, bounds, offsetNumber, callback) {
+    self.fetchSingleData = function(bounds, offsetNumber, callback) {
 
         // Calculate the search terms
         var sw = bounds.points[0];
@@ -96,7 +98,7 @@ var DataYelpModel = function(name) {
                data.total < offsetNumber+20)
                 callback();
             else
-                self.fetchSingleData(tempData, bounds, offsetNumber+20, callback)
+                self.fetchSingleData(bounds, offsetNumber+20, callback)
         }).fail(function() {
             callback();
         })
@@ -113,4 +115,4 @@ var DataYelpModel = function(name) {
     return self;
 };
 
-var dataYelpModel = DataYelpModel();
+var dataYelpRestaurantModel = DataYelpModel(Notifications.data.YELP_RESTAURANT_CHANGED);

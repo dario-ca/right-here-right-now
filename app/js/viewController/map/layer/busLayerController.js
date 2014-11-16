@@ -4,41 +4,6 @@ function BusLayerController() {
     var busRouteLayers = [];
 
     /**
-     * Display the bus route
-     * @param rt: bus line number
-     */
-    // TODO: delete commented code
-    /*
-    self.displayBusRoute = function(rt, dir) {
-
-        var stops = dataBusModel.getLineStops(rt, dir);
-        var latLon = [];
-        stops.forEach(function(stop) {
-            latLon.push(L.latLng(stop.lat, stop.lon));
-        });
-
-        var routeLayer = L.Routing.control({
-            plan: L.Routing.plan(latLon,
-                { waypointIcon: L.icon({
-                    iconUrl: "resource/sublayer/icon/bus_stop.png",
-                    iconAnchor: L.point(12, 41)
-                })
-            }),
-            fitSelectedRoutes: false,
-            lineOptions: {
-                styles: [
-                    {color: 'black', opacity: 0, weight: 0},
-                    {color: 'blue', opacity: 0, weight: 0},
-                    {color: 'red', opacity: 0, weight: 2}
-                ]
-            }
-        });
-        var map = mapModel.getLeafletMap();
-        map.addLayer(routeLayer);
-    };
-    */
-
-    /**
      * Display the bus stops
      * @param stops
      */
@@ -46,7 +11,7 @@ function BusLayerController() {
 
         stops.forEach(function(stop) {
             // TODO: add the bus stop icon
-            var busStop = ExternalSvgViewController("resource/sublayer/icon/bus.svg");
+            var busStop = ExternalSvgViewController("resource/sublayer/icon/bus-stop.svg");
             busStop.view.width = self.defaultIconSize;
             busStop.view.height= self.defaultIconSize;
 
@@ -57,37 +22,6 @@ function BusLayerController() {
             self.view.append(busStop);
             busRouteLayers.push(busStop);
         });
-
-        // TODO: delete commented code
-        /*
-        // Extract latitude and longitude
-        var latLon = [];
-        stops.forEach(function(stop) {
-            latLon.push(L.latLng(stop.lat, stop.lon));
-        });
-
-        var routeLayer = L.Routing.control({
-            plan: L.Routing.plan(latLon,
-                { waypointIcon: L.icon({
-                    iconUrl: "resource/sublayer/icon/bus_stop.png",
-                    iconAnchor: L.point(12, 41)
-                    }),
-                draggableWaypoints: false,
-                addWaypoints: false
-            }),
-            fitSelectedRoutes: false,
-            lineOptions: {
-                styles: [
-                    {color: 'black', opacity: 0, weight: 0},
-                    {color: 'blue', opacity: 0, weight: 0},
-                    {color: 'red', opacity: 0, weight: 0}
-                ]
-            }
-        });
-        var map = mapModel.getLeafletMap();
-        map.addLayer(routeLayer);
-        busRouteLayers.push(routeLayer);
-        */
     };
 
     self.hideBusRoutes = function() {
@@ -180,10 +114,10 @@ function BusLayerController() {
             popup.view.destination.text(dataBusModel.busSelected.des);
 
             if(dataBusModel.busSelected.dly != undefined) {
-                popup.view.delay.text("No delay");
+                popup.view.delay.text("Delay");
             }
             else {
-                popup.view.delay.text("Delay");
+                popup.view.delay.text("In time");
             }
         }
         else
