@@ -1,7 +1,7 @@
 function PopupLayerController() {
     var self = MapLayerController();
 
-    self.openPopup = function(lat, lng, popupType) {
+    self.openPopup = function(lat, lng, popupType, onCloseCallback) {
         var popup = null;
         switch (popupType){
             case MapPopupType.POPUP_SIMPLE:
@@ -40,6 +40,9 @@ function PopupLayerController() {
 
         popup.view.close.onClick(function(){
             popup.dispose();
+            if(onCloseCallback){
+                onCloseCallback();
+            }
         });
 
         var position = self.project(lat, lng);

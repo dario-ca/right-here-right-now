@@ -37,6 +37,7 @@ var Application = function() {
     var loadResources = function(callback) {
         queue()
             .defer(externalSvgModel.loadResources)
+            .defer(dataPopulationModel.loadResources)
             .await(callback)
     };
 

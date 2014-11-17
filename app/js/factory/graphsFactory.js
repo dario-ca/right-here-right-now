@@ -21,10 +21,10 @@ var GraphsFactory = function() {
             "MOBILITY": {
                 sublayers: {
                     "Divvy": {
-                        graph: {class: DivvyGraphViewController, position: GraphPosition.TOP}
+                        graph: {class: DivvyGraphViewController, position: GraphPosition.FULL}
                     },
-                    "Bus": {
-                        graph: {class: NoSelectionGraphViewController, position: GraphPosition.BOTTOM}
+                    "Buses": {
+                        graph: {class: CtaGraphViewController, position: GraphPosition.FULL}
                     }
                 }
             }
@@ -43,5 +43,6 @@ var GraphsFactory = function() {
 
 var GraphPosition = {
     TOP: "TOP",
-    BOTTOM: "BOTTOM"
+    BOTTOM: "BOTTOM",
+    FULL: "FULL"
 };

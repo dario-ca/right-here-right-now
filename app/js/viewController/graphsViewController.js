@@ -87,16 +87,20 @@ var GraphsViewController = function() {
         viewController.view.width = (100 - sublayerIconMargin - sublayerIconWidth) + "%";
 
         if(position == GraphPosition.TOP){
-
+            viewController.view.height = "45%";
             _topViewController = viewController;
 
         } else if(position == GraphPosition.BOTTOM){
-
+            viewController.view.height = "45%";
             viewController.view.y = "50%";
             _bottomViewController = viewController;
+        } else if(position == GraphPosition.FULL){
+            viewController.view.height = "90%";
+
+            _topViewController = viewController;
         }
 
-        viewController.view.height = "45%";
+
 
         self.view.append(viewController)
     };

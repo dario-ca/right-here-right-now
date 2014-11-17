@@ -2,3 +2,7 @@
     stroke: white;
     stroke-width: 0.3%;
 }
+.label-single-graph {
+    fill: white;
+    font-family: lato-bold;
+}
