@@ -34,6 +34,13 @@ Colors.lightOne = {
     LIGHT_ONE_COMPLETED_DUP: "red"
 };
 
+Colors.lightAll = {
+    LIGHT_ALL_OPEN: "#3F8643",
+    LIGHT_ALL_OPEN_DUP: "red",
+    LIGHT_ALL_COMPLETED: "#BABABA",
+    LIGHT_ALL_COMPLETED_DUP: "red"
+};
+
 Colors.layer = {
     MOBILITY: "#293d9b",
     INFORMATION: "#3f8643",

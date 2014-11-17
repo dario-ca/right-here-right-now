@@ -68,7 +68,6 @@ function CrimeLayerController(name,notification,icon) {
         drawCrimes();
     };
 
-    //TODO:big problem, never entered first condition, problem with notifications I think
     var onCrimeSelected = function() {
         //if they are not clicking on me, I remove my popup if any
         if (DataCrimeModel.popupCategory !== _name && _popup !== null) {

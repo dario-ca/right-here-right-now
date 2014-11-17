@@ -39,7 +39,7 @@ var LayerFactory = function() {
         informationLayer.addSublayer("Light",
                                      "resource/sublayer/icon/light.svg",
                                      Colors.layer.INFORMATION,
-                                     [LightOneLayerController]);
+                                     [LightOneLayerController,LightAllLayerController]);
         informationLayer.addSublayer("Abandoned Vehicle",
                                      "resource/sublayer/icon/abandoned-vehicle.svg",
                                      Colors.layer.INFORMATION,
