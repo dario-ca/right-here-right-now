@@ -11,7 +11,7 @@ function BusLayerController() {
 
         stops.forEach(function(stop) {
             // TODO: add the bus stop icon
-            var busStop = self.createIcon(stop.lat, stop.lon, "resource/sublayer/icon/bus.svg");
+            var busStop = self.createIcon(stop.lat, stop.lon, "resource/sublayer/icon/bus-stop.svg");
 
             self.view.append(busStop);
             busRouteLayers.push(busStop);

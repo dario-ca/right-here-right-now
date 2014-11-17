@@ -13,6 +13,8 @@ var DataDivvyModel = function(name) {
 
     self.stationSelected=null;
 
+    self.entireCityData;    // Contains the data for the entire city
+
 
     ////////////////////////// PUBLIC METHODS //////////////////////////
 
@@ -22,9 +24,26 @@ var DataDivvyModel = function(name) {
                 console.log("Error downloading the file "+self._divvyURL);
                 return;
             }
+            self.entireCityData = json.stationBeanList;
             self.callback(geoFilter(json.stationBeanList));
         });
     };
+
+    self.__defineGetter__("city", function() {
+        return {
+            bikesAvailable: bikesAvailable(self.entireCityData),
+            placesAvailable:  placesAvailable(self.entireCityData)
+        };
+    });
+
+    self.__defineGetter__("selection", function() {
+        return {
+            bikesAvailable: bikesAvailable(self.data),
+            placesAvailable:  placesAvailable(self.data)
+        };
+    });
+
+
 
 
 
@@ -41,6 +60,23 @@ var DataDivvyModel = function(name) {
         });
 
         return newData;
+    };
+
+    // Number of bikes
+    var bikesAvailable = function(data) {
+        var sum = 0;
+        data.forEach(function(station) {
+            sum += station.availableBikes;
+        });
+        return sum;
+    };
+
+    var placesAvailable = function(data) {
+        var sum = 0;
+        data.forEach(function(station) {
+            sum += station.availableDocks;
+        });
+        return sum;
     };
 
     self.stationClicked = function(divvyStation) {

@@ -143,6 +143,14 @@ var DataBusModel = function(name) {
         self.dispatch(Notifications.data.BUS_SELECTION_CHANGED);
     };
 
+    self.__defineGetter__("selection", function() {
+       return {
+           totalBusses: totalBusses(self.data),
+           delayedBusses: delayedBusses(self.data),
+           notDelayedBusses: notDelayedBusses(self.data)
+       };
+    });
+
     ////////////////////////// PRIVATE METHODS //////////////////////////
     var xmlToJs = function(xml) {
         var x2js = new X2JS();
@@ -305,6 +313,28 @@ var DataBusModel = function(name) {
         });
 
         return newData;
+    };
+
+    var totalBusses = function(data) {
+        return data.length;
+    };
+
+    var delayedBusses = function(data) {
+        var sum = 0;
+        data.forEach(function(bus) {
+            if(bus.dly != undefined)
+                sum++;
+        });
+        return sum;
+    };
+
+    var notDelayedBusses = function(data) {
+        var sum = 0;
+        data.forEach(function(bus) {
+            if(bus.dly == undefined)
+                sum++;
+        });
+        return sum;
     };
 
     var init = function() {
