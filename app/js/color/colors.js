@@ -53,3 +53,8 @@ Colors.enhanceIcon = {
 Colors.selection = {
     RECTANGLE: "#293d9b"
 };
+
+Colors.graph = {
+    CHICAGO: "#0570b0",
+    SELECTION: "#fd8d3c"
+};

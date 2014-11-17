@@ -36,7 +36,8 @@ var ExternalSvgModel = function() {
                             "resource/view/weather-widget.svg",
                             "resource/view/graphs-title.svg",
                             "resource/view/map-popup-warning.svg",
-                            "resource/graph/no-selection.svg"
+                            "resource/graph/no-selection.svg",
+                            "resource/graph/legenda.svg"
                             ];
 
 
