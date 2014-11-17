@@ -10,7 +10,8 @@ var GraphsViewController = function() {
         sublayerIconMargin = 3,
         sublayerIconMarginTop = 20;
 
-
+    var _topViewController = null;
+    var _bottomViewController = null;
 
     self.onLayerSelectionChanged = function() {
         _layerButtons.forEach(function(button){
@@ -18,6 +19,7 @@ var GraphsViewController = function() {
         });
 
         drawSublayerButtons();
+        instantiateGraphs();
     };
 
 
@@ -25,7 +27,40 @@ var GraphsViewController = function() {
 
 
         drawSublayerButtons();
+        instantiateGraphs();
     };
+
+
+    var instantiateGraphs = function() {
+
+        if(_topViewController){
+            _topViewController.dispose();
+        }
+
+        if(_bottomViewController){
+            _bottomViewController.dispose();
+        }
+
+
+        if(!graphsModel.layerSelected)
+            return;
+
+        var layer = app.graphsFactory.layerGraphs[graphsModel.layerSelected];
+        if(layer){
+
+            if(layer.graph && layer.graph.class){
+                setTopOrBottomViewController(layer.graph.class(), layer.graph.position);
+            }
+
+            var sublayer = layer.sublayers[graphsModel.sublayerSelected];
+
+            if(sublayer){
+                setTopOrBottomViewController(sublayer.graph.class(), sublayer.graph.position);
+            }
+
+        }
+    };
+
 
     /**
      * @override
@@ -43,6 +78,25 @@ var GraphsViewController = function() {
         }
 
     };
+
+
+    var setTopOrBottomViewController = function(viewController, position) {
+        viewController.view.classed("graph-view-controller", true);
+        viewController.view.width = (100 - sublayerIconMargin - sublayerIconWidth) + "%";
+
+        if(position == GraphPosition.TOP){
+
+            _topViewController = viewController;
+
+        } else if(position == GraphPosition.BOTTOM){
+
+            viewController.view.y = "50%";
+            _bottomViewController = viewController;
+        }
+
+        self.view.append(viewController)
+    };
+
 
 
     var drawSublayerButtons = function() {
@@ -91,7 +145,7 @@ var GraphsViewController = function() {
 
         //TITLE
         _graphsTitle = ExternalSvgViewController("resource/view/graphs-title.svg");
-        _graphsTitle.view.title = "prova";
+        _graphsTitle.view.title = "No sublayer selected";
         _graphsTitle.view.x = "3.5%";
         _graphsTitle.view.y = "2.2%";
         _graphsTitle.view.width = "40%";

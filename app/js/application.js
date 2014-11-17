@@ -6,7 +6,7 @@ var Application = function() {
 
 
     self.mainWindow = null;
-
+    self.graphsFactory = null;
     /** PUBLIC FUNCTIONS**/
 
     /**
@@ -46,6 +46,9 @@ var Application = function() {
     var setUp = function() {
         var layerFactory = LayerFactory();
         layerFactory.populateLayers();
+
+        self.graphsFactory = GraphsFactory();
+        self.graphsFactory.populateGraphs();
 
 
         var body = d3.select("body");
