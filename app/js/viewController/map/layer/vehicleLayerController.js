@@ -55,7 +55,7 @@ function VehicleLayerController() {
         _svgVehicles=[];
     };
 
-    //TODO:check implementation of unsubscribe
+    //TODO:check implementation
     self.super_dispose = self.dispose;
     self.dispose = function() {
         self.hideVehicles();

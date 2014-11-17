@@ -49,13 +49,15 @@ var GraphsViewController = function() {
         if(layer){
 
             if(layer.graph && layer.graph.class){
-                setTopOrBottomViewController(layer.graph.class(), layer.graph.position);
+                setTopOrBottomViewController(layer.graph.class(graphsModel.layerSelected),
+                    layer.graph.position);
             }
 
             var sublayer = layer.sublayers[graphsModel.sublayerSelected];
 
             if(sublayer){
-                setTopOrBottomViewController(sublayer.graph.class(), sublayer.graph.position);
+                setTopOrBottomViewController(sublayer.graph.class(graphsModel.layerSelected, graphsModel.sublayerSelected),
+                    sublayer.graph.position);
             }
 
         }

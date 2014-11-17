@@ -3,6 +3,7 @@ function LightOneLayerController() {
 
     /////////////////////////// PRIVATE ATTRIBUTES ////////////////////////////
 
+    var _name=dataLight1Model.name;
     var _lightOneData=[];
     var _svgLightsOne=[];
     var _popup=null;
@@ -25,10 +26,20 @@ function LightOneLayerController() {
                     return Colors.lightOne.LIGHT_ONE_OPEN_DUP;
                 }
             });
-            lightIcon.view.onClick(function(){
+            /*lightIcon.view.onClick(function(){
                 if(dataLight1Model.light1selected!==null)
                     _popup.dispose();
                 dataLight1Model.light1Clicked(d);
+            });*/
+            lightIcon.view.onClick(function() {
+                //if I am clicking on the same popup, remove it
+                if (dataLight1Model.lightSelected !== null && dataLight1Model.lightSelected.service_request_number === d.service_request_number && _popup !== null){
+                    _popup.dispose();
+                    _popup=null;
+                    dataLight1Model.lightClicked(null,null);
+                }else{
+                    dataLight1Model.lightClicked(d,_name);
+                }
             });
         })
     };
@@ -48,6 +59,24 @@ function LightOneLayerController() {
         }
     };
 
+    var onLightSelected = function() {
+        //if they are not clicking on me, I remove my popup if any
+        if (Data311Model.lightPopup !== _name && _popup !== null) {
+            _popup.dispose();
+            dataLight1Model.lightSelected=null;
+            _popup=null;
+            //if they are clicking on me, I create the popup removing the old one if any
+        }else if(Data311Model.lightPopup===_name){
+            if(_popup!==null){
+                _popup.dispose();
+            }
+            _popup = popupLayerController.openPopup(dataLight1Model.lightSelected.latitude, dataLight1Model.lightSelected.longitude, MapPopupType.POPUP_SIMPLE);
+            _popup.view.title.text("Single light Broken: "+dataLight1Model.lightSelected.status);
+            _popup.view.subtitle.text(dataLight1Model.lightSelected.street_address);
+        }
+
+    };
+
     /////////////////////////// PUBLIC METHODS ////////////////////////////
 
 
@@ -64,12 +93,12 @@ function LightOneLayerController() {
         self.hideLights();
         self.super_dispose();
         dataLight1Model.unsubscribe(Notifications.data.LIGHT_OUT_SINGLE_CHANGED, onLightOneData);
-        dataLight1Model.unsubscribe(Notifications.data.LIGHT_OUT_SINGLE_SELECTION_CHANGED,onLight1Selected);
+        notificationCenter.unsubscribe(Notifications.data.LIGHT_SELECTION_CHANGED,onLightSelected);
     };
 
     var init = function() {
         dataLight1Model.subscribe(Notifications.data.LIGHT_OUT_SINGLE_CHANGED, onLightOneData);
-        dataLight1Model.subscribe(Notifications.data.LIGHT_OUT_SINGLE_SELECTION_CHANGED, onLight1Selected);
+        notificationCenter.subscribe(Notifications.data.LIGHT_SELECTION_CHANGED, onLightSelected);
     }();
 
     return self;
