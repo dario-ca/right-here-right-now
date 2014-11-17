@@ -49,6 +49,12 @@ function levenshteinStringDistance(s1, s2) {
 }
 
 function stringDistance(s1, s2) {
+    if(s1 == null ||
+       s1 == undefined ||
+       s2 == null ||
+       s2 == undefined)
+        return 1000;    // return very high distance
+
     var d1 = levenshteinStringDistance(s1, s2);
     var d2 = levenshteinStringDistance(s1, s2.substring(0, s1.length));
     var d3 = levenshteinStringDistance(s1.substring(0, s2.length), s2);
