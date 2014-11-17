@@ -7,7 +7,7 @@ var GraphsFactory = function() {
         self.layerGraphs = {
 
             "SECURITY": {
-                graph: {class: NoSelectionGraphViewController, position: GraphPosition.TOP},
+                graph: {class: SecurityGraphViewController, position: GraphPosition.TOP},
                 sublayers: {
                     "Personal Assault": {
                         graph: {class: NoSelectionGraphViewController, position: GraphPosition.BOTTOM}
@@ -17,6 +17,16 @@ var GraphsFactory = function() {
                     }
                 }
 
+            },
+            "MOBILITY": {
+                sublayers: {
+                    "Divvy": {
+                        graph: {class: DivvyGraphViewController, position: GraphPosition.TOP}
+                    },
+                    "Bus": {
+                        graph: {class: NoSelectionGraphViewController, position: GraphPosition.BOTTOM}
+                    }
+                }
             }
 
         }
