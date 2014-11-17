@@ -96,6 +96,8 @@ var GraphsViewController = function() {
             _bottomViewController = viewController;
         }
 
+        viewController.view.height = "45%";
+
         self.view.append(viewController)
     };
 

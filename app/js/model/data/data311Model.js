@@ -36,6 +36,9 @@ var Data311Model = function(modelName,databaseMainUrl,notification,interval,json
     self.potholeSelected=null;
     self.vehicleSelected=null;
     self.light1selected=null;
+    self.lightAllselected=null;
+    self.lightSelected=null;
+
 
     ////////////////////////// PRIVATE METHODS //////////////////////////
 
@@ -194,6 +197,20 @@ var Data311Model = function(modelName,databaseMainUrl,notification,interval,json
         self.dispatch(Notifications.data.LIGHT_OUT_SINGLE_SELECTION_CHANGED);
     };
 
+    self.lightAllClicked = function(lightAll) {
+        if(self.lightAllselected!==null && self.lightAllselected.service_request_number === lightAll.service_request_number){
+            self.lightAllselected=null;
+        }else
+            self.lightAllselected = lightAll;
+        self.dispatch(Notifications.data.LIGHT_OUT_ALL_SELECTION_CHANGED);
+    };
+
+    self.lightClicked = function(light,category) {
+        self.lightSelected = light;
+        Data311Model.lightPopup=category;
+        notificationCenter.dispatch(Notifications.data.LIGHT_SELECTION_CHANGED);
+    };
+
     ////////////////////////// SUBSCRIBES //////////////////////////
 
     notificationCenter.subscribe(Notifications.timeInterval.TIME_INTERVAL_CHANGED,callBackChangeTimeFilter);
@@ -201,6 +218,8 @@ var Data311Model = function(modelName,databaseMainUrl,notification,interval,json
 
     return self;
 };
+
+Data311Model.lightPopup=null;
 
 var dataPotholeModel = Data311Model("Potholes","http://data.cityofchicago.org/resource/7as2-ds3y.json",Notifications.data.POTHOLE_CHANGED,30000,"creation_date");
 dataPotholeModel.addSqlWhere("status!='Completed - Dup'");
@@ -220,7 +239,6 @@ dataLight1Model.addSqlWhere("status!='Open - Dup'");
 
 var dataFoodInspection = Data311Model("Food inspections","http://data.cityofchicago.org/resource/4ijn-s7e5.json",Notifications.data.FOOD_INSPECTION_CHANGED,30000,"inspection_date");
 var dataRodentBites = Data311Model("Rodent Bites","http://data.cityofchicago.org/resource/97t6-zrhs.json",Notifications.data.RAT_BITES_CHANGED,30000,"creation_date");
-//var TempDataCrimeModel = Data311Model("Crimes","http://data.cityofchicago.org/resource/ijzp-q8t2.json",Notifications.data.crime.TMP_CRIME_DATA_CHANGED,30000,"date",2);
 
 ////////////////////////// STATUS //////////////////////////
 dataPotholeModel.status = {
@@ -242,3 +260,14 @@ dataLight1Model.status = {
     LIGHT_ONE_COMPLETED: "Completed",
     LIGHT_ONE_COMPLETED_DUP: "Completed - Dup"
 };
+
+dataLight1Model.name= "lightOne";
+
+dataLightsAllModel.status = {
+    LIGHT_ALL_OPEN: "Open",
+    LIGHT_ALL_OPEN_DUP: "Open - Dup",
+    LIGHT_ALL_COMPLETED: "Completed",
+    LIGHT_ALL_COMPLETED_DUP: "Completed - Dup"
+};
+
+dataLightsAllModel.name= "lightsAll";

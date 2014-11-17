@@ -10,6 +10,7 @@ var ExternalSvgModel = function() {
                             "resource/view/notification-popup2.svg",
                             "resource/view/map-popup-simple.svg",
                             "resource/view/map-popup-bus.svg",
+                            "resource/view/map-popup-twitter.svg",
                             "resource/sublayer/icon/divvy-station.svg",
                             "resource/sublayer/icon/bus.svg",
                             "resource/sublayer/icon/bus-stop.svg",

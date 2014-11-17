@@ -24,6 +24,13 @@ function PopupLayerController() {
                 popup.view.width = 16;
                 popup.view.height = 8;
                 break;
+            case MapPopupType.POPUP_TWITTER:
+                popup = ExternalSvgViewController("resource/view/map-popup-twitter.svg");
+                //popup.view.width = 16;
+                //popup.view.height = 8;
+                popup.view.width = 40;
+                popup.view.height = 60;
+                break;
 
             default :
 
@@ -62,5 +69,6 @@ var MapPopupType = {
     POPUP_SIMPLE: "POPUP_SIMPLE",
     POPUP_BUS: "POPUP_BUS",
     POPUP_CRIME: "POPUP_CRIME",
-    POPUP_WARNING: "POPUP_WARNING"
+    POPUP_WARNING: "POPUP_WARNING",
+    POPUP_TWITTER: "POPUP_TWITTER"
 };

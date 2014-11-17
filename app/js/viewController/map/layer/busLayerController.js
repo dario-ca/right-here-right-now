@@ -74,7 +74,7 @@ function BusLayerController() {
             self.view.append(bus);
 
             // Eventually add a warning if the vehicle is delayed
-            if(vehicle.dly != undefined || 1==1) {
+            if(vehicle.dly != undefined) {
                 self.addWarning(vehicle.lat, vehicle.lon, 2.8);
             }
 
