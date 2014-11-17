@@ -6,9 +6,9 @@
 <g>
 	<polygon fill="#FFFFFF" stroke="#000000" stroke-width="0.5774" stroke-miterlimit="10" points="0.344,19.273 0.344,0.797 
 		15.933,19.273 305.777,19.273 305.777,97.797 0.344,97.797 	"/>
-	<text id="title" transform="matrix(1 0 0 1 21.3779 45.6074)" font-family="'MyriadPro-Bold'" font-size="19.0536">Title</text>
-	<text id="subtitle" transform="matrix(1 0 0 1 33.3779 89.2686)" font-family="'MyriadPro-Regular'" font-size="19.0536">subtitlesubtitlesubtitle</text>
-	<text id="warning" transform="matrix(1 0 0 1 104.7109 68.2637)" font-family="'MyriadPro-Regular'" font-size="19.0536">prova prova provaprova</text>
+	<text id="title" transform="matrix(1 0 0 1 21.3779 45.6074)" font-family="'Lato-Bold'" font-size="19.0536">Title</text>
+	<text id="subtitle" transform="matrix(1 0 0 1 33.3779 89.2686)" font-family="'Lato'" font-size="19.0536">subtitlesubtitlesubtitle</text>
+	<text id="warning" transform="matrix(1 0 0 1 104.7109 68.2637)" font-family="'Lato'" font-size="19.0536">prova prova provaprova</text>
 	<g id="close">
 		
 			<rect x="278.25" y="25.625" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="4.0417" stroke-miterlimit="10" width="21.748" height="20.016"/>
@@ -16,6 +16,6 @@
 			<line fill="none" stroke="#444042" stroke-width="3.4643" stroke-miterlimit="10" x1="285.854" y1="33.455" x2="294.802" y2="33.455"/>
 	</g>
 	
-		<text id="description_1_" transform="matrix(1 0 0 1 22.3779 67.7227)" fill="#FCB514" font-family="'MyriadPro-Bold'" font-size="17.2138">WARNING</text>
+		<text id="description_1_" transform="matrix(1 0 0 1 22.3779 67.7227)" fill="#FCB514" font-family="'Lato'" font-size="15.2138">WARNING</text>
 </g>
 </svg>

@@ -6,9 +6,9 @@
 <g>
 	<polygon fill="#FFFFFF" stroke="#000000" stroke-width="0.5774" stroke-miterlimit="10" points="0.344,19.273 0.344,0.797 
 		15.933,19.273 305.777,19.273 305.777,97.797 0.344,97.797 	"/>
-	<text id="title" transform="matrix(1 0 0 1 21.3779 45.6074)" font-family="'MyriadPro-Bold'" font-size="19.0536">Title</text>
-	<text id="description" transform="matrix(1 0 0 1 33.3779 65.2686)" font-family="'MyriadPro-Regular'" font-size="19.0536">subtitlesubtitlesubtitle</text>
-	<text id="subtitle" transform="matrix(1 0 0 1 21.3779 87.9297)" font-family="'MyriadPro-Regular'" font-size="19.0536">prova prova provaprova</text>
+	<text id="title" transform="matrix(1 0 0 1 21.3779 45.6074)" font-family="'Lato-Bold'" font-size="19.0536">Title</text>
+	<text id="description" transform="matrix(1 0 0 1 33.3779 65.2686)" font-family="'Lato-Regular'" font-size="19.0536">subtitlesubtitlesubtitle</text>
+	<text id="subtitle" transform="matrix(1 0 0 1 21.3779 87.9297)" font-family="'Lato-Regular'" font-size="19.0536">prova prova provaprova</text>
 	<g id="close">
 		
 			<rect x="278.25" y="25.625" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="4.0417" stroke-miterlimit="10" width="21.748" height="20.016"/>
