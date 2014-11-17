@@ -29,7 +29,7 @@ function DivvyLayerController() {
             var divvyStationIcon = self.createIcon(d.latitude, d.longitude,"resource/sublayer/icon/divvy-station.svg");
             _svgStations.push(divvyStationIcon);
 
-            divvyStationIcon.view.background.style("fill",Colors.station.DIVVY_STATION_REGULAR);
+            divvyStationIcon.view.background.style("fill",Colors.layer.MOBILITY);
             if(d.availableBikes==0 || d.availableDocks==0) {
                 self.addWarning(d.latitude, d.longitude,self.defaultIconSize*self.defaultCircleRatio);
             }

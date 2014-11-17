@@ -16,6 +16,6 @@
 			<line fill="none" stroke="#444042" stroke-width="3.4643" stroke-miterlimit="10" x1="285.854" y1="33.455" x2="294.802" y2="33.455"/>
 	</g>
 	
-		<text id="description_1_" transform="matrix(1 0 0 1 22.3779 67.7227)" fill="#FCB514" font-family="'Lato'" font-size="15.2138">WARNING</text>
+		<text id="description_1_" transform="matrix(1 0 0 1 22.3779 67.7227)" fill="#FCB514" font-family="'Lato'" font-size="15.2138">WARNING:</text>
 </g>
 </svg>
