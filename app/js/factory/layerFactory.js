@@ -84,7 +84,7 @@ var LayerFactory = function() {
         socialLayer.addSublayer("twitter",
             "resource/sublayer/icon/twitter.svg",
             Colors.layer.SOCIAL,
-            []);
+            [TwitterLayerController]);
 
 
     };

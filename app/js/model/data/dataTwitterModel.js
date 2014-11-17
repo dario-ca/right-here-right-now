@@ -18,7 +18,7 @@ var DataTwitterModel = function() {
     self.fetchData = function() {
 
         var selection = selectionModel.getCircumscribedSelection();
-        var radius    = getRadius(selection[0]);
+        var radius    = getRadius(selection[0]) / 1000;
         var center    = getCenter(selection[0]);
         var latitude  = center[0];
         var longitude = center[1];
@@ -47,7 +47,7 @@ var DataTwitterModel = function() {
                 d.coordinates == null)
                 return false;
 
-            return selectionModel.pointInside([d.coordinates[0], d.coordinates[1]]);
+            return selectionModel.pointInside([d.coordinates.coordinates[1], d.coordinates.coordinates[0]]);
         });
 
         return newData;
