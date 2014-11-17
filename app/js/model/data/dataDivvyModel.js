@@ -26,6 +26,8 @@ var DataDivvyModel = function(name) {
         });
     };
 
+
+
     ////////////////////////////////// PRIVATE METHODS //////////////////////////////////
     /**
      * This function is automatically called for filtering data.

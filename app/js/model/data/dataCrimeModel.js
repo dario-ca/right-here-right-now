@@ -147,6 +147,31 @@ var DataCrimeModel = function(modelName,colorCode,databaseMainUrl,notification,i
         notificationCenter.dispatch(Notifications.data.crime.CRIME_SELECTION_CHANGED);
     };
 
+    self.getSubTypes = function() {
+        var outputTypes = [];
+        var addValue = function(type) {
+            var found = false;
+            for (var i = 0; i < outputTypes.length; i++){
+                if (outputTypes[i].name === type ){
+                    outputTypes[i].total += 1;
+                    found = true;
+                }
+            }
+            if (!found) {
+                outputTypes.push({
+                    name: type,
+                    total: 1
+                })
+            }
+        };
+
+        for (var i = 0; i < self.data.length; i++){
+            addValue(self.data[i].primary_type);
+        }
+
+        return outputTypes;
+    }
+
     ////////////////////////// SUBSCRIBES //////////////////////////
 
     notificationCenter.subscribe(Notifications.timeInterval.TIME_INTERVAL_CHANGED,callBackChangeTimeFilter);

@@ -12,23 +12,22 @@
  * @returns {*} a dataModel
  * @constructor
  */
-var Data311Model = function(modelName,databaseMainUrl,notification,interval,jsonNameDateAttribute,numWeekFilter) {
+var Data311Model = function(modelName,databaseMainUrl,notification,interval,jsonNameDateAttribute,numWeek) {
     //////////////////////////  DEBUG ///////////////////////////
     var debug = false;
     //////////////////////////  PRIVATE ATTRIBUTES ///////////////////////////
     var self = DataModel();
     var name = modelName;
-    //var fromTime = moment().subtract(1, 'months').format('YYYY-MM-DD'); //TODO remove hardcode
     var fromTime;
     var rectangles = [];
     var mainUrl = databaseMainUrl;
     var tmpData = [];
     var nameDateAttribute = jsonNameDateAttribute;
     var incrementalID = 0;
+    var numWeek = numWeek || 1;
     var numWaitingQueries = 0;
     var prefixQuery = self._proxyURL;
     var charAfterUrl = "&";
-    var weeksNum = numWeekFilter || 1;
     var sqlWhere = [];
     //////////////////////////  PUBLIC ATTRIBUTES ///////////////////////////
 
@@ -104,7 +103,7 @@ var Data311Model = function(modelName,databaseMainUrl,notification,interval,json
         if (timeIntervalModel.timeInterval === TimeInterval.LAST_MONTH) {
             fromTime = moment().subtract(1, 'months').format('YYYY-MM-DD');
         } else if (timeIntervalModel.timeInterval === TimeInterval.LAST_WEEK){
-            fromTime = moment().subtract(weeksNum, 'weeks').format('YYYY-MM-DD');
+            fromTime = moment().subtract(numWeek, 'weeks').format('YYYY-MM-DD');
         } else {
             console.log("Illegal state time interval");
         }
@@ -139,6 +138,32 @@ var Data311Model = function(modelName,databaseMainUrl,notification,interval,json
             charAfterUrl = "?";
         }
     };
+
+    self.getSubTypes = function(attribute) {
+        var outputTypes = [];
+        var attr = attribute || "status";
+        var addValue = function(type) {
+            var found = false;
+            for (var i = 0; i < outputTypes.length; i++){
+                if (outputTypes[i].name === type ){
+                    outputTypes[i].total += 1;
+                    found = true;
+                }
+            }
+            if (!found) {
+                outputTypes.push({
+                    name: type,
+                    total: 1
+                })
+            }
+        };
+
+        for (var i = 0; i < self.data.length; i++){
+            addValue(self.data[i][attr]);
+        }
+
+        return outputTypes;
+    }
 
     self.addSqlWhere = function (str){
         sqlWhere.push(str);
@@ -195,7 +220,7 @@ dataLight1Model.addSqlWhere("status!='Open - Dup'");
 
 var dataFoodInspection = Data311Model("Food inspections","http://data.cityofchicago.org/resource/4ijn-s7e5.json",Notifications.data.FOOD_INSPECTION_CHANGED,30000,"inspection_date");
 var dataRodentBites = Data311Model("Rodent Bites","http://data.cityofchicago.org/resource/97t6-zrhs.json",Notifications.data.RAT_BITES_CHANGED,30000,"creation_date");
-//var dataCrimeModel = Data311Model("Crimes","http://data.cityofchicago.org/resource/ijzp-q8t2.json",Notifications.data.crime.CRIME_CHANGED,30000,"date",2);
+//var TempDataCrimeModel = Data311Model("Crimes","http://data.cityofchicago.org/resource/ijzp-q8t2.json",Notifications.data.crime.TMP_CRIME_DATA_CHANGED,30000,"date",2);
 
 ////////////////////////// STATUS //////////////////////////
 dataPotholeModel.status = {
