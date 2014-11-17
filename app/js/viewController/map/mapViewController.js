@@ -212,9 +212,10 @@ function MapViewController() {
         // call first map reset
         self.onMapReset();
 
-        var popup = popupLayerController.openPopup(41.876320, -87.672841, MapPopupType.POPUP_SIMPLE);
+        var popup = popupLayerController.openPopup(41.876320, -87.672841, MapPopupType.POPUP_WARNING);
         popup.view.title.text("POPUP TITLE");
         popup.view.subtitle.text("popup subtitle");
+        popup.view.warning.text("popup warning");
 
 
         //TODO REMOVE

@@ -24,7 +24,6 @@ function RestaurantLayerController() {
             restaurantIcon.view.onClick(function(){
                 if(dataRestaurantModel.restaurantSelected!==null)
                     _popup.dispose();
-                console.log(d);
                 dataRestaurantModel.restaurantClicked(d);
             });
         })
@@ -39,15 +38,21 @@ function RestaurantLayerController() {
         _svgRestaurants.forEach(function(d){
             d.dispose();
         });
+        self.clear();
         _svgRestaurants=[];
     };
 
     var onRestaurantSelected = function() {
         if(_popup!==null)
             _popup.dispose();
-        if(dataRestaurantModel.restaurantSelected!==null) {
+        if(dataRestaurantModel.restaurantSelected!==null && dataRestaurantModel.restaurantSelected.food_inspection === undefined) {
             _popup = popupLayerController.openPopup(dataRestaurantModel.restaurantSelected.location.coordinate.latitude, dataRestaurantModel.restaurantSelected.location.coordinate.longitude, MapPopupType.POPUP_SIMPLE);
             _popup.view.title.text(dataRestaurantModel.restaurantSelected.name);
+            _popup.view.subtitle.text(dataRestaurantModel.restaurantSelected.location.display_address[0]);
+        }else if(dataRestaurantModel.restaurantSelected!==null && dataRestaurantModel.restaurantSelected.food_inspection !== undefined){
+            _popup = popupLayerController.openPopup(dataRestaurantModel.restaurantSelected.location.coordinate.latitude, dataRestaurantModel.restaurantSelected.location.coordinate.longitude, MapPopupType.POPUP_WARNING);
+            _popup.view.title.text(dataRestaurantModel.restaurantSelected.name);
+            _popup.view.warning.text(" food inspection failed");
             _popup.view.subtitle.text(dataRestaurantModel.restaurantSelected.location.display_address[0]);
         }
     };

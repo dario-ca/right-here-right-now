@@ -6,9 +6,9 @@
 <g>
 	<polygon fill="#FFFFFF" stroke="#000000" stroke-width="0.5774" stroke-miterlimit="10" points="0.344,19.273 0.344,0.797 
 		15.933,19.273 305.778,19.273 305.778,129.5 0.344,129.5 	"/>
-	<text id="title" transform="matrix(1 0 0 1 21.7114 51.6074)" font-family="'MyriadPro-Bold'" font-size="19.0536">Title</text>
-	<text id="destination" transform="matrix(1 0 0 1 126.7114 85.9297)" font-family="'MyriadPro-Regular'" font-size="19.0536">subtitle</text>
-	<text id="subtitle_1_" transform="matrix(1 0 0 1 21.7119 85.9297)" font-family="'MyriadPro-Regular'" font-size="19.0536">Destination:</text>
+	<text id="title" transform="matrix(1 0 0 1 21.7114 51.6074)" font-family="'Lato-Bold'" font-size="19.0536">Title</text>
+	<text id="destination" transform="matrix(1 0 0 1 126.7114 85.9297)" font-family="'Lato-Regular'" font-size="19.0536">subtitle</text>
+	<text id="subtitle_1_" transform="matrix(1 0 0 1 21.7119 85.9297)" font-family="'Lato-Regular'" font-size="19.0536">Destination:</text>
 	<g id="close">
 		
 			<rect x="278.25" y="25.625" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="4.0417" stroke-miterlimit="10" width="21.748" height="20.016"/>
@@ -16,5 +16,5 @@
 			<line fill="none" stroke="#444042" stroke-width="3.4643" stroke-miterlimit="10" x1="285.854" y1="33.455" x2="294.802" y2="33.455"/>
 	</g>
 </g>
-<text id="delay" transform="matrix(1 0 0 1 21.7119 109.9297)" font-family="'MyriadPro-Regular'" font-size="19.0536">The vehicle is time</text>
+<text id="delay" transform="matrix(1 0 0 1 21.7119 109.9297)" font-family="'Lato-Regular'" font-size="19.0536">The vehicle is time</text>
 </svg>

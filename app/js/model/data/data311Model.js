@@ -14,7 +14,7 @@
  */
 var Data311Model = function(modelName,databaseMainUrl,notification,interval,jsonNameDateAttribute,numWeekFilter) {
     //////////////////////////  DEBUG ///////////////////////////
-    var debug = true;
+    var debug = false;
     //////////////////////////  PRIVATE ATTRIBUTES ///////////////////////////
     var self = DataModel();
     var name = modelName;
