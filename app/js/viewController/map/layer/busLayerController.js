@@ -100,7 +100,7 @@ function BusLayerController() {
     var onBusSelected = function() {
         if(dataBusModel.busSelected != null) {
             self.displayBusRoute(dataBusModel.busSelected.stops);
-            var popup = popupLayerController.openPopup(dataBusModel.busSelected.lat, dataBusModel.busSelected.lon, MapPopupType.POPUP_BUS);
+            var popup = popupLayerController.openPopup(dataBusModel.busSelected.lat, dataBusModel.busSelected.lon, MapPopupType.POPUP_BUS, self.hideBusRoutes);
             popup.view.title.text("Bus "+dataBusModel.busSelected.rt);
             popup.view.destination.text(dataBusModel.busSelected.des);
 
@@ -122,12 +122,18 @@ function BusLayerController() {
         self.super_dispose();
         dataBusModel.unsubscribe(Notifications.data.BUS_CHANGED, onBusData);
         dataBusModel.unsubscribe(Notifications.data.BUS_SELECTION_CHANGED, onBusSelected);
+
+        // Enable notification
+        dataNotificationModel.disableNotification(Notifications.data.BUS_CHANGED);
     };
 
     var init = function() {
 
         dataBusModel.subscribe(Notifications.data.BUS_CHANGED, onBusData);
         dataBusModel.subscribe(Notifications.data.BUS_SELECTION_CHANGED, onBusSelected);
+
+        // Enable notification
+        dataNotificationModel.enableNotification(Notifications.data.BUS_CHANGED);
 
     }();
 

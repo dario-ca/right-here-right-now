@@ -29,6 +29,7 @@ function SelectionRectangleViewController() {
     var drawSelections = function() {
         var selections = selectionModel.getSelection();
         var points = selectionModel.points;
+        var selectedPoints = selectionModel.selectedPoints;
         var lines = selectionModel.lines;
 
         // Remove lines
@@ -73,6 +74,22 @@ function SelectionRectangleViewController() {
         });
 
         // Draw the selected points
+        selectedPoints.forEach(function(point){
+            var pointController = ExternalSvgViewController("resource/sublayer/icon/bus.svg");
+            pointController.view.width = self.defaultIconSize;
+            pointController.view.height= self.defaultIconSize;
+
+            var p = self.project(point[0], point[1]);
+            pointController.view.x = p.x;
+            pointController.view.y = p.y;
+
+            self.view.append(pointController);
+
+            self.points.push(pointController);
+        });
+
+        /*
+        // Draw the points
         points.forEach(function(point){
             var pointController = ExternalSvgViewController("resource/sublayer/icon/bus.svg");
             pointController.view.width = self.defaultIconSize;
@@ -86,6 +103,7 @@ function SelectionRectangleViewController() {
 
             self.points.push(pointController);
         });
+        */
     };
 
     var removeSelection = function() {
@@ -215,6 +233,12 @@ function SelectionRectangleViewController() {
     };
 
     var updateSelectionMode = function() {
+
+        //Update path selection
+        if(selectionModel.selectionMode == SelectionMode.SELECTION_NONE &&
+            selectionModel.previousSelectionMode == SelectionMode.SELECTION_PATH)
+            selectionModel.selectionPathFinished();
+
         switch(selectionModel.selectionMode) {
             case SelectionMode.SELECTION_AREA:
                 areaSelectionMode();
@@ -255,6 +279,7 @@ function SelectionRectangleViewController() {
             .attr("width","100%");
 
         notificationCenter.subscribe(Notifications.selection.SELECTION_CHANGED, updateSelection);
+        notificationCenter.subscribe(Notifications.selection.SELECTION_POINTS_CHANGED, updateSelection);
         notificationCenter.subscribe(Notifications.selection.SELECTION_MODE_CHANGED, updateSelectionMode);
         dataPositionModel.subscribe(Notifications.position.POSITION_CHANGED, self.userPositionChange);
 

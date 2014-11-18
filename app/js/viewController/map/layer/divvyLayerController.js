@@ -90,11 +90,17 @@ function DivvyLayerController() {
         self.super_dispose();
         dataDivvyModel.unsubscribe(Notifications.data.DIVVY_BIKES_CHANGED, onDivvyData);
         dataDivvyModel.unsubscribe(Notifications.data.DIVVY_BIKES_SELECTION_CHANGED, onStationSelected);
+
+        // Disable notification
+        dataNotificationModel.disableNotification(Notifications.data.DIVVY_BIKES_CHANGED);
     };
 
     var init = function() {
         dataDivvyModel.subscribe(Notifications.data.DIVVY_BIKES_CHANGED, onDivvyData);
         dataDivvyModel.subscribe(Notifications.data.DIVVY_BIKES_SELECTION_CHANGED, onStationSelected);
+
+        // Enable notification
+        dataNotificationModel.enableNotification(Notifications.data.DIVVY_BIKES_CHANGED);
     }();
 
     return self;

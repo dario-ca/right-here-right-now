@@ -62,7 +62,9 @@ Notifications.data.crime = {
 Notifications.selection = {
     SELECTION_CHANGED: "selection.SELECTION_CHANGED",
     SELECTION_POINTS_CHANGED: "selection.SELECTION_POINTS_CHANGED",
-    SELECTION_MODE_CHANGED: "selection.SELECTION_MODE_CHANGED"
+    SELECTION_MODE_CHANGED: "selection.SELECTION_MODE_CHANGED",
+
+    SELECTION_PATH_CHANGED: "selection.SELECTION_PATH_CHANGED"  // Need more data from google maps
 };
 
 Notifications.enhanceIcon = {

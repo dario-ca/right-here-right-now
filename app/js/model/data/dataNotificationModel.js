@@ -17,6 +17,34 @@ var DataNotificationModel = function(name) {
         self.busData = undefined;
     };
 
+    self.enableNotification = function(notification) {
+        switch(notification) {
+            case Notifications.data.DIVVY_BIKES_CHANGED:
+                dataDivvyModel.subscribe(Notifications.data.DIVVY_BIKES_CHANGED, onDivvyChange);
+                break;
+            case Notifications.data.BUS_CHANGED:
+                dataBusModel.subscribe(Notifications.data.BUS_CHANGED, onBusChange);
+                break;
+            default:
+                console.warn("Notification not supported: "+notification);
+
+        }
+    };
+
+    self.disableNotification = function(notification) {
+        switch(notification) {
+            case Notifications.data.DIVVY_BIKES_CHANGED:
+                dataDivvyModel.unsubscribe(Notifications.data.DIVVY_BIKES_CHANGED, onDivvyChange);
+                break;
+            case Notifications.data.BUS_CHANGED:
+                dataBusModel.unsubscribe(Notifications.data.BUS_CHANGED, onBusChange);
+                break;
+            default:
+                console.warn("Notification not supported: "+notification);
+
+        }
+    };
+
     ////////////////////////////////// PRIVATE METHODS //////////////////////////////////
 
     var sendNotification = function() {
@@ -55,11 +83,6 @@ var DataNotificationModel = function(name) {
     };
 
     var init = function() {
-
-        // Listen for data changed
-        dataDivvyModel.subscribe(Notifications.data.DIVVY_BIKES_CHANGED, onDivvyChange);
-        dataBusModel.subscribe(Notifications.data.BUS_CHANGED, onBusChange);
-
         //notificationCenter.subscribe(Notifications.data.NOTIFICATION_AVAILABLE, testFunction);
     }();
 

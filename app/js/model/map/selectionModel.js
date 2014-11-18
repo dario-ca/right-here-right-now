@@ -16,6 +16,7 @@ var SelectionModel = function() {
     var rectangles = [];
 
     var _selectionMode = SelectionMode.SELECTION_NONE;
+    var _previousSelectionMode = SelectionMode.SELECTION_NONE;
 
     var Dx = 0.005;       // Width of the automatic selection around path
     var Dy = 0.005;
@@ -128,7 +129,8 @@ var SelectionModel = function() {
 
 
     self.__defineSetter__("selectionMode", function(mode){
-       _selectionMode = mode;
+        _previousSelectionMode = _selectionMode;
+        _selectionMode = mode;
         notificationCenter.dispatch(Notifications.selection.SELECTION_MODE_CHANGED);
     });
 
@@ -137,12 +139,20 @@ var SelectionModel = function() {
         return _selectionMode;
     });
 
+    self.__defineGetter__("previousSelectionMode", function(){
+        return _previousSelectionMode;
+    });
+
     /**
      * Bad hack created in order to break the circular dependence between
      * DataModel -> SelectionModel -> DataGoogeDirectionModel -> DataModel -> ...
      */
     self.subscribeToGoogleDirections = function() {
         dataGoogleDirectionModel.subscribe(Notifications.data.DIRECTION_CHANGED, onDirectionChanged);
+    };
+
+    self.selectionPathFinished = function() {
+        getDataFromGoogle();
     };
 
     ////////////////////////////////// PRIVATE METHODS //////////////////////////////////
@@ -294,6 +304,10 @@ var SelectionModel = function() {
         rectangles.push(rectangle);
 
         selectionChanged();
+    };
+
+    var getDataFromGoogle = function() {
+        notificationCenter.dispatch(Notifications.selection.SELECTION_PATH_CHANGED);
     };
 
     var init = function() {

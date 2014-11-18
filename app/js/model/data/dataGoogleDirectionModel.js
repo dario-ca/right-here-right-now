@@ -69,7 +69,7 @@ var DataGoogleDirectionModel = function(name) {
     var init = function() {
 
         // Listen for the selection update notification and call fetch when it changes
-        notificationCenter.subscribe(Notifications.selection.SELECTION_POINTS_CHANGED, self.fetchData);
+        notificationCenter.subscribe(Notifications.selection.SELECTION_PATH_CHANGED, self.fetchData);
 
     }();
 
