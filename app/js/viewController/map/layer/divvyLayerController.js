@@ -51,7 +51,6 @@ function DivvyLayerController() {
             divvyStationIcon.view.onClick(function(){
                 if(dataDivvyModel.stationSelected!==null)
                     _popup.dispose();
-                console.log(d);
                 dataDivvyModel.stationClicked(d);
             });
         })
