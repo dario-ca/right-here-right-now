@@ -17,8 +17,8 @@ var SelectionModel = function() {
 
     var _selectionMode = SelectionMode.SELECTION_NONE;
 
-    var Dx = 0.003;       // Width of the automatic selection around path
-    var Dy = 0.003;
+    var Dx = 0.005;       // Width of the automatic selection around path
+    var Dy = 0.005;
 
     self.points = [];   // Contains the selected points
     self.lines = [];    // Contains the lines that connects selected points

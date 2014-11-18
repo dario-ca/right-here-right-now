@@ -27,7 +27,7 @@ var DataYelpModel = function(notification, term) {
 
     self.fetchData = function() {
 
-        var selection = selectionModel.getSelection();
+        var selection = selectionModel.getCircumscribedSelection();
 
         var q = queue(15);
         tempData = [];  // Contains the partial data
