@@ -4,8 +4,8 @@
 var NotificationPopupsViewController = function() {
     var self = SvgViewController();
 
-    var MAX_POPUP = 2;
-    var POPUP_DURATION = 10000;
+    var MAX_POPUP = 5;
+    var POPUP_DURATION = 20000;
 
     var _notificationPopups = [];
     var _popupWidth = 100;
@@ -67,6 +67,7 @@ var NotificationPopupsViewController = function() {
         console.log("New notification available");
         var divvyData = dataNotificationModel.divvyData;
         var busData = dataNotificationModel.busData;
+        var twitterData = dataNotificationModel.twitterData;
 
         dataNotificationModel.clearData();  // Delete already notified data
 
@@ -94,6 +95,13 @@ var NotificationPopupsViewController = function() {
                 console.log(bus);
                 self.addNotificationPopup("Delayed bus", "Bus: "+bus.rt,
                     "resource/sublayer/icon/bus-no-number.svg");
+            });
+
+        if(twitterData != undefined)
+            twitterData.forEach(function(tweet) {
+                console.log(tweet);
+                self.addNotificationPopup("New tweet from "+tweet.user.name, tweet.text.substring(0,40),
+                    "resource/sublayer/icon/twitter.svg");
             });
     };
 

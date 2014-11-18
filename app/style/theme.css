@@ -47,9 +47,8 @@ body {
     user-select: none;
 }
 
-/*
 .clickable-item {
     pointer-events: all;
     cursor: pointer;
 }
-*/
+

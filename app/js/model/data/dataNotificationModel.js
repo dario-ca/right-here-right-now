@@ -9,6 +9,7 @@ var DataNotificationModel = function(name) {
 
     self.divvyData = undefined;
     self.busData = undefined;
+    self.twitterData = undefined;
 
     ////////////////////////// PUBLIC METHODS //////////////////////////
 
@@ -24,6 +25,9 @@ var DataNotificationModel = function(name) {
                 break;
             case Notifications.data.BUS_CHANGED:
                 dataBusModel.subscribe(Notifications.data.BUS_CHANGED, onBusChange);
+                break;
+            case Notifications.data.TWITTER_CHANGED:
+                dataTwitterModel.subscribe(Notifications.data.TWITTER_CHANGED, onTwitterChanged);
                 break;
             default:
                 console.warn("Notification not supported: "+notification);
@@ -72,6 +76,16 @@ var DataNotificationModel = function(name) {
         // Make transformations on the data
 
         self.busData = data;
+        sendNotification();
+    };
+
+    var onTwitterChanged = function() {
+        var data = dataTwitterModel.modifiedData;
+
+        if(jQuery.isEmptyObject(data))
+            return;
+
+        self.twitterData = data;
         sendNotification();
     };
 

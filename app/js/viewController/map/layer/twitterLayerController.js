@@ -57,10 +57,16 @@ function TwitterLayerController() {
         self.clear();
         self.super_dispose();
         dataTwitterModel.unsubscribe(Notifications.data.TWITTER_CHANGED, onTwitterData);
+
+        // Disable notification
+        dataNotificationModel.disableNotification(Notifications.data.TWITTER_CHANGED);
     };
 
     var init = function() {
         dataTwitterModel.subscribe(Notifications.data.TWITTER_CHANGED, onTwitterData);
+
+        // Enable notification
+        dataNotificationModel.enableNotification(Notifications.data.TWITTER_CHANGED);
     }();
 
     return self;
