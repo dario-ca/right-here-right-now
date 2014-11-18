@@ -7,10 +7,17 @@
 var DataNotificationModel = function(name) {
     var self = {};
 
-    var divvyData;
-    var busData;
+    self.divvyData = undefined;
+    self.busData = undefined;
 
     ////////////////////////// PUBLIC METHODS //////////////////////////
+
+    self.clearData = function() {
+        self.divvyData = undefined;
+        self.busData = undefined;
+    };
+
+    ////////////////////////////////// PRIVATE METHODS //////////////////////////////////
 
     var sendNotification = function() {
         notificationCenter.dispatch(Notifications.data.NOTIFICATION_AVAILABLE);
@@ -24,7 +31,7 @@ var DataNotificationModel = function(name) {
 
         // Make transformations on the data
 
-        divvyData = data;
+        self.divvyData = data;
         sendNotification();
     };
 
@@ -36,18 +43,16 @@ var DataNotificationModel = function(name) {
 
         // Make transformations on the data
 
-        busData = data;
+        self.busData = data;
         sendNotification();
     };
 
     var testFunction = function() {
         console.log("DIVVY DATA CHANGED:");
-        console.log(divvyData);
+        console.log(self.divvyData);
         console.log("BUS DATA CHANGED:");
-        console.log(busData);
+        console.log(self.busData);
     };
-
-    ////////////////////////////////// PRIVATE METHODS //////////////////////////////////
 
     var init = function() {
 
@@ -55,7 +60,7 @@ var DataNotificationModel = function(name) {
         dataDivvyModel.subscribe(Notifications.data.DIVVY_BIKES_CHANGED, onDivvyChange);
         dataBusModel.subscribe(Notifications.data.BUS_CHANGED, onBusChange);
 
-        notificationCenter.subscribe(Notifications.data.NOTIFICATION_AVAILABLE, testFunction);
+        //notificationCenter.subscribe(Notifications.data.NOTIFICATION_AVAILABLE, testFunction);
     }();
 
     return self;

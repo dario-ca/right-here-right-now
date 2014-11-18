@@ -15,9 +15,6 @@ var NotificationPopupsViewController = function() {
     self.super_updateView = self.updateView;
     self.updateView = function() {
         self.super_updateView();
-
-
-
     };
 
 
@@ -66,12 +63,48 @@ var NotificationPopupsViewController = function() {
 
     //#PRIVATE FUNCTIONS
 
+    var notificationAvailable = function() {
+        console.log("New notification available");
+        var divvyData = dataNotificationModel.divvyData;
+        var busData = dataNotificationModel.busData;
+
+        dataNotificationModel.clearData();  // Delete already notified data
+
+        if(divvyData != undefined)
+            divvyData.forEach(function(station) {
+                var message;
+
+                if(station.availableDocks == station.totalDock)
+                    message = "Divvy station empty";
+                else if(station.availableDocks == 0)
+                    message = "Divvy station full";
+                else
+                    return; // Do not notify stations that are not empty and not full
+
+                self.addNotificationPopup(message, station.stationName,
+                    "resource/sublayer/icon/divvy-station.svg");
+                console.log(station);
+            });
+
+        if(busData != undefined)
+            busData.forEach(function(bus) {
+                if(bus.dly == undefined)
+                    return; // Do not consider bus in time
+
+                console.log(bus);
+                self.addNotificationPopup("Delayed bus", "Bus: "+bus.rt,
+                    "resource/sublayer/icon/bus-no-number.svg");
+            });
+    };
+
 
 
     var init = function() {
         self.view.classed("notifications-popups-view-controller", true);
 
         self.view.setViewBox(0, 0, _popupWidth, _popupHeight);
+
+        /*
 
         var i = 0;
 
@@ -104,6 +137,10 @@ var NotificationPopupsViewController = function() {
             self.addNotificationPopup("Mouse", "Mouse spotted close to UIC",
                 "resource/sublayer/icon/unsafe.svg");
         },19000);
+        */
+
+        // Subscription to notifications
+        notificationCenter.subscribe(Notifications.data.NOTIFICATION_AVAILABLE, notificationAvailable);
 
     }();
 
