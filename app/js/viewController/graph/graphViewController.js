@@ -4,7 +4,7 @@
  */
 var GraphViewController = function(layer, sublayer) {
     var self = SvgViewController();
-
+    var _noSelectionViewController;
 
 
     self.addLegenda = function(items/*[{text:, color:},{..},]*/) {
@@ -25,6 +25,20 @@ var GraphViewController = function(layer, sublayer) {
         }
         self.view.append(legenda);
         return legenda;
+    };
+
+
+    self.showNoSelection = function() {
+        self.view.html("");
+        _noSelectionViewController = ExternalSvgViewController("resource/graph/no-selection.svg");
+        self.view.append(_noSelectionViewController);
+    };
+
+
+    self.hideNoSelection = function() {
+        if(_noSelectionViewController){
+            _noSelectionViewController.dispose();
+        }
     };
 
 

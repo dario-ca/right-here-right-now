@@ -12,6 +12,7 @@ var NoSelectionGraphViewController = function(layer, sublayer) {
             "crimes / population"
         );
         self.view.append(verticalBar);
+
     }();
 
     return self;
