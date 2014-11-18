@@ -25,6 +25,8 @@ function DivvyLayerController() {
 
     var drawStations = function(){
         self.hideStations();
+        self.clear();   // Remove warnings
+        
         _divvyData.forEach(function(d){
             var divvyStationIcon = self.createIcon(d.latitude, d.longitude,"resource/sublayer/icon/divvy-station.svg");
             _svgStations.push(divvyStationIcon);
@@ -87,6 +89,7 @@ function DivvyLayerController() {
     self.super_dispose = self.dispose;
     self.dispose = function() {
         self.hideStations();
+        self.clear();   // Remove warnings
         self.super_dispose();
         dataDivvyModel.unsubscribe(Notifications.data.DIVVY_BIKES_CHANGED, onDivvyData);
         dataDivvyModel.unsubscribe(Notifications.data.DIVVY_BIKES_SELECTION_CHANGED, onStationSelected);
