@@ -34,7 +34,9 @@ function BarLayerController() {
         _svgBars.forEach(function(d){
             d.dispose();
         });
-        self.clear();
+        if(_popup!==null){
+            _popup.dispose();
+        }
         _svgBars=[];
     };
 

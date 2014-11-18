@@ -52,10 +52,12 @@ function VehicleLayerController() {
         _svgVehicles.forEach(function(d){
             d.dispose();
         });
+        if(_popup!==null){
+            _popup.dispose();
+        }
         _svgVehicles=[];
     };
 
-    //TODO:check implementation
     self.super_dispose = self.dispose;
     self.dispose = function() {
         self.hideVehicles();

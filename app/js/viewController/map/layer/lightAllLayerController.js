@@ -72,6 +72,9 @@ function LightAllLayerController() {
             d.dispose();
         });
         self.clear();
+        if(_popup!==null){
+            _popup.dispose();
+        }
         _svgLightsAll=[];
     };
 
