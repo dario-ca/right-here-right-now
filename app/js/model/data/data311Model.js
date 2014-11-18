@@ -35,8 +35,6 @@ var Data311Model = function(modelName,databaseMainUrl,notification,interval,json
     self.interval = interval;
     self.potholeSelected=null;
     self.vehicleSelected=null;
-    self.light1selected=null;
-    self.lightAllselected=null;
     self.lightSelected=null;
 
 
@@ -187,22 +185,6 @@ var Data311Model = function(modelName,databaseMainUrl,notification,interval,json
         }else
             self.vehicleSelected = vehicle;
         self.dispatch(Notifications.data.ABANDONED_VEHICLES_SELECTION_CHANGED);
-    };
-
-    self.light1Clicked = function(light1) {
-        if(self.light1selected!==null && self.light1selected.service_request_number === light1.service_request_number){
-            self.light1selected=null;
-        }else
-            self.light1selected = light1;
-        self.dispatch(Notifications.data.LIGHT_OUT_SINGLE_SELECTION_CHANGED);
-    };
-
-    self.lightAllClicked = function(lightAll) {
-        if(self.lightAllselected!==null && self.lightAllselected.service_request_number === lightAll.service_request_number){
-            self.lightAllselected=null;
-        }else
-            self.lightAllselected = lightAll;
-        self.dispatch(Notifications.data.LIGHT_OUT_ALL_SELECTION_CHANGED);
     };
 
     self.lightClicked = function(light,category) {

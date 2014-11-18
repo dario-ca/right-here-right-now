@@ -91,6 +91,10 @@ function CrimeLayerController(name,notification,icon) {
         _svgCrimes.forEach(function(d){
             d.dispose();
         });
+        if(_popup!==null){
+            _popup.dispose();
+        }
+        self.clear();
         _svgCrimes=[];
     };
 
