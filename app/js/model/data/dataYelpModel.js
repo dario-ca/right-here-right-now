@@ -22,6 +22,8 @@ var DataYelpModel = function(notification, term) {
 
     var tempData;   // Contains the partial data
 
+    self.barSelected=null;
+
 
     ////////////////////////// PUBLIC METHODS //////////////////////////
 
@@ -44,6 +46,14 @@ var DataYelpModel = function(notification, term) {
         q.await(function() {
             self.callback(tempData);
         });
+    };
+
+    self.barClicked = function(bar) {
+        if(self.barSelected!==null && self.barSelected.id === bar.id){
+            self.barSelected=null;
+        }else
+            self.barSelected = bar;
+        self.dispatch(Notifications.data.BAR_SELECTION_CHANGED);
     };
 
     ////////////////////////////////// PRIVATE METHODS //////////////////////////////////
@@ -119,4 +129,4 @@ var DataYelpModel = function(notification, term) {
 };
 
 var dataYelpRestaurantModel = DataYelpModel(Notifications.data.YELP_RESTAURANT_CHANGED, "food");
-var dataYelpBarModel = DataYelpModel(Notifications.data.YELP_RESTAURANT_CHANGED, "bar");
+var dataYelpBarModel = DataYelpModel(Notifications.data.BAR_CHANGED, "bar");

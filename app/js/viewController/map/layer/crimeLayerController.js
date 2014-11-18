@@ -75,13 +75,19 @@ function CrimeLayerController(name,notification,icon) {
             currentCrimeCategoryModel.crimeSelected=null;
             _popup=null;
         //if they are clicking on me, I create the popup removing the old one if any
-        }else if(DataCrimeModel.popupCategory===_name){
+        }else if(DataCrimeModel.popupCategory===_name && (_.indexOf(DataCrimeModel.typesDangerCircle, currentCrimeCategoryModel.crimeSelected.primary_type) === -1)){
             if(_popup!==null){
                 _popup.dispose();
             }
             _popup = popupLayerController.openPopup(currentCrimeCategoryModel.crimeSelected.latitude, currentCrimeCategoryModel.crimeSelected.longitude, MapPopupType.POPUP_CRIME);
             _popup.view.title.text(currentCrimeCategoryModel.crimeSelected.primary_type);
-            _popup.view.description.text(currentCrimeCategoryModel.crimeSelected.description);
+            _popup.view.subtitle.text(currentCrimeCategoryModel.crimeSelected.block);
+        }else if(DataCrimeModel.popupCategory===_name && (_.indexOf(DataCrimeModel.typesDangerCircle, currentCrimeCategoryModel.crimeSelected.primary_type) !== -1)){
+            if(_popup!==null){
+                _popup.dispose();
+            }
+            _popup = popupLayerController.openPopup(currentCrimeCategoryModel.crimeSelected.latitude, currentCrimeCategoryModel.crimeSelected.longitude, MapPopupType.POPUP_CRIME_DANGER);
+            _popup.view.title.text(currentCrimeCategoryModel.crimeSelected.primary_type);
             _popup.view.subtitle.text(currentCrimeCategoryModel.crimeSelected.block);
         }
 
@@ -91,6 +97,10 @@ function CrimeLayerController(name,notification,icon) {
         _svgCrimes.forEach(function(d){
             d.dispose();
         });
+        if(_popup!==null){
+            _popup.dispose();
+        }
+        self.clear();
         _svgCrimes=[];
     };
 

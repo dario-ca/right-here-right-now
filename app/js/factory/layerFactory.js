@@ -74,11 +74,11 @@ var LayerFactory = function() {
         pointOfInterestLayer.addSublayer("Bar",
             "resource/sublayer/icon/bar.svg",
             Colors.layer.POINT_OF_INTEREST,
-            []);
+            [BarLayerController]);
         pointOfInterestLayer.addSublayer("Important Place",
             "resource/sublayer/icon/important-place.svg",
             Colors.layer.POINT_OF_INTEREST,
-            []);
+            [ImportantPlacesLayerController]);
         
         var socialLayer = self.addLayer("SOCIAL");
         socialLayer.addSublayer("twitter",

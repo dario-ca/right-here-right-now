@@ -39,6 +39,9 @@ function RestaurantLayerController() {
             d.dispose();
         });
         self.clear();
+        if(_popup!==null){
+            _popup.dispose();
+        }
         _svgRestaurants=[];
     };
 
@@ -57,7 +60,6 @@ function RestaurantLayerController() {
         }
     };
 
-    //TODO:check implementation of unsubscribe
     self.super_dispose = self.dispose;
     self.dispose = function() {
         self.hideRestaurants();

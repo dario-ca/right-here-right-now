@@ -49,15 +49,6 @@ function LightOneLayerController() {
         drawLightsOne();
     };
 
-    var onLight1Selected = function() {
-        if(_popup!==null)
-            _popup.dispose();
-        if(dataLight1Model.light1selected!==null) {
-            _popup = popupLayerController.openPopup(dataLight1Model.light1selected.latitude, dataLight1Model.light1selected.longitude, MapPopupType.POPUP_SIMPLE);
-            _popup.view.title.text("Single light Broken: "+dataLight1Model.light1selected.status);
-            _popup.view.subtitle.text(dataLight1Model.light1selected.street_address);
-        }
-    };
 
     var onLightSelected = function() {
         //if they are not clicking on me, I remove my popup if any
@@ -84,6 +75,9 @@ function LightOneLayerController() {
         _svgLightsOne.forEach(function(d){
             d.dispose();
         });
+        if(_popup!==null){
+            _popup.dispose();
+        }
         _svgLightsOne=[];
     };
 

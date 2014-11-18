@@ -71,6 +71,10 @@ function LightAllLayerController() {
         _svgLightsAll.forEach(function(d){
             d.dispose();
         });
+        self.clear();
+        if(_popup!==null){
+            _popup.dispose();
+        }
         _svgLightsAll=[];
     };
 

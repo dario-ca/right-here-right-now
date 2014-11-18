@@ -65,6 +65,9 @@ function DivvyLayerController() {
         _svgStations.forEach(function(d){
             d.dispose();
         });
+        if(_popup!==null){
+            _popup.dispose();
+        }
         _svgStations=[];
     };
 
