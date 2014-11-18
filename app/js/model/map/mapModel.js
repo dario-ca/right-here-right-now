@@ -46,7 +46,12 @@ var MapModel = function() {
      *
      */
     self.projectAtDefaultZoom = function(lat,long) {
-        return _map.project(new L.LatLng(lat,long), _defaultZoomForProjecting);
+        if(!isNaN(lat) && !isNaN(long)){
+            return _map.project(new L.LatLng(lat,long), _defaultZoomForProjecting);
+        } else {
+            return L.point(0,0);
+        }
+
     };
 
     self.unprojectAtDefaultZoom = function(x,y) {
