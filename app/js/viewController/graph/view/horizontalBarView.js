@@ -69,7 +69,7 @@ var HorizontalBarView = function(data, labels, colors, unit) {
                 }
             })
             .attr("dy", function(d) {
-                if(d > 10){
+                if(y(d) > 15){
                     return textTopMargin + "%"
                 } else {
                     return -1 + "%"
