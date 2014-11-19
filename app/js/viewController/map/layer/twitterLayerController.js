@@ -22,7 +22,6 @@ function TwitterLayerController() {
             // Add the interaction on
             tweetController.view.onClick(function() {
                 onTweetSelected(tweetController);
-                console.log("Tweet clicked");
             });
         });
 
@@ -48,8 +47,38 @@ function TwitterLayerController() {
     };
 
     var formatLine = function(text, line) {
-        var charPerLine = 30;
+
+        /*
         return text.substring(line*charPerLine, line*charPerLine + charPerLine);
+        */
+
+        var i = formatLineIndexes(text, line);
+
+        /*if(i[0] >= text.length || i[1] >= text.length)
+            return "";
+        else */
+            return text.substring(i[0], i[1]);
+    };
+
+    var formatLineIndexes = function(text, line) {
+        var charPerLine = 33;
+
+        var lastSpaceIndex = (line + 1) * charPerLine;
+        for(var i = line * charPerLine; i < (line + 1) * charPerLine && i < text.length; i++) {
+            if(text[i] == ' ')
+                lastSpaceIndex = i;
+        }
+
+        if((line + 1) * charPerLine - lastSpaceIndex > 5)
+            lastSpaceIndex = (line + 1) * charPerLine;
+
+        if(line == 0)
+            return [0, lastSpaceIndex];
+
+        var previousIndexes = formatLineIndexes(text, line - 1);
+        var currentIndexes = formatLineIndexes(text.substring(previousIndexes[1], formatLineIndexes[1]+charPerLine), 0);
+        return [previousIndexes[1] + 1, previousIndexes[1] + currentIndexes[1]];
+
     };
 
     self.super_dispose = self.dispose;

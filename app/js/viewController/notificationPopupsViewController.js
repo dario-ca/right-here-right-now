@@ -84,7 +84,6 @@ var NotificationPopupsViewController = function() {
 
                 self.addNotificationPopup(message, station.stationName,
                     "resource/sublayer/icon/divvy-station.svg");
-                console.log(station);
             });
 
         if(busData != undefined)
@@ -92,14 +91,12 @@ var NotificationPopupsViewController = function() {
                 if(bus.dly == undefined)
                     return; // Do not consider bus in time
 
-                console.log(bus);
                 self.addNotificationPopup("Delayed bus", "Bus: "+bus.rt,
                     "resource/sublayer/icon/bus-no-number.svg");
             });
 
         if(twitterData != undefined)
             twitterData.forEach(function(tweet) {
-                console.log(tweet);
                 self.addNotificationPopup("New tweet from "+tweet.user.name, tweet.text.substring(0,40),
                     "resource/sublayer/icon/twitter.svg");
             });
