@@ -4,11 +4,9 @@ var SecurityGraphViewController = function (nameLayer, nameSubLayer) {
     var _dataSelection = [0,0,0,0];
     var super_dispose = self.dispose;
     var barchart;
-    var dimensSquare = 25;
-    var _yCenter = 50;
-    var popC = 1;
+    var popC = dataPopulationModel.getPopulationInChicago();
     var popS = 1;
-    var legendPies;
+    var factor = 1000;
     var legendBar;
 
     self.dispose = function () {
@@ -21,7 +19,7 @@ var SecurityGraphViewController = function (nameLayer, nameSubLayer) {
     };
 
     var callBackDataSelection = function() {
-        popS = 1; //TODO update surface selection
+        popS = dataPopulationModel.getPopulationInCurrentSelection();
         if (barchart){
             barchart.remove();
         }
@@ -40,7 +38,6 @@ var SecurityGraphViewController = function (nameLayer, nameSubLayer) {
         }
         var data = dataCrimeTypeCityModel.getCategories();
         if (data){
-            console.log(data);
             _dataChicago = [data.CATEGORY_1, data.CATEGORY_2,data.CATEGORY_3,data.CATEGORY_4];
         } else {
             _dataChicago = [0,0,0,0];
@@ -52,8 +49,8 @@ var SecurityGraphViewController = function (nameLayer, nameSubLayer) {
         var tmpArray = [];
         var j = 0;
         for (var i = 0; i < dataChicago.length; i++) {
-            tmpArray[j] = dataChicago[i];
-            tmpArray[j+1] = dataSelection[i];
+            tmpArray[j] = Number((dataChicago[i]/popC) * factor).toFixed(3);
+            tmpArray[j+1] = Number((dataSelection[i]/popS) * factor).toFixed(3);
             j = j + 2;
         }
         return tmpArray;

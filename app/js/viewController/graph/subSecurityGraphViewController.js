@@ -7,19 +7,14 @@ var SubSecurityGraphViewController = function (nameLayer, nameSubLayer) {
     var _dataSelection = null;
     var super_dispose = self.dispose;
     var barchart;
-    var titleChicago;
-    var titleSelection;
-    var dimensSquare = 25;
-    var _xChicago = 35;
-    var _xSelection = 65;
-    var _yCenter = 75;
-    var areaC = 1;
-    var areaS = 1;
+    var popC = dataPopulationModel.getPopulationInChicago();
+    var popS = 1;
     var maxElem = 5;
     var sourceDataSelection;
     var notificationSelection;
     var legendBar;
     var arrayLabels;
+    var factor = 1000;
 
     self.dispose = function () {
         super_dispose();
@@ -28,12 +23,11 @@ var SubSecurityGraphViewController = function (nameLayer, nameSubLayer) {
     };
 
     var callBackDataSelection = function() {
-        areaS = 1; //TODO update surface selection
+        popS = dataPopulationModel.getPopulationInCurrentSelection();
         if (barchart){
             barchart.remove();
         }
         if (!selectionModel.isEmpty()&& sourceDataSelection.getSubTypes().length>= 1){
-            console.log(sourceDataSelection.getSubTypes())
             _dataSelection = sourceDataSelection.getSubTypes();
         } else {
             _dataSelection = null;
@@ -46,7 +40,6 @@ var SubSecurityGraphViewController = function (nameLayer, nameSubLayer) {
             barchart.remove();
         }
         if (dataCrimeTypeCityModel.data && dataCrimeTypeCityModel.data.length>= 1){
-            console.log(dataCrimeTypeCityModel.data);
             _dataChicago = dataCrimeTypeCityModel.data;
         } else {
             _dataChicago = null;
@@ -67,14 +60,14 @@ var SubSecurityGraphViewController = function (nameLayer, nameSubLayer) {
             arrayLabels.push(dataSelection[i].name);
             for (var j = 0; j < dataChicago.length; j++){
                 if (dataSelection[i].name === dataChicago[j].name){
-                    tmpArray.push(dataChicago[j].total);
-                    tmpArray.push(dataSelection[i].total);
+                    tmpArray.push(Number((dataChicago[j].total/popC) * factor).toFixed(3));
+                    tmpArray.push(Number((dataSelection[i].total/popS) * factor).toFixed(3));
                     found = true;
                 }
             }
             if (!found){
                 tmpArray.push(0);
-                tmpArray.push(dataSelection[i].total);
+                tmpArray.push(Number((dataSelection[i].total/popS) * factor).toFixed(3));
             }
         }
         return tmpArray;

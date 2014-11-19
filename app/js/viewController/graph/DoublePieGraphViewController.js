@@ -5,6 +5,7 @@ var DoublePieGraphViewController = function (nameLayer, nameSubLayer) {
     var self = GraphViewController(nameLayer, nameSubLayer);
     var _dataPieChicago = [0,0];
     var _dataPieSelection = [0,0];
+    var factor = 100;
     var super_dispose = self.dispose;
     var pieChicago;
     var pieSelection;
@@ -15,7 +16,7 @@ var DoublePieGraphViewController = function (nameLayer, nameSubLayer) {
     var _xChicago = 35;
     var _xSelection = 65;
     var _yCenter = 75;
-    var areaC = 1;
+    var areaC = dataPopulationModel.getAreaChicagoInKm2();
     var areaS = 1;
     var sourceDataCity;
     var sourceDataSelection;
@@ -31,7 +32,7 @@ var DoublePieGraphViewController = function (nameLayer, nameSubLayer) {
     };
 
     var callBackDataSelection = function() {
-        areaS = 1; //TODO update surface selection
+        areaS = dataPopulationModel.getAreaSelectionInKM2();
         if (barchart){
             barchart.remove();
         }
@@ -39,7 +40,6 @@ var DoublePieGraphViewController = function (nameLayer, nameSubLayer) {
             pieSelection.remove();
         }
         if (!selectionModel.isEmpty()&& sourceDataSelection.getSubTypes().length>= 1){
-            console.log(sourceDataSelection.getSubTypes())
             _dataPieSelection = getArrayData(sourceDataSelection.getSubTypes());
             addPieSelection();
         } else {
@@ -57,7 +57,6 @@ var DoublePieGraphViewController = function (nameLayer, nameSubLayer) {
             pieChicago.remove();
         }
         if (sourceDataCity.data && sourceDataCity.data.length>= 1){
-            console.log(sourceDataCity.data);
             _dataPieChicago = getArrayData(sourceDataCity.data);
             addPieChicago()
         } else {
@@ -85,7 +84,7 @@ var DoublePieGraphViewController = function (nameLayer, nameSubLayer) {
     };
 
     var addBarChart = function() {
-        barchart = HorizontalBarView([_dataPieChicago[0] / areaC,_dataPieSelection[0] / areaS,_dataPieChicago[1] / areaC,_dataPieSelection[1] / areaS],["Completed","Open"],[Colors.graph.CHICAGO, Colors.graph.SELECTION],"sbaluba");
+        barchart = HorizontalBarView([Number((_dataPieChicago[0] / areaC)*factor).toFixed(3),Number((_dataPieSelection[0] / areaS)*factor).toFixed(3),Number((_dataPieChicago[1] / areaC)*factor).toFixed(3),Number((_dataPieSelection[1] / areaS)*factor).toFixed(3)],["Completed","Open"],[Colors.graph.CHICAGO, Colors.graph.SELECTION],"sbaluba");
         barchart.width = "80%";
         barchart.height = "50%";
         barchart.y = "20%";
