@@ -21,6 +21,11 @@ function ImportantPlacesLayerController() {
                 if(dataImportantPlacesModel.placeSelected!==null)
                     _popup.dispose();
                 dataImportantPlacesModel.placeClicked(d);
+
+                // Add the point to the selection
+                if(selectionModel.selectionMode == SelectionMode.SELECTION_PATH) {
+                    selectionModel.addPoint([d.latitude, d.longitude]);
+                }
             });
         })
     };
