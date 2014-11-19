@@ -3,8 +3,8 @@
  */
 var DoublePieGraphViewController = function (nameLayer, nameSubLayer) {
     var self = GraphViewController(nameLayer, nameSubLayer);
-    var _dataPieChicago = [1,1];
-    var _dataPieSelection = [1,1];
+    var _dataPieChicago = [0,0];
+    var _dataPieSelection = [0,0];
     var super_dispose = self.dispose;
     var pieChicago;
     var pieSelection;
@@ -17,8 +17,8 @@ var DoublePieGraphViewController = function (nameLayer, nameSubLayer) {
     var _yCenter = 75;
     var areaC = 1;
     var areaS = 1;
-    var sourceDataCity = dataPotholeCityModel;
-    var sourceDataSelection = dataPotholeModel;
+    var sourceDataCity;
+    var sourceDataSelection;
     var notificationCity;
     var notificationSelection;
     var legendPies;
@@ -38,7 +38,7 @@ var DoublePieGraphViewController = function (nameLayer, nameSubLayer) {
         if (pieSelection) {
             pieSelection.remove();
         }
-        if (!selectionModel.isEmpty()&& sourceDataSelection.getSubTypes().length> 1){
+        if (!selectionModel.isEmpty()&& sourceDataSelection.getSubTypes().length>= 1){
             console.log(sourceDataSelection.getSubTypes())
             _dataPieSelection = getArrayData(sourceDataSelection.getSubTypes());
             addPieSelection();
@@ -56,7 +56,7 @@ var DoublePieGraphViewController = function (nameLayer, nameSubLayer) {
         if (pieChicago){
             pieChicago.remove();
         }
-        if (sourceDataCity.data && sourceDataCity.data.length> 1){
+        if (sourceDataCity.data && sourceDataCity.data.length>= 1){
             console.log(sourceDataCity.data);
             _dataPieChicago = getArrayData(sourceDataCity.data);
             addPieChicago()

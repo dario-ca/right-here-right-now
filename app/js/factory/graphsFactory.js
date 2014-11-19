@@ -10,10 +10,16 @@ var GraphsFactory = function() {
                 graph: {class: SecurityGraphViewController, position: GraphPosition.TOP},
                 sublayers: {
                     "Personal Assault": {
-                        graph: {class: NoSelectionGraphViewController, position: GraphPosition.BOTTOM}
+                        graph: {class: SubSecurityGraphViewController, position: GraphPosition.BOTTOM}
                     },
                     "Property Crime": {
-                        graph: {class: NoSelectionGraphViewController, position: GraphPosition.BOTTOM}
+                        graph: {class: SubSecurityGraphViewController, position: GraphPosition.BOTTOM}
+                    },
+                    "Mice": {
+                        graph: {class: SubSecurityGraphViewController, position: GraphPosition.BOTTOM}
+                    },
+                    "Pigeons": {
+                        graph: {class: SubSecurityGraphViewController, position: GraphPosition.BOTTOM}
                     }
                 }
 

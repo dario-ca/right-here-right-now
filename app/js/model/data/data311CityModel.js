@@ -175,7 +175,7 @@ dataCrimeTypeCityModel.getCategories = function () {
     };
     for (var i = 0; i < dataCrimeTypeCityModel.data.length; i++) {
         for (var cat in DataCrimeModel.categories) {
-            if (DataCrimeModel.categories[cat].indexOf(dataCrimeTypeCityModel.data[i].primary_type) !== -1){
+            if (DataCrimeModel.categories[cat].indexOf(dataCrimeTypeCityModel.data[i].name) !== -1){
                 outPut[cat] += +dataCrimeTypeCityModel.data[i].total;
             }
         }
