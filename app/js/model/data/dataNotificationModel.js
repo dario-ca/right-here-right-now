@@ -43,6 +43,9 @@ var DataNotificationModel = function(name) {
             case Notifications.data.BUS_CHANGED:
                 dataBusModel.unsubscribe(Notifications.data.BUS_CHANGED, onBusChange);
                 break;
+            case Notifications.data.TWITTER_CHANGED:
+                dataTwitterModel.unsubscribe(Notifications.data.TWITTER_CHANGED, onTwitterChanged);
+                break;
             default:
                 console.warn("Notification not supported: "+notification);
 

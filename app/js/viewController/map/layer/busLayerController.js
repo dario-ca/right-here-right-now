@@ -106,9 +106,11 @@ function BusLayerController() {
 
             if(dataBusModel.busSelected.dly != undefined) {
                 popup.view.delay.text("Delay");
+                popup.view.delay.attr("fill","red");
             }
             else {
                 popup.view.delay.text("In time");
+                popup.view.delay.attr("fill","green");
             }
         }
         else

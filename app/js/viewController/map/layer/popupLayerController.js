@@ -6,28 +6,38 @@ function PopupLayerController() {
         switch (popupType){
             case MapPopupType.POPUP_SIMPLE:
                 popup = ExternalSvgViewController("resource/view/map-popup-simple.svg");
-                popup.view.width = 16;
-                popup.view.height = 4;
+                //popup.view.width = 16;
+                //popup.view.height = 4;
+                popup.view.width = 32;
+                popup.view.height = 8;
                 break;
             case MapPopupType.POPUP_WARNING:
                 popup = ExternalSvgViewController("resource/view/map-popup-warning.svg");
-                popup.view.width = 16;
-                popup.view.height = 4;
+                //popup.view.width = 16;
+                //popup.view.height = 4;
+                popup.view.width = 32;
+                popup.view.height = 8;
                 break;
             case MapPopupType.POPUP_CRIME:
                 popup = ExternalSvgViewController("resource/view/map-popup-crime2.svg");
-                popup.view.width = 16;
-                popup.view.height = 4;
+                //popup.view.width = 16;
+                //popup.view.height = 4;
+                popup.view.width = 32;
+                popup.view.height = 8;
                 break;
             case MapPopupType.POPUP_CRIME_DANGER:
                 popup = ExternalSvgViewController("resource/view/map-popup-crime-danger.svg");
-                popup.view.width = 16;
-                popup.view.height = 4;
+                //popup.view.width = 16;
+                //popup.view.height = 4;
+                popup.view.width = 32;
+                popup.view.height = 8;
                 break;
             case MapPopupType.POPUP_BUS:
                 popup = ExternalSvgViewController("resource/view/map-popup-bus.svg");
-                popup.view.width = 16;
-                popup.view.height = 8;
+                //popup.view.width = 16;
+                //popup.view.height = 8;
+                popup.view.width = 32;
+                popup.view.height = 16;
                 break;
             case MapPopupType.POPUP_TWITTER:
                 popup = ExternalSvgViewController("resource/view/map-popup-twitter.svg");

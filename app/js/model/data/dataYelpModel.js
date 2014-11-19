@@ -8,7 +8,9 @@ var DataYelpModel = function(notification, term) {
     var self = DataModel();
 
     self._notification = notification;
-    self.interval = 120000;
+    self.interval = 600000;
+
+    self.duplicateCheck = false;    // Disable the duplicate check
 
     ////////////////////////// PRIVATE ATTRIBUTES //////////////////////////
     var customer_key = "E1wtlLW7YM3i4uBpc3Cn5A";
@@ -18,7 +20,7 @@ var DataYelpModel = function(notification, term) {
     var token_public = '5N-egiQwfvcKydR-pYrYzyA4wn_QqZu_';
     var token_secret = 'Fe7g29LlohGjz_ASGFqQX0dboMM';
 
-    var maxBusiness = 100;
+    var maxBusiness = 40;
 
     var tempData;   // Contains the partial data
 
