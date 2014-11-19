@@ -28,6 +28,8 @@ var DataRestaurantModel = function() {
         var restaurants    = dataYelpRestaurantModel.data;
         var foodInspection = dataFoodInspection.data;
 
+        console.log(restaurants, foodInspection);
+
         if(restaurants == null)
             return;
 
@@ -35,12 +37,12 @@ var DataRestaurantModel = function() {
             restaurants.forEach(function(restaurant) {
                 var f = foodInspection.filter(function(fi) {
                     return distance([restaurant.location.coordinate.latitude, restaurant.location.coordinate.longitude],
-                                     [fi.latitude, fi.longitude]) < 0.001 &&
-                                    stringDistance(restaurant.name, fi.aka_name) < 3;
+                                     [fi.latitude, fi.longitude]) < 0.0005  /*&&
+                                    stringDistance(restaurant.name, fi.aka_name) < 4*/;
                 });
                 if(f.length > 0) {
                     restaurant["food_inspection"] = f[0];
-                    console.log("Food inspection non passata", restaurant);
+                    console.log(">>>>Food inspection non passata", restaurant);
                 }
             });
 

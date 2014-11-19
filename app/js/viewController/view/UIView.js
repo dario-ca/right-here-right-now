@@ -93,7 +93,7 @@ var UIView = function(domElement) {
     };
 
     self.onClickRemove = function() {
-        self.classed("ui-view-pointer", false);   // Add the class pointer if it is clickable
+        self.classed({"ui-view-pointer": false, "clickable-item": false});   // Add the class pointer if it is clickable
         self.on("click", null);
     };
 

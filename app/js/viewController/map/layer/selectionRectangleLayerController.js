@@ -75,7 +75,7 @@ function SelectionRectangleViewController() {
 
         // Draw the selected points
         selectedPoints.forEach(function(point){
-            var pointController = ExternalSvgViewController("resource/sublayer/icon/bus.svg");
+            var pointController = ExternalSvgViewController("resource/sublayer/icon/point.svg");
             pointController.view.width = self.defaultIconSize;
             pointController.view.height= self.defaultIconSize;
 
