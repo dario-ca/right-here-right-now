@@ -26,6 +26,19 @@ var LayerModel = function(name) {
       }
     };
 
+
+    self.getSublayerWithName = function(name) {
+        var selectedLayer = null;
+        if(name){
+            self.sublayers.forEach(function(sublayers){
+                if(sublayers.name.toUpperCase() === name.toUpperCase())
+                        selectedLayer = sublayers;
+                });
+            }
+
+            return selectedLayer;
+    };
+
     /** GETTER SETTER FUNCTIONS**/
     self.__defineSetter__("selected", function(flag){
         self.sublayers.forEach(function(sublayer){
