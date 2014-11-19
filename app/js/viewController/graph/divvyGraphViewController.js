@@ -15,7 +15,6 @@ var DivvyGraphViewController = function (nameLayer, nameSubLayer) {
     var _xSelection = 65;
     var _yCenter = 50;
     var legendPies;
-    dataDivvyModel.selection
     self.dispose = function () {
         super_dispose();
         dataDivvyModel.unsubscribe(Notifications.data.DIVVY_BIKES_CHANGED,callBack);
@@ -67,16 +66,12 @@ var DivvyGraphViewController = function (nameLayer, nameSubLayer) {
     }
 
     var init = function() {
-        _dataPieChicago = getArrayData(dataDivvyModel.city) || [1,1];
-        _dataPieSelection = getArrayData(dataDivvyModel.selection) || [1,1];
 
         legendPies = self.addLegenda([{text:"Full slots", color:Colors.graph.DIVVY_FULL},
             {text:"Empty slots", color:Colors.graph.DIVVY_EMPTY}]);
         legendPies.view.attr("y",_yCenter - 20 + "%");
 
-        addPieChicago();
         titleChicago = self.addTitle("Chicago","35%",((_yCenter - (dimensSquare/2) - 2.5) + "%"));
-        addPieSelection();
         titleSelection = self.addTitle("Selection","65%",((_yCenter - (dimensSquare/2) - 2.5) + "%"));
 
         dataDivvyModel.subscribe(Notifications.data.DIVVY_BIKES_CHANGED,callBack);

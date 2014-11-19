@@ -38,7 +38,7 @@ var DoublePieGraphViewController = function (nameLayer, nameSubLayer) {
         if (pieSelection) {
             pieSelection.remove();
         }
-        if (!selectionModel.isEmpty()){
+        if (!selectionModel.isEmpty()&& sourceDataSelection.getSubTypes().length> 1){
             console.log(sourceDataSelection.getSubTypes())
             _dataPieSelection = getArrayData(sourceDataSelection.getSubTypes());
             addPieSelection();
@@ -131,20 +131,15 @@ var DoublePieGraphViewController = function (nameLayer, nameSubLayer) {
 
         }
         sourceDataCity.fetchData();
-        _dataPieChicago = getArrayData(sourceDataCity.data) || [1,1];
-        _dataPieSelection = getArrayData(sourceDataSelection.getSubTypes()) || [1,1];
 
         legendBar = self.addLegenda([{text:"Chicago", color:Colors.graph.CHICAGO},
             {text:"Selection", color:Colors.graph.SELECTION}]);
-        addBarChart();
 
         legendPies = self.addLegenda([{text:"Open", color:Colors.graph.OPEN},
             {text:"Completed", color:Colors.graph.COMPLETED}]);
         legendPies.view.attr("y",_yCenter - 20 + "%");
 
-        addPieChicago();
         titleChicago = self.addTitle("Chicago",_xChicago + "%",((_yCenter - (dimensSquare/2) - 2.5) + "%"));
-        addPieSelection();
         titleSelection = self.addTitle("Selection", _xSelection + "%",((_yCenter - (dimensSquare/2) - 2.5) + "%"));
 
         sourceDataCity.subscribe(notificationCity,callBackDataChicago);

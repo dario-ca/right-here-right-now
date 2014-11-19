@@ -48,13 +48,10 @@ var CtaGraphViewController = function (nameLayer, nameSubLayer) {
 
     var init = function() {
 
-        _dataPieSelection = getArrayData(dataDivvyModel.selection) || [1,1];
-
         legendPies = self.addLegenda([{text:"In time", color:Colors.graph.IN_TIME},
             {text:"Late", color:Colors.graph.LATE}]);
         legendPies.view.attr("y",_yCenter - 20 + "%");
 
-        addPieSelection();
         titleSelection = self.addTitle("Selection",_xSelection + "%",((_yCenter - (dimensSquare/2) - 2.5) + "%"));
 
         dataDivvyModel.subscribe(Notifications.data.BUS_CHANGED,callBack);
