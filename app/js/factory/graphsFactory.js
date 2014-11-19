@@ -27,6 +27,20 @@ var GraphsFactory = function() {
                         graph: {class: CtaGraphViewController, position: GraphPosition.FULL}
                     }
                 }
+            },
+            "INFORMATION": {
+                sublayers: {
+                    "Pothole": {
+                        graph: {class: DoublePieGraphViewController, position: GraphPosition.FULL}
+                    },
+                    "Light": {
+                        graph: {class: DoublePieGraphViewController, position: GraphPosition.FULL}
+                    },
+                    "Abandoned Vehicle": {
+                        graph: {class: DoublePieGraphViewController, position: GraphPosition.FULL}
+                    }
+
+                }
             }
 
         }

@@ -63,5 +63,12 @@ Colors.selection = {
 
 Colors.graph = {
     CHICAGO: "#0570b0",
-    SELECTION: "#fd8d3c"
+    SELECTION: "#fd8d3c",
+    OPEN: "#3CC3E2",
+    COMPLETED: "#3F8643",
+    DIVVY_FULL: "#3CC3E2",
+    DIVVY_EMPTY: "#3F8643",
+    IN_TIME: "yellow",
+    LATE: "blue"
+
 };

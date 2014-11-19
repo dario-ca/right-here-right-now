@@ -3,53 +3,83 @@
  */
 var DivvyGraphViewController = function (nameLayer, nameSubLayer) {
     var self = GraphViewController(nameLayer, nameSubLayer);
+    var _dataPieChicago = [1,1];
+    var _dataPieSelection = [1,1];
     var super_dispose = self.dispose;
     var pieChicago;
     var pieSelection;
     var titleChicago;
     var titleSelection;
-    var dimensSquare = 40;
-    var _xChicago = 10;
-    var _xSelection = 55;
+    var dimensSquare = 25;
+    var _xChicago = 35;
+    var _xSelection = 65;
+    var _yCenter = 50;
+    var legendPies;
+    dataDivvyModel.selection
     self.dispose = function () {
         super_dispose();
+        dataDivvyModel.unsubscribe(Notifications.data.DIVVY_BIKES_CHANGED,callBack);
     };
 
-    var init = function() {
-        self.view.classed("divvy-graph-view-controller", true);
-        self.addLegenda([{text:"Full", color:Colors.graph.CHICAGO},
-            {text:"Empty", color:Colors.graph.SELECTION}]);
-        pieChicago = PieChartView([30,70],[Colors.graph.SELECTION, Colors.graph.CHICAGO]);
+    var callBack = function() {
+        if (pieSelection) {
+            pieSelection.remove();
+        }
+        if (pieChicago) {
+            pieChicago.remove();
+        }
+        if (!selectionModel.isEmpty()){
+            _dataPieSelection = getArrayData(dataDivvyModel.selection);
+            addPieSelection();
+        } else {
+            _dataPieSelection = [0,0];
+        }
+        _dataPieChicago = getArrayData(dataDivvyModel.city);
+        addPieChicago();
+
+    };
+
+    var addPieChicago = function () {
+        pieChicago = PieChartView(_dataPieChicago,[Colors.graph.DIVVY_FULL, Colors.graph.DIVVY_EMPTY]);
         self.view.append(pieChicago);
         pieChicago.width = dimensSquare + "%";
         pieChicago.height = dimensSquare + "%";
-        pieChicago.y = 50 - (dimensSquare/2) + "%";
-        pieChicago.x = _xChicago + "%";
+        pieChicago.y = _yCenter - (dimensSquare/2) + "%";
+        pieChicago.x = _xChicago - (dimensSquare/2) + "%";
+    };
 
-        titleChicago = self.view.append("text");
-        titleChicago.text("Chicago");
-        titleChicago.attr("y",((50 - (dimensSquare/2) - 2.5) + "%"));
-        titleChicago.attr("x",_xChicago + "%");
-        titleChicago.attr("width",dimensSquare + "%");
-        titleChicago.attr("height", "10%");
-        titleChicago.classed("label-single-graph",true);
-        self.view.append(titleChicago);
-
-        pieSelection = PieChartView([30,70],[Colors.graph.SELECTION, Colors.graph.CHICAGO]);
+    var addPieSelection = function() {
+        pieSelection = PieChartView(_dataPieSelection,[Colors.graph.DIVVY_FULL, Colors.graph.DIVVY_EMPTY]);
         self.view.append(pieSelection);
         pieSelection.width = dimensSquare + "%";
         pieSelection.height = dimensSquare + "%";
-        pieSelection.y = 50 - (dimensSquare/2) + "%";
-        pieSelection.x = _xSelection + "%";
+        pieSelection.y = _yCenter - (dimensSquare/2) + "%";
+        pieSelection.x = _xSelection - (dimensSquare/2)  + "%";
+    };
 
-        titleSelection = self.view.append("text");
-        titleSelection.text("Selection");
-        titleSelection.attr("y",((50 - (dimensSquare/2) - 2.5) + "%"));
-        titleSelection.attr("x",_xSelection + "%");
-        titleSelection.attr("width",dimensSquare + "%");
-        titleSelection.attr("height", "10%");
-        titleSelection.classed("label-single-graph",true);
-        self.view.append(titleSelection);
+    //bikesAvailable: 530
+    //placesAvailable: 1165
+    var getArrayData = function(data) {
+        if (!data) {
+            return null;
+        }
+        return [data.bikesAvailable, data.placesAvailable];
+    }
+
+    var init = function() {
+        _dataPieChicago = getArrayData(dataDivvyModel.city) || [1,1];
+        _dataPieSelection = getArrayData(dataDivvyModel.selection) || [1,1];
+
+        legendPies = self.addLegenda([{text:"Full slots", color:Colors.graph.DIVVY_FULL},
+            {text:"Empty slots", color:Colors.graph.DIVVY_EMPTY}]);
+        legendPies.view.attr("y",_yCenter - 20 + "%");
+
+        addPieChicago();
+        titleChicago = self.addTitle("Chicago","35%",((_yCenter - (dimensSquare/2) - 2.5) + "%"));
+        addPieSelection();
+        titleSelection = self.addTitle("Selection","65%",((_yCenter - (dimensSquare/2) - 2.5) + "%"));
+
+        dataDivvyModel.subscribe(Notifications.data.DIVVY_BIKES_CHANGED,callBack);
     }();
 
     return self;

@@ -12,7 +12,10 @@ var PieChartView = function(data, colors) {
     var totalSum = function() {
         var tmpSum= 0;
         for (var i = 0; i < data.length; i++){
-            tmpSum += data[i];
+            tmpSum += +data[i];
+        }
+        if (tmpSum === 0) {
+            return 1;
         }
         return tmpSum;
     }();
@@ -25,6 +28,7 @@ var PieChartView = function(data, colors) {
 
     var init = function () {
         self.attr("viewBox", "0 0 " + w + " " + h)
+            .attr("preserveAspectRatio","xMidYMid meet")
             .classed("view-piechart-graph", true);
 
         arcs = self.selectAll("g.arc")
