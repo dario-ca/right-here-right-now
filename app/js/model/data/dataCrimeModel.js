@@ -219,9 +219,9 @@ DataCrimeModel.categories = {
                     "OFFENSES INVOLVING CHILDREN"]
 };
 
-DataCrimeModel.typesDangerCircle = ["BATTERY"];
+DataCrimeModel.typesDangerLargerCircle = ["BATTERY"];
 
-DataCrimeModel.typesWarningCircle = [""];
+DataCrimeModel.typesDangerCircle = ["ROBBERY","NARCOTICS"];
 
 
 var dataCrimeCategory1Model = DataCrimeModel("category1",Colors.layer.SECURITY_1,"http://data.cityofchicago.org/resource/ijzp-q8t2.json",Notifications.data.crime.CRIME_CATEGORY1_CHANGED,30000,"date",2);

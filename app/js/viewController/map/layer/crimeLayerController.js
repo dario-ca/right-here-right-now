@@ -41,8 +41,8 @@ function CrimeLayerController(name,notification,icon) {
             _svgCrimes.push(crimeIcon);
             crimeIcon.view.background.style("fill", d.color);
 
-            if(_.indexOf(DataCrimeModel.typesWarningCircle, d.primary_type) !== -1){
-                self.addWarning(d.latitude, d.longitude,self.defaultIconSize*self.defaultCircleRatio);
+            if(_.indexOf(DataCrimeModel.typesDangerLargerCircle, d.primary_type) !== -1){
+                self.addDanger(d.latitude, d.longitude,self.defaultIconSize*self.defaultCircleRatio*1.5);
             }
 
             if(_.indexOf(DataCrimeModel.typesDangerCircle, d.primary_type) !== -1){
@@ -75,14 +75,14 @@ function CrimeLayerController(name,notification,icon) {
             currentCrimeCategoryModel.crimeSelected=null;
             _popup=null;
         //if they are clicking on me, I create the popup removing the old one if any
-        }else if(DataCrimeModel.popupCategory===_name && (_.indexOf(DataCrimeModel.typesDangerCircle, currentCrimeCategoryModel.crimeSelected.primary_type) === -1)){
+        }else if(DataCrimeModel.popupCategory===_name && (_.indexOf(DataCrimeModel.typesDangerCircle, currentCrimeCategoryModel.crimeSelected.primary_type) === -1) && (_.indexOf(DataCrimeModel.typesDangerLargerCircle, currentCrimeCategoryModel.crimeSelected.primary_type) === -1)){
             if(_popup!==null){
                 _popup.dispose();
             }
             _popup = popupLayerController.openPopup(currentCrimeCategoryModel.crimeSelected.latitude, currentCrimeCategoryModel.crimeSelected.longitude, MapPopupType.POPUP_CRIME);
             _popup.view.title.text(currentCrimeCategoryModel.crimeSelected.primary_type);
             _popup.view.subtitle.text(currentCrimeCategoryModel.crimeSelected.block);
-        }else if(DataCrimeModel.popupCategory===_name && (_.indexOf(DataCrimeModel.typesDangerCircle, currentCrimeCategoryModel.crimeSelected.primary_type) !== -1)){
+        }else if(DataCrimeModel.popupCategory===_name && ((_.indexOf(DataCrimeModel.typesDangerCircle, currentCrimeCategoryModel.crimeSelected.primary_type) !== -1) || (_.indexOf(DataCrimeModel.typesDangerLargerCircle, currentCrimeCategoryModel.crimeSelected.primary_type) !== -1))){
             if(_popup!==null){
                 _popup.dispose();
             }
