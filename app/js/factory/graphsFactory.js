@@ -15,10 +15,10 @@ var GraphsFactory = function() {
                     "Property Crime": {
                         graph: {class: SubSecurityGraphViewController, position: GraphPosition.BOTTOM}
                     },
-                    "Mice": {
+                    "Unsafe Area": {
                         graph: {class: SubSecurityGraphViewController, position: GraphPosition.BOTTOM}
                     },
-                    "Pigeons": {
+                    "Minor Crime": {
                         graph: {class: SubSecurityGraphViewController, position: GraphPosition.BOTTOM}
                     }
                 }

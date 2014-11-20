@@ -56,7 +56,7 @@ var LayerFactory = function() {
                                     Colors.layer.SECURITY_2,
                                     [Category2CrimeLayerController]
                                 );
-        securityLayer.addSublayer("Mice",
+        securityLayer.addSublayer("Unsafe Area",
                                     "resource/sublayer/icon/unsafe.svg",
                                     Colors.layer.SECURITY_3,
                                     [Category3CrimeLayerController]);

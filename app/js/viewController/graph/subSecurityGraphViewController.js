@@ -96,7 +96,7 @@ var SubSecurityGraphViewController = function (nameLayer, nameSubLayer) {
     var init = function() {
 
         switch (nameSubLayer){
-            case "Personal Assault":;
+            case "Personal Assault":
                 notificationSelection = Notifications.data.CRIME_CATEGORY1_CHANGED;
                 sourceDataSelection = dataCrimeCategory1Model;
                 break;
@@ -104,11 +104,11 @@ var SubSecurityGraphViewController = function (nameLayer, nameSubLayer) {
                 notificationSelection = Notifications.data.CRIME_CATEGORY2_CHANGED;
                 sourceDataSelection = dataCrimeCategory2Model;
                 break;
-            case "Mice":
+            case "Unsafe Area":
                 notificationSelection = Notifications.data.CRIME_CATEGORY3_CHANGED;
                 sourceDataSelection = dataCrimeCategory3Model;
                 break;
-            case "Pigeons":
+            case "Minor Crime":
                 notificationSelection = Notifications.data.CRIME_CATEGORY4_CHANGED;
                 sourceDataSelection = dataCrimeCategory4Model;
                 break;
