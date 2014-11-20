@@ -31,13 +31,46 @@ var DataBusModel = function(name) {
      * Fetch all the busses in the selected area
      */
     self.fetchData = function() {
-        var lines = self._lines.filter(function(line){
-                        return line.directions.filter(function(direction) {
-                                    return direction.stops.filter(function(stop) {
-                                                return selectionModel.pointInside([stop.lat, stop.lon]);
-                                            }).length > 0;
-                               }).length > 0;
-                    });
+        /*
+         var lines = self._lines.filter(function(line){
+         return line.directions.filter(function(direction) {
+         return direction.stops.filter(function(stop) {
+         return selectionModel.pointInside([stop.lat, stop.lon]);
+         }).length > 0;
+         }).length > 0;
+         });
+        */
+
+
+        // Optimized version of the function
+        var lines = [];
+
+        function parseLines(lines, i) {
+            if (self._lines.length <= i) {
+                self.fetchData2(lines);
+                return;
+            }
+
+            var line = self._lines[i];
+            if (line.directions.filter(function (direction) {
+                    return direction.stops.filter(function (stop) {
+                            return selectionModel.pointInside([stop.lat, stop.lon]);
+                        }).length > 0;
+                }).length > 0
+        )
+            lines.push(line);
+
+            setTimeout(function () {
+                parseLines(lines, i + 1);
+            }, 1);
+
+        };
+
+        parseLines(lines, 0);
+    };
+
+    self.fetchData2 = function(lines) {
+
 
 
         // Temporary data
