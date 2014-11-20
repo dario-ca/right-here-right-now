@@ -51,7 +51,6 @@ function SelectionRectangleViewController() {
         });
         self.circles = [];
 
-
         selections.forEach(function(selection) {
             var polygon = mask.append("polygon")
                             .attr("fill", "#000000")
@@ -313,8 +312,15 @@ function SelectionRectangleViewController() {
             .style("fill", "rgba(0,0,0,0.35)"); // Transparent background
 
         // Create mask
-        mask = self.view.append("defs")
-            .append("mask")
+        var defs = self.view.append("defs");
+
+        defs.append("filter")
+            .attr("id","blur")
+            .append("feGaussianBlur")
+            .attr("in", "SourceGraphic")
+            .attr("stdDeviation", "0.5");
+
+        mask = defs.append("mask")
             .attr("id","mask");
 
         mask.append("rect")
@@ -323,6 +329,8 @@ function SelectionRectangleViewController() {
             .attr("y","0")
             .attr("height","100%")
             .attr("width","100%");
+
+        mask = mask.append("g").attr("filter", "url(#blur)");   // Blur effect
 
         notificationCenter.subscribe(Notifications.selection.SELECTION_CHANGED, updateSelection);
         notificationCenter.subscribe(Notifications.selection.SELECTION_POINTS_CHANGED, updateSelection);
