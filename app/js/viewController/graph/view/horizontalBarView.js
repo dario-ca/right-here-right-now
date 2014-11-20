@@ -3,11 +3,11 @@
  * @param data  array of values to be displayed. 2 for every labels
  * @param labels    labels to display
  * @param colors    2 colors
- * @param unit      text to display bottom right
+ * @param unit      text to display bottom right, maybe split in two lines
  * @returns {*}
  * @constructor
  */
-var HorizontalBarView = function(data, labels, colors, unit) {
+var HorizontalBarView = function(data, labels, colors, unit, unit2) {
     if(! (data.length == 2*labels.length))
         console.warn("data and lablels  not one the double of the other");
     if(colors.length != 2)
@@ -21,7 +21,7 @@ var HorizontalBarView = function(data, labels, colors, unit) {
         xmargin  = 10,
         xlinemargin = 1,
         bottomLineMargin = 10,
-        textTopMargin = 10
+        textTopMargin = 10,
         rectWidth = 8;
 
     var xspacing = (100 -  rightMargin) / (numOfCouples+1);
@@ -29,7 +29,7 @@ var HorizontalBarView = function(data, labels, colors, unit) {
 
     var init = function() {
         self.classed("horizontal-bar-view", true);
-        self.setViewBox(0,0,450,150);
+        self.setViewBox(0,0,450,120);
         //text
         var labelsSelection = self.selectAll("text").data(labels);
         var bars = self.selectAll("rect").data(data);
@@ -79,7 +79,7 @@ var HorizontalBarView = function(data, labels, colors, unit) {
             .attr("fill","#FFFFFF")
             .attr("text-anchor","middle")
             .attr("font-size", 10)
-            .text(function(d){return d});
+            .text(function(d){return d3.round(d,1)});
 
         //line
         self.append("line")
@@ -93,12 +93,24 @@ var HorizontalBarView = function(data, labels, colors, unit) {
         //unit
         self.append("text")
             .attr("x", 100 - xlinemargin + "%")
-            .attr("y", 100 + "%")
+            .attr("y", 98 + "%")
             .attr("stroke", "#FFFFFF")
             .attr("font-size", 10)
             .attr("text-anchor","end")
             .attr("stroke-width", 0.2 + "%")
             .text(unit);
+
+        if(unit2){
+            //unit
+            self.append("text")
+                .attr("x", 100 - xlinemargin + "%")
+                .attr("y", 107 + "%")
+                .attr("stroke", "#FFFFFF")
+                .attr("font-size", 10)
+                .attr("text-anchor","end")
+                .attr("stroke-width", 0.2 + "%")
+                .text(unit2);
+        }
 
 
     }();
