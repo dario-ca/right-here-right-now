@@ -58,7 +58,7 @@ var SecurityGraphViewController = function (nameLayer, nameSubLayer) {
 
 
     var addBarChart = function() {
-        barchart = HorizontalBarView(getAlternateArray(_dataChicago,_dataSelection),["Personal Assault","Category 2","cat 3", "cat 4"],
+        barchart = HorizontalBarView(getAlternateArray(_dataChicago,_dataSelection),["Personal Assault","Property Crime","", "Minor Crime"],
             [Colors.graph.CHICAGO, Colors.graph.SELECTION],
             "Crimes per ", d3.format(",")(factor) + " people");
         barchart.width = "90%";
