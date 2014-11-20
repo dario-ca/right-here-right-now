@@ -74,9 +74,10 @@ var WeatherViewController = function() {
     var init = function() {
         self.view.classed("weather-view-controller", true);
 
+        draw();
         dataWeatherModel.subscribe(Notifications.data.WEATHER_CHANGED, self.onWeatherChanged);
 
-        draw();
+
     } ();
 
 

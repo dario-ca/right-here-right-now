@@ -55,6 +55,10 @@ var GraphsViewController = function() {
 
             var sublayer = layer.sublayers[graphsModel.sublayerSelected];
 
+            if(!sublayer){
+
+            }
+
             if(sublayer){
                 setTopOrBottomViewController(sublayer.graph.class(graphsModel.layerSelected, graphsModel.sublayerSelected),
                     sublayer.graph.position);
