@@ -43,6 +43,8 @@ var DataGoogleDirectionModel = function(name) {
         }
         var destination = "" + coordinates[coordinates.length - 1][0] + ","+coordinates[coordinates.length - 1][1];
 
+        var departureTime = parseInt(Date.now()/1000);
+
         /*
         var origin = "41.8719273,-87.6511568";
         var destination = "41.8758623,-87.6207177";
@@ -50,9 +52,9 @@ var DataGoogleDirectionModel = function(name) {
 
         var query;
         if(waypoints == "")
-            query = "&origin=" + origin + "&mode=" + self.mode + "&destination=" + destination + "&key=" + self._key;
+            query = "&origin=" + origin + "&mode=" + self.mode + "&destination=" + destination + "&depature_time=" + departureTime + "&key=" + self._key;
         else
-            query = "&origin=" + origin + "&mode=" + self.mode + "&destination=" + destination + "&waypoints=" + waypoints + "&key=" + self._key;
+            query = "&origin=" + origin + "&mode=" + self.mode + "&destination=" + destination + "&depature_time=" + departureTime + "&waypoints=" + waypoints + "&key=" + self._key;
 
         d3.json(self._proxyURL + self._googleDirectionURL + query, function(error, json) {
             if(error) {

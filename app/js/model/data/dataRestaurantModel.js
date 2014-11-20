@@ -42,7 +42,7 @@ var DataRestaurantModel = function() {
                 });
                 if(f.length > 0) {
                     restaurant["food_inspection"] = f[0];
-                    console.log(">>>>Food inspection non passata", restaurant);
+                    //console.log(">>>>Food inspection non passata", restaurant);
                 }
             });
 

@@ -17,9 +17,10 @@ function SelectionRectangleViewController() {
 
     var mask;
 
-    var polygons = [];   // Used in order to produce mask not rectangular
+    var polygons = [];    // Used in order to produce mask not rectangular
     self.lines = [];      // Contains the lines that connect the selected points
     self.points = [];     // Contains the selected point controllers
+    self.circles = [];    // Circles
 
     //////////////////////////// PUBLIC METHODS //////////////////////////////
 
@@ -44,6 +45,13 @@ function SelectionRectangleViewController() {
         });
         self.points = [];
 
+        // Remove circles
+        self.circles.forEach(function(circle) {
+            circle.dispose();
+        });
+        self.circles = [];
+
+
         selections.forEach(function(selection) {
             var polygon = mask.append("polygon")
                             .attr("fill", "#000000")
@@ -59,31 +67,69 @@ function SelectionRectangleViewController() {
         // Draw the lines that connects the selected points
         lines.forEach(function(line) {
 
-            var p0 = self.project(line[0][0], line[0][1]);
-            var p1 = self.project(line[1][0], line[1][1]);
+            var p0 = self.project(line.start[0], line.start[1]);
+            var p1 = self.project(line.end[0]  , line.end[1]);
 
             var l = self.view.append("line")
                 .attr("x1", p0.x)
                 .attr("y1", p0.y)
                 .attr("x2", p1.x)
                 .attr("y2", p1.y)
-                .attr("stroke-width", 0.1)
+                .attr("stroke-opacity", "0.5")
+                .attr("stroke-width", 0.2)
                 .attr("stroke", "black");
+                //.attr("stroke", "#f03b20");
+
 
             self.lines.push(l);
         });
 
+        // Draw the time spent for traveling
+        var durationSum = 0;    // Duration of the travel in seconds
+        lines.forEach(function(line) {
+
+            var p0 = self.project(line.start[0], line.start[1]);
+            var p1 = self.project(line.end[0]  , line.end[1]);
+            durationSum += line.duration;
+            //console.log(durationSum);
+
+            if(durationSum > 180) {
+                // Add the icon
+                var circleController = ExternalSvgViewController("resource/sublayer/icon/circle.svg");
+                self.view.append(circleController);
+                circleController.view.width = 3;
+                circleController.view.height = 3;
+
+                circleController.view.text.text("" + parseInt(durationSum/60) + " min");
+                circleController.view.circle.attr("fill", "black");
+
+                var position = p1;
+                circleController.view.x = position.x - 3/2;
+                circleController.view.y = position.y - 3/2;
+                self.fixControllerSize(circleController, true);
+
+                self.circles.push(circleController);
+
+                durationSum = 0;
+            }
+        });
+
         // Draw the selected points
         selectedPoints.forEach(function(point){
+            //var pointController = ExternalSvgViewController("resource/sublayer/icon/point.svg");
+
+            // Add the icon
             var pointController = ExternalSvgViewController("resource/sublayer/icon/point.svg");
-            pointController.view.width = self.defaultIconSize;
-            pointController.view.height= self.defaultIconSize;
-
-            var p = self.project(point[0], point[1]);
-            pointController.view.x = p.x;
-            pointController.view.y = p.y;
-
             self.view.append(pointController);
+            pointController.view.width = 2.6;
+            pointController.view.height = 8;
+
+
+            var position = self.project(point[0], point[1]);
+            pointController.view.x = position.x - 2.6/2;
+            pointController.view.y = position.y - 8/2;
+            self.fixControllerSize(pointController, true);
+
 
             self.points.push(pointController);
         });

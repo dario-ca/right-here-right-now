@@ -192,7 +192,7 @@ var SelectionModel = function() {
                 var lastLatLng = null;
                 decodedPath.forEach(function(latLng) {
                     if(lastLatLng != null)
-                        self.lines.push([[lastLatLng.lat(), lastLatLng.lng()],[latLng.lat(), latLng.lng()]]);
+                        self.lines.push({start: [lastLatLng.lat(), lastLatLng.lng()], end: [latLng.lat(), latLng.lng()], duration: +step.duration.value / decodedPath.length});
 
                     lastLatLng = latLng;
                 });
