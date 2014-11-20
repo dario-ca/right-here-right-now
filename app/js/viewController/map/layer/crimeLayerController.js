@@ -42,7 +42,7 @@ function CrimeLayerController(name,notification,icon) {
             crimeIcon.view.background.style("fill", d.color);
 
             if(_.indexOf(DataCrimeModel.typesDangerLargerCircle, d.primary_type) !== -1){
-                self.addDanger(d.latitude, d.longitude,self.defaultIconSize*self.defaultCircleRatio*1.5);
+                self.addDanger(d.latitude, d.longitude,self.defaultIconSize*self.defaultCircleRatio*1.4);
             }
 
             if(_.indexOf(DataCrimeModel.typesDangerCircle, d.primary_type) !== -1){
