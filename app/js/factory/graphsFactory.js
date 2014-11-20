@@ -10,10 +10,16 @@ var GraphsFactory = function() {
                 graph: {class: SecurityGraphViewController, position: GraphPosition.TOP},
                 sublayers: {
                     "Personal Assault": {
-                        graph: {class: NoSelectionGraphViewController, position: GraphPosition.BOTTOM}
+                        graph: {class: SubSecurityGraphViewController, position: GraphPosition.BOTTOM}
                     },
                     "Property Crime": {
-                        graph: {class: NoSelectionGraphViewController, position: GraphPosition.BOTTOM}
+                        graph: {class: SubSecurityGraphViewController, position: GraphPosition.BOTTOM}
+                    },
+                    "Unsafe Area": {
+                        graph: {class: SubSecurityGraphViewController, position: GraphPosition.BOTTOM}
+                    },
+                    "Minor Crime": {
+                        graph: {class: SubSecurityGraphViewController, position: GraphPosition.BOTTOM}
                     }
                 }
 
@@ -26,6 +32,20 @@ var GraphsFactory = function() {
                     "Buses": {
                         graph: {class: CtaGraphViewController, position: GraphPosition.FULL}
                     }
+                }
+            },
+            "INFORMATION": {
+                sublayers: {
+                    "Pothole": {
+                        graph: {class: DoublePieGraphViewController, position: GraphPosition.FULL}
+                    },
+                    "Light": {
+                        graph: {class: DoublePieGraphViewController, position: GraphPosition.FULL}
+                    },
+                    "Abandoned Vehicle": {
+                        graph: {class: DoublePieGraphViewController, position: GraphPosition.FULL}
+                    }
+
                 }
             }
 

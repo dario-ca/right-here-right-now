@@ -27,6 +27,19 @@ var GraphViewController = function(layer, sublayer) {
         return legenda;
     };
 
+    self.addTitle = function(title, x, y){
+        var tmpTitle = self.view.append("text");
+        tmpTitle.text(title);
+        tmpTitle.attr("y", y);
+        tmpTitle.attr("x", x);
+        tmpTitle.style("text-anchor","middle");
+        tmpTitle.style("font-size","2vh");
+        tmpTitle.style("fill","white");
+        tmpTitle.attr("height", "10%");
+        self.view.append(tmpTitle);
+        return tmpTitle;
+    };
+
 
     self.showNoSelection = function() {
         self.view.html("");

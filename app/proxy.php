@@ -34,7 +34,7 @@ $valid_requests = array(
 	"www.ctabustracker.com",
 	"api.yelp.com",
 	"api.wunderground.com",
-	"maps.googleapis.com"
+	"maps.googleapis.com",
 );
 
 /* * * STOP EDITING HERE UNLESS YOU KNOW WHAT YOU ARE DOING * * */

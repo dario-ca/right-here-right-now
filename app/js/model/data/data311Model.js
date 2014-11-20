@@ -141,6 +141,9 @@ var Data311Model = function(modelName,databaseMainUrl,notification,interval,json
     };
 
     self.getSubTypes = function(attribute) {
+        if (!self.data){
+            return false;
+        }
         var outputTypes = [];
         var attr = attribute || "status";
         var addValue = function(type) {

@@ -2,8 +2,8 @@
   "id" : "01",
   "name" : "UIC East Campus",
   "address": "750 S Halsted St #100",
-  "latitude" : "41.870411",
-  "longitude" : "-87.648382"
+  "latitude" : "41.871977",
+  "longitude" : "-87.647846"
   },
   {
     "id" : "02",
@@ -16,7 +16,7 @@
     "id" : "03",
     "name" : "UIC EVL",
     "address": "842 W Taylor St #2032",
-    "latitude" : "41.870411",
+    "latitude" : "41.870427",
     "longitude" : "-87.648382"
   },
   {
@@ -44,84 +44,84 @@
     "id" : "07",
     "name" : "Shedd Aquarium",
     "address": "1200 S Lake Shore Dr",
-    "latitude" : "41.790561",
-    "longitude" : " -87.583045"
+    "latitude" : "41.867537",
+    "longitude" : "-87.614038"
   },
   {
     "id" : "08",
-    "name" : "UIC East Campus",
-    "address": "750 S Halsted St #100",
-    "latitude" : "41.870411",
-    "longitude" : " -87.648382"
-  },
-  {
-    "id" : "09",
     "name" : "United Center",
     "address": "1901 W Madison St",
     "latitude" : "41.880687",
     "longitude" : "-87.674155"
   },
   {
-    "id" : "10",
+    "id" : "09",
     "name" : "Navy Pier",
     "address": "600 E Grand Ave",
     "latitude" : "41.891646",
     "longitude" : "-87.605123"
   },
   {
-    "id" : "11",
+    "id" : "10",
     "name" : "Art Institute of Chicago",
     "address": "111 S Michigan Ave",
     "latitude" : "41.879580",
     "longitude" : "-87.623734"
   },
   {
-    "id" : "12",
+    "id" : "11",
     "name" : "Lincoln Park Zoo",
     "address": "2001 N Clark St",
     "latitude" : "41.920894",
     "longitude" : "-87.632938"
   },
   {
-    "id" : "13",
+    "id" : "12",
     "name" : "The Field Museum",
     "address": "1400 S Lake Shore Dr",
     "latitude" : "41.866273",
     "longitude" : "-87.616991"
   },
   {
-    "id" : "14",
+    "id" : "13",
     "name" : "Willis Tower",
     "address": "233 S Wacker Dr",
     "latitude" : "41.878888",
     "longitude" : "-87.635936"
   },
   {
-    "id" : "15",
+    "id" : "14",
     "name" : "Lincoln Park",
     "address": "",
     "latitude" : "41.928349",
     "longitude" : "-87.635479"
   },
   {
-    "id" : "16",
+    "id" : "15",
     "name" : "Soldier Field",
     "address": "1410 Museum Campus Dr",
     "latitude" : "41.862293",
     "longitude" : "-87.616699"
   },
   {
-    "id" : "17",
+    "id" : "16",
     "name" : "Wrigley Field",
     "address": "1060 W Addison St",
     "latitude" : "41.948450",
     "longitude" : "-87.655333"
   },
   {
-    "id" : "18",
+    "id" : "17",
     "name" : "U.S. Cellular Field",
     "address": "333 W 35th St",
     "latitude" : "41.830310",
     "longitude" : "-87.634948"
+  },
+  {
+    "id" : "18",
+    "name" : "Museum Campus",
+    "address": "",
+    "latitude" : "41.861470",
+    "longitude" : "-87.614924"
   }
 ]

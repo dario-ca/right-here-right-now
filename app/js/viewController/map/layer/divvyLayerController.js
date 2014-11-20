@@ -10,18 +10,6 @@ function DivvyLayerController() {
 
     /////////////////////////// PRIVATE METHODS ////////////////////////////
 
-    /*var createIcon = function(latitude, longitude, path){
-        var icon = ExternalSvgViewController(path);
-        self.view.append(icon);
-        icon.view.width =self.defaultIconSize;
-        icon.view.height=self.defaultIconSize;
-
-        var position = self.project(latitude, longitude);
-        icon.view.x = position.x;
-        icon.view.y = position.y;
-
-        return icon;
-    };*/
 
     var drawStations = function(){
         self.hideStations();
@@ -36,20 +24,6 @@ function DivvyLayerController() {
                 self.addWarning(d.latitude, d.longitude,self.defaultIconSize*self.defaultCircleRatio);
             }
 
-             //code before circles
-
-            /*divvyStationIcon.view.background.style("fill",function(){
-                //station empty: no bikes
-                if(d.availableBikes==0){
-                    return Colors.station.DIVVY_STATION_EMPTY;
-                //station full: no slots
-                }else if(d.availableDocks==0){
-                    return Colors.station.DIVVY_STATION_FULL;
-                //station regular: bikes and slots
-                }else{
-                    return Colors.station.DIVVY_STATION_REGULAR;
-                }
-            });*/
             divvyStationIcon.view.onClick(function(){
                 if(dataDivvyModel.stationSelected!==null)
                     _popup.dispose();
@@ -76,7 +50,21 @@ function DivvyLayerController() {
     var onStationSelected = function() {
         if(_popup!==null)
             _popup.dispose();
-        if(dataDivvyModel.stationSelected!==null) {
+        if(dataDivvyModel.stationSelected!==null && dataDivvyModel.stationSelected.availableBikes==0) {
+            _popup = popupLayerController.openPopup(dataDivvyModel.stationSelected.latitude, dataDivvyModel.stationSelected.longitude, MapPopupType.POPUP_WARNING);
+            _popup.view.title.text(dataDivvyModel.stationSelected.stationName);
+            _popup.view.warning.text("No Available Bikes");
+            _popup.view.subtitle.text(
+                "Bikes: "+dataDivvyModel.stationSelected.availableBikes+
+                " - Docks: "+dataDivvyModel.stationSelected.availableDocks);
+        }else if(dataDivvyModel.stationSelected!==null && dataDivvyModel.stationSelected.availableDocks==0) {
+            _popup = popupLayerController.openPopup(dataDivvyModel.stationSelected.latitude, dataDivvyModel.stationSelected.longitude, MapPopupType.POPUP_WARNING);
+            _popup.view.title.text(dataDivvyModel.stationSelected.stationName);
+            _popup.view.warning.text("No Available Docks");
+            _popup.view.subtitle.text(
+                "Bikes: "+dataDivvyModel.stationSelected.availableBikes+
+                " - Docks: "+dataDivvyModel.stationSelected.availableDocks);
+        }else if(dataDivvyModel.stationSelected!==null) {
             _popup = popupLayerController.openPopup(dataDivvyModel.stationSelected.latitude, dataDivvyModel.stationSelected.longitude, MapPopupType.POPUP_SIMPLE);
             _popup.view.title.text(dataDivvyModel.stationSelected.stationName);
             _popup.view.subtitle.text(

@@ -10,6 +10,7 @@ var DataPopulationModel = function() {
         });
     };
 
+
     self.getPopulationInCurrentSelection = function() {
         var sumPopulation = 0;
 
@@ -26,6 +27,13 @@ var DataPopulationModel = function() {
 
         return sumPopulation;
     };
+
+
+    self.getPopulationInChicago = function() {
+        //only the CITY OF CHICAGO
+        return 2695598;
+    };
+
 
     self.getAreaSelectionInKM2 = function() {
         if(selectionModel.isEmpty()){
@@ -70,13 +78,9 @@ var DataPopulationModel = function() {
     };
 
 
-    self.convertAreaInMiles2 = function(area){
-        return area * 0.386101919641;
-    };
-
-
-    self.convertDensityInMiles = function(density){
-        return density / 0.386101919641;
+    self.getAreaChicagoInKm2 = function() {
+        //only the CITY of chicago
+        return 606;
     };
 
 
@@ -88,6 +92,24 @@ var DataPopulationModel = function() {
             return 0;
         }
     };
+
+
+    self.getDensityInChicagoInKm2 = function() {
+        return 4447.4;
+    };
+
+
+    self.convertAreaInMiles2 = function(area){
+        return area * 0.386101919641;
+    };
+
+
+    self.convertDensityInMiles = function(density){
+        return density / 0.386101919641;
+    };
+
+
+
 
 
     return self;

@@ -55,6 +55,7 @@ var GraphsViewController = function() {
 
             var sublayer = layer.sublayers[graphsModel.sublayerSelected];
 
+
             if(sublayer){
                 setTopOrBottomViewController(sublayer.graph.class(graphsModel.layerSelected, graphsModel.sublayerSelected),
                     sublayer.graph.position);
@@ -172,7 +173,8 @@ var GraphsViewController = function() {
                 translateCoordinateSystemGroup.append(button);
 
                 button.onClick(function(){
-                   graphsModel.layerSelected = layer.name;
+                    graphsModel.layerSelected = layer.name;
+                    graphsModel.sublayerSelected = layer.sublayers[0].name;
                 });
 
                 _layerButtons.push({viewController:button, layerName:layer.name});

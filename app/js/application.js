@@ -58,8 +58,6 @@ var Application = function() {
         self.mainWindow.view.appendTo(body);
         self.mainWindow.updateView();
 
-        //GRAPH SELECTION SECURITY
-        graphsModel.layerSelected = "SECURITY";
 
         //NEARBY SELECTION ON
         selectionModel.selectionMode = SelectionMode.SELECTION_NEARBY;
@@ -68,6 +66,10 @@ var Application = function() {
         model.getLayerWithName("POINT OF INTEREST")
              .getSublayerWithName("Important Place")
              .selected = true;
+
+        //GRAPH SELECTION SECURITY
+        graphsModel.layerSelected = "SECURITY";
+        graphsModel.sublayerSelected = "Personal Assault";
     };
 
 

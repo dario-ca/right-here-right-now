@@ -7,7 +7,7 @@
  * @returns {*}
  * @constructor
  */
-var VerticalBarView = function(data, labels, colors, unit) {
+var VerticalBarView = function(data, labels, colors, unit, unit2) {
     if(! (data.length == 2*labels.length))
         console.warn("data and lablels  not one the double of the other");
     if(colors.length != 2)
@@ -51,9 +51,14 @@ var VerticalBarView = function(data, labels, colors, unit) {
             .attr("x", function(d){return xlinemargin + xmargin + x(d) + "%"})
             .attr("dy", rectHeight + "%")
             .attr("fill","#FFFFFF")
-            .attr("text-anchor","end")
+            .attr("text-anchor",
+                    function(d){
+                        if(x(d) < 30)
+                            return "start";
+                        else return "end";
+                    })
             .attr("font-size", 10)
-            .text(function(d){return d});
+            .text(function(d){return d3.round(d,1)});
 
         //line
         self.append("line")
@@ -67,12 +72,24 @@ var VerticalBarView = function(data, labels, colors, unit) {
         //unit
         self.append("text")
             .attr("x", 80 + "%")
-            .attr("y", 100 + "%")
+            .attr("y", 93 + "%")
             .attr("stroke", "#FFFFFF")
             .attr("font-size", 10)
             .attr("text-anchor","end")
             .attr("stroke-width", 0.2 + "%")
             .text(unit);
+
+        if(unit2) {
+            //unit
+            self.append("text")
+                .attr("x", 80 + "%")
+                .attr("y", 100 + "%")
+                .attr("stroke", "#FFFFFF")
+                .attr("font-size", 10)
+                .attr("text-anchor","end")
+                .attr("stroke-width", 0.2 + "%")
+                .text(unit2);
+        }
 
 
     }();

@@ -3,25 +3,58 @@
  */
 var CtaGraphViewController = function (nameLayer, nameSubLayer) {
     var self = GraphViewController(nameLayer, nameSubLayer);
+    var _dataPieSelection = [1,1];
     var super_dispose = self.dispose;
     var pieSelection;
     var titleSelection;
-    var dimensSquare = 80;
+    var dimensSquare = 40;
+    var _xSelection = 50;
+    var _yCenter = 50;
+    var legendPies;
+    dataDivvyModel.selection
     self.dispose = function () {
         super_dispose();
+        dataDivvyModel.unsubscribe(Notifications.data.BUS_CHANGED,callBack);
     };
 
-    var init = function() {
-        self.view.classed("divvy-graph-view-controller", true);
-        self.addLegenda([{text:"In time", color:Colors.graph.CHICAGO},
-            {text:"Late", color:Colors.graph.SELECTION}]);
+    var callBack = function() {
+        if (pieSelection) {
+            pieSelection.remove();
+        }
+        if (!selectionModel.isEmpty()){
+            _dataPieSelection = getArrayData(dataDivvyModel.selection);
+            addPieSelection();
+        } else {
+            _dataPieSelection = [0,0];
+        }
 
-        pieSelection = PieChartView([30,70],[Colors.graph.SELECTION, Colors.graph.CHICAGO]);
+    };
+
+    var addPieSelection = function() {
+        pieSelection = PieChartView(_dataPieSelection,[Colors.graph.IN_TIME, Colors.graph.LATE]);
         self.view.append(pieSelection);
         pieSelection.width = dimensSquare + "%";
-        pieSelection.heigth = dimensSquare + "%";
-        pieSelection.y = "50%";
-        pieSelection.x = dimensSquare/2 + "%";
+        pieSelection.height = dimensSquare + "%";
+        pieSelection.y = _yCenter - (dimensSquare/2) + "%";
+        pieSelection.x = _xSelection - (dimensSquare/2)  + "%";
+    };
+
+    var getArrayData = function(data) {
+        if (!data) {
+            return null;
+        }
+        return [data.bikesAvailable, data.placesAvailable];
+    }
+
+    var init = function() {
+
+        legendPies = self.addLegenda([{text:"In time", color:Colors.graph.IN_TIME},
+            {text:"Late", color:Colors.graph.LATE}]);
+        legendPies.view.attr("y",_yCenter - 20 + "%");
+
+        titleSelection = self.addTitle("Selection",_xSelection + "%",((_yCenter - (dimensSquare/2) - 2.5) + "%"));
+
+        dataDivvyModel.subscribe(Notifications.data.BUS_CHANGED,callBack);
     }();
 
     return self;

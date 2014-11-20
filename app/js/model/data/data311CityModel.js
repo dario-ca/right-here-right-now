@@ -135,33 +135,35 @@ var data311CityModel = function(modelName, mainURL, dateField,notification,inter
 };
 
 var dataPotholeCityModel = data311CityModel("PotHoleCity","http://data.cityofchicago.org/resource/7as2-ds3y.json","creation_date",Notifications.data.POTHOLE_CITY_CHANGED,300000);
-dataPotholeCityModel.addSqlSelect("status")
+dataPotholeCityModel.addSqlSelect("status AS name")
     .addSqlSelect("count(*) AS total")
+    .addSqlWhere("status!='Completed - Dup'")
+    .addSqlWhere("status!='Open - Dup'")
     .addSqlGroup("status");
 
 var dataAbandonedCityModel = data311CityModel("AbandonedCity","http://data.cityofchicago.org/resource/3c9v-pnva.json","creation_date",Notifications.data.ABANDONED_VEHICLES_CITY_CHANGED,300000);
-dataAbandonedCityModel.addSqlSelect("status")
+dataAbandonedCityModel.addSqlSelect("status AS name")
     .addSqlSelect("count(*) AS total")
     .addSqlGroup("status");
 
 var dataLightAllCityModel = data311CityModel("LightAllCity","http://data.cityofchicago.org/resource/zuxi-7xem.json","creation_date",Notifications.data.LIGHT_OUT_ALL_CITY_CHANGED,300000);
-dataLightAllCityModel.addSqlSelect("status")
+dataLightAllCityModel.addSqlSelect("status AS name")
     .addSqlSelect("count(*) AS total")
     .addSqlGroup("status");
 
 var dataLightOneCityModel = data311CityModel("LightOneCity","http://data.cityofchicago.org/resource/3aav-uy2v.json","creation_date",Notifications.data.LIGHT_OUT_SINGLE_CITY_CHANGED,300000);
-dataLightOneCityModel.addSqlSelect("status")
+dataLightOneCityModel.addSqlSelect("status AS name")
     .addSqlSelect("count(*) AS total")
     .addSqlGroup("status");
 
 var dataFoodInspCityModel = data311CityModel("FoodInspectionCity","http://data.cityofchicago.org/resource/4ijn-s7e5.json","inspection_date",Notifications.data.FOOD_INSPECTION_CITY_CHANGED,300000);
-dataFoodInspCityModel.addSqlSelect("results")
+dataFoodInspCityModel.addSqlSelect("results AS name")
     .addSqlSelect("count(*) AS total")
     .addSqlGroup("results");
 
 var dataCrimeTypeCityModel = data311CityModel("CrimeTypeCityModel","http://data.cityofchicago.org/resource/ijzp-q8t2.json","date",Notifications.data.crime.CRIME_TYPE_CITY_CHANGED,300000,2);
 dataCrimeTypeCityModel.addSqlSelect("count(*) AS total")
-    .addSqlSelect("primary_type")
+    .addSqlSelect("primary_type AS name")
     .addSqlGroup("primary_type");
 
 dataCrimeTypeCityModel.getCategories = function () {
@@ -173,7 +175,7 @@ dataCrimeTypeCityModel.getCategories = function () {
     };
     for (var i = 0; i < dataCrimeTypeCityModel.data.length; i++) {
         for (var cat in DataCrimeModel.categories) {
-            if (DataCrimeModel.categories[cat].indexOf(dataCrimeTypeCityModel.data[i].primary_type) !== -1){
+            if (DataCrimeModel.categories[cat].indexOf(dataCrimeTypeCityModel.data[i].name) !== -1){
                 outPut[cat] += +dataCrimeTypeCityModel.data[i].total;
             }
         }

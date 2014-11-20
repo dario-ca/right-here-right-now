@@ -173,7 +173,7 @@ var crimeTrendModel = function(modelName,notification,interval) {
 
     ////////////////////////// SUBSCRIBES //////////////////////////
 
-    notificationCenter.subscribe(Notifications.selection.SELECTION_CHANGED,callBackChangeAreas);
+    //notificationCenter.subscribe(Notifications.selection.SELECTION_CHANGED,callBackChangeAreas);
 
     return self;
 };
