@@ -48,6 +48,9 @@ function CrimeLayerController(name,notification,icon) {
             if(_.indexOf(DataCrimeModel.typesDangerCircle, d.primary_type) !== -1){
                 self.addDanger(d.latitude, d.longitude,self.defaultIconSize*self.defaultCircleRatio);
             }
+            if(_.indexOf(DataCrimeModel.typeWarningCircle, d.primary_type) !== -1){
+                self.addWarning(d.latitude, d.longitude,self.defaultIconSize*self.defaultCircleRatio);
+            }
 
             crimeIcon.view.onClick(function() {
                 //if I am clicking on the same popup, remove it

@@ -188,35 +188,35 @@ DataCrimeModel.categories = {
                     "ASSAULT",
                     "SEX OFFENSE",
                     "CRIM SEXUAL ASSAULT",
-                    "ROBBERY",
-                    "INTIMIDATION"],
+                    "HOMICIDE",
+                    "KIDNAPPING",
+                    "INTIMIDATION",
+                    "OFFENSES INVOLVING CHILDREN"],
 
     CATEGORY_2 : ["THEFT",
+                    "ROBBERY",
                     "BURGLARY",
                     "MOTOR VEHICLE THEFT"],
 
     CATEGORY_3 : ["PROSTITUTION",
                     "NARCOTICS",
+                    "OTHER NARCOTIC VIOLATION",
                     "OBSCENITY",
                     "PUBLIC PEACE VIOLATION",
                     "CRIMINAL TRESPASS",
                     "WEAPONS VIOLATION",
                     "CRIMINAL DAMAGE",
-                    "ARSON",
-                    "HOMICIDE",
-                    "KIDNAPPING"],
+                    "ARSON"],
 
     CATEGORY_4 : ["DOMESTIC VIOLENCE",
                     "GAMBLING",
                     "STALKING",
                     "RITUALISM",
                     "DECEPTIVE PRACTICE",
-                    "OTHER NARCOTIC VIOLATION",
                     "OTHER OFFENSE",
                     "LIQUOR LAW VIOLATION",
                     "INTERFERENCE WITH PUBLIC OFFICER",
-                    "CONCEALED CARRY LICENSE VIOLATION",
-                    "OFFENSES INVOLVING CHILDREN"]
+                    "CONCEALED CARRY LICENSE VIOLATION"]
 };
 
 DataCrimeModel.longToShortName = {
@@ -230,9 +230,11 @@ DataCrimeModel.longToShortName = {
     "OFFENSES INVOLVING CHILDREN": "CHILD OFFENSE"
 };
 
-DataCrimeModel.typesDangerLargerCircle = ["BATTERY"];
+DataCrimeModel.typesDangerLargerCircle = ["BATTERY","HOMICIDE","KIDNAPPING"];
 
-DataCrimeModel.typesDangerCircle = ["ROBBERY","NARCOTICS"];
+DataCrimeModel.typesDangerCircle = ["ROBBERY"];
+
+DataCrimeModel.typeWarningCircle = ["NARCOTICS"];
 
 
 var dataCrimeCategory1Model = DataCrimeModel("category1",Colors.layer.SECURITY_1,"http://data.cityofchicago.org/resource/ijzp-q8t2.json",Notifications.data.crime.CRIME_CATEGORY1_CHANGED,30000,"date",2);
