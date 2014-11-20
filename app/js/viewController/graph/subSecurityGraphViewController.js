@@ -14,7 +14,7 @@ var SubSecurityGraphViewController = function (nameLayer, nameSubLayer) {
     var notificationSelection;
     var legendBar;
     var arrayLabels;
-    var factor = 1000;
+    var factor = 100000;
 
     self.dispose = function () {
         super_dispose();
@@ -57,11 +57,20 @@ var SubSecurityGraphViewController = function (nameLayer, nameSubLayer) {
         var found;
         for (var i = 0; i < maxElem && i < dataSelection.length; i++) {
             found = false;
-            arrayLabels.push(dataSelection[i].name);
+
+            //some names are too long, Dario has mapped them to a shorter name
+            var label = null;
+            if(DataCrimeModel.longToShortName[dataSelection[i].name]) {
+                label = DataCrimeModel.longToShortName[dataSelection[i].name].toLowerCase();
+            } else {
+                label = dataSelection[i].name.toLowerCase();
+            }
+
+            arrayLabels.push(label);
             for (var j = 0; j < dataChicago.length; j++){
                 if (dataSelection[i].name === dataChicago[j].name){
-                    tmpArray.push(Number((dataChicago[j].total/popC) * factor).toFixed(3));
-                    tmpArray.push(Number((dataSelection[i].total/popS) * factor).toFixed(3));
+                    tmpArray.push((dataChicago[j].total/popC) * factor);
+                    tmpArray.push((dataSelection[i].total/popS) * factor);
                     found = true;
                 }
             }
@@ -75,7 +84,8 @@ var SubSecurityGraphViewController = function (nameLayer, nameSubLayer) {
 
     var addBarChart = function() {
         if (_dataChicago && _dataSelection){
-            barchart = VerticalBarView(getAlternateArray(_dataChicago,_dataSelection),arrayLabels,[Colors.graph.CHICAGO, Colors.graph.SELECTION],"sbaluba");
+            barchart = VerticalBarView(getAlternateArray(_dataChicago,_dataSelection),arrayLabels,[Colors.graph.CHICAGO, Colors.graph.SELECTION],
+                "Crimes per ", d3.format(",")(factor) + " people");
             //barchart.width = "80%";
             //barchart.height = "50%";
             //barchart.y = "20%";

@@ -6,7 +6,7 @@ var SecurityGraphViewController = function (nameLayer, nameSubLayer) {
     var barchart;
     var popC = dataPopulationModel.getPopulationInChicago();
     var popS = 1;
-    var factor = 1000;
+    var factor = 100000;
     var legendBar;
 
     self.dispose = function () {
@@ -49,19 +49,24 @@ var SecurityGraphViewController = function (nameLayer, nameSubLayer) {
         var tmpArray = [];
         var j = 0;
         for (var i = 0; i < dataChicago.length; i++) {
-            tmpArray[j] = Number((dataChicago[i]/popC) * factor).toFixed(3);
-            tmpArray[j+1] = Number((dataSelection[i]/popS) * factor).toFixed(3);
+            tmpArray[j] = (dataChicago[i]/popC) * factor;
+            tmpArray[j+1] = (dataSelection[i]/popS) * factor;
             j = j + 2;
         }
         return tmpArray;
-    }
+    };
+
+
     var addBarChart = function() {
-        barchart = HorizontalBarView(getAlternateArray(_dataChicago,_dataSelection),["Personal Assault","Category 2","cat 3", "cat 4"],[Colors.graph.CHICAGO, Colors.graph.SELECTION],"Crime/population");
+        barchart = HorizontalBarView(getAlternateArray(_dataChicago,_dataSelection),["Personal Assault","Category 2","cat 3", "cat 4"],
+            [Colors.graph.CHICAGO, Colors.graph.SELECTION],
+            "Crimes per ", d3.format(",")(factor) + " people");
         barchart.width = "90%";
-        barchart.height = "900%";
-        barchart.y = "50%";
+        barchart.height = "90%";
+        barchart.y = "20%";
         self.view.append(barchart);
-    }
+    };
+
 
     var init = function() {
 

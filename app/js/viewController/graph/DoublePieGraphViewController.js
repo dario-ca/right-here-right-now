@@ -84,10 +84,16 @@ var DoublePieGraphViewController = function (nameLayer, nameSubLayer) {
     };
 
     var addBarChart = function() {
-        barchart = HorizontalBarView([Number((_dataPieChicago[0] / areaC)*factor).toFixed(3),Number((_dataPieSelection[0] / areaS)*factor).toFixed(3),Number((_dataPieChicago[1] / areaC)*factor).toFixed(3),Number((_dataPieSelection[1] / areaS)*factor).toFixed(3)],["Completed","Open"],[Colors.graph.CHICAGO, Colors.graph.SELECTION],"sbaluba");
+        barchart = HorizontalBarView([(_dataPieChicago[0] / areaC)*factor,
+            (_dataPieSelection[0] / areaS)*factor,
+            (_dataPieChicago[1] / areaC)*factor,
+            (_dataPieSelection[1] / areaS)*factor],
+            ["Completed","Open"],
+            [Colors.graph.CHICAGO, Colors.graph.SELECTION],"occurrences per","square mile");
         barchart.width = "80%";
         barchart.height = "50%";
         barchart.y = "20%";
+        barchart.x = "10%";
         self.view.append(barchart);
     }
 
