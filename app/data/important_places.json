@@ -116,5 +116,12 @@
     "address": "333 W 35th St",
     "latitude" : "41.830310",
     "longitude" : "-87.634948"
+  },
+  {
+    "id" : "18",
+    "name" : "Museum Campus",
+    "address": "",
+    "latitude" : "41.861470",
+    "longitude" : "-87.614924"
   }
 ]
