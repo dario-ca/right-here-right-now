@@ -138,6 +138,11 @@ function MapViewController() {
     self.updateView = function() {
         self.super_updateView();
         _mapContainer.invalidateSize();
+        //MOVE RIGHT
+        d3.selectAll(".leaflet-left").style("left", "22%");
+        //MOVE ZOOM DOWN
+        d3.selectAll(".leaflet-top").style("top", "30%");
+
     };
 
     /////////////////////////// PRIVATE METHODS ///////////////////////////
@@ -181,7 +186,7 @@ function MapViewController() {
         // Add the base map layer to the map container box
         _mapContainer.addLayer(tileLayers.map);
 
-        L.control.layers(tileLayers,[], {position: "topleft"}).addTo(_mapContainer);
+        L.control.layers(tileLayers,[], {position: "bottomleft"}).addTo(_mapContainer);
 
         _svgLayer = UISvgView();
         _svgLayer.classed("map-layers-container", true);
@@ -190,6 +195,8 @@ function MapViewController() {
         d3.select(_mapContainer.getPanes().overlayPane).append(function() {
             return _svgLayer.node();
         });
+
+
 
         // Subscribe to notifications
 

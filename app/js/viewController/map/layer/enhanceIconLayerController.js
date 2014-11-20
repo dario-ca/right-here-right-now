@@ -38,6 +38,12 @@ function EnhanceIconLayerController() {
         var circle = viewController.view.circle;
         circle.style("fill", Colors.enhanceIcon.WARNING);
         _warningCircles.push(circle);
+
+        if(!enhanceIconModel.warning){
+            circle.attr("opacity", 0);
+        }
+
+
         return viewController;
     };
 
@@ -47,6 +53,11 @@ function EnhanceIconLayerController() {
         var circle = viewController.view.circle;
         circle.style("fill", Colors.enhanceIcon.DANGER);
         _dangerCircles.push(circle);
+
+        if(!enhanceIconModel.danger){
+            circle.attr("opacity", 0);
+        }
+
         return viewController;
     };
 
