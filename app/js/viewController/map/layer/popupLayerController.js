@@ -34,6 +34,13 @@ function PopupLayerController() {
                 popup.view.width = 32;
                 popup.view.height = 8;
                 break;
+            case MapPopupType.POPUP_CRIME_WARNING:
+                popup = ExternalSvgViewController("resource/view/map-popup-crime-warning.svg");
+                //popup.view.width = 16;
+                //popup.view.height = 4;
+                popup.view.width = 32;
+                popup.view.height = 8;
+                break;
             case MapPopupType.POPUP_BUS:
                 popup = ExternalSvgViewController("resource/view/map-popup-bus.svg");
                 //popup.view.width = 16;
@@ -96,5 +103,6 @@ var MapPopupType = {
     POPUP_WARNING: "POPUP_WARNING",
     POPUP_TWITTER: "POPUP_TWITTER",
     POPUP_CRIME_DANGER: "POPUP_CRIME_DANGER",
+    POPUP_CRIME_WARNING: "POPUP_CRIME_WARNING",
     POPUP_INSPECTION: "POPUP_INSPECTION"
 };

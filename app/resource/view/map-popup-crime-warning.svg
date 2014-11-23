@@ -6,7 +6,7 @@
 <g>
 	<polygon fill="#FFFFFF" stroke="#000000" stroke-width="0.5774" stroke-miterlimit="10" points="0.344,19.273 0.344,0.797 
 		15.933,19.273 305.777,19.273 305.777,97.797 0.344,97.797 	"/>
-	<text id="title" transform="matrix(1 0 0 1 104.0444 46.9414)" font-family="'Lato-Bold'" font-size="19.0536">Title</text>
+	<text id="title" transform="matrix(1 0 0 1 112.0444 46.9414)" font-family="'Lato-Bold'" font-size="19.0536">Title</text>
 	<text id="subtitle" transform="matrix(1 0 0 1 21.7109 77.2695)" font-family="'Lato-Regular'" font-size="19.0536">subtitlesubtitlesubtitle</text>
 	<g id="close">
 		
