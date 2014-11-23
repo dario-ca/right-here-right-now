@@ -11,7 +11,7 @@ var MapModel = function() {
     // This is the default latitude and longitude of the Map center.
 
 //    latitude:41.869912359714654, longitude:-87.64772415161133
-    var  _focusPoint = { latitude:41.876320, longitude:-87.572841 };
+    var  _focusPoint = { latitude:41.876320, longitude:-87.672841 };
     var _topLeftCoord = new L.latLng(/*41.978353*/42.1, /*-87.707857*/-88.0);
     var _bottomRightCoord = new L.latLng(/*41.788746*/41.1, /*-87.580715*/-87.0);
     var _defaultZoomForProjecting = 10;
@@ -58,6 +58,20 @@ var MapModel = function() {
         return _map.unproject(new L.Point(x,y), _defaultZoomForProjecting);
     };
 
+
+    self.centerInSelection = function() {
+        var c = selectionModel.getSelection()[0].getCentroid();
+        _map.panTo(new L.LatLng(c[0], c[1]));
+    };
+
+
+    self.onNearbySelection = function() {
+        if(selectionModel.selectionMode == SelectionMode.SELECTION_NEARBY){
+            if(!selectionModel.isEmpty()){
+                self.centerInSelection();
+            }
+        }
+    };
 
     /**
      *
@@ -124,6 +138,7 @@ var MapModel = function() {
 
     ////////////////////////////////// PRIVATE METHODS //////////////////////////////////
     var init = function() {
+        notificationCenter.subscribe(Notifications.selection.SELECTION_CHANGED, self.onNearbySelection);
     } ();
 
     return self;

@@ -109,41 +109,54 @@ var NotificationPopupsViewController = function() {
 
         self.view.setViewBox(0, 0, _popupWidth, _popupHeight);
 
-        /*
 
+/*
         var i = 0;
 
-        window.setInterval(function(){
+        window.setTimeout(function(){
             i++;
-            self.addNotificationPopup("Abandoned Vehicle ", "somewhere",
+            self.addNotificationPopup("Abandoned Vehicle ", "near 809 S Damen Avenue ",
                 "resource/sublayer/icon/abandoned-vehicle.svg");
-        },25000);
+        },5000);
 
-        window.setInterval(function(){
+        window.setTimeout(function(){
             i++;
-            self.addNotificationPopup("Divvy Station Empty", "The bikes station ... has no more bikes",
-                "resource/sublayer/icon/divvy-station.svg");
-        },11000);
-
-        window.setInterval(function(){
-            i++;
-            self.addNotificationPopup("Light broken", "Light in street ... broke",
-                "resource/sublayer/icon/light.svg");
+            self.addNotificationPopup("Tweet from: Antionetta94", "Just met an handsome italian guy!",
+                "resource/sublayer/icon/twitter.svg");
         },6000);
 
-        window.setInterval(function(){
+        window.setTimeout(function(){
+            i++;
+            self.addNotificationPopup("Divvy Station Empty", "UIC Campus East",
+                "resource/sublayer/icon/divvy-station.svg");
+        },9000);
+
+        window.setTimeout(function(){
+            i++;
+            self.addNotificationPopup("Tweet from: Killer Kenny", "OMG Delicious dinner at Sbarro",
+                "resource/sublayer/icon/twitter.svg");
+        },10000);
+
+
+        window.setTimeout(function(){
+            i++;
+            self.addNotificationPopup("Light broken", "Light in Tailor Street is broken",
+                "resource/sublayer/icon/light.svg");
+        },13000);
+
+        /*window.setTimeout(function(){
             i++;
             self.addNotificationPopup("OH MY GOD THEY KILLED KENNY!", "",
                 "resource/sublayer/icon/assault.svg");
         },15000);
 
-        window.setInterval(function(){
+        window.setTimeout(function(){
             i++;
-            self.addNotificationPopup("Mouse", "Mouse spotted close to UIC",
-                "resource/sublayer/icon/unsafe.svg");
-        },19000);
-        */
+            self.addNotificationPopup("Bus Delayed", "Line 157",
+                "resource/sublayer/icon/bus-no-number.svg");
+        },18000);
 
+*/
         // Subscription to notifications
         notificationCenter.subscribe(Notifications.data.NOTIFICATION_AVAILABLE, notificationAvailable);
 
