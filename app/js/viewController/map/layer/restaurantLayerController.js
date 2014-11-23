@@ -55,10 +55,12 @@ function RestaurantLayerController() {
             _popup.view.title.text(dataRestaurantModel.restaurantSelected.name);
             _popup.view.subtitle.text(dataRestaurantModel.restaurantSelected.location.display_address[0]);
         }else if(dataRestaurantModel.restaurantSelected!==null && dataRestaurantModel.restaurantSelected.food_inspection !== undefined){
-            _popup = popupLayerController.openPopup(dataRestaurantModel.restaurantSelected.location.coordinate.latitude, dataRestaurantModel.restaurantSelected.location.coordinate.longitude, MapPopupType.POPUP_WARNING);
+            _popup = popupLayerController.openPopup(dataRestaurantModel.restaurantSelected.location.coordinate.latitude, dataRestaurantModel.restaurantSelected.location.coordinate.longitude, MapPopupType.POPUP_INSPECTION);
             _popup.view.title.text(dataRestaurantModel.restaurantSelected.name);
-            _popup.view.warning.text(" food inspection failed");
-            _popup.view.subtitle.text(dataRestaurantModel.restaurantSelected.location.display_address[0]);
+            _popup.view.description.text(" food inspection failed");
+            var inspectionDate=new Date(dataRestaurantModel.restaurantSelected.food_inspection.inspection_date);
+            _popup.view.subtitle.text(parseFloat(inspectionDate.getMonth()+1)+"/"+parseFloat(inspectionDate.getDate()+1)+"/"+inspectionDate.getFullYear());
+            _popup.view.address.text(dataRestaurantModel.restaurantSelected.location.display_address[0]);
         }
     };
 

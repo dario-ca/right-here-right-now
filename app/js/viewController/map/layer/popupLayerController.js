@@ -48,6 +48,13 @@ function PopupLayerController() {
                 popup.view.width = 40;
                 popup.view.height = 60;
                 break;
+            case MapPopupType.POPUP_INSPECTION:
+                popup = ExternalSvgViewController("resource/view/map-popup-warning-inspection.svg");
+                //popup.view.width = 16;
+                //popup.view.height = 8;
+                popup.view.width = 40;
+                popup.view.height = 70;
+                break;
 
             default :
 
@@ -88,5 +95,6 @@ var MapPopupType = {
     POPUP_CRIME: "POPUP_CRIME",
     POPUP_WARNING: "POPUP_WARNING",
     POPUP_TWITTER: "POPUP_TWITTER",
-    POPUP_CRIME_DANGER: "POPUP_CRIME_DANGER"
+    POPUP_CRIME_DANGER: "POPUP_CRIME_DANGER",
+    POPUP_INSPECTION: "POPUP_INSPECTION"
 };
