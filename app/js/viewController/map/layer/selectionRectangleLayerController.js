@@ -256,9 +256,10 @@ function SelectionRectangleViewController() {
     };
 
     var nearbyMode = function() {
-        dataPositionModel.unsubscribe(Notifications.position.POSITION_CHANGED, self.userPositionChange);
-        dataPositionModel.subscribe(Notifications.position.POSITION_CHANGED, self.userPositionChange);
-
+        //dataPositionModel.unsubscribe(Notifications.position.POSITION_CHANGED, self.userPositionChange);
+        //dataPositionModel.subscribe(Notifications.position.POSITION_CHANGED, self.userPositionChange);
+        if($.isEmptyObject(dataPositionModel.data) == false)
+            self.userPositionChange();
     };
 
     self.userPositionChange = function() {
