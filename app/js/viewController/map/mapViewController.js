@@ -41,8 +41,12 @@ function MapViewController() {
         layerViewControllers.push(layerController);
         layerController.view.appendTo(_svgLayerGroup);
 
-        //bring the popups to front again
-        popupLayerController.view.bringToFront();
+        var orderedByZIndex = _.sortBy(layerViewControllers, function(l){return l.z_index});
+        orderedByZIndex.forEach(function(layer){
+            //bring the popups to front again
+            popupLayerController.view.bringToFront();
+        });
+
     };
 
 
@@ -143,6 +147,8 @@ function MapViewController() {
         //MOVE ZOOM DOWN
         d3.selectAll(".leaflet-top").style("top", "30%");
 
+        //make layers visible
+        d3.select(".leaflet-control-layers").classed("leaflet-control-layers-fixed-expanded", true);
     };
 
     /////////////////////////// PRIVATE METHODS ///////////////////////////
