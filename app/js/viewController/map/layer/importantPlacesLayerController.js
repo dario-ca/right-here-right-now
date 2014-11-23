@@ -1,6 +1,8 @@
 function ImportantPlacesLayerController() {
     var self = MapLayerController();
 
+    self.z_index=6;
+
     /////////////////////////// PRIVATE ATTRIBUTES ////////////////////////////
 
     var _placesData=[];

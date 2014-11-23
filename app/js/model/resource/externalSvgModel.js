@@ -38,6 +38,8 @@ var ExternalSvgModel = function() {
                             "resource/view/map-popup-crime.svg",
                             "resource/view/map-popup-crime2.svg",
                             "resource/view/map-popup-crime-danger.svg",
+                            "resource/view/map-popup-crime-warning.svg",
+                            "resource/view/map-popup-warning-inspection.svg",
                             "resource/view/weather-widget.svg",
                             "resource/view/graphs-title.svg",
                             "resource/view/map-popup-warning.svg",

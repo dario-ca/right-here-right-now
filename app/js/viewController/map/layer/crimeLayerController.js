@@ -14,16 +14,17 @@ function CrimeLayerController(name,notification,icon) {
     var currentCrimeCategoryModel=null;
     var _popup=null;
 
-
     /////////////////////////// PRIVATE METHODS ////////////////////////////
 
     var giveCurrentCrimeCategoryModel = function(){
         switch(_name) {
             case "category1":
                 currentCrimeCategoryModel = dataCrimeCategory1Model;
+                self.z_index=4;
                 break;
             case "category2":
                 currentCrimeCategoryModel = dataCrimeCategory2Model;
+                self.z_index=3;
                 break;
             case "category3":
                 currentCrimeCategoryModel = dataCrimeCategory3Model;
@@ -78,7 +79,7 @@ function CrimeLayerController(name,notification,icon) {
             currentCrimeCategoryModel.crimeSelected=null;
             _popup=null;
         //if they are clicking on me, I create the popup removing the old one if any
-        }else if(DataCrimeModel.popupCategory===_name && (_.indexOf(DataCrimeModel.typesDangerCircle, currentCrimeCategoryModel.crimeSelected.primary_type) === -1) && (_.indexOf(DataCrimeModel.typesDangerLargerCircle, currentCrimeCategoryModel.crimeSelected.primary_type) === -1)){
+        }else if(DataCrimeModel.popupCategory===_name && (_.indexOf(DataCrimeModel.typesDangerCircle, currentCrimeCategoryModel.crimeSelected.primary_type) === -1) && (_.indexOf(DataCrimeModel.typesDangerLargerCircle, currentCrimeCategoryModel.crimeSelected.primary_type) === -1)&&(_.indexOf(DataCrimeModel.typeWarningCircle, currentCrimeCategoryModel.crimeSelected.primary_type) === -1)){
             if(_popup!==null){
                 _popup.dispose();
             }
@@ -90,6 +91,13 @@ function CrimeLayerController(name,notification,icon) {
                 _popup.dispose();
             }
             _popup = popupLayerController.openPopup(currentCrimeCategoryModel.crimeSelected.latitude, currentCrimeCategoryModel.crimeSelected.longitude, MapPopupType.POPUP_CRIME_DANGER);
+            _popup.view.title.text(currentCrimeCategoryModel.crimeSelected.primary_type);
+            _popup.view.subtitle.text(currentCrimeCategoryModel.crimeSelected.block);
+        }else if(DataCrimeModel.popupCategory===_name && (_.indexOf(DataCrimeModel.typeWarningCircle, currentCrimeCategoryModel.crimeSelected.primary_type) !== -1)){
+            if(_popup!==null){
+                _popup.dispose();
+            }
+            _popup = popupLayerController.openPopup(currentCrimeCategoryModel.crimeSelected.latitude, currentCrimeCategoryModel.crimeSelected.longitude, MapPopupType.POPUP_CRIME_WARNING);
             _popup.view.title.text(currentCrimeCategoryModel.crimeSelected.primary_type);
             _popup.view.subtitle.text(currentCrimeCategoryModel.crimeSelected.block);
         }

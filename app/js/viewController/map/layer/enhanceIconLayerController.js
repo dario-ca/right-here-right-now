@@ -1,6 +1,7 @@
 function EnhanceIconLayerController() {
     var self = MapLayerController();
 
+    self.z_index=-1;
 
     var _warningCircles = [],
         _dangerCircles = [];

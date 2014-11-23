@@ -1,6 +1,8 @@
 function PopupLayerController() {
     var self = MapLayerController();
 
+    self.z_index=7;
+
     self.openPopup = function(lat, lng, popupType, onCloseCallback) {
         var popup = null;
         switch (popupType){
@@ -32,6 +34,13 @@ function PopupLayerController() {
                 popup.view.width = 32;
                 popup.view.height = 8;
                 break;
+            case MapPopupType.POPUP_CRIME_WARNING:
+                popup = ExternalSvgViewController("resource/view/map-popup-crime-warning.svg");
+                //popup.view.width = 16;
+                //popup.view.height = 4;
+                popup.view.width = 32;
+                popup.view.height = 8;
+                break;
             case MapPopupType.POPUP_BUS:
                 popup = ExternalSvgViewController("resource/view/map-popup-bus.svg");
                 //popup.view.width = 16;
@@ -45,6 +54,13 @@ function PopupLayerController() {
                 //popup.view.height = 8;
                 popup.view.width = 40;
                 popup.view.height = 60;
+                break;
+            case MapPopupType.POPUP_INSPECTION:
+                popup = ExternalSvgViewController("resource/view/map-popup-warning-inspection.svg");
+                //popup.view.width = 16;
+                //popup.view.height = 8;
+                popup.view.width = 40;
+                popup.view.height = 70;
                 break;
 
             default :
@@ -86,5 +102,7 @@ var MapPopupType = {
     POPUP_CRIME: "POPUP_CRIME",
     POPUP_WARNING: "POPUP_WARNING",
     POPUP_TWITTER: "POPUP_TWITTER",
-    POPUP_CRIME_DANGER: "POPUP_CRIME_DANGER"
+    POPUP_CRIME_DANGER: "POPUP_CRIME_DANGER",
+    POPUP_CRIME_WARNING: "POPUP_CRIME_WARNING",
+    POPUP_INSPECTION: "POPUP_INSPECTION"
 };

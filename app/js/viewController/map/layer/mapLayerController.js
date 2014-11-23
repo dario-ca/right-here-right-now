@@ -14,6 +14,8 @@ var MapLayerController = function() {
     self.warningViews = [];
     self.dangerViews = [];
 
+    self.z_index=0;
+
     ////////////////////////// PRIVATE ATTRIBUTES //////////////////////////
 
     // Contains all the layers of the VC
