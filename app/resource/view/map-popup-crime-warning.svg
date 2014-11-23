@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.4, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0"
+	 width="400" height="100" viewBox="0 0 400 100" enable-background="new 0 0 400 100" xml:space="preserve">
+<g>
+	<polygon fill="#FFFFFF" stroke="#000000" stroke-width="0.5774" stroke-miterlimit="10" points="0.344,19.273 0.344,0.797 
+		15.933,19.273 305.777,19.273 305.777,97.797 0.344,97.797 	"/>
+	<text id="title" transform="matrix(1 0 0 1 104.0444 46.9414)" font-family="'Lato-Bold'" font-size="19.0536">Title</text>
+	<text id="subtitle" transform="matrix(1 0 0 1 21.7109 77.2695)" font-family="'Lato-Regular'" font-size="19.0536">subtitlesubtitlesubtitle</text>
+	<g id="close">
+		
+			<rect x="278.25" y="25.625" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="4.0417" stroke-miterlimit="10" width="21.748" height="20.016"/>
+		
+			<line fill="none" stroke="#444042" stroke-width="3.4643" stroke-miterlimit="10" x1="285.854" y1="33.455" x2="294.802" y2="33.455"/>
+	</g>
+	
+		<text id="description" transform="matrix(1 0 0 1 21.0444 46.3887)" fill="#FCB514" font-family="'MyriadPro-Bold'" font-size="17.2138">WARNING:</text>
+</g>
+</svg>
