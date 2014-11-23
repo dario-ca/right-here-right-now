@@ -11,18 +11,21 @@ var CtaGraphViewController = function (nameLayer, nameSubLayer) {
     var _xSelection = 50;
     var _yCenter = 50;
     var legendPies;
-    dataDivvyModel.selection
+
     self.dispose = function () {
         super_dispose();
-        dataDivvyModel.unsubscribe(Notifications.data.BUS_CHANGED,callBack);
+        dataBusModel.unsubscribe(Notifications.data.BUS_CHANGED,callBack);
+        notificationCenter.unsubscribe(Notifications.selection.SELECTION_CHANGED,self.callBackLoading);
     };
 
     var callBack = function() {
         if (pieSelection) {
             pieSelection.remove();
         }
-        if (!selectionModel.isEmpty()){
-            _dataPieSelection = getArrayData(dataDivvyModel.selection);
+        if (!selectionModel.isEmpty() && dataBusModel.data){
+            _dataPieSelection = getArrayData(dataBusModel.selection);
+            self.loadingTitle.attr("visibility","hidden");
+            self.selectRequireTitle.attr("visibility","hidden");
             addPieSelection();
         } else {
             _dataPieSelection = [0,0];
@@ -43,8 +46,8 @@ var CtaGraphViewController = function (nameLayer, nameSubLayer) {
         if (!data) {
             return null;
         }
-        return [data.bikesAvailable, data.placesAvailable];
-    }
+        return [data.notDelayedBusses, data.delayedBusses];
+    };
 
     var init = function() {
 
@@ -54,7 +57,10 @@ var CtaGraphViewController = function (nameLayer, nameSubLayer) {
 
         titleSelection = self.addTitle("Selection",_xSelection + "%",((_yCenter - (dimensSquare/2) - 2.5) + "%"));
 
-        dataDivvyModel.subscribe(Notifications.data.BUS_CHANGED,callBack);
+        self.addMessages("50%","50%");
+        self.callBackLoading();
+        notificationCenter.subscribe(Notifications.selection.SELECTION_CHANGED,self.callBackLoading);
+        dataBusModel.subscribe(Notifications.data.BUS_CHANGED,callBack);
     }();
 
     return self;

@@ -8,6 +8,7 @@ var SecurityGraphViewController = function (nameLayer, nameSubLayer) {
     var popS = 1;
     var factor = 100000;
     var legendBar;
+    var mainTitle;
 
     self.dispose = function () {
         super_dispose();
@@ -20,10 +21,13 @@ var SecurityGraphViewController = function (nameLayer, nameSubLayer) {
 
     var callBackDataSelection = function() {
         popS = dataPopulationModel.getPopulationInCurrentSelection();
+        if (popS === 0) {
+           popS = 1;
+        }
         if (barchart){
             barchart.remove();
         }
-        if (!selectionModel.isEmpty()){
+        if (!selectionModel.isEmpty() && dataCrimeCategory1Model.data && dataCrimeCategory2Model.data && dataCrimeCategory3Model.data && dataCrimeCategory4Model.data){
             _dataSelection = [dataCrimeCategory1Model.data.length,dataCrimeCategory2Model.data.length,dataCrimeCategory3Model.data.length,dataCrimeCategory4Model.data.length]
         } else {
             _dataSelection = [0,0,0,0];
@@ -63,7 +67,7 @@ var SecurityGraphViewController = function (nameLayer, nameSubLayer) {
             "Crimes per ", d3.format(",")(factor) + " people");
         barchart.width = "90%";
         barchart.height = "90%";
-        barchart.y = "20%";
+        barchart.y = "25%";
         self.view.append(barchart);
     };
 
@@ -75,16 +79,14 @@ var SecurityGraphViewController = function (nameLayer, nameSubLayer) {
         legendBar = self.addLegenda([{text:"Chicago", color:Colors.graph.CHICAGO},
             {text:"Selection", color:Colors.graph.SELECTION}]);
 
-        dataCrimeCategory1Model.subscribe(Notifications.data.CRIME_CATEGORY1_CHANGED,callBackDataSelection);
-        dataCrimeCategory2Model.subscribe(Notifications.data.CRIME_CATEGORY2_CHANGED,callBackDataSelection);
-        dataCrimeCategory3Model.subscribe(Notifications.data.CRIME_CATEGORY3_CHANGED,callBackDataSelection);
-        dataCrimeCategory4Model.subscribe(Notifications.data.CRIME_CATEGORY4_CHANGED,callBackDataSelection);
-        dataCrimeTypeCityModel.subscribe(Notifications.data.CRIME_TYPE_CITY_CHANGED,callBackDataChicago);
+        mainTitle = self.addTitle("Comparison Crime Density","50%" ,"20%");
+
+        dataCrimeCategory1Model.subscribe(Notifications.data.crime.CRIME_CATEGORY1_CHANGED,callBackDataSelection);
+        dataCrimeCategory2Model.subscribe(Notifications.data.crime.CRIME_CATEGORY2_CHANGED,callBackDataSelection);
+        dataCrimeCategory3Model.subscribe(Notifications.data.crime.CRIME_CATEGORY3_CHANGED,callBackDataSelection);
+        dataCrimeCategory4Model.subscribe(Notifications.data.crime.CRIME_CATEGORY4_CHANGED,callBackDataSelection);
+        dataCrimeTypeCityModel.subscribe(Notifications.data.crime.CRIME_TYPE_CITY_CHANGED,callBackDataChicago);
     }();
-
-    return self;
-
-
 
     return self;
 };

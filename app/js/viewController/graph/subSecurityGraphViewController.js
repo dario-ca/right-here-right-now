@@ -3,10 +3,12 @@
  */
 var SubSecurityGraphViewController = function (nameLayer, nameSubLayer) {
     var self = GraphViewController(nameLayer, nameSubLayer);
-    var _dataChicago = null;
-    var _dataSelection = null;
+    var _dataChicago = [];
+    var _dataSelection = [];
+    var subLayer = nameSubLayer;
     var super_dispose = self.dispose;
     var barchart;
+    var mainTitle;
     var popC = dataPopulationModel.getPopulationInChicago();
     var popS = 1;
     var maxElem = 5;
@@ -18,19 +20,25 @@ var SubSecurityGraphViewController = function (nameLayer, nameSubLayer) {
 
     self.dispose = function () {
         super_dispose();
-        dataCrimeTypeCityModel.unsubscribe(Notifications.data.CRIME_TYPE_CITY_CHANGED,callBackDataChicago);
+        dataCrimeTypeCityModel.unsubscribe(Notifications.data.crime.CRIME_TYPE_CITY_CHANGED,callBackDataChicago);
         sourceDataSelection.unsubscribe(notificationSelection,callBackDataSelection);
+        notificationCenter.unsubscribe(Notifications.selection.SELECTION_CHANGED,self.callBackLoading);
     };
 
     var callBackDataSelection = function() {
         popS = dataPopulationModel.getPopulationInCurrentSelection();
+        if (popS === 0) {
+            popS = 1;
+        }
         if (barchart){
             barchart.remove();
         }
         if (!selectionModel.isEmpty()&& sourceDataSelection.getSubTypes().length>= 1){
             _dataSelection = sourceDataSelection.getSubTypes();
+            self.loadingTitle.attr("visibility","hidden");
+            self.selectRequireTitle.attr("visibility","hidden");
         } else {
-            _dataSelection = null;
+            _dataSelection = [];
         }
         addBarChart();
     };
@@ -41,8 +49,10 @@ var SubSecurityGraphViewController = function (nameLayer, nameSubLayer) {
         }
         if (dataCrimeTypeCityModel.data && dataCrimeTypeCityModel.data.length>= 1){
             _dataChicago = dataCrimeTypeCityModel.data;
+            self.loadingTitle.attr("visibility","hidden");
+            self.selectRequireTitle.attr("visibility","hidden");
         } else {
-            _dataChicago = null;
+            _dataChicago = [];
         }
         addBarChart()
     };
@@ -83,33 +93,29 @@ var SubSecurityGraphViewController = function (nameLayer, nameSubLayer) {
     }
 
     var addBarChart = function() {
-        if (_dataChicago && _dataSelection){
-            barchart = VerticalBarView(getAlternateArray(_dataChicago,_dataSelection),arrayLabels,[Colors.graph.CHICAGO, Colors.graph.SELECTION],
-                "Crimes per ", d3.format(",")(factor) + " people");
-            //barchart.width = "80%";
-            //barchart.height = "50%";
-            //barchart.y = "20%";
-            self.view.append(barchart);
-        }
+        barchart = VerticalBarView(getAlternateArray(_dataChicago,_dataSelection),arrayLabels,[Colors.graph.CHICAGO, Colors.graph.SELECTION],
+            "Crimes per ", d3.format(",")(factor) + " people");
+        barchart.y = "5%";
+        self.view.append(barchart);
     };
 
     var init = function() {
 
-        switch (nameSubLayer){
+        switch (subLayer){
             case "Personal Assault":
-                notificationSelection = Notifications.data.CRIME_CATEGORY1_CHANGED;
+                notificationSelection = Notifications.data.crime.CRIME_CATEGORY1_CHANGED;
                 sourceDataSelection = dataCrimeCategory1Model;
                 break;
             case "Property Crime":
-                notificationSelection = Notifications.data.CRIME_CATEGORY2_CHANGED;
+                notificationSelection = Notifications.data.crime.CRIME_CATEGORY2_CHANGED;
                 sourceDataSelection = dataCrimeCategory2Model;
                 break;
             case "Unsafe Area":
-                notificationSelection = Notifications.data.CRIME_CATEGORY3_CHANGED;
+                notificationSelection = Notifications.data.crime.CRIME_CATEGORY3_CHANGED;
                 sourceDataSelection = dataCrimeCategory3Model;
                 break;
             case "Minor Crime":
-                notificationSelection = Notifications.data.CRIME_CATEGORY4_CHANGED;
+                notificationSelection = Notifications.data.crime.CRIME_CATEGORY4_CHANGED;
                 sourceDataSelection = dataCrimeCategory4Model;
                 break;
 
@@ -119,8 +125,14 @@ var SubSecurityGraphViewController = function (nameLayer, nameSubLayer) {
         legendBar = self.addLegenda([{text:"Chicago", color:Colors.graph.CHICAGO},
             {text:"Selection", color:Colors.graph.SELECTION}]);
 
-        dataCrimeTypeCityModel.subscribe(Notifications.data.CRIME_TYPE_CITY_CHANGED,callBackDataChicago);
+        mainTitle = self.addTitle("Detail main crimes type","50%" ,"5%");
+
+        self.addMessages("50%","25%");
+        self.callBackLoading();
+        notificationCenter.subscribe(Notifications.selection.SELECTION_CHANGED,self.callBackLoading);
+        dataCrimeTypeCityModel.subscribe(Notifications.data.crime.CRIME_TYPE_CITY_CHANGED,callBackDataChicago);
         sourceDataSelection.subscribe(notificationSelection,callBackDataSelection);
+        callBackDataChicago();
     }();
 
     return self;

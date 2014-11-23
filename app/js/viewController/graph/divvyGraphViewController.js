@@ -18,6 +18,7 @@ var DivvyGraphViewController = function (nameLayer, nameSubLayer) {
     self.dispose = function () {
         super_dispose();
         dataDivvyModel.unsubscribe(Notifications.data.DIVVY_BIKES_CHANGED,callBack);
+        notificationCenter.unsubscribe(Notifications.selection.SELECTION_CHANGED,self.callBackLoading);
     };
 
     var callBack = function() {
@@ -30,6 +31,8 @@ var DivvyGraphViewController = function (nameLayer, nameSubLayer) {
         if (!selectionModel.isEmpty()){
             _dataPieSelection = getArrayData(dataDivvyModel.selection);
             addPieSelection();
+            self.loadingTitle.attr("visibility","hidden");
+            self.selectRequireTitle.attr("visibility","hidden");
         } else {
             _dataPieSelection = [0,0];
         }
@@ -74,6 +77,9 @@ var DivvyGraphViewController = function (nameLayer, nameSubLayer) {
         titleChicago = self.addTitle("Chicago","35%",((_yCenter - (dimensSquare/2) - 2.5) + "%"));
         titleSelection = self.addTitle("Selection","65%",((_yCenter - (dimensSquare/2) - 2.5) + "%"));
 
+        self.addMessages("65%",_yCenter + "%");
+        self.callBackLoading();
+        notificationCenter.subscribe(Notifications.selection.SELECTION_CHANGED,self.callBackLoading);
         dataDivvyModel.subscribe(Notifications.data.DIVVY_BIKES_CHANGED,callBack);
     }();
 
