@@ -1,6 +1,8 @@
 function PopupLayerController() {
     var self = MapLayerController();
 
+    self.z_index=7;
+
     self.openPopup = function(lat, lng, popupType, onCloseCallback) {
         var popup = null;
         switch (popupType){

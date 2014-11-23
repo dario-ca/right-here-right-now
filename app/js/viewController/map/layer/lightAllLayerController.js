@@ -1,6 +1,8 @@
 function LightAllLayerController() {
     var self = MapLayerController();
 
+    self.z_index=1;
+
     /////////////////////////// PRIVATE ATTRIBUTES ////////////////////////////
 
     var _name= dataLightsAllModel.name;

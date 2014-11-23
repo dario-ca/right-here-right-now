@@ -14,16 +14,17 @@ function CrimeLayerController(name,notification,icon) {
     var currentCrimeCategoryModel=null;
     var _popup=null;
 
-
     /////////////////////////// PRIVATE METHODS ////////////////////////////
 
     var giveCurrentCrimeCategoryModel = function(){
         switch(_name) {
             case "category1":
                 currentCrimeCategoryModel = dataCrimeCategory1Model;
+                self.z_index=4;
                 break;
             case "category2":
                 currentCrimeCategoryModel = dataCrimeCategory2Model;
+                self.z_index=3;
                 break;
             case "category3":
                 currentCrimeCategoryModel = dataCrimeCategory3Model;

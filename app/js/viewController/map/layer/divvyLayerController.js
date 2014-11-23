@@ -1,6 +1,8 @@
 function DivvyLayerController() {
     var self = MapLayerController();
 
+    self.z_index=5;
+
     /////////////////////////// PRIVATE ATTRIBUTES ////////////////////////////
 
     var _divvyData=[];

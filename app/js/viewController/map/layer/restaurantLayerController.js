@@ -1,6 +1,8 @@
 function RestaurantLayerController() {
     var self = MapLayerController();
 
+    self.z_index=2;
+
     /////////////////////////// PRIVATE ATTRIBUTES ////////////////////////////
 
     var _restaurantData=[];

@@ -230,9 +230,9 @@ DataCrimeModel.longToShortName = {
     "OFFENSES INVOLVING CHILDREN": "CHILD OFFENSE"
 };
 
-DataCrimeModel.typesDangerLargerCircle = ["BATTERY","HOMICIDE","KIDNAPPING"];
+DataCrimeModel.typesDangerLargerCircle = ["HOMICIDE","KIDNAPPING"];
 
-DataCrimeModel.typesDangerCircle = ["ROBBERY"];
+DataCrimeModel.typesDangerCircle = ["ROBBERY","BATTERY"];
 
 DataCrimeModel.typeWarningCircle = ["NARCOTICS"];
 
