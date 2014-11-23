@@ -40,13 +40,16 @@ function MapViewController() {
         self.addChildController(layerController);
         layerViewControllers.push(layerController);
         layerController.view.appendTo(_svgLayerGroup);
+        self.reorderLayers();
+    };
 
+
+    self.reorderLayers = function() {
         var orderedByZIndex = _.sortBy(layerViewControllers, function(l){return l.z_index});
         orderedByZIndex.forEach(function(layer){
             //bring the popups to front again
-            popupLayerController.view.bringToFront();
+            layer.view.bringToFront();
         });
-
     };
 
 
@@ -149,6 +152,8 @@ function MapViewController() {
 
         //make layers visible
         d3.select(".leaflet-control-layers").classed("leaflet-control-layers-fixed-expanded", true);
+        d3.select(".leaflet-control-layers-toggle").remove();
+        d3.select(".leaflet-control-layers-list").attr("class","leaflet-custom-always-visible");
     };
 
     /////////////////////////// PRIVATE METHODS ///////////////////////////

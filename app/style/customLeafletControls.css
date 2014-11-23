@@ -1,10 +1,18 @@
-.leaflet-control-layers-fixed-expanded .leaflet-control-layers-toggle {
-    display: none;
-}
+
 .leaflet-control-layers-fixed-expanded .leaflet-control-layers-list {
     display: block;
     position: relative;
 }
+/*
+.leaflet-control-layers-fixed-expanded .leaflet-control-layers-toggle {
+    display: none;
+}
+*/
+
+.leaflet-custom-always-visible {
+    display: block;
+}
+
 .leaflet-control-layers-fixed-expanded {
     padding: 6px 10px 6px 6px;
     color: #333;
