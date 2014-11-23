@@ -106,7 +106,7 @@ var SelectionModel = function() {
     };
 
     self.isEmpty = function() {
-        return rectangles == 0;
+        return rectangles.length == 0;
     };
 
     /**
@@ -354,6 +354,12 @@ var Rectangle = function() {
 
     self.addPoint = function(point) {
         points.push(point);
+    };
+
+    self.getCentroid = function() {
+        var x = (self.points[0][0] + self.points[1][0] + self.points[2][0] + self.points[3][0]) / 4 ;
+        var y = (self.points[0][1] + self.points[1][1] + self.points[2][1] + self.points[3][1]) / 4 ;
+        return [x,y];
     };
 
     self.pointInside = function(point) {

@@ -10,7 +10,7 @@ function MapViewController() {
     /////////////////////////// PRIVATE ATTRIBUTES /////////////////////////// 
 
     var _mapContainer;
-    var _defaultZoom = 13;
+    var _defaultZoom = 14;
     
     var _mapID = {
         aerial: 'macs91.k25dm9i2',
@@ -148,7 +148,7 @@ function MapViewController() {
         //MOVE RIGHT
         d3.selectAll(".leaflet-left").style("left", "22%");
         //MOVE ZOOM DOWN
-        d3.selectAll(".leaflet-top").style("top", "30%");
+        d3.selectAll(".leaflet-top").style("top", "60%");
 
         //make layers visible
         d3.select(".leaflet-control-layers").classed("leaflet-control-layers-fixed-expanded", true);
