@@ -16,6 +16,6 @@
 	</g>
 	<text id="title_1_" transform="matrix(1 0 0 1 23.0454 78.8555)" fill="#FCB514" font-family="'Lato-Bold'" font-size="14.7271">WARNING:</text>
 </g>
-<text id="description_1_" transform="matrix(1 0 0 1 51.0439 102.6035)" font-family="'Lato-Regular'" font-size="19.0536">description</text>
+<text id="description" transform="matrix(1 0 0 1 51.0439 102.6035)" font-family="'Lato-Regular'" font-size="19.0536">description</text>
 <text id="address" transform="matrix(1 0 0 1 24.7109 127.9375)" font-family="'Lato-Regular'" font-size="19.0536">address</text>
 </svg>
