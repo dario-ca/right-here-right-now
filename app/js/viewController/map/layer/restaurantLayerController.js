@@ -20,7 +20,7 @@ function RestaurantLayerController() {
             _svgRestaurants.push(restaurantIcon);
 
             if(d.food_inspection !== undefined) {
-                self.addWarning(d.location.coordinate.latitude, d.location.coordinate.longitude,self.defaultIconSize*self.defaultCircleRatio);
+                self.addWarning(d.location.coordinate.latitude, d.location.coordinate.longitude,self.defaultIconSize*self.defaultCircleRatio*1.6);
             }
 
             restaurantIcon.view.onClick(function(){
