@@ -22,6 +22,8 @@ function SelectionRectangleViewController() {
     self.points = [];     // Contains the selected point controllers
     self.circles = [];    // Circles
 
+    var gaussianFilter;
+
     //////////////////////////// PUBLIC METHODS //////////////////////////////
 
 
@@ -309,16 +311,18 @@ function SelectionRectangleViewController() {
         self.view.append(UIBackgroundView());
         backGroundView = self.view.select("rect")
             .attr("mask","url(#mask)")
-            .style("fill", "rgba(0,0,0,0.35)"); // Transparent background
+            .style("fill", "rgba(0,0,0,0.65)"); // Transparent background
 
         // Create mask
         var defs = self.view.append("defs");
 
-        defs.append("filter")
-            .attr("id","blur")
-            .append("feGaussianBlur")
-            .attr("in", "SourceGraphic")
-            .attr("stdDeviation", "0.5");
+
+        gaussianFilter = defs.append("filter")
+                .attr("id","blur");
+
+        gaussianFilter.append("feGaussianBlur")
+                .attr("in", "SourceGraphic")
+                .attr("stdDeviation", "0.5");
 
         mask = defs.append("mask")
             .attr("id","mask");
