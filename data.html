@@ -26,7 +26,7 @@
 	            <li><a href="installation.html">Installation</a></li>
 	            <li><a href="code.html">Download</a></li>
 	            <li class="active"><a href="data.html">Data</a></li>
-	            <li><a href="findings.html">Findinds</a></li>
+	            <li><a href="findings.html">Findings</a></li>
 	          </ul>
 	      </div>
 	    </nav>
@@ -34,9 +34,38 @@
 		<div class="container">
 
 			<div class="page-header">
-				<h1>Bootstrap grid examples</h1>
-				<p class="lead">Basic grid layouts to get you familiar with building within the Bootstrap grid system.</p>
+				<h1>Data sources</h1>
+				<p class="lead">Where we take the data and how we process it</p>
 			</div>
+
+			<h3>CTA busses data</h3>
+			<p>The Chicago Transit Authority provides a <a href="http://www.transitchicago.com/developers/"> developer API</a> that allows third party applications to download near realtime data (usually they have a delay around 30 seconds).<br>
+			In this application we used the <a href="http://www.transitchicago.com/developers/bustracker.aspx">bus tracker API</a>. In order to display realtime bus locations and stops for every bus the application needs to download the entire transport network and than display data only for the selected area. Since the API doesn't provide a filter based on the location of the bus every time the user selects an area the application will search in the entire network (using an efficient algorithm) for bus lines that have at least one stop inside the area. The creation of the network is a very slow process and for that reason we decided to save the precomputed network in a json file that is loaded when the application is launched.<br>
+			For more informations please refer to the <a href="http://www.transitchicago.com/assets/1/developer_center/BusTime_Developer_API_Guide.pdf">ufficial documentation</a>.
+			</p>
+
+			<hr>
+
+			<h3>Divvy bikes data</h3>
+			<p>The <a href="https://www.divvybikes.com">Divvybikes</a> provide a realtime API that is updated near realtime (every 30 seconds) and gives the information about every station (number of bikes that are at that station and number of available docks).<br>
+			You can find the data in JSON format <a href="http://www.divvybikes.com/stations/json/">here</a>.
+			</p>
+
+			<hr>
+
+			<h3>Crimes and 311 data</h3>
+
+			<hr>
+
+			<h3>Restaurants and bars data</h3>
+			<p>The <a href="http://www.yelp.com/developers/documentation">Yelp developer API</a> is the main source of information for restaurants and bars. We also itegrated information about food inspection failed. In order to do it the application uses the 311 data and a special software componet execute the merge of the data based on location (we tried also ann association name based, but it doesn't work very well since restaurant name can be in different languages in 311 database and Yelp).</p>
+
+
+			<hr>
+
+			<h3>Important places data</h3>
+
+			<hr>
 
 			<h3>Three equal columns</h3>
 			<p>Get three equal-width columns <strong>starting at desktops and scaling to large desktops</strong>. On mobile devices, tablets and below, the columns will automatically stack.</p>
@@ -45,106 +74,6 @@
 				<div class="col-md-4">.col-md-4</div>
 				<div class="col-md-4">.col-md-4</div>
 			</div>
-
-			<h3>Three unequal columns</h3>
-			<p>Get three columns <strong>starting at desktops and scaling to large desktops</strong> of various widths. Remember, grid columns should add up to twelve for a single horizontal block. More than that, and columns start stacking no matter the viewport.</p>
-			<div class="row">
-				<div class="col-md-3">.col-md-3</div>
-				<div class="col-md-6">.col-md-6</div>
-				<div class="col-md-3">.col-md-3</div>
-			</div>
-
-			<h3>Two columns</h3>
-			<p>Get two columns <strong>starting at desktops and scaling to large desktops</strong>.</p>
-			<div class="row">
-				<div class="col-md-8">.col-md-8</div>
-				<div class="col-md-4">.col-md-4</div>
-			</div>
-
-			<h3>Full width, single column</h3>
-			<p class="text-warning">No grid classes are necessary for full-width elements.</p>
-
-			<hr>
-
-			<h3>Two columns with two nested columns</h3>
-			<p>Per the documentation, nesting is easy—just put a row of columns within an existing column. This gives you two columns <strong>starting at desktops and scaling to large desktops</strong>, with another two (equal widths) within the larger column.</p>
-			<p>At mobile device sizes, tablets and down, these columns and their nested columns will stack.</p>
-			<div class="row">
-				<div class="col-md-8">
-					.col-md-8
-					<div class="row">
-						<div class="col-md-6">.col-md-6</div>
-						<div class="col-md-6">.col-md-6</div>
-					</div>
-				</div>
-				<div class="col-md-4">.col-md-4</div>
-			</div>
-
-			<hr>
-
-			<h3>Mixed: mobile and desktop</h3>
-			<p>The Bootstrap 3 grid system has four tiers of classes: xs (phones), sm (tablets), md (desktops), and lg (larger desktops). You can use nearly any combination of these classes to create more dynamic and flexible layouts.</p>
-			<p>Each tier of classes scales up, meaning if you plan on setting the same widths for xs and sm, you only need to specify xs.</p>
-			<div class="row">
-				<div class="col-xs-12 col-md-8">.col-xs-12 .col-md-8</div>
-				<div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
-				<div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
-				<div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-6">.col-xs-6</div>
-				<div class="col-xs-6">.col-xs-6</div>
-			</div>
-
-			<hr>
-
-			<h3>Mixed: mobile, tablet, and desktop</h3>
-			<p></p>
-			<div class="row">
-				<div class="col-xs-12 col-sm-6 col-lg-8">.col-xs-12 .col-sm-6 .col-lg-8</div>
-				<div class="col-xs-6 col-lg-4">.col-xs-6 .col-lg-4</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
-				<div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
-				<div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
-			</div>
-
-			<hr>
-
-			<h3>Column clearing</h3>
-			<p><a href="http://getbootstrap.com/css/#grid-responsive-resets">Clear floats</a> at specific breakpoints to prevent awkward wrapping with uneven content.</p>
-			<div class="row">
-				<div class="col-xs-6 col-sm-3">
-					.col-xs-6 .col-sm-3
-					<br>
-					Resize your viewport or check it out on your phone for an example.
-				</div>
-				<div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
-
-				<!-- Add the extra clearfix for only the required viewport -->
-				<div class="clearfix visible-xs"></div>
-
-				<div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
-				<div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
-			</div>
-
-			<hr>
-
-			<h3>Offset, push, and pull resets</h3>
-			<p>Reset offsets, pushes, and pulls at specific breakpoints.</p>
-			<div class="row">
-				<div class="col-sm-5 col-md-6">.col-sm-5 .col-md-6</div>
-				<div class="col-sm-5 col-sm-offset-2 col-md-6 col-md-offset-0">.col-sm-5 .col-sm-offset-2 .col-md-6 .col-md-offset-0</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-6 col-md-5 col-lg-6">.col-sm-6 .col-md-5 .col-lg-6</div>
-				<div class="col-sm-6 col-md-5 col-md-offset-2 col-lg-6 col-lg-offset-0">.col-sm-6 .col-md-5 .col-md-offset-2 .col-lg-6 .col-lg-offset-0</div>
-			</div>
-
 
 		</div> <!-- /container -->
 	</body>
