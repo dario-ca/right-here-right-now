@@ -122,35 +122,33 @@ function SelectionRectangleViewController() {
             // Add the icon
             var pointController = ExternalSvgViewController("resource/sublayer/icon/point.svg");
             self.view.append(pointController);
-            pointController.view.width = 2.6;
-            pointController.view.height = 8;
-
+            pointController.view.width  = self.defaultIconSize * 1;
+            pointController.view.height = self.defaultIconSize * 4;
 
             var position = self.project(point[0], point[1]);
-            pointController.view.x = position.x - 2.6/2;
-            pointController.view.y = position.y - 8/2;
+            pointController.view.x = position.x - self.defaultIconSize * 1 / 2;
+            pointController.view.y = position.y - self.defaultIconSize * 4 / 2;
             self.fixControllerSize(pointController, true);
 
 
             self.points.push(pointController);
         });
 
-        /*
+
         // Draw the points
         points.forEach(function(point){
-            var pointController = ExternalSvgViewController("resource/sublayer/icon/bus.svg");
-            pointController.view.width = self.defaultIconSize;
-            pointController.view.height= self.defaultIconSize;
+            var pointController = ExternalSvgViewController("resource/sublayer/icon/point.svg");
+            self.view.append(pointController);
+            pointController.view.width = self.defaultIconSize * 1;
+            pointController.view.height= self.defaultIconSize * 4;
 
             var p = self.project(point[0], point[1]);
-            pointController.view.x = p.x;
-            pointController.view.y = p.y;
-
-            self.view.append(pointController);
+            pointController.view.x = p.x - self.defaultIconSize * 1 / 2;
+            pointController.view.y = p.y - self.defaultIconSize * 4 / 2;
+            self.fixControllerSize(pointController, true);
 
             self.points.push(pointController);
         });
-        */
     };
 
     var removeSelection = function() {
