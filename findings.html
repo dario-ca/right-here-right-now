@@ -8,7 +8,7 @@
 		<meta name="author" content="">
 		<link rel="icon" href="http://getbootstrap.com/favicon.ico">
 
-		<title>Grid Template for Bootstrap</title>
+		<title>Findings</title>
 
 		<link href="bootstrap.min.css" rel="stylesheet">
 		<link href="grid.css" rel="stylesheet">
@@ -34,117 +34,58 @@
 		<div class="container">
 
 			<div class="page-header">
-				<h1>Bootstrap grid examples</h1>
-				<p class="lead">Basic grid layouts to get you familiar with building within the Bootstrap grid system.</p>
+				<h1>Findings</h1>
+				<p class="lead">All the interesting information we have discovered using the application.</p>
 			</div>
 
-			<h3>Three equal columns</h3>
-			<p>Get three equal-width columns <strong>starting at desktops and scaling to large desktops</strong>. On mobile devices, tablets and below, the columns will automatically stack.</p>
+			<h3>From UIC to Museum Campus</h3>
+			<p>In this section is analyzed the shortest path between UIC and Museum Campus. The Roosvelt Dr connects directly the two areas.</p>
 			<div class="row">
-				<div class="col-md-4">.col-md-4</div>
-				<div class="col-md-4">.col-md-4</div>
-				<div class="col-md-4">.col-md-4</div>
-			</div>
-
-			<h3>Three unequal columns</h3>
-			<p>Get three columns <strong>starting at desktops and scaling to large desktops</strong> of various widths. Remember, grid columns should add up to twelve for a single horizontal block. More than that, and columns start stacking no matter the viewport.</p>
-			<div class="row">
-				<div class="col-md-3">.col-md-3</div>
-				<div class="col-md-6">.col-md-6</div>
-				<div class="col-md-3">.col-md-3</div>
-			</div>
-
-			<h3>Two columns</h3>
-			<p>Get two columns <strong>starting at desktops and scaling to large desktops</strong>.</p>
-			<div class="row">
-				<div class="col-md-8">.col-md-8</div>
-				<div class="col-md-4">.col-md-4</div>
-			</div>
-
-			<h3>Full width, single column</h3>
-			<p class="text-warning">No grid classes are necessary for full-width elements.</p>
-
-			<hr>
-
-			<h3>Two columns with two nested columns</h3>
-			<p>Per the documentation, nesting is easy—just put a row of columns within an existing column. This gives you two columns <strong>starting at desktops and scaling to large desktops</strong>, with another two (equal widths) within the larger column.</p>
-			<p>At mobile device sizes, tablets and down, these columns and their nested columns will stack.</p>
-			<div class="row">
-				<div class="col-md-8">
-					.col-md-8
-					<div class="row">
-						<div class="col-md-6">.col-md-6</div>
-						<div class="col-md-6">.col-md-6</div>
-					</div>
+				<div class="col-md-6">
+					<h4>Roosvelt Rd</h4>
+					<p>The Roosvelt Rd is the most direct path that connects UIC and Museum Campus. You can go through this road by car, by the bus number 12 or using a Divvy bike (there is one Divvy station on both ends of the street). Several 311 requests have been made in the last week and in the last month, complaining about potholes and street lights (both one out an all out). Many of these request are still open. The Roosvelt road cannot be defined as a safety road. The application shows many crimes of type "Personal Assault", like batteries and assaults. Many "Property Crimes" are also higlighted, as burglaries and thefts. In the area also crimes about narcotics have been registered. We can also report that on the road are not present many bars or restaurants, one of them has not even passed the food inspection.</p>
 				</div>
-				<div class="col-md-4">.col-md-4</div>
+				<div class="col-md-6"><img src="image/roosvelt.png" width="100%"></div>
 			</div>
 
-			<hr>
-
-			<h3>Mixed: mobile and desktop</h3>
-			<p>The Bootstrap 3 grid system has four tiers of classes: xs (phones), sm (tablets), md (desktops), and lg (larger desktops). You can use nearly any combination of these classes to create more dynamic and flexible layouts.</p>
-			<p>Each tier of classes scales up, meaning if you plan on setting the same widths for xs and sm, you only need to specify xs.</p>
+			<h3>The city of Chicago and the Loop</h3>
+			<p>Here are described facts about the city of Chicago and comparisons with the Loop area.</p>
 			<div class="row">
-				<div class="col-xs-12 col-md-8">.col-xs-12 .col-md-8</div>
-				<div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
-				<div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
-				<div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-6">.col-xs-6</div>
-				<div class="col-xs-6">.col-xs-6</div>
-			</div>
-
-			<hr>
-
-			<h3>Mixed: mobile, tablet, and desktop</h3>
-			<p></p>
-			<div class="row">
-				<div class="col-xs-12 col-sm-6 col-lg-8">.col-xs-12 .col-sm-6 .col-lg-8</div>
-				<div class="col-xs-6 col-lg-4">.col-xs-6 .col-lg-4</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
-				<div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
-				<div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
-			</div>
-
-			<hr>
-
-			<h3>Column clearing</h3>
-			<p><a href="http://getbootstrap.com/css/#grid-responsive-resets">Clear floats</a> at specific breakpoints to prevent awkward wrapping with uneven content.</p>
-			<div class="row">
-				<div class="col-xs-6 col-sm-3">
-					.col-xs-6 .col-sm-3
-					<br>
-					Resize your viewport or check it out on your phone for an example.
+				<div class="col-md-6">
+					<p>In the city of Chicago "Property crime" is the category with the largest number of crimes and the Loop is an area where this type of crimes are predominant. The Loop is the commercial and turistic heart of the city, thus we are not surprised if this areas shows many icons related to "Personal Assault" and "Property Crime" categories. Since in the Loop there are always many people, it is reasonable that the density of thefts in this area is much higher than the density for the whole city.</p>
+					<div class="col-md-12"><img src="image/loop_theft.png" width="100%"></div>
+					In addition, always because this is the center of the city and many people and police are around, drug dealing is difficult an the density of crimes of type "Narcotics" is lower than the density of Chicago.
+					<div class="col-md-12"><img src="image/loop_narcotics.png" width="100%"></div>
+					The loop area, moreover, shows a high number of abandoned vehicles, but they are always promptly removed: this can be inferred from the fact that there are not 311 open requests.
+					Since the area is so important for the city, it has a lotof divvy bike stations, used by employees and turists.
+					However, even if the density of crimes in this area is higher than in the whole Chicago, the Loop is not a unsafe zone but it is an area that attracts many thieves, due to the huge number of turists.
 				</div>
-				<div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
-
-				<!-- Add the extra clearfix for only the required viewport -->
-				<div class="clearfix visible-xs"></div>
-
-				<div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
-				<div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+				<div class="col-md-6">
+					<div class="col-md-12"><img src="image/loop_crime.png" width="100%"></div>
+					<div class="col-md-12"><img src="image/loop_map_crime.png" width="75%"></div>
+				</div>
 			</div>
 
-			<hr>
-
-			<h3>Offset, push, and pull resets</h3>
-			<p>Reset offsets, pushes, and pulls at specific breakpoints.</p>
+			<h3>UIC Area</h3>
+			<p>Some findings about the area around UIC, from West campus to East Campus.</p>
 			<div class="row">
-				<div class="col-sm-5 col-md-6">.col-sm-5 .col-md-6</div>
-				<div class="col-sm-5 col-sm-offset-2 col-md-6 col-md-offset-0">.col-sm-5 .col-sm-offset-2 .col-md-6 .col-md-offset-0</div>
+				<div class="col-md-6">
+					<p>Number and types of crimes in the area between the two main UIC campuses have been analyzed with respect to the same data about the City of Chicago as a whole. The area between West and East campuses is characterized by a huge number of thefts per 100k inhabitants.</p>
+					<p> However it has to be highlighted that the density of batteries is significantly lower then respect to the whole Chicago.</p>
+					In the UIC area there are not crimes about narcotics. It can be understood by looking at the map: no crimes that belong to the "Unsafe Area" category have the warning yellow circle around.
+				</div>
+				<div class="col-md-6">
+					<div class="col-md-12"><img src="image/uic_area_crime.png" width="100%"></div>
+					<div class="col-md-12"><img src="image/uic_area_theft.png" width="100%"></div>
+					<div class="col-md-12"><img src="image/uic_area_battery.png" width="100%"></div>
+				</div>
 			</div>
 			<div class="row">
-				<div class="col-sm-6 col-md-5 col-lg-6">.col-sm-6 .col-md-5 .col-lg-6</div>
-				<div class="col-sm-6 col-md-5 col-md-offset-2 col-lg-6 col-lg-offset-0">.col-sm-6 .col-md-5 .col-md-offset-2 .col-lg-6 .col-lg-offset-0</div>
+				<div class="col-md-6">
+					<p>The UIC area has also been analyzed by focusing on the services that offers and the 311 requests. In the area thare are several divvy bikes stations and and many restaurants. Almost all the restaurants and bars are placed in Taylor street that connects directly the two campuses. We want also to highlight that no abandoned vehicles has been found.</p>
+				</div>
+				<div class="col-md-6"><img src="image/uic_area_info.png" width="100%"></div>
 			</div>
-
 
 		</div> <!-- /container -->
 	</body>
