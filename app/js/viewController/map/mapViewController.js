@@ -154,6 +154,15 @@ function MapViewController() {
         d3.select(".leaflet-control-layers").classed("leaflet-control-layers-fixed-expanded", true);
         d3.select(".leaflet-control-layers-toggle").remove();
         d3.select(".leaflet-control-layers-list").attr("class","leaflet-custom-always-visible");
+        d3.select(".leaflet-control-zoom-in").style("width","6vh");
+        d3.select(".leaflet-control-zoom-in").style("height","6vh");
+
+        d3.select(".leaflet-control-zoom-out").style("width","6vh");
+        d3.select(".leaflet-control-zoom-out").style("height","6vh");
+
+        d3.select(".leaflet-control-zoom-in").style("font-size","5vh");
+
+        d3.select(".leaflet-control-zoom-out").style("font-size","5vh");
     };
 
     /////////////////////////// PRIVATE METHODS ///////////////////////////
