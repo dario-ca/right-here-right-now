@@ -256,14 +256,21 @@ function SelectionRectangleViewController() {
     var nearbyMode = function() {
         //dataPositionModel.unsubscribe(Notifications.position.POSITION_CHANGED, self.userPositionChange);
         //dataPositionModel.subscribe(Notifications.position.POSITION_CHANGED, self.userPositionChange);
+
+        console.log("Activated nearby mode", dataPositionModel.data);
+
         if($.isEmptyObject(dataPositionModel.data) == false)
             self.userPositionChange();
     };
 
     self.userPositionChange = function() {
 
+        console.log("Position changed");
+
         if(selectionModel.selectionMode != SelectionMode.SELECTION_NEARBY)
             return; // Not in nearby mode
+
+        console.log("Update position");
 
         var position = dataPositionModel.data;
 

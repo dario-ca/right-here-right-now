@@ -19,6 +19,8 @@ var DataModel = function(name) {
 
     self.duplicateCheck = true;     // If true check for duplicates and doesn't send notification if found
 
+    self.automaticallyClearData = true;
+
     /* Contains the interval (in milli-seconds) of re-fetching (0 if no automatic re-fetch) */
     self.interval = 0;
 
@@ -70,7 +72,8 @@ var DataModel = function(name) {
             self.startFetching();
         }
         else if(selectionModel.isEmpty() == true &&
-                self._observers > 0) {
+                self._observers > 0 &&
+                self.automaticallyClearData == true) {
             self.data = [];
             self.dispatch(self._notification);
         }
