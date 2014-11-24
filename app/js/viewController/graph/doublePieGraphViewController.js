@@ -6,7 +6,7 @@ var DoublePieGraphViewController = function (nameLayer, nameSubLayer) {
     var _dataPieChicago = [0,0];
     var _dataPieSelection = [0,0];
     var subLayer = nameSubLayer;
-    var factor = 100;
+    var factor = 1;
     var super_dispose = self.dispose;
     var pieChicago;
     var pieSelection;
@@ -19,7 +19,7 @@ var DoublePieGraphViewController = function (nameLayer, nameSubLayer) {
     var _xChicago = 35;
     var _xSelection = 65;
     var _yCenter = 75;
-    var areaC = dataPopulationModel.getAreaChicagoInKm2();
+    var areaC = dataPopulationModel.convertAreaInMiles2(dataPopulationModel.getAreaChicagoInKm2());
     var areaS = 1;
     var sourceDataCity;
     var sourceDataSelection;
@@ -44,8 +44,8 @@ var DoublePieGraphViewController = function (nameLayer, nameSubLayer) {
         if (pieSelection) {
             pieSelection.remove();
         }
-        if (!selectionModel.isEmpty()&& sourceDataSelection.getSubTypes().length>= 1){
-            areaS = dataPopulationModel.getAreaSelectionInKM2();
+        if (!selectionModel.isEmpty() && sourceDataSelection.getSubTypes().length>= 1){
+            areaS = dataPopulationModel.convertAreaInMiles2(dataPopulationModel.getAreaSelectionInKM2());
             _dataPieSelection = getArrayData(sourceDataSelection.getSubTypes());
             self.loadingTitle.attr("visibility","hidden");
             self.selectRequireTitle.attr("visibility","hidden");

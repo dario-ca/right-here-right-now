@@ -65,28 +65,28 @@ var SubSecurityGraphViewController = function (nameLayer, nameSubLayer) {
             return -num.total;
         });
         var found;
-        for (var i = 0; i < maxElem && i < dataSelection.length; i++) {
+        for (var i = 0; i < maxElem && i < tmpSele.length; i++) {
             found = false;
 
             //some names are too long, Dario has mapped them to a shorter name
             var label = null;
-            if(DataCrimeModel.longToShortName[dataSelection[i].name]) {
-                label = DataCrimeModel.longToShortName[dataSelection[i].name].toLowerCase();
+            if(DataCrimeModel.longToShortName[tmpSele[i].name]) {
+                label = DataCrimeModel.longToShortName[tmpSele[i].name].toLowerCase();
             } else {
-                label = dataSelection[i].name.toLowerCase();
+                label = tmpSele[i].name.toLowerCase();
             }
 
             arrayLabels.push(label);
             for (var j = 0; j < dataChicago.length; j++){
-                if (dataSelection[i].name === dataChicago[j].name){
+                if (tmpSele[i].name === dataChicago[j].name){
                     tmpArray.push((dataChicago[j].total/popC) * factor);
-                    tmpArray.push((dataSelection[i].total/popS) * factor);
+                    tmpArray.push((tmpSele[i].total/popS) * factor);
                     found = true;
                 }
             }
             if (!found){
                 tmpArray.push(0);
-                tmpArray.push(Number((dataSelection[i].total/popS) * factor).toFixed(3));
+                tmpArray.push((tmpSele[i].total/popS) * factor);
             }
         }
         return tmpArray;
@@ -125,7 +125,7 @@ var SubSecurityGraphViewController = function (nameLayer, nameSubLayer) {
         legendBar = self.addLegenda([{text:"Chicago", color:Colors.graph.CHICAGO},
             {text:"Selection", color:Colors.graph.SELECTION}]);
 
-        mainTitle = self.addTitle("Detail main crimes type","50%" ,"5%");
+        mainTitle = self.addTitle("Common crimes of selection in "  + subLayer,"50%" ,"5%");
 
         self.addMessages("50%","25%");
         self.callBackLoading();

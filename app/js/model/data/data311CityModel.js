@@ -33,7 +33,7 @@ var data311CityModel = function(modelName, mainURL, dateField,notification,inter
         } else {
             console.log("Illegal state time interval");
         }
-        self.dataChanged();
+        self.fetchData();
     };
 
     callBackChangeTimeFilter();
