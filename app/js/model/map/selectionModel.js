@@ -54,6 +54,7 @@ var SelectionModel = function() {
         rectangles = [];
         self.points = [];
         self.lines = [];
+        self.selectedPoints = [];
 
         selectionChanged();
     };
