@@ -15,7 +15,12 @@ h4 {
   background-color: rgba(86,61,124,.15);
   border: 1px solid #ddd;
   border: 1px solid rgba(86,61,124,.2);
+  /* NO BACKGROUND AND BORDER */
+  background-color: #ffffff;
+  border: 0px;
 }
+
+
 
 hr {
   margin-top: 40px;
