@@ -11,6 +11,8 @@ var DataPositionModel = function() {
     self._notification = Notifications.position.POSITION_CHANGED;
     self.duplicateCheck = false;
 
+    self.automaticallyClearData = false;
+
     var noReply = true;
 
     ////////////////////////////////// PRIVATE METHODS //////////////////////////////////
