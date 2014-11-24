@@ -53,8 +53,97 @@
 
 			<hr>
 
-			<h3>Crimes and 311 data</h3>
-
+			<h3>City of Chicago data</h3>
+			<p>The application uses different data of Chicago, all of these data are downloaded in real-time from the <a href="https://data.cityofchicago.org/">City of Chicago Data Portal</a>. In particular the list of the source for each data set is reported below:
+			<ul>
+			<li> <h4><a href="https://data.cityofchicago.org/Service-Requests/311-Service-Requests-Pot-Holes-Reported/7as2-ds3y">Potholes</a></h4>
+					<p>
+						Reports of potholes through the 311 call center and uses a computerized mapping and tracking system to identify pothole locations. Other than filtering for time and location no more elaboration has been performed for this data set.
+					</p>
+			</li>
+			<li> <h4><a href="https://data.cityofchicago.org/Service-Requests/311-Service-Requests-Abandoned-Vehicles/3c9v-pnva">Abandoned Vehicle</a></h4>
+					<p>
+						All open abandoned vehicle complaints made to 311. Other than filtering for time and location no more elaboration has been performed for this data set.
+					</p>
+			</li>
+			<li> <h4><a href="https://data.cityofchicago.org/Service-Requests/311-Service-Requests-Street-Lights-All-Out/zuxi-7xem">Street light all out</a></h4>
+					<p>
+						All open reports of "Street Lights - All Out" (an outage of 3 or more lights) made to 311. Other than filtering for time and location no more elaboration has been performed for this data set.
+					</p>
+			</li>
+			<li> <h4><a href="https://data.cityofchicago.org/Service-Requests/311-Service-Requests-Street-Lights-One-Out/3aav-uy2v">Street light one out</a></h4>
+					<p>
+						All open 311 reports of one or two lights out on metal poles on a residential or arterial street. Other than filtering for time and location no more elaboration has been performed for this data set.
+					</p>
+			</li>
+			<li> <h4><a href="https://data.cityofchicago.org/Public-Safety/Crimes-2001-to-present/ijzp-q8t2">Crimes</a></h4>
+					<p>
+						All reported incidents of crime (with the exception of murders where data exists for each victim) that occurred in the City of Chicago from 2001 to present, minus the most recent seven days. These data have been elaborated in order to have a better visualization, in the application all the original types of crime have been included in four principal categories composed in the following way:
+						<ul>
+							<li> <h5>Personal Assault <h5>
+								<p>
+									<ul>
+										<li>BATTERY</li>
+										<li>ASSAULT</li>
+										<li>SEX OFFENSE</li>
+										<li>CRIM SEXUAL ASSAULT</li>
+										<li>HOMICIDE</li>
+										<li>KIDNAPPING</li>
+										<li>INTIMIDATION</li>
+										<li>OFFENSES INVOLVING CHILDREN</li>
+									</ul>
+								</p>
+							</li>
+							<li> <h5>Property Crime<h5>
+								<p>
+									<ul>
+										<li>THEFT</li>
+										<li>ROBBERY</li>
+										<li>BURGLARY</li>
+										<li>MOTOR VEHICLE THEFT</li>
+									</ul>
+								</p>
+							</li>
+							<li> <h5>Unsafe Area<h5>
+								<p>
+									<ul>
+										<li>PROSTITUTION</li>
+										<li>NARCOTICS</li>
+										<li>OTHER NARCOTIC VIOLATION</li>
+										<li>OBSCENITY</li>
+										<li>PUBLIC PEACE VIOLATION</li>
+										<li>CRIMINAL TRESPASS</li>
+										<li>WEAPONS VIOLATION</li>
+										<li>CRIMINAL DAMAGE</li>
+										<li>ARSON</li>
+									</ul>
+								</p>
+							</li>
+							<li> <h5>Minor Crime<h5>
+								<p>
+									<ul>
+										<li>DOMESTIC VIOLENCE</li>
+										<li>GAMBLING</li>
+										<li>STALKING</li>
+										<li>RITUALISM</li>
+										<li>DECEPTIVE PRACTICE</li>
+										<li>OTHER OFFENSE</li>
+										<li>LIQUOR LAW VIOLATION</li>
+										<li>INTERFERENCE WITH PUBLIC OFFICER</li>
+										<li>CONCEALED CARRY LICENSE VIOLATION</li>
+									</ul>
+								</p>
+							</li>						
+						</ul>
+					</p>
+			</li>
+			<li> <h4><a href="https://data.cityofchicago.org/Health-Human-Services/Food-Inspections/4ijn-s7e5">Food inspection</a></h4>
+					<p>
+						Inspections of restaurants and other food establishments in Chicago from January 1, 2010 to the present. Other than filtering for time and location no more elaboration has been performed for this data set. Anyway the application automatically tries to match the locals deriving from yelp and the food inspection.
+					</p>
+			</li>
+			</ul>
+			</p>
 			<hr>
 
 			<h3>Restaurants and bars data</h3>
@@ -64,6 +153,15 @@
 			<hr>
 
 			<h3>Important places data</h3>
+
+			<hr>
+
+			<hr>
+
+			<h3>Graphs data</h3>
+			<p>
+			For the graphs has been mainly used the data proposed above, anyway the application shows graphics for some data set using density based on population (for what concerns crimes) or surface (for the other cases). With this approach is possible to compare the data from the city of chicago and the current selection in a "fair" way avoiding comparison between data regarding population or suface with high differences. The surface of the current selection has been computed using the geographic coordinates. For what concerns the population the application estimate it using the data relatives at the <a href="https://data.cityofchicago.org/Facilities-Geographic-Boundaries/Population-by-2010-Census-Block/5yjb-v3mj">Population by 2010 Census Block</a> and using the data relative at the census block boundaries avaible at the following <a href="https://data.cityofchicago.org/Facilities-Geographic-Boundaries/Population-by-2010-Census-Block/5yjb-v3mj">link</a>.
+			</p>
 
 			<hr>
 
