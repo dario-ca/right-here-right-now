@@ -18,7 +18,7 @@ var HorizontalBarView = function(data, labels, colors, unit, unit2) {
     var numOfCouples = data.length / 2;
 
     var rightMargin = 15,
-        xmargin  = 10,
+        xmargin  = 5,
         xlinemargin = 1,
         bottomLineMargin = 10,
         textTopMargin = 10,

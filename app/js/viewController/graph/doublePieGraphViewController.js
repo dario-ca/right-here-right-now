@@ -5,18 +5,21 @@ var DoublePieGraphViewController = function (nameLayer, nameSubLayer) {
     var self = GraphViewController(nameLayer, nameSubLayer);
     var _dataPieChicago = [0,0];
     var _dataPieSelection = [0,0];
-    var factor = 100;
+    var subLayer = nameSubLayer;
+    var factor = 1;
     var super_dispose = self.dispose;
     var pieChicago;
     var pieSelection;
     var barchart;
     var titleChicago;
     var titleSelection;
+    var mainTitle;
+    var secondTitle;
     var dimensSquare = 25;
     var _xChicago = 35;
     var _xSelection = 65;
     var _yCenter = 75;
-    var areaC = dataPopulationModel.getAreaChicagoInKm2();
+    var areaC = dataPopulationModel.convertAreaInMiles2(dataPopulationModel.getAreaChicagoInKm2());
     var areaS = 1;
     var sourceDataCity;
     var sourceDataSelection;
@@ -24,26 +27,32 @@ var DoublePieGraphViewController = function (nameLayer, nameSubLayer) {
     var notificationSelection;
     var legendPies;
     var legendBar;
+    var loadingTitle;
+    var selectRequireTitle;
 
     self.dispose = function () {
         super_dispose();
         sourceDataCity.unsubscribe(notificationCity,callBackDataChicago);
         sourceDataSelection.unsubscribe(notificationSelection,callBackDataSelection);
+        notificationCenter.unsubscribe(Notifications.selection.SELECTION_CHANGED,self.callBackLoading);
     };
 
     var callBackDataSelection = function() {
-        areaS = dataPopulationModel.getAreaSelectionInKM2();
         if (barchart){
             barchart.remove();
         }
         if (pieSelection) {
             pieSelection.remove();
         }
-        if (!selectionModel.isEmpty()&& sourceDataSelection.getSubTypes().length>= 1){
+        if (!selectionModel.isEmpty() && sourceDataSelection.getSubTypes().length>= 1){
+            areaS = dataPopulationModel.convertAreaInMiles2(dataPopulationModel.getAreaSelectionInKM2());
             _dataPieSelection = getArrayData(sourceDataSelection.getSubTypes());
+            self.loadingTitle.attr("visibility","hidden");
+            self.selectRequireTitle.attr("visibility","hidden");
             addPieSelection();
         } else {
             _dataPieSelection = [0,0];
+            areaS = 1;
         }
         addBarChart()
 
@@ -92,7 +101,7 @@ var DoublePieGraphViewController = function (nameLayer, nameSubLayer) {
             [Colors.graph.CHICAGO, Colors.graph.SELECTION],"occurrences per","square mile");
         barchart.width = "80%";
         barchart.height = "50%";
-        barchart.y = "20%";
+        barchart.y = "25%";
         barchart.x = "10%";
         self.view.append(barchart);
     }
@@ -114,7 +123,7 @@ var DoublePieGraphViewController = function (nameLayer, nameSubLayer) {
 
     var init = function() {
 
-        switch (nameSubLayer){
+        switch (subLayer){
             case "Pothole":
                 notificationCity = Notifications.data.POTHOLE_CITY_CHANGED;
                 notificationSelection = Notifications.data.POTHOLE_CHANGED;
@@ -144,11 +153,17 @@ var DoublePieGraphViewController = function (nameLayer, nameSubLayer) {
             {text:"Completed", color:Colors.graph.COMPLETED}]);
         legendPies.view.attr("y",_yCenter - 20 + "%");
 
-        titleChicago = self.addTitle("Chicago",_xChicago + "%",((_yCenter - (dimensSquare/2) - 2.5) + "%"));
-        titleSelection = self.addTitle("Selection", _xSelection + "%",((_yCenter - (dimensSquare/2) - 2.5) + "%"));
+        titleChicago = self.addTitle("Chicago",_xChicago + "%",((_yCenter - (dimensSquare/2) - 1.5) + "%"));
+        titleSelection = self.addTitle("Selection", _xSelection + "%",((_yCenter - (dimensSquare/2) - 1.5) + "%"));
+        mainTitle = self.addTitle("Comparison " + subLayer + " Density","50%" ,"20%");
+        secondTitle = self.addTitle("Relative Status","50%" ,((_yCenter - (dimensSquare/2) - 5) + "%"));
+
+        self.addMessages(_xSelection + "%", _yCenter + "%");
+        self.callBackLoading();
 
         sourceDataCity.subscribe(notificationCity,callBackDataChicago);
         sourceDataSelection.subscribe(notificationSelection,callBackDataSelection);
+        notificationCenter.subscribe(Notifications.selection.SELECTION_CHANGED,self.callBackLoading);
     }();
 
     return self;

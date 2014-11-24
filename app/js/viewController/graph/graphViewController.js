@@ -6,6 +6,19 @@ var GraphViewController = function(layer, sublayer) {
     var self = SvgViewController();
     var _noSelectionViewController;
 
+    self.loadingTitle;
+    self.selectRequireTitle;
+
+    self.callBackLoading = function(){
+        if (selectionModel.isEmpty()) {
+            self.loadingTitle.attr("visibility", "hidden");
+            self.selectRequireTitle.attr("visibility", "inherit")   ;
+        }
+        else {
+            self.loadingTitle.attr("visibility","inherit");
+            self.selectRequireTitle.attr("visibility","hidden");
+        }
+    };
 
     self.addLegenda = function(items/*[{text:, color:},{..},]*/) {
         var legenda = ExternalSvgViewController("resource/graph/legenda.svg");
@@ -32,6 +45,7 @@ var GraphViewController = function(layer, sublayer) {
         tmpTitle.text(title);
         tmpTitle.attr("y", y);
         tmpTitle.attr("x", x);
+        tmpTitle.style("font-family","lato");
         tmpTitle.style("text-anchor","middle");
         tmpTitle.style("font-size","2vh");
         tmpTitle.style("fill","white");
@@ -40,6 +54,10 @@ var GraphViewController = function(layer, sublayer) {
         return tmpTitle;
     };
 
+    self.addMessages = function (x, y) {
+        self.loadingTitle = self.addTitle("Loading data...",x,y);
+        self.selectRequireTitle = self.addTitle("Select Area",x,y);
+    };
 
     self.showNoSelection = function() {
         self.view.html("");

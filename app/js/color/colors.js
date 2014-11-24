@@ -46,8 +46,8 @@ Colors.layer = {
     INFORMATION: "#3f8643",
     SECURITY_1: "#b93721",
     SECURITY_2: "#F19261",
-    SECURITY_3: "#FACC00",
-    SECURITY_4: "#C7B95B",
+    SECURITY_3: "#FFD000",
+    SECURITY_4: "#CCB204",
     SOCIAL: "#3CC3E2",
     POINT_OF_INTEREST: "#000"
 };
