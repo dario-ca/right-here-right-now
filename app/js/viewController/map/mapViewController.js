@@ -161,8 +161,10 @@ function MapViewController() {
         d3.select(".leaflet-control-zoom-out").style("height","6vh");
 
         d3.select(".leaflet-control-zoom-in").style("font-size","5vh");
-
         d3.select(".leaflet-control-zoom-out").style("font-size","5vh");
+
+        d3.select(".leaflet-control-zoom-in").style("padding-top","4vh");
+        d3.select(".leaflet-control-zoom-out").style("padding-top","4vh");
     };
 
     /////////////////////////// PRIVATE METHODS ///////////////////////////
