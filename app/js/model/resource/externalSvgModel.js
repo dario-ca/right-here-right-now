@@ -44,7 +44,8 @@ var ExternalSvgModel = function() {
                             "resource/view/graphs-title.svg",
                             "resource/view/map-popup-warning.svg",
                             "resource/graph/no-selection.svg",
-                            "resource/graph/legenda.svg"
+                            "resource/graph/legenda.svg",
+                            "resource/mapTools/maptoolzoom.svg"
                             ];
 
 

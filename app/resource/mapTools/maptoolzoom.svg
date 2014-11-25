@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.4, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0"
+	 width="200" height="200" viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve">
+<rect id="zoomin" y="-0.066" opacity="0.9" width="52.478" height="49.221"/>
+<rect id="zoomout" y="49.925" opacity="0.9" width="52.478" height="49.221"/>
+<rect y="152.606" opacity="0.9" width="169.025" height="47.394"/>
+<text id="map" transform="matrix(1 0 0 1 19.2754 182.7383)" fill="#F1F2F2" font-family="'Lato-Regular'" font-size="19.5982">MAP</text>
+<text id="aerial" transform="matrix(1 0 0 1 88.4795 183.3174)" fill="#F1F2F2" font-family="'Lato-Regular'" font-size="19.5982">AERIAL</text>
+<text transform="matrix(1 0 0 1 11.9648 41.876)" fill="#FFFFFF" font-family="'Lato-Regular'" font-size="49.3857">+</text>
+<text transform="matrix(1.6616 0 0 1 10.8076 89.2695)" fill="#FFFFFF" font-family="'Lato-Regular'" font-size="49.3857">-</text>
+</svg>

@@ -1,5 +1,8 @@
 var popupLayerController = null;
 var enhanceLayerController = null;
+
+var mapTilesLayer;
+
 /**
  * @class: MapViewController
  */
@@ -165,6 +168,9 @@ function MapViewController() {
 
         d3.select(".leaflet-control-zoom-in").style("padding-top","4vh");
         d3.select(".leaflet-control-zoom-out").style("padding-top","4vh");
+
+
+        d3.select(".leaflet-control-container").style("visibility", "hidden");
     };
 
     /////////////////////////// PRIVATE METHODS ///////////////////////////
@@ -204,6 +210,8 @@ function MapViewController() {
                 attribution: _mapAttribution
             })
         };
+
+        mapTilesLayer = tileLayers;
 
         // Add the base map layer to the map container box
         _mapContainer.addLayer(tileLayers.map);

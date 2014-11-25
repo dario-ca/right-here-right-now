@@ -7,6 +7,7 @@ var MainViewController = function() {
     self.layerSelectionViewController = null;
     self.notificationsViewController = null;
     self.mapToolsViewController = null;
+    self.mapToolsZoomViewController = null;
     self.notificationsPopupViewController = null;
     self.weatherViewController = null;
     self.graphsViewController = null;
@@ -50,6 +51,23 @@ var MainViewController = function() {
         self.mapToolsViewController.view.height = "100%";
         self.mapToolsViewController.view.x = "34%";
         mapToolsTranslateCoordinateSystemGroup.append(self.mapToolsViewController);
+
+
+        //MAP TOOLS ZOOM
+
+        //translate to the bottom
+        var mapToolsZoomTranslateCoordinateSystemGroup = UISvgView()
+            .setViewBox(0,0,117,10.80)
+            .setFrame(0,0,"100%","100%")
+            .setAspectRatioOptions("xMinYMax meet");
+
+        self.view.append(mapToolsZoomTranslateCoordinateSystemGroup);
+
+        self.mapToolsZoomViewController = MapToolsZoomViewController();
+        self.mapToolsZoomViewController.view.width = "36%";
+        self.mapToolsZoomViewController.view.height = "100%";
+        self.mapToolsZoomViewController.view.x = "22.1%";
+        mapToolsZoomTranslateCoordinateSystemGroup.append(self.mapToolsZoomViewController);
 
         //NOTIFICATIONS POPUPS
         self.notificationsPopupViewController = NotificationPopupsViewController();
