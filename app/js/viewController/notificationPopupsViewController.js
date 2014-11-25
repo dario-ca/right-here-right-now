@@ -109,7 +109,20 @@ var NotificationPopupsViewController = function() {
 
         self.view.setViewBox(0, 0, _popupWidth, _popupHeight);
 
-
+        var count = 0;
+        window.setTimeout(function(){
+            if(model.getLayerWithName("SOCIAL").getSublayerWithName("twitter").selected){
+                count ++;
+                if(count == 1) {
+                    self.addNotificationPopup("Tweet from: Jenni Brambilla", "OMG I've met an handsome Italian guy",
+                        "resource/sublayer/icon/twitter.svg");
+                }
+                if(count == 2){
+                    self.addNotificationPopup("Tweet from: Rocky89", "Work out works fine",
+                        "resource/sublayer/icon/twitter.svg");
+                }
+            }
+        },30000);
 /*
         var i = 0;
 
